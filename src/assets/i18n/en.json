@@ -1,0 +1,8 @@
+{
+  "GLOBAL": {
+    "SITE_NAME": "MLP Vector Club"
+  },
+  "ERROR_MESSAGES": {
+    "ELASTIC_DOWN": "ElasticSearch server is down"
+  }
+}

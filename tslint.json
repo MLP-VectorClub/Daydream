@@ -1,9 +1,25 @@
 {
-  "extends": "tslint:recommended",
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules"
+  ],
   "rulesDirectory": [
     "codelyzer"
   ],
   "rules": {
+    "callable-types": true,
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "curly": [
+      true,
+      "as-needed"
+    ],
+    "eofline": true,
+    "forin": true,
+    "import-spacing": true,
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
@@ -11,8 +27,15 @@
     },
     "import-blacklist": [
       true,
-      "rxjs/Rx"
+      "rxjs/Rx",
+      "selenium-webdriver/http"
     ],
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "no-arg": true,
+    "no-bitwise": true,
     "interface-name": false,
     "max-classes-per-file": false,
     "max-line-length": [
@@ -40,15 +63,21 @@
       "timeEnd",
       "trace"
     ],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
     "no-empty": false,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": true,
+    "no-shadowed-variable": true,
+    "no-string-literal": false,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
+    "no-string-throw": true,
     "no-switch-case-fall-through": true,
+    "no-trailing-whitespace": true,
+    "no-unused-expression": true,
     "no-use-before-declare": true,
+    "no-var-keyword": true,
     "no-var-requires": false,
     "object-literal-key-quotes": [
       true,
@@ -60,8 +89,36 @@
       true,
       "single"
     ],
+    "variable-name": [
+      true,
+      "check-format",
+      "ban-keywords"
+    ],
+    "prefer-const": true,
+    "radix": true,
+    "semicolon": true,
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
     "trailing-comma": false,
     "no-output-on-prefix": true,
+    "directive-selector": [
+      true,
+      "attribute",
+      "app",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "app",
+      "kebab-case"
+    ],
+    "array-bracket-spacing": [
+      true,
+      "never"
+    ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -70,6 +127,20 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "one-variable-per-declaration": false,
+    "no-unused-variable": true,
+    "no-empty-interface": false,
+    "prefer-template": true,
+    "no-useless-concat": true,
+    "brace-style": [
+      true,
+      "stroustrup",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "no-unnecessary-constructor": true,
+    "one-line": false
   }
 }

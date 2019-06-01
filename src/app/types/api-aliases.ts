@@ -1,9 +1,9 @@
-export * from './api';
-import * as api from './api';
+export * from 'src/app/types/api';
+import * as api from 'src/app/types/api';
 
 /**
  * @file
- * Used to create aliases for lengthy generated OpenAPI operation IDs
+ * Used to create aliases for lengthy interface names generated from the OpenAPI operation IDs
  */
 
 export type GetAllAppearancesRequest = api.AppControllersApiAppearancesControllerGetAllRequest;
