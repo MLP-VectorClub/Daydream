@@ -8,6 +8,8 @@
   'GLOBAL.FOOTER.APP_VERSION.2' | translate
   }}
   <app-time [date]="g.commitTime"></app-time>
-  | <a routerLink="/about/privacy">{{'GLOBAL.FOOTER.PRIVACY_POLICY' | translate}}</a>
-  | <a (click)="openContactModal()">{{'GLOBAL.FOOTER.CONTACT_US' | translate}}</a>
+  <nz-divider nzType="vertical"></nz-divider>
+  <a routerLink="/about/privacy">{{'GLOBAL.FOOTER.PRIVACY_POLICY' | translate}}</a>
+  <nz-divider nzType="vertical"></nz-divider>
+  <a (click)="openContactModal()">{{'GLOBAL.FOOTER.CONTACT_US' | translate}}</a>
 </footer>

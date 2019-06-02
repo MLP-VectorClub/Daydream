@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { GetAllAppearancesRequest, GetAllAppearancesResult } from 'app/types';
+import { QueryPublicAppearancesRequest, QueryPublicAppearancesResult } from 'app/types';
 
 export enum ActionTypes {
   LOAD_APPEARANCES = '[COLOR GUIDE] Load Appearances',
@@ -10,14 +10,14 @@ export enum ActionTypes {
 export class LoadAppearancesAction implements Action {
   readonly type = ActionTypes.LOAD_APPEARANCES;
 
-  constructor(public payload: GetAllAppearancesRequest) {
+  constructor(public payload: QueryPublicAppearancesRequest) {
   }
 }
 
 export class LoadAppearancesYay implements Action {
   readonly type = ActionTypes.LOAD_APPEARANCES_YAY;
 
-  constructor(public payload: GetAllAppearancesResult) {
+  constructor(public payload: QueryPublicAppearancesResult) {
   }
 }
 

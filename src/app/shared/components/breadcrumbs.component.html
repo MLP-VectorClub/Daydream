@@ -1,0 +1,14 @@
+<ol *ngIf="items.length > 0" class="breadcrumbs">
+  <ng-container *ngFor="let item of items">
+    <ng-container *ngIf="item.label !== null">
+      <li class="div">/</li>
+      <li>
+        <a *ngIf="item.url !== null; else unlinkedItem" [routerLink]="item.url">{{item.label | translate}}</a>
+        <ng-template #unlinkedItem>
+          <strong *ngIf="item.current === true; else rawItem">{{item.label | translate}}</strong>
+          <ng-template #rawItem>{{item.label | translate}}</ng-template>
+        </ng-template>
+      </li>
+    </ng-container>
+  </ng-container>
+</ol>

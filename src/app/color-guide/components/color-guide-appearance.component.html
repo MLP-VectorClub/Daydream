@@ -1,0 +1,8 @@
+<div nz-row [nzGutter]="16">
+  <div *ngIf="appearance.spriteHash" nz-col nzSpan="3">
+    <img [src]="appearance | spriteUrl" class="sprite-image">
+  </div>
+  <div nz-col nzSpan="21">
+    <strong>{{appearance.label}}</strong>
+  </div>
+</div>

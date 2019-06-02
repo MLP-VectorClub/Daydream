@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ColorGuideComponent } from 'app/color-guide/color-guide.component';
+import { ColorGuideComponent } from 'app/color-guide/components/color-guide.component';
 
 const routes: Routes = [
   {

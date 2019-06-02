@@ -5,15 +5,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule } from 'app/core/core.module';
 import {
   AvatarWrapComponent,
+  BreadcrumbsComponent,
   ContentComponent,
+  MainComponent,
+  PageHeaderComponent,
+  PaginationComponent,
   SidebarComponent,
   SidebarUserInfoComponent,
   TimeComponent,
   UserLinkComponent,
 } from 'app/shared/components';
 import { VarDirective } from 'app/shared/directives';
-import { AvatarShapePipe, RoleLabelPipe } from 'app/shared/pipes';
-import { PermissionPipe } from 'app/shared/pipes/permission.pipe';
+import { AvatarShapePipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 const declarations = [
@@ -24,6 +27,10 @@ const declarations = [
   SidebarUserInfoComponent,
   UserLinkComponent,
   TimeComponent,
+  BreadcrumbsComponent,
+  MainComponent,
+  PageHeaderComponent,
+  PaginationComponent,
 
   // Directives
   VarDirective,
@@ -32,6 +39,7 @@ const declarations = [
   AvatarShapePipe,
   RoleLabelPipe,
   PermissionPipe,
+  SpriteUrlPipe,
 ];
 
 @NgModule({

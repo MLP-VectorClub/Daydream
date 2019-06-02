@@ -8,8 +8,13 @@ import { User } from 'src/app/types/api';
  * Used to create aliases for lengthy interface names generated from the OpenAPI operation IDs
  */
 
-export type GetAllAppearancesRequest = api.AppControllersApiAppearancesControllerAllRequest;
-export type GetAllAppearancesResult = api.AppControllersApiAppearancesControllerAllResult;
+export type QueryPublicAppearancesRequest = api.AppControllersApiAppearancesControllerQueryPublicRequest;
+export type QueryPublicAppearancesResult = api.AppControllersApiAppearancesControllerQueryPublicResult;
+export type GetAppearanceSpriteRequest = Omit<api.AppControllersApiAppearancesControllerSpriteRequest, 'hash' | 'token' | 'size' | 'id'> & {
+  hash?: api.AppControllersApiAppearancesControllerSpriteRequest['hash'];
+  token?: api.AppControllersApiAppearancesControllerSpriteRequest['token'];
+  size?: api.AppControllersApiAppearancesControllerSpriteRequest['size'];
+};
 
 export type NullableUser = Omit<User, 'id' | 'name' | 'avatarUrl'> & {
   id: Nullable<User['id']>;

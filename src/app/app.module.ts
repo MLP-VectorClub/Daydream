@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { fallbackLanguage, localStorageKeys, supportedLanguages } from 'app/app.config';
 import { CoreModule } from 'app/core/core.module';
+import { ErrorModule } from 'app/error/error.module';
 import { FooterModule } from 'app/footer/footer.module';
 import { HeaderModule } from 'app/header/header.module';
 import { noop } from 'lodash';
@@ -43,6 +44,7 @@ registerLocaleData(en);
     CoreModule,
     HeaderModule,
     FooterModule,
+    ErrorModule,
   ],
   providers: [
     {

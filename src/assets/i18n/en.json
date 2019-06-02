@@ -25,16 +25,36 @@
   },
   "TITLES": {
     "COLOR_GUIDE": "Color Guide",
-    "COLOR_GUIDE_NAMED_PAGED": "Page {{page}} - {{guide}} Color Guide"
+    "COLOR_GUIDE_NAMED": "{{guide}} Color Guide",
+    "COLOR_GUIDE_NAMED_PAGED": "Page {{page}} - {{guide}} Color Guide",
+    "LATEST_EPISODE": "Latest episode",
+    "SHOW": "Show",
+    "EVENTS": "Events",
+    "ABOUT": "About",
+    "NOT_FOUND": "404"
   },
   "COLOR_GUIDE": {
     "GUIDE_NAMES": {
       "EQG": "EQG",
       "PONY": "Pony"
+    },
+    "SUBTITLE": "A searchable list of character colors from the series",
+    "LOADING_ERROR": "Failed to load appearances"
+  },
+  "ERROR_PAGES": {
+    "BREADCRUMBS": {
+      "START": "Error",
+      "NOT_FOUND": "Not Found"
+    },
+    "NOT_FOUND": {
+      "TITLE": "404 Not Found",
+      "SUBTITLE": "This page does not exist"
     }
   },
   "ERROR_MESSAGES": {
     "ELASTIC_DOWN": "ElasticSearch server is down",
-    "GIT_INFO_MISSING": "Failed to retrieve backend server version information"
+    "GIT_INFO_MISSING": "Failed to retrieve backend server version information",
+    "APPEARANCE_NOT_FOUND": "Could not find the appearance with the ID given",
+    "APPEARANCE_PRIVATE": "You do not have permission to view this appearance"
   }
 }

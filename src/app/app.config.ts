@@ -9,7 +9,7 @@ export const PROJECT_NAME = GITHUB_URL.split('/').pop();
 export const CLUB_URL = 'https://www.deviantart.com/mlp-vectorclub';
 
 export const API_PREFIX = '/api/v1';
-export const GUEST_AVATAR = '/assets/guest.svg';
+export const GUEST_AVATAR = '/assets/img/guest.svg';
 
 export const supportedLanguages = ['en'];
 export const fallbackLanguage = 'en';

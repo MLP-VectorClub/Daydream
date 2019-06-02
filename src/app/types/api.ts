@@ -55,6 +55,8 @@ export interface ServerResponse {
  */
 export type PageNumber = number;
 
+export type File = string;
+
 export interface PageData {
   pagination: {
     currentPage: number;
@@ -86,9 +88,16 @@ export interface ValueOfGitInfo {
  */
 export interface Appearance {
   id: number;
+  /**
+   * The name of the appearance
+   */
   label: string;
   added: string;
   notes: string;
+  /**
+   * MD5 hash of the current sprite image, if there is one, and null otherwise. The actual file is available from a different endpoint.
+   */
+  spriteHash: SpriteHash;
 }
 
 /**
@@ -99,6 +108,12 @@ export interface ArrayOfAppearances {
 }
 
 export type GuideName = 'pony' | 'eqg';
+
+export type SpriteSize = 300 | 600;
+
+export type SpriteHash = string;
+
+export type AppearanceToken = string;
 
 /**
  * Represents an authenticated user
@@ -134,19 +149,25 @@ export interface ValueOfUser {
 
 export interface AppControllersApiAboutControllerServerRequest {
 }
-
 export type AppControllersApiAboutControllerServerResult = ServerResponse & ValueOfGitInfo;
 
-export interface AppControllersApiAppearancesControllerAllRequest {
+export interface AppControllersApiAppearancesControllerQueryPublicRequest {
   guide: GuideName
   page: PageNumber
   q: string
 }
 
-export type AppControllersApiAppearancesControllerAllResult = PagedServerResponse &
+export type AppControllersApiAppearancesControllerQueryPublicResult = PagedServerResponse &
   ArrayOfAppearances;
 
-export interface AppControllersApiUsersControllerMeRequest {
+export interface AppControllersApiAppearancesControllerSpriteRequest {
+  id: number
+  size: SpriteSize
+  token: AppearanceToken
+  hash: SpriteHash
 }
 
+export type AppControllersApiAppearancesControllerSpriteResult = any
+export interface AppControllersApiUsersControllerMeRequest {
+}
 export type AppControllersApiUsersControllerMeResult = ServerResponse & ValueOfUser;

@@ -3,12 +3,14 @@ const fs = require('fs');
 
 require('dotenv').config();
 
-if (!fs.existsSync(process.env.API_SCHEMA_PATH)){
-  console.error('Missing API schema file (or API_SCHEMA_PATH not set)');
+const filePath = `${process.env.BACKEND_ROOT}/fs/api.json`;
+
+if (!fs.existsSync(filePath)){
+  console.error('Missing API schema file (or BACKEND_ROOT not set)');
   process.exit(1);
 }
 
-const jsonFile = fs.readFileSync(process.env.API_SCHEMA_PATH);
+const jsonFile = fs.readFileSync(filePath);
 const schema = JSON.parse(jsonFile);
 
 GenerateTypings(schema).then(({ typeStore }) => {

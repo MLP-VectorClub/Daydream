@@ -1,0 +1,6 @@
+<div class="pagination-wrapper" *ngIf="data">
+  <nz-spin [nzSpinning]="status === s.LOAD">
+    <nz-pagination [nzPageIndex]="data.currentPage" [nzTotal]="data.totalItems" [nzPageSize]="data.itemsPerPage"
+      [nzHideOnSinglePage]="true" (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+  </nz-spin>
+</div>

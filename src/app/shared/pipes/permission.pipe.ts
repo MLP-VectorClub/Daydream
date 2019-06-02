@@ -8,6 +8,6 @@ export class PermissionPipe implements PipeTransform {
   ];
 
   transform(userRole: UserRole, checkAgainst: UserRole): boolean {
-    return this.roleList.indexOf(checkAgainst) >= this.roleList.indexOf(userRole);
+    return this.roleList.indexOf(checkAgainst) <= this.roleList.indexOf(userRole);
   }
 }

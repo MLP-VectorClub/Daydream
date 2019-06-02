@@ -7,20 +7,20 @@
           (click)="toggleSidebar()"></i>
         <span class="notif-cnt" [title]="'GLOBAL.HEADER.NEW_NOTIFICATIONS' | translate"></span>
       </li>
-      <li><a href='/episode/latest'>{{'TITLES.LATEST_EPISODE' | translate}}</a></li>
-      <li><a href='/show'>{{'TITLES.SHOW' | translate}}</a></li>
-      <li><a href='/cg'>{{'TITLES.COLOR_GUIDE' | translate}}</a></li>
-      <li><a href='/events'>{{'TITLES.EVENTS' | translate}}</a></li>
+      <li><a routerLink='/episode/latest'>{{'TITLES.LATEST_EPISODE' | translate}}</a></li>
+      <li><a routerLink='/show'>{{'TITLES.SHOW' | translate}}</a></li>
+      <li><a routerLink='/cg'>{{'TITLES.COLOR_GUIDE' | translate}}</a></li>
+      <li><a routerLink='/events'>{{'TITLES.EVENTS' | translate}}</a></li>
       <ng-container *ngIf="signedIn$ | async">
         <li>
           <app-user-link [userName]="user.name" [text]="'TITLES.ACCOUNT' | translate"></app-user-link>
         </li>
       </ng-container>
       <ng-container *ngIf="user.role | permission:'staff'">
-        <li><a href='/users'>{{'TITLES.USERS' | translate}}</a></li>
-        <li><a href='/admin'>{{'TITLES.ADMIN' | translate}}</a></li>
+        <li><a routerLink='/users'>{{'TITLES.USERS' | translate}}</a></li>
+        <li><a routerLink='/admin'>{{'TITLES.ADMIN' | translate}}</a></li>
       </ng-container>
-      <li><a href='/about'>{{'TITLES.ABOUT' | translate}}</a></li>
+      <li><a routerLink='/about'>{{'TITLES.ABOUT' | translate}}</a></li>
       <li><a [href]="c.CLUB_URL" target="_blank" rel="noopener">MLP-VectorClub</a></li>
     </ul>
     <div id="to-the-top" class="fa fa-arrow-up"></div>

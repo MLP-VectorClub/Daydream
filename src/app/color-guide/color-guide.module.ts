@@ -4,13 +4,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ColorGuideRoutingModule } from 'app/color-guide/color-guide-routing.module';
 import { ColorGuideService } from 'app/color-guide/color-guide.service';
+import { ColorGuideAppearanceComponent, ColorGuideAppearanceListComponent, ColorGuideComponent } from 'app/color-guide/components';
 import { SharedModule } from 'app/shared/shared.module';
 import * as fromEffects from 'app/store/effects/color-guide.effects';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
-import { ColorGuideComponent } from './color-guide.component';
 
 @NgModule({
-  declarations: [ColorGuideComponent],
+  declarations: [
+    ColorGuideComponent,
+    ColorGuideAppearanceComponent,
+    ColorGuideAppearanceListComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,

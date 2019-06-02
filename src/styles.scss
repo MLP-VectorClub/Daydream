@@ -8,9 +8,18 @@ html {
 body {
   font-family: $regular-font;
   font-size: 1rem;
+  line-height: $original-line-height;
+  overflow-x: auto;
+  overflow-y: scroll;
   padding-top: $header-height;
+  background-color: #fff;
+  background-image: url(/assets/img/grid-16x16.svg), url(/assets/img/grid-4x4.svg);
 }
 
 app-root > * {
   min-height: 100vh;
+}
+
+.ant-layout {
+  background: transparent !important;
 }

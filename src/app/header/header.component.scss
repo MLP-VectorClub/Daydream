@@ -62,6 +62,10 @@ header {
             display: none;
           }
 
+          + li {
+            margin-left: 0 !important;
+          }
+
           > .notif-cnt {
             font-size: 16px;
             font-weight: 700;

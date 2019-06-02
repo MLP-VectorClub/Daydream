@@ -42,6 +42,7 @@
     "core-js": "^2.5.4",
     "date-fns": "^2.0.0-alpha.27",
     "express": "^4.15.2",
+    "express-php-fpm": "^2.0.2",
     "hammerjs": "^2.0.8",
     "ng-zorro-antd": "^7.4.1",
     "rxjs": "~6.3.3",

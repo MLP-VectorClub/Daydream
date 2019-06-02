@@ -1,4 +1,5 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromActions from 'app/store/actions/color-guide.actions';
 import { Appearance, PageData, Status } from 'app/types';
 
@@ -15,6 +16,9 @@ const defaultState: State = adapter.getInitialState({
 
 export const reducer = (state: State = defaultState, action: fromActions.ColorGuideActions) => {
   switch (action.type) {
+    case fromActions.ActionTypes.LOAD_APPEARANCES:
+      return { ...state, status: Status.LOAD };
+
     case fromActions.ActionTypes.LOAD_APPEARANCES_YAY:
       return adapter.addAll(action.payload.appearances, { ...state, status: Status.YAY, pagination: action.payload.pagination });
 
@@ -26,3 +30,11 @@ export const reducer = (state: State = defaultState, action: fromActions.ColorGu
       return state;
   }
 };
+
+// get the selectors
+const { selectAll } = adapter.getSelectors();
+
+const colorGuideSelector = createFeatureSelector<State>('color-guide');
+export const appearances = createSelector(colorGuideSelector, selectAll);
+export const pagination = createSelector(colorGuideSelector, (state: State) => state.pagination);
+export const status = createSelector(colorGuideSelector, (state: State) => state.status);

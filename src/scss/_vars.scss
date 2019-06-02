@@ -5,6 +5,7 @@ $error-color: #f5222d;
 $header-height: 50px;
 $sidebar-width: 330px;
 $sidebar-breakpoint: 1200px;
+$sidebar-background: darken($primary, 20);
 // Mobile to desktop breakpoint
 $breakpoint: 650px;
 $avatar-size: 50px;
@@ -23,6 +24,8 @@ $sidebar-content-background: rgba(white, .1);
 }
 
 $footer-height: 38px;
+$content-margin: 8px;
+$original-line-height: 1.15;
 
 %navbar-li {
   a {
@@ -49,7 +52,7 @@ $footer-height: 38px;
     content: "";
     width: 12px;
     height: 12px;
-    background-image: url(/assets/extlink.svg);
+    background-image: url(/assets/img/extlink.svg);
     background-size: 12px;
     display: inline-block;
     margin-left: 2px;

@@ -1,0 +1,22 @@
+<ng-container *ngIf="status !== s.NAY; else nayNotify">
+  <ng-template #paginationComponent>
+    <app-pagination [data]="pagination"
+      (goto)="changePage.emit($event)"></app-pagination>
+  </ng-template>
+
+  <ng-template [ngTemplateOutlet]="paginationComponent"></ng-template>
+
+  <nz-list [nzDataSource]="appearances" [nzRenderItem]="itemTemplate" nzItemLayout="horizontal" [nzLoading]="status === s.LOAD">
+    <ng-template #itemTemplate let-item>
+      <nz-list-item>
+        <app-color-guide-appearance [appearance]="item"></app-color-guide-appearance>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+
+  <ng-template [ngTemplateOutlet]="paginationComponent"></ng-template>
+</ng-container>
+
+<ng-template #nayNotify>
+  <nz-alert nzType="error" [nzMessage]="'COLOR_GUIDE.LOADING_ERROR' | translate"></nz-alert>
+</ng-template>

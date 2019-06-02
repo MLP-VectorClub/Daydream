@@ -29,7 +29,8 @@
       true,
       "rxjs/Rx",
       "selenium-webdriver/http",
-      "yargs"
+      "yargs",
+      "tslint/lib/runner"
     ],
     "indent": [
       true,

@@ -1,16 +1,19 @@
-import 'zone.js/dist/zone-node';
 import { enableProdMode } from '@angular/core';
 // Express Engine
 import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+import * as bodyParser from 'body-parser';
 
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
+import * as expressPhpFpm from 'express-php-fpm';
 import { join } from 'path';
+import 'zone.js/dist/zone-node';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
+
+require('dotenv').config();
 
 // Express server
 const app = express();
@@ -33,6 +36,13 @@ app.set('view engine', 'html');
 app.set('views', DIST_FOLDER);
 
 app.use(bodyParser.json());
+
+// Backend proxy
+app.use('/api', expressPhpFpm.default({
+  documentRoot: process.env.BACKEND_ROOT,
+  env: {},
+  socketOptions: { path: process.env.FPM_SOCKET_PATH },
+}));
 
 // Serve static files from /browser
 app.get('*.*', express.static(DIST_FOLDER, {
