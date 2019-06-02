@@ -16,7 +16,7 @@ import {
   UserLinkComponent,
 } from 'app/shared/components';
 import { VarDirective } from 'app/shared/directives';
-import { AvatarShapePipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
+import { AppearancePagePipe, AvatarShapePipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 const declarations = [
@@ -40,6 +40,8 @@ const declarations = [
   RoleLabelPipe,
   PermissionPipe,
   SpriteUrlPipe,
+  AppearancePagePipe,
+  // PaletteUrlPipe,
 ];
 
 @NgModule({

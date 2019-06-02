@@ -14,5 +14,10 @@ export const ENDPOINTS = {
       path: `${API_PREFIX}/appearances/${appearanceId}/sprite`,
       queryParams: mapValues(params, String),
     }),
+  APPEARANCE_PALETTE: (appearanceId: number) =>
+    buildUrl(null, {
+      path: `${API_PREFIX}/appearances/${appearanceId}/palette`,
+      // TODO hash
+    }),
   USERS_ME: `${API_PREFIX}/users/me`,
 };

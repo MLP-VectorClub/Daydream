@@ -98,6 +98,10 @@ export interface Appearance {
    * MD5 hash of the current sprite image, if there is one, and null otherwise. The actual file is available from a different endpoint.
    */
   spriteHash: SpriteHash;
+  /**
+   * Indicates whether there are any cutie marks tied to this appearance
+   */
+  hasCutieMarks?: boolean;
 }
 
 /**
@@ -156,7 +160,6 @@ export interface AppControllersApiAppearancesControllerQueryPublicRequest {
   page: PageNumber
   q: string
 }
-
 export type AppControllersApiAppearancesControllerQueryPublicResult = PagedServerResponse &
   ArrayOfAppearances;
 
@@ -166,7 +169,6 @@ export interface AppControllersApiAppearancesControllerSpriteRequest {
   token: AppearanceToken
   hash: SpriteHash
 }
-
 export type AppControllersApiAppearancesControllerSpriteResult = any
 export interface AppControllersApiUsersControllerMeRequest {
 }

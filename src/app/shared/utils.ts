@@ -1,5 +1,6 @@
 import { GUIDE_NAMES } from 'app/app.config';
 import { GuideName } from 'app/types';
+import { trim } from 'lodash';
 
 export const sanitizeGuideName = (value: string): GuideName => {
   if (GUIDE_NAMES.includes(value as GuideName))
@@ -16,4 +17,8 @@ export const sanitizeSearchParam = (value?: string) => {
   if (typeof value !== 'string')
     return '';
   return value.trim();
+};
+
+export const makeUrlSafe = (input: string): string => {
+  return trim(input.replace(/[^A-Za-z\d\-]/g, '-').replace(/-+/g, '-'), '-');
 };

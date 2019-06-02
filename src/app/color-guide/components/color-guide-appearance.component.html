@@ -1,8 +1,16 @@
-<div nz-row [nzGutter]="16">
-  <div *ngIf="appearance.spriteHash" nz-col nzSpan="3">
-    <img [src]="appearance | spriteUrl" class="sprite-image">
+<div class="appearance-item">
+  <div *ngIf="appearance.spriteHash" class="sprite">
+    <a *appVar="appearance | spriteUrl as spritePath" [href]="spritePath" target="_blank">
+      <img [src]="spritePath" [alt]="appearance.label" class="sprite-image">
+    </a>
   </div>
-  <div nz-col nzSpan="21">
-    <strong>{{appearance.label}}</strong>
+  <div class="data">
+    <div class="appearance-header">
+      <a [routerLink]="appearance | appearancePage" class="appearance-name">{{appearance.label}}</a>
+    </div>
+    <div class="notes">
+      <span *ngIf="appearance.notes" [innerHTML]="appearance.notes"></span>
+      <span *ngIf="appearance.hasCutieMarks">Cutie mark available</span>
+    </div>
   </div>
 </div>
