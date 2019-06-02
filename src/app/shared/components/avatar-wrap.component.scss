@@ -1,0 +1,27 @@
+@import "scss/vars";
+
+.avatar-wrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  flex: 1 1 auto;
+  margin: 0 10px 0 0;
+  cursor: default;
+  user-select: none;
+  color: #777;
+  border: 2px solid;
+  background-color: #efefef;
+
+  &.provider-deviantart {
+    border-radius: 5px;
+  }
+
+  &.provider-discord {
+    border-radius: 50%;
+  }
+
+  .avatar {
+    width: $avatar-size;
+    height: $avatar-size;
+  }
+}

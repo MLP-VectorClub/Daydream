@@ -1,8 +1,40 @@
 {
   "GLOBAL": {
-    "SITE_NAME": "MLP Vector Club"
+    "SITE_NAME": "MLP Vector Club",
+    "GUEST_USER_NAME": "Curious Pony",
+    "HEADER": {
+      "NEW_NOTIFICATIONS": "New notifications"
+    },
+    "FOOTER": {
+      "APP_VERSION": [
+        "Running ",
+        "@",
+        " created "
+      ],
+      "BACKEND_VERSION": [
+        "(backend: ",
+        "@",
+        " created ",
+        ")"
+      ],
+      "VISIT_GITHUB": "Visit the GitHub repository",
+      "SEE_CHANGES": "See exactly what was changed and why",
+      "PRIVACY_POLICY": "Privacy Policy",
+      "CONTACT_US": "Contact Us"
+    }
+  },
+  "TITLES": {
+    "COLOR_GUIDE": "Color Guide",
+    "COLOR_GUIDE_NAMED_PAGED": "Page {{page}} - {{guide}} Color Guide"
+  },
+  "COLOR_GUIDE": {
+    "GUIDE_NAMES": {
+      "EQG": "EQG",
+      "PONY": "Pony"
+    }
   },
   "ERROR_MESSAGES": {
-    "ELASTIC_DOWN": "ElasticSearch server is down"
+    "ELASTIC_DOWN": "ElasticSearch server is down",
+    "GIT_INFO_MISSING": "Failed to retrieve backend server version information"
   }
 }

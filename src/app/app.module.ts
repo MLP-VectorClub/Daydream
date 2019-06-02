@@ -10,8 +10,12 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { fallbackLanguage, localStorageKeys, supportedLanguages } from 'app/app.config';
+import { CoreModule } from 'app/core/core.module';
+import { FooterModule } from 'app/footer/footer.module';
+import { HeaderModule } from 'app/header/header.module';
 import { noop } from 'lodash';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppEffects } from './app.effects';
@@ -28,7 +32,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({
+    environment.production ? [] : StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),
     EffectsModule.forRoot([AppEffects]),
@@ -36,6 +40,9 @@ registerLocaleData(en);
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
+    CoreModule,
+    HeaderModule,
+    FooterModule,
   ],
   providers: [
     {

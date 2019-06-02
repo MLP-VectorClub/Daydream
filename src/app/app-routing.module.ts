@@ -1,7 +1,21 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'cg',
+    loadChildren: 'app/color-guide/color-guide.module#ColorGuideModule',
+  },
+  {
+    path: 'colorguide',
+    loadChildren: 'app/color-guide/color-guide.module#ColorGuideModule',
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'cg',
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

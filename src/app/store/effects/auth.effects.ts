@@ -6,14 +6,14 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
-export class CoreEffects {
+export class AuthEffects {
 
   @Effect()
   checkAuthEffect$: Observable<fromActions.AuthActions> = this.actions$.pipe(
-    ofType(fromActions.AuthActionTypes.CHECK_AUTH),
+    ofType(fromActions.ActionTypes.CHECK_AUTH),
     switchMap(() => this.userService.getMe().pipe(
-      map(user => new fromActions.CheckAuthSuccess(user)),
-      catchError(() => of(new fromActions.CheckAuthFail())),
+      map(user => new fromActions.CheckAuthYay(user)),
+      catchError(() => of(new fromActions.CheckAuthNay())),
     )),
   );
 

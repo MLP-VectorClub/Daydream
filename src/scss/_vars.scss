@@ -1,0 +1,57 @@
+$primary: #2C73B1;
+
+$error-color: #f5222d;
+
+$header-height: 50px;
+$sidebar-width: 330px;
+$sidebar-breakpoint: 1200px;
+// Mobile to desktop breakpoint
+$breakpoint: 650px;
+$avatar-size: 50px;
+
+$monospace: 'Consolas', monospace;
+$cursive: 'Celestia', 'Lucida Calligraphy', 'Monotype Corsiva', cursive;
+$regular-font: 'Arimo', sans-serif;
+
+$sidebar-content-color: rgba(white, .75);
+$sidebar-content-border: rgba(white, .3);
+$sidebar-content-background: rgba(white, .1);
+%sidebar-content {
+  color: $sidebar-content-color;
+  background-color: $sidebar-content-background;
+  border: 1px solid $sidebar-content-border;
+}
+
+$footer-height: 38px;
+
+%navbar-li {
+  a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    padding: 1px 3.5px;
+    height: 24px;
+    line-height: 22px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color .2s linear;
+
+    &:hover { background-color: rgba(white, .2) }
+
+    &:active { background-color: rgba(white, .5) }
+  }
+}
+
+%contains-external-links {
+  a[href^=http]:after {
+    font-style: italic;
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-image: url(/assets/extlink.svg);
+    background-size: 12px;
+    display: inline-block;
+    margin-left: 2px;
+  }
+}

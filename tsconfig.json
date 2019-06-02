@@ -6,6 +6,9 @@
       "app/*": ["src/app/*"]
     },
     "outDir": "./dist/out-tsc",
+    "types": [
+      "node"
+    ],
     "sourceMap": true,
     "declaration": false,
     "module": "es2015",

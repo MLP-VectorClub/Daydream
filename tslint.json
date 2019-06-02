@@ -28,7 +28,8 @@
     "import-blacklist": [
       true,
       "rxjs/Rx",
-      "selenium-webdriver/http"
+      "selenium-webdriver/http",
+      "yargs"
     ],
     "indent": [
       true,
@@ -66,7 +67,7 @@
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
-    "no-empty": false,
+    "no-empty": true,
     "no-inferrable-types": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
@@ -141,6 +142,10 @@
       }
     ],
     "no-unnecessary-constructor": true,
-    "one-line": false
+    "one-line": false,
+    "comma-dangle": [
+      true,
+      "always-multiline"
+    ]
   }
 }

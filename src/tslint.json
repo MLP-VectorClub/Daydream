@@ -13,10 +13,5 @@
       "app",
       "kebab-case"
     ]
-  },
-  "linterOptions": {
-      "exclude": [
-          "src/app/types/api.ts"
-      ]
   }
 }

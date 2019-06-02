@@ -1,0 +1,28 @@
+<header>
+  <nav>
+    <ul *appVar="user$ | async as user">
+      <li class="sidebar-toggle">
+        <i *appVar="sidebarCollapsed$ | async as isCollapsed" class="toggle fa fa-fw"
+          [class.fa-chevron-left]="!isCollapsed" [class.fa-chevron-right]="isCollapsed"
+          (click)="toggleSidebar()"></i>
+        <span class="notif-cnt" [title]="'GLOBAL.HEADER.NEW_NOTIFICATIONS' | translate"></span>
+      </li>
+      <li><a href='/episode/latest'>{{'TITLES.LATEST_EPISODE' | translate}}</a></li>
+      <li><a href='/show'>{{'TITLES.SHOW' | translate}}</a></li>
+      <li><a href='/cg'>{{'TITLES.COLOR_GUIDE' | translate}}</a></li>
+      <li><a href='/events'>{{'TITLES.EVENTS' | translate}}</a></li>
+      <ng-container *ngIf="signedIn$ | async">
+        <li>
+          <app-user-link [userName]="user.name" [text]="'TITLES.ACCOUNT' | translate"></app-user-link>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="user.role | permission:'staff'">
+        <li><a href='/users'>{{'TITLES.USERS' | translate}}</a></li>
+        <li><a href='/admin'>{{'TITLES.ADMIN' | translate}}</a></li>
+      </ng-container>
+      <li><a href='/about'>{{'TITLES.ABOUT' | translate}}</a></li>
+      <li><a [href]="c.CLUB_URL" target="_blank" rel="noopener">MLP-VectorClub</a></li>
+    </ul>
+    <div id="to-the-top" class="fa fa-arrow-up"></div>
+  </nav>
+</header>

@@ -1,45 +1,54 @@
 import { Action } from '@ngrx/store';
+import { Nullable } from 'app/types';
 
-export enum CoreActionTypes {
+export enum ActionTypes {
   SET_TITLE = '[CORE] Set Title',
   TITLE_TRANSLATED = '[CORE] Title translated',
   DETECT_LANGUAGE = '[CORE] Detect Language',
   LANGUAGE_DETECTED = '[CORE] Language Detected',
   CHANGE_LANGUAGE = '[CORE] Change Language',
+  TOGGLE_SIDEBAR = '[CORE] Toggle Sidebar',
 }
 
 type TitleKeyWithParams = [string, { [key: string]: any }];
 export type SetTitleActionPayload = string | TitleKeyWithParams;
 
 export class DetectLanguageAction implements Action {
-  readonly type = CoreActionTypes.DETECT_LANGUAGE;
+  readonly type = ActionTypes.DETECT_LANGUAGE;
 }
 
 export class LanguageDetectedAction implements Action {
-  readonly type = CoreActionTypes.LANGUAGE_DETECTED;
+  readonly type = ActionTypes.LANGUAGE_DETECTED;
 
   constructor(public payload: string) {
   }
 }
 
 export class ChangeLanguageAction implements Action {
-  readonly type = CoreActionTypes.CHANGE_LANGUAGE;
+  readonly type = ActionTypes.CHANGE_LANGUAGE;
 
   constructor(public payload: string) {
   }
 }
 
 export class SetTitleAction implements Action {
-  readonly type = CoreActionTypes.SET_TITLE;
+  readonly type = ActionTypes.SET_TITLE;
 
   constructor(public payload: SetTitleActionPayload) {
   }
 }
 
 export class TitleTranslatedAction implements Action {
-  readonly type = CoreActionTypes.TITLE_TRANSLATED;
+  readonly type = ActionTypes.TITLE_TRANSLATED;
 
   constructor(public payload: string) {
+  }
+}
+
+export class ToggleSidebarAction implements Action {
+  readonly type = ActionTypes.TOGGLE_SIDEBAR;
+
+  constructor(public payload: Nullable<boolean>) {
   }
 }
 
@@ -48,4 +57,5 @@ export type CoreActions =
   LanguageDetectedAction |
   ChangeLanguageAction |
   SetTitleAction |
-  TitleTranslatedAction;
+  TitleTranslatedAction |
+  ToggleSidebarAction;

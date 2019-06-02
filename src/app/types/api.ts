@@ -1,3 +1,4 @@
+/* tslint:disable */
 /*
  *
  *
@@ -44,7 +45,7 @@ export interface ServerResponse {
    */
   status: boolean;
   /**
-   * A message explaining the outcome of the request, typically used for errors
+   * A translation key pointing to a message that explains the outcome of the request, typically used for errors
    */
   message?: string;
 }
@@ -64,6 +65,21 @@ export interface PageData {
 }
 
 export type PagedServerResponse = ServerResponse & PageData;
+
+/**
+ * Contains information about the server's current revision
+ */
+export interface GitInfo {
+  commitId: string;
+  commitTime: string;
+}
+
+/**
+ * Git revision information under the git key
+ */
+export interface ValueOfGitInfo {
+  git: (GitInfo)[];
+}
 
 /**
  * Represents an entry in the color guide
@@ -89,9 +105,10 @@ export type GuideName = 'pony' | 'eqg';
  */
 export interface User {
   id: string;
-  label?: string;
-  role: any;
-  avatar_url: string;
+  name: string;
+  role: UserRole;
+  avatarUrl: string;
+  avatarProvider: AvatarProvider;
 }
 
 /**
@@ -100,20 +117,36 @@ export interface User {
 export type UserRole = 'guest' | 'user' | 'member' | 'assistant' | 'staff' | 'admin' | 'developer';
 
 /**
+ * List of supported avatar providers
+ */
+export type AvatarProvider = 'deviantart' | 'discord';
+
+/**
  * A user's data under the user key
  */
 export interface ValueOfUser {
   user: (User)[];
+  /**
+   * If this value is true the DeviantArt access token expired and the backend is updating it in the background. Future requests should be made to the appropriate endpoint periodically to check whether the session update was successful and the user should be logged out if it wasn't.
+   */
+  sessionUpdating: boolean;
 }
 
-export interface AppControllersApiAppearancesControllerGetAllRequest {
-  guide: GuideName;
-  page: PageNumber;
-  q: string;
+export interface AppControllersApiAboutControllerServerRequest {
 }
-export type AppControllersApiAppearancesControllerGetAllResult = PagedServerResponse &
+
+export type AppControllersApiAboutControllerServerResult = ServerResponse & ValueOfGitInfo;
+
+export interface AppControllersApiAppearancesControllerAllRequest {
+  guide: GuideName
+  page: PageNumber
+  q: string
+}
+
+export type AppControllersApiAppearancesControllerAllResult = PagedServerResponse &
   ArrayOfAppearances;
 
-export interface AppControllersApiUsersControllerGetMeRequest {
+export interface AppControllersApiUsersControllerMeRequest {
 }
-export type AppControllersApiUsersControllerGetMeResult = ServerResponse & ValueOfUser;
+
+export type AppControllersApiUsersControllerMeResult = ServerResponse & ValueOfUser;

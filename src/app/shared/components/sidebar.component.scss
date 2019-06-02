@@ -1,0 +1,10 @@
+@import "scss/vars";
+
+.sidebar {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  overflow: auto;
+  height: calc(100vh - #{$header-height + $footer-height});
+  padding: 10px;
+}
