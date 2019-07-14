@@ -1,8 +1,6 @@
 <div class="appearance-item">
-  <div *ngIf="appearance.spriteHash" class="sprite">
-    <a *appVar="appearance | spriteUrl as spritePath" [href]="spritePath" target="_blank">
-      <img [src]="spritePath" [alt]="appearance.label" class="sprite-image">
-    </a>
+  <div *ngIf="appearance.sprite" class="sprite">
+    <app-color-guide-appearance-sprite [appearance]="appearance"></app-color-guide-appearance-sprite>
   </div>
   <div class="data">
     <div class="appearance-header">

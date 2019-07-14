@@ -12,10 +12,7 @@ export class FooterComponent {
   g = GIT;
   c = config;
 
-  constructor() {
-  }
-
   openContactModal() {
-
+    // TODO Implement
   }
 }

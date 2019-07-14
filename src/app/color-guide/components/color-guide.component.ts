@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { sanitizeGuideName, sanitizePageParam, sanitizeSearchParam } from 'app/shared/utils';
 import * as fromColorGuideActions from 'app/store/actions/color-guide.actions';
 import { SetTitleAction } from 'app/store/actions/core.actions';
@@ -8,7 +9,6 @@ import { AppState } from 'app/store/reducers';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
 import { Appearance, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
 import { LaxBreadcrumbOption } from 'app/types/ng-zorro';
-import * as capitalize from 'capitalize';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -28,7 +28,8 @@ export class ColorGuideComponent implements OnInit {
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private trans: TranslateService) {
     this.breadcrumbs$ = this.breadcrumbsSource.asObservable();
     this.appearances$ = this.store.pipe(select(fromReducer.appearances));
     this.pagination$ = this.store.pipe(select(fromReducer.pagination));
@@ -45,7 +46,7 @@ export class ColorGuideComponent implements OnInit {
         return { guide, page, q };
       }),
     ).subscribe(params => {
-      this.guideName = capitalize(params.guide);
+      this.guideName = this.trans.instant(`COLOR_GUIDE.GUIDE_NAMES.${params.guide.toUpperCase()}`);
       this.breadcrumbsSource.next(this.getBreadcrumbs(this.guideName));
       this.store.dispatch(new SetTitleAction(['COLOR_GUIDE_NAMED_PAGED', { guide: this.guideName, page: params.page }]));
       this.store.dispatch(new fromColorGuideActions.LoadAppearancesAction(params));

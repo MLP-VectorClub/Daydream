@@ -1,0 +1,6 @@
+<ng-container *ngIf="appearance.sprite">
+  <nz-spin [nzSpinning]="status === Status.LOAD" [nzDelay]="200">
+    <img [attr.src]="imageSource$ | async" [alt]="appearance.label" class="sprite-image"
+      inViewport (inViewportAction)="onIntersection($event)" #imageTag/>
+  </nz-spin>
+</ng-container>

@@ -1,5 +1,8 @@
 @import "scss/vars";
 @import "scss/fonts";
+@import '~ngx-progressive-image-loader/ngx-progressive-image-loader';
+
+@include progressive-image-loader(0.5);
 
 html {
   font-size: 16px;

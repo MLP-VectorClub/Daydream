@@ -54,7 +54,10 @@
   "ERROR_MESSAGES": {
     "ELASTIC_DOWN": "ElasticSearch server is down",
     "GIT_INFO_MISSING": "Failed to retrieve backend server version information",
-    "APPEARANCE_NOT_FOUND": "Could not find the appearance with the ID given",
-    "APPEARANCE_PRIVATE": "You do not have permission to view this appearance"
+    "COLOR_GUIDE": {
+      "INVALID_GUIDE_NAME": "The specified guide name is invalid",
+      "APPEARANCE_NOT_FOUND": "Could not find the appearance with the ID given",
+      "APPEARANCE_PRIVATE": "You do not have permission to view this appearance"
+    }
   }
 }

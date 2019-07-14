@@ -10,3 +10,4 @@ A work-in-progress SPA frontend for [MLPVC-RR](https://github.com/seinopsys/MLPV
  - [ngrx](https://ngrx.io/)
  - [ngx-translate](https://github.com/ngx-translate/core)
  - [Sass](https://sass-lang.com/)
+ - [ng-in-viewport](https://github.com/k3nsei/ng-in-viewport)

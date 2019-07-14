@@ -17,6 +17,7 @@ async function createVersionsFile(filename) {
 `;
 
   fs.writeFileSync(filename, content.replace(/^\n/g, ''), { encoding: 'utf8' });
+  console.log(`Git version information written to ${filename}`);
 }
 
 createVersionsFile('src/environments/git.ts');

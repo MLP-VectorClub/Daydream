@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://api.mlpvector.lc",
+    "target": "https://mlpvector.lc",
     "changeOrigin": true,
     "secure": false
   }

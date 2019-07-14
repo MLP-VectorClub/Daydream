@@ -95,13 +95,27 @@ export interface Appearance {
   added: string;
   notes: string;
   /**
-   * MD5 hash of the current sprite image, if there is one, and null otherwise. The actual file is available from a different endpoint.
+   * The sprite that belongs to this appearance, or null if there isn't one
    */
-  spriteHash: SpriteHash;
+  sprite: Sprite;
   /**
    * Indicates whether there are any cutie marks tied to this appearance
    */
   hasCutieMarks?: boolean;
+}
+
+/**
+ * Data related to an appearance's sprite file. The actual file is available from a different endpoint.
+ */
+export interface Sprite {
+  /**
+   * MD5 hash of the current sprite image
+   */
+  hash: SpriteHash;
+  /**
+   * Small preview image with matching proportions to the actual image, suitable for displaying as a preview while the full image loads
+   */
+  preview: string;
 }
 
 /**
