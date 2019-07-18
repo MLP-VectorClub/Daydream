@@ -95,7 +95,7 @@ export interface Appearance {
   added: string;
   notes: string;
   /**
-   * The sprite that belongs to this appearance, or null if there isn't one
+   * The sprite that belongs to this appearance, or null if there is none
    */
   sprite: Sprite;
   /**
@@ -113,7 +113,7 @@ export interface Sprite {
    */
   hash: SpriteHash;
   /**
-   * Small preview image with matching proportions to the actual image, suitable for displaying as a preview while the full image loads
+   * Data URI for a small preview image with matching proportions to the actual image, suitable for displaying as a preview while the full image loads
    */
   preview: string;
 }
@@ -126,6 +126,8 @@ export interface ArrayOfAppearances {
 }
 
 export type GuideName = 'pony' | 'eqg';
+
+export type GuidePageSize = number;
 
 export type SpriteSize = 300 | 600;
 
@@ -172,6 +174,7 @@ export type AppControllersApiAboutControllerServerResult = ServerResponse & Valu
 export interface AppControllersApiAppearancesControllerQueryPublicRequest {
   guide: GuideName
   page: PageNumber
+  size: GuidePageSize
   q: string
 }
 export type AppControllersApiAppearancesControllerQueryPublicResult = PagedServerResponse &

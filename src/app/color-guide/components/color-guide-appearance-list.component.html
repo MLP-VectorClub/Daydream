@@ -1,7 +1,7 @@
 <ng-container *ngIf="status !== s.NAY; else nayNotify">
   <ng-template #paginationComponent>
-    <app-pagination [data]="pagination"
-      (goto)="changePage.emit($event)"></app-pagination>
+    <app-pagination [data]="pagination" [availablePageSizes]="gps" (goto)="changePage.emit($event)"
+                    (size)="changePageSize.emit($event)"></app-pagination>
   </ng-template>
 
   <ng-template [ngTemplateOutlet]="paginationComponent"></ng-template>

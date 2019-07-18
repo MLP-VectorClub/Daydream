@@ -13,7 +13,13 @@ export const sanitizePageParam = (value: string) => {
     return 1;
   return page;
 };
-export const sanitizeSearchParam = (value?: string) => {
+export const sanitizePageSizeParam = (values: number[]) => (value: string) => {
+  const size = parseInt(value, 10);
+  if (!values.includes(size))
+    return values[0];
+  return size;
+};
+export const sanitizeSearchParam = (value?: string): string => {
   if (typeof value !== 'string')
     return '';
   return value.trim();

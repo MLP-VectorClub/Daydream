@@ -14,13 +14,23 @@ export class PaginationComponent {
   @Input()
   status: Status = Status.INIT;
 
+  @Input()
+  availablePageSizes: number[] = [];
+
   @Output()
   goto = new EventEmitter<number>();
+
+  @Output()
+  size = new EventEmitter<number>();
 
   s = Status;
 
   pageChange(page: number) {
     this.goto.emit(page);
+  }
+
+  pageSizeChange(page: number) {
+    this.size.emit(page);
   }
 
 }

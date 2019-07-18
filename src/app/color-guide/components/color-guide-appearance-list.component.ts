@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Appearance, PageData, Status } from 'app/types';
+import { GUIDE_PAGE_SIZES } from 'app/app.config';
 
 @Component({
   selector: 'app-color-guide-appearance-list',
@@ -20,6 +21,10 @@ export class ColorGuideAppearanceListComponent {
   @Output()
   changePage = new EventEmitter<number>();
 
+  @Output()
+  changePageSize = new EventEmitter<number>();
+
   s = Status;
+  gps = GUIDE_PAGE_SIZES;
 
 }

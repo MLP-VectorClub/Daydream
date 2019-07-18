@@ -9,8 +9,9 @@
       [subtitle]="'COLOR_GUIDE.SUBTITLE' | translate"></app-page-header>
 
     <app-color-guide-appearance-list [pagination]="pagination$ | async"
-      [appearances]="appearances$ | async"
-      [status]="status$ | async"
-      (changePage)="changePage($event)"></app-color-guide-appearance-list>
+                                     [appearances]="appearances$ | async"
+                                     [status]="status$ | async"
+                                     (changePage)="changePage($event)"
+                                     (changePageSize)="changePageSize($event)"></app-color-guide-appearance-list>
   </app-main>
 </app-content>

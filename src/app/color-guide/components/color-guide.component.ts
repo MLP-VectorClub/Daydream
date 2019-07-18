@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { sanitizeGuideName, sanitizePageParam, sanitizeSearchParam } from 'app/shared/utils';
+import { sanitizeGuideName, sanitizePageParam, sanitizePageSizeParam, sanitizeSearchParam } from 'app/shared/utils';
 import * as fromColorGuideActions from 'app/store/actions/color-guide.actions';
 import { SetTitleAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
@@ -11,6 +11,8 @@ import { Appearance, Nullable, PageData, QueryPublicAppearancesRequest, Status }
 import { LaxBreadcrumbOption } from 'app/types/ng-zorro';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GUIDE_PAGE_SIZES } from 'app/app.config';
+import { omit } from 'lodash';
 
 @Component({
   selector: 'app-color-guide',
@@ -43,7 +45,8 @@ export class ColorGuideComponent implements OnInit {
         const guide = sanitizeGuideName(path.guide);
         const page = sanitizePageParam(query.page);
         const q = sanitizeSearchParam(query.q);
-        return { guide, page, q };
+        const size = sanitizePageSizeParam(GUIDE_PAGE_SIZES)(query.size);
+        return { guide, page, q, size };
       }),
     ).subscribe(params => {
       this.guideName = this.trans.instant(`COLOR_GUIDE.GUIDE_NAMES.${params.guide.toUpperCase()}`);
@@ -57,8 +60,12 @@ export class ColorGuideComponent implements OnInit {
   }
 
   changePage(page: number) {
-    const queryParams = { ...this.route.snapshot.queryParams, page };
+    const queryParams = omit({ ...this.route.snapshot.queryParams, page }, 'size');
     this.router.navigate(['.'], { relativeTo: this.route, queryParams });
+  }
+
+  changePageSize(size: number) {
+    this.store.dispatch(new fromColorGuideActions.ChangePageSizeAction(size));
   }
 
   private getBreadcrumbs(guideName: Nullable<string>): LaxBreadcrumbOption[] {

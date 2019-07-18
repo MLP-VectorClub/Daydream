@@ -1,6 +1,15 @@
 <div class="pagination-wrapper" *ngIf="data">
   <nz-spin [nzSpinning]="status === s.LOAD">
+    <ng-template #rangeTemplate let-range="range" let-total>
+      {{ range[0] }}-{{ range[1] }} of {{ total }} items
+    </ng-template>
     <nz-pagination [nzPageIndex]="data.currentPage" [nzTotal]="data.totalItems" [nzPageSize]="data.itemsPerPage"
-      [nzHideOnSinglePage]="true" (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+                   [nzHideOnSinglePage]="true" (nzPageIndexChange)="pageChange($event)"
+                   nzShowQuickJumper [nzShowTotal]="rangeTemplate" [nzShowSizeChanger]="true"
+                   [nzPageSizeOptions]="availablePageSizes" (nzPageSizeChange)="pageSizeChange($event)">
+      <ng-template #renderItemTemplate let-type let-page="page">
+        <a *ngIf="type === 'page'">{{ page }}</a>
+      </ng-template>
+    </nz-pagination>
   </nz-spin>
 </div>

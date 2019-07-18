@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { AuthModule } from 'app/auth/auth.module';
 import { CoreEffects } from 'app/store/effects/core.effects';
 import { reducer } from 'app/store/reducers/core.reducer';
+import { UserPrefsService } from 'app/core/user-prefs.service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { reducer } from 'app/store/reducers/core.reducer';
     EffectsModule.forFeature([CoreEffects]),
     AuthModule,
   ],
-  providers: [],
+  providers: [UserPrefsService],
 })
 export class CoreModule {
 }
