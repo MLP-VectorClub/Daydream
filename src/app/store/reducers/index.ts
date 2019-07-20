@@ -2,7 +2,7 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import * as fromAuthReducer from 'app/store/reducers/auth.reducer';
 import * as fromColorGuideReducer from 'app/store/reducers/color-guide.reducer';
 import * as fromCoreReducer from 'app/store/reducers/core.reducer';
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 
 export interface AppState {
   auth: fromAuthReducer.State;

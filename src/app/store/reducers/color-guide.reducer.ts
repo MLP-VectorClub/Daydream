@@ -14,7 +14,7 @@ const defaultState: State = adapter.getInitialState({
   pagination: null,
 });
 
-export const reducer = (state: State = defaultState, action: fromActions.ColorGuideActions) => {
+export function reducer(state: State = defaultState, action: fromActions.ColorGuideActions): State {
   switch (action.type) {
     case fromActions.ActionTypes.LOAD_APPEARANCES:
       return { ...state, status: Status.LOAD };
@@ -29,7 +29,7 @@ export const reducer = (state: State = defaultState, action: fromActions.ColorGu
     default:
       return state;
   }
-};
+}
 
 // get the selectors
 const { selectAll } = adapter.getSelectors();

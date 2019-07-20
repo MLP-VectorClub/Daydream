@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as config from 'app/app.config';
-import { GIT } from 'src/environments/git';
+import { GIT } from 'environments/git';
 
 @Component({
   selector: 'app-footer',

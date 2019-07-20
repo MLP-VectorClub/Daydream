@@ -1,7 +1,5 @@
-export * from 'src/app/types/api';
-import { Nullable, Omit } from 'app/types/common';
-import * as api from 'src/app/types/api';
-import { User } from 'src/app/types/api';
+import { Nullable, Omit } from 'app/types';
+import * as api from 'app/types/api';
 
 /**
  * @file
@@ -16,8 +14,8 @@ export type GetAppearanceSpriteRequest = Omit<api.AppControllersApiAppearancesCo
   size?: api.AppControllersApiAppearancesControllerSpriteRequest['size'];
 };
 
-export type NullableUser = Omit<User, 'id' | 'name' | 'avatarUrl'> & {
-  id: Nullable<User['id']>;
-  name: Nullable<User['name']>;
-  avatarUrl: Nullable<User['avatarUrl']>;
+export type NullableUser = Omit<api.User, 'id' | 'name' | 'avatarUrl'> & {
+  id: Nullable<api.User['id']>;
+  name: Nullable<api.User['name']>;
+  avatarUrl: Nullable<api.User['avatarUrl']>;
 };

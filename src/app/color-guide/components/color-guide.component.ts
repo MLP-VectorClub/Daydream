@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { GUIDE_PAGE_SIZES } from 'app/app.config';
 import { sanitizeGuideName, sanitizePageParam, sanitizePageSizeParam, sanitizeSearchParam } from 'app/shared/utils';
 import * as fromColorGuideActions from 'app/store/actions/color-guide.actions';
 import { SetTitleAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
-import { Appearance, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
-import { LaxBreadcrumbOption } from 'app/types/ng-zorro';
+import { Appearance, LaxBreadcrumbOption, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
+import { omit } from 'lodash';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GUIDE_PAGE_SIZES } from 'app/app.config';
-import { omit } from 'lodash';
 
 @Component({
   selector: 'app-color-guide',

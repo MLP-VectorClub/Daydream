@@ -15,8 +15,9 @@ import {
   TimeComponent,
   UserLinkComponent,
 } from 'app/shared/components';
+import { AboveContentComponent } from 'app/shared/components/above-content.component';
 import { VarDirective } from 'app/shared/directives';
-import { AppearancePagePipe, AvatarShapePipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
+import { AppearancePagePipe, AvatarShapePipe, PaletteUrlPipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 const declarations = [
@@ -31,6 +32,7 @@ const declarations = [
   MainComponent,
   PageHeaderComponent,
   PaginationComponent,
+  AboveContentComponent,
 
   // Directives
   VarDirective,
@@ -41,7 +43,7 @@ const declarations = [
   PermissionPipe,
   SpriteUrlPipe,
   AppearancePagePipe,
-  // PaletteUrlPipe,
+  PaletteUrlPipe,
 ];
 
 @NgModule({

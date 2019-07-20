@@ -1,4 +1,4 @@
-import { Nullable } from 'app/types/common';
+import { Nullable } from 'app/types';
 import { BreadcrumbOption } from 'ng-zorro-antd/breadcrumb/nz-breadcrumb.component';
 
 export interface LaxBreadcrumbOption {

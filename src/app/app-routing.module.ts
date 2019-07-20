@@ -5,11 +5,11 @@ import { NotFoundComponent } from 'app/error/components/not-found.component';
 const routes: Routes = [
   {
     path: 'cg',
-    loadChildren: 'app/color-guide/color-guide.module#ColorGuideModule',
+    loadChildren: () => import('app/color-guide/color-guide.module').then(m => m.ColorGuideModule),
   },
   {
     path: 'colorguide',
-    loadChildren: 'app/color-guide/color-guide.module#ColorGuideModule',
+    loadChildren: () => import('app/color-guide/color-guide.module').then(m => m.ColorGuideModule),
   },
   {
     path: '',

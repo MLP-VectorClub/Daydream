@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LaxBreadcrumbOption } from 'app/types/ng-zorro';
+import { LaxBreadcrumbOption } from 'app/types';
 
 @Component({
   selector: 'app-error',

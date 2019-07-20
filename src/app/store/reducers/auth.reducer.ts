@@ -20,7 +20,7 @@ const guestUser: NullableUser = {
   avatarProvider: 'deviantart',
 };
 
-export const reducer = (state: State = defaultState, action: fromActions.AuthActions) => {
+export function reducer(state: State = defaultState, action: fromActions.AuthActions): State {
   switch (action.type) {
     case fromActions.ActionTypes.CHECK_AUTH_YAY:
       return { signedIn: true, data: action.payload };
@@ -31,7 +31,7 @@ export const reducer = (state: State = defaultState, action: fromActions.AuthAct
     default:
       return state;
   }
-};
+}
 
 const authSelector = createFeatureSelector('auth');
 export const signedIn = createSelector(authSelector, (state: State) => state.signedIn);
