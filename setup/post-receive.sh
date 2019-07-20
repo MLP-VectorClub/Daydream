@@ -9,7 +9,7 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
     CMD_CD="cd $(readlink -nf "$PWD/..")"
     CMD_FETCH="$GIT fetch"
     CMD_NPM="sudo -u www-data npm install --no-save"
-    CMD_BUILD="sudo -u www-data npm run build"
+    CMD_BUILD="sudo -u www-data nice npm run build"
 
     echo "$ $CMD_CD"
     eval ${CMD_CD}
