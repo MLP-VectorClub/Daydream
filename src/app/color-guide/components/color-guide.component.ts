@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { GUIDE_PAGE_SIZES } from 'app/app.config';
-import { sanitizeGuideName, sanitizePageParam, sanitizePageSizeParam, sanitizeSearchParam } from 'app/shared/utils';
+import { paginationParam, sanitizeGuideName, sanitizePageParam, sanitizePageSizeParam, sanitizeSearchParam } from 'app/shared/utils';
 import * as fromColorGuideActions from 'app/store/actions/color-guide.actions';
 import { SetTitleAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
 import { Appearance, LaxBreadcrumbOption, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
-import { omit } from 'lodash';
+import { omit } from 'lodash-es';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
@@ -64,7 +64,7 @@ export class ColorGuideComponent implements OnInit {
   }
 
   changePage(page: number) {
-    const queryParams = omit({ ...this.route.snapshot.queryParams, page }, 'size');
+    const queryParams = omit({ ...this.route.snapshot.queryParams, page: paginationParam(page) }, 'size');
     this.router.navigate(['.'], { relativeTo: this.route, queryParams });
   }
 

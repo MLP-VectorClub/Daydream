@@ -1,5 +1,5 @@
 import { GuideName } from 'app/types';
-import { range } from 'lodash';
+import { range } from 'lodash-es';
 import { NzBreakPoint } from 'ng-zorro-antd';
 
 export const GITHUB_URL = 'https://github.com/SeinopSys/MLPVectorClub';

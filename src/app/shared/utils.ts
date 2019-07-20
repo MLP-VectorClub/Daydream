@@ -1,8 +1,6 @@
 import { GUIDE_NAMES } from 'app/app.config';
 import { GuideName } from 'app/types';
-import { trim } from 'lodash';
-import { pipe } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { trim } from 'lodash-es';
 
 export const sanitizeGuideName = (value: string): GuideName => {
   if (GUIDE_NAMES.includes(value as GuideName))
@@ -31,8 +29,8 @@ export const makeUrlSafe = (input: string): string => {
   return trim(input.replace(/[^A-Za-z\d\-]/g, '-').replace(/-+/g, '-'), '-');
 };
 
-/** RxJS operator */
-export const skipFirstIf = (condition: () => boolean) =>
-  pipe(filter((val, index) => {
-    return condition() ? index > 1 : true;
-  }));
+/**
+ * Clear way to make sure the first page does not show as a query param in the URL
+ */
+export const paginationParam = (page: number): number | undefined =>
+  page === 1 ? undefined : page;

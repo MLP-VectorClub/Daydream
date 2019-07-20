@@ -14,7 +14,7 @@ import { CoreModule } from 'app/core/core.module';
 import { ErrorModule } from 'app/error/error.module';
 import { FooterModule } from 'app/footer/footer.module';
 import { HeaderModule } from 'app/header/header.module';
-import { noop } from 'lodash';
+import { noop } from 'lodash-es';
 import { InViewportModule } from 'ng-in-viewport';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
