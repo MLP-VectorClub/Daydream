@@ -1,6 +1,8 @@
 import { GUIDE_NAMES } from 'app/app.config';
 import { GuideName } from 'app/types';
 import { trim } from 'lodash';
+import { pipe } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 export const sanitizeGuideName = (value: string): GuideName => {
   if (GUIDE_NAMES.includes(value as GuideName))
@@ -28,3 +30,9 @@ export const sanitizeSearchParam = (value?: string): string => {
 export const makeUrlSafe = (input: string): string => {
   return trim(input.replace(/[^A-Za-z\d\-]/g, '-').replace(/-+/g, '-'), '-');
 };
+
+/** RxJS operator */
+export const skipFirstIf = (condition: () => boolean) =>
+  pipe(filter((val, index) => {
+    return condition() ? index > 1 : true;
+  }));

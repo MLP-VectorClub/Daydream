@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { Nullable } from 'app/types';
 
 export enum ActionTypes {
+  SET_ROOT_STATE = '[CORE] Set Root State',
   SET_TITLE = '[CORE] Set Title',
   TITLE_TRANSLATED = '[CORE] Title translated',
   DETECT_LANGUAGE = '[CORE] Detect Language',
@@ -52,10 +53,18 @@ export class ToggleSidebarAction implements Action {
   }
 }
 
+export class SetRootStateAction implements Action {
+  readonly type = ActionTypes.SET_ROOT_STATE;
+
+  constructor(public payload: any) {
+  }
+}
+
 export type CoreActions =
   DetectLanguageAction |
   LanguageDetectedAction |
   ChangeLanguageAction |
   SetTitleAction |
   TitleTranslatedAction |
-  ToggleSidebarAction;
+  ToggleSidebarAction |
+  SetRootStateAction;

@@ -11,7 +11,7 @@ import * as fromReducer from 'app/store/reducers/color-guide.reducer';
 import { Appearance, LaxBreadcrumbOption, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
 import { omit } from 'lodash';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-color-guide',
@@ -26,6 +26,7 @@ export class ColorGuideComponent implements OnInit {
   guideName: string;
 
   private breadcrumbsSource = new BehaviorSubject<LaxBreadcrumbOption[]>(this.getBreadcrumbs(null));
+  private skip = false;
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
@@ -36,10 +37,15 @@ export class ColorGuideComponent implements OnInit {
     this.pagination$ = this.store.pipe(select(fromReducer.pagination));
     this.status$ = this.store.pipe(select(fromReducer.status));
 
-    combineLatest(
+    // Appearance list already filled by the server
+    this.appearances$.pipe(take(1), filter(items => items.length > 0)).subscribe(() => this.skip = true);
+  }
+
+  ngOnInit() {
+    combineLatest([
       this.route.params,
       this.route.queryParams,
-    ).pipe(
+    ]).pipe(
       map(([path, query]): QueryPublicAppearancesRequest => {
         const guide = sanitizeGuideName(path.guide);
         const page = sanitizePageParam(query.page);
@@ -51,11 +57,10 @@ export class ColorGuideComponent implements OnInit {
       this.guideName = this.trans.instant(`COLOR_GUIDE.GUIDE_NAMES.${params.guide.toUpperCase()}`);
       this.breadcrumbsSource.next(this.getBreadcrumbs(this.guideName));
       this.store.dispatch(new SetTitleAction(['COLOR_GUIDE_NAMED_PAGED', { guide: this.guideName, page: params.page }]));
-      this.store.dispatch(new fromColorGuideActions.LoadAppearancesAction(params));
+      if (this.skip)
+        this.skip = false;
+      else this.store.dispatch(new fromColorGuideActions.LoadAppearancesAction(params));
     });
-  }
-
-  ngOnInit() {
   }
 
   changePage(page: number) {

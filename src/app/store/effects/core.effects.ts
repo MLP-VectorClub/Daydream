@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
-import { localStorageKeys } from 'app/app.config';
 import * as fromActions from 'app/store/actions/core.actions';
 import { isArray } from 'lodash';
 import { Observable } from 'rxjs';
@@ -22,7 +21,6 @@ export class CoreEffects {
     ofType(fromActions.ActionTypes.CHANGE_LANGUAGE),
     map((action: fromActions.ChangeLanguageAction) => action.payload),
     tap((lang: string) => this.trans.use(lang)),
-    tap((lang: string) => localStorage.setItem(localStorageKeys.language, lang)),
   );
 
   lastSetTitlePayload: fromActions.SetTitleActionPayload;

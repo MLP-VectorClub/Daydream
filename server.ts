@@ -4,14 +4,17 @@ import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import * as bodyParser from 'body-parser';
+import { environment } from 'environments/environment';
 
 import * as express from 'express';
-import * as expressPhpFpm from 'express-php-fpm';
+import * as httpProxy from 'http-proxy';
 import { join } from 'path';
 import 'zone.js/dist/zone-node';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
+
+global['Event'] = null;
 
 require('dotenv').config();
 
@@ -28,8 +31,8 @@ const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/mai
 app.engine('html', ngExpressEngine({
   bootstrap: AppServerModuleNgFactory,
   providers: [
-    provideModuleMap(LAZY_MODULE_MAP)
-  ]
+    provideModuleMap(LAZY_MODULE_MAP),
+  ],
 }));
 
 app.set('view engine', 'html');
@@ -37,16 +40,22 @@ app.set('views', DIST_FOLDER);
 
 app.use(bodyParser.json());
 
-// Backend proxy
-app.use('/api', expressPhpFpm.default({
-  documentRoot: process.env.BACKEND_ROOT,
-  env: {},
-  socketOptions: { path: process.env.FPM_SOCKET_PATH },
-}));
+const proxy = httpProxy.createProxyServer({
+  target: `https://${environment.backendDomain}`,
+  followRedirects: true,
+  secure: false,
+});
+proxy.on('proxyReq', (proxyReq) => {
+  if (proxyReq.getHeader('host') !== environment.backendDomain)
+    proxyReq.setHeader('host', environment.backendDomain);
+});
+app.all('/api/*', (req, res) => {
+  proxy.web(req, res);
+});
 
 // Serve static files from /browser
 app.get('*.*', express.static(DIST_FOLDER, {
-  maxAge: '1y'
+  maxAge: '1y',
 }));
 
 // All regular routes use the Universal engine

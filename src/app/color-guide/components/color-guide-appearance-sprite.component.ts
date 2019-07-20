@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { SpriteUrlPipe } from 'app/shared/pipes';
 import { Appearance, Status } from 'app/types';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -9,12 +10,12 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   templateUrl: './color-guide-appearance-sprite.component.html',
   styleUrls: ['./color-guide-appearance-sprite.component.scss'],
 })
-export class ColorGuideAppearanceSpriteComponent implements OnChanges, OnDestroy {
+export class ColorGuideAppearanceSpriteComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input()
   appearance: Appearance;
 
-  @ViewChild('imageTag')
+  @ViewChild('imageTag', { static: false })
   imageEl: ElementRef<HTMLImageElement>;
 
   Status = Status;
@@ -25,7 +26,15 @@ export class ColorGuideAppearanceSpriteComponent implements OnChanges, OnDestroy
   spriteUrlPipe = new SpriteUrlPipe();
   loadSubscription: Subscription = null;
 
-  constructor(private http: HttpClient) {
+  isBrowser: boolean;
+
+  constructor(private http: HttpClient,
+              @Inject(PLATFORM_ID) private platformId: object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  ngOnInit(): void {
+    this.loadFullSize();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,8 +60,8 @@ export class ColorGuideAppearanceSpriteComponent implements OnChanges, OnDestroy
     }
   }
 
-  onIntersection({ target, visible }: { target: HTMLElement, visible: boolean }) {
-    if (this.visible || !visible || !target.isSameNode(this.imageEl.nativeElement))
+  onIntersection({ visible }: { visible: boolean }) {
+    if (!this.isBrowser || this.visible || !visible)
       return;
 
     this.visible = true;
@@ -60,9 +69,8 @@ export class ColorGuideAppearanceSpriteComponent implements OnChanges, OnDestroy
   }
 
   private loadFullSize() {
-    if (!this.appearance || !this.visible) {
+    if (!this.appearance || !this.visible)
       return;
-    }
 
     this.status = Status.LOAD;
     const spriteUrl = this.spriteUrlPipe.transform(this.appearance);

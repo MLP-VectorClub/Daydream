@@ -16,7 +16,7 @@ export class TimeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.updateDisplay();
-    timer(10000).subscribe(() => this.updateDisplay());
+    this.timer = timer(10000).subscribe(() => this.updateDisplay());
   }
 
   ngOnDestroy() {

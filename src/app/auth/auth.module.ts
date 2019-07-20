@@ -7,7 +7,7 @@ import * as fromAuthActions from 'app/store/actions/auth.actions';
 import { AuthEffects } from 'app/store/effects/auth.effects';
 import { AppState } from 'app/store/reducers';
 import * as fromAuthReducer from 'app/store/reducers/auth.reducer';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 
 @NgModule({
   declarations: [],
@@ -22,12 +22,10 @@ import { filter } from 'rxjs/operators';
       provide: APP_INITIALIZER,
       useFactory: (store: Store<AppState>) => () => new Promise<void>(resolve => {
         store.dispatch(new fromAuthActions.CheckAuthAction());
-        const sub = store.pipe(select(fromAuthReducer.data)).pipe(
+        store.pipe(select(fromAuthReducer.data)).pipe(
           filter(value => value !== null),
-        ).subscribe(() => {
-          sub.unsubscribe();
-          resolve();
-        });
+          take(1),
+        ).subscribe(() => resolve());
       }),
       deps: [Store],
       multi: true,
