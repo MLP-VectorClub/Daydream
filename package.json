@@ -50,8 +50,7 @@
     "ngx-progressive-image-loader": "^3.0.2",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26",
-    "tslint": "~5.11.0"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
@@ -72,6 +71,7 @@
     "protractor": "~5.4.0",
     "ts-loader": "^5.2.0",
     "ts-node": "~7.0.0",
+    "tslint": "~5.11.0",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "~3.2.2",
     "webpack-cli": "^3.1.0"
