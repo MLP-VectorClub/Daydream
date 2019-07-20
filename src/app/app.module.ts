@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, BrowserTransferStateModule, makeStateKey, TransferState } from '@angular/platform-browser';
+import { BrowserModule, makeStateKey, TransferState } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
@@ -14,7 +14,8 @@ import { CoreModule } from 'app/core/core.module';
 import { ErrorModule } from 'app/error/error.module';
 import { FooterModule } from 'app/footer/footer.module';
 import { HeaderModule } from 'app/header/header.module';
-import { noop } from 'lodash-es';
+import { environment } from 'environments/environment';
+import noop from 'lodash-es/noop';
 import { InViewportModule } from 'ng-in-viewport';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,12 +34,11 @@ registerLocaleData(en);
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'mlpvectorclub' }),
-    BrowserTransferStateModule,
     InViewportModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({
+    environment.production ? [] : StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),
     EffectsModule.forRoot([AppEffects]),

@@ -1,7 +1,7 @@
 import { API_PREFIX } from 'app/app.config';
 import { GetAppearanceSpriteRequest, QueryPublicAppearancesRequest } from 'app/types';
 import * as buildUrl from 'build-url';
-import { mapValues } from 'lodash-es';
+import mapValues from 'lodash-es/mapValues';
 
 export const ENDPOINTS = {
   APPEARANCES: (params: QueryPublicAppearancesRequest) =>

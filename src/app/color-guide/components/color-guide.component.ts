@@ -9,7 +9,7 @@ import { SetTitleAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
 import { Appearance, LaxBreadcrumbOption, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
-import { omit } from 'lodash-es';
+import omit from 'lodash-es/omit';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 

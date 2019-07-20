@@ -1,6 +1,6 @@
 import { GUIDE_NAMES } from 'app/app.config';
 import { GuideName } from 'app/types';
-import { trim } from 'lodash-es';
+import trim from 'lodash-es/trim';
 
 export const sanitizeGuideName = (value: string): GuideName => {
   if (GUIDE_NAMES.includes(value as GuideName))
