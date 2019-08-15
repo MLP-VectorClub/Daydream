@@ -14,7 +14,7 @@ export type GetAppearanceSpriteRequest = Omit<api.AppControllersApiAppearancesCo
   size?: api.AppControllersApiAppearancesControllerSpriteRequest['size'];
 };
 
-export type NullableUser = Omit<api.User, 'id' | 'name' | 'avatarUrl'> & {
+export type AppUser = Omit<api.User, 'id' | 'name' | 'avatarUrl'> & {
   id: Nullable<api.User['id']>;
   name: Nullable<api.User['name']>;
   avatarUrl: Nullable<api.User['avatarUrl']>;

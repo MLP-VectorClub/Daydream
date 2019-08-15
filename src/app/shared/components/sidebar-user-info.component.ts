@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NullableUser } from 'app/types';
+import { AppUser } from 'app/types';
 
 @Component({
   selector: 'app-sidebar-user-info',
@@ -9,7 +9,7 @@ import { NullableUser } from 'app/types';
 export class SidebarUserInfoComponent {
 
   @Input()
-  user: NullableUser;
+  user: AppUser;
 
   @Input()
   signedIn: boolean;

@@ -2,7 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { SpriteUrlPipe } from 'app/shared/pipes';
-import { Appearance, Status } from 'app/types';
+import { Appearance, Nullable, Status } from 'app/types';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
@@ -20,11 +20,11 @@ export class ColorGuideAppearanceSpriteComponent implements OnInit, OnChanges, O
 
   Status = Status;
 
-  imageSource$ = new BehaviorSubject(null);
+  imageSource$ = new BehaviorSubject<Nullable<string>>(null);
   status = Status.INIT;
   visible = false;
   spriteUrlPipe = new SpriteUrlPipe();
-  loadSubscription: Subscription = null;
+  loadSubscription: Nullable<Subscription> = null;
 
   isBrowser: boolean;
 

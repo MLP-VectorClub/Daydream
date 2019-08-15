@@ -3,10 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, makeStateKey, TransferState } from '@angular/platform-browser';
+import { BrowserModule, makeStateKey } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { fallbackLanguage, supportedLanguages } from 'app/app.config';
@@ -21,8 +21,7 @@ import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppEffects } from './app.effects';
-import * as fromCoreActions from './store/actions/core.actions';
-import { AppState, metaReducers, reducers } from './store/reducers';
+import { metaReducers, reducers } from './store/reducers';
 
 export const NGRX_STATE = makeStateKey('NGRX_STATE');
 
@@ -69,29 +68,4 @@ registerLocaleData(en);
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private transferState: TransferState,
-              private store: Store<AppState>) {
-    const isBrowser = this.transferState.hasKey<any>(NGRX_STATE);
-
-    if (isBrowser)
-      this.onBrowser();
-    else this.onServer();
-  }
-
-  onServer() {
-    this.transferState.onSerialize(NGRX_STATE, () => {
-      let state;
-      this.store.subscribe((saveState: any) => {
-        state = saveState;
-      }).unsubscribe();
-
-      return state;
-    });
-  }
-
-  onBrowser() {
-    const state = this.transferState.get<any>(NGRX_STATE, null);
-    this.transferState.remove(NGRX_STATE);
-    this.store.dispatch(new fromCoreActions.SetRootStateAction(state));
-  }
 }

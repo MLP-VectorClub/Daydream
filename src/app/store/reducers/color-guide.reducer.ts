@@ -1,10 +1,11 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromActions from 'app/store/actions/color-guide.actions';
-import { Appearance, PageData, Status } from 'app/types';
+import { Appearance, Nullable, PageData, Status } from 'app/types';
 
-export interface State extends EntityState<Appearance>, PageData {
+export interface State extends EntityState<Appearance> {
   status: Status;
+  pagination: Nullable<PageData['pagination']>;
 }
 
 export const adapter: EntityAdapter<Appearance> = createEntityAdapter<Appearance>();

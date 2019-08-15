@@ -5,7 +5,7 @@ import { ToggleSidebarAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
 import * as fromAuthReducer from 'app/store/reducers/auth.reducer';
 import { sidebarCollapsed } from 'app/store/reducers/core.reducer';
-import { NullableUser } from 'app/types';
+import { AppUser, Nullable } from 'app/types';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent {
   sidebarCollapsed$: Observable<boolean>;
-  user$: Observable<NullableUser>;
+  user$: Observable<Nullable<AppUser>>;
   signedIn$: Observable<boolean>;
 
   c = config;

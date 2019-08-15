@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromActions from 'app/store/actions/auth.actions';
-import { Nullable, NullableUser } from 'app/types';
+import { AppUser, Nullable } from 'app/types';
 
 export interface State {
   signedIn: boolean;
-  data: Nullable<NullableUser>;
+  data: Nullable<AppUser>;
 }
 
 const defaultState: State = {
@@ -12,7 +12,7 @@ const defaultState: State = {
   data: null,
 };
 
-const guestUser: NullableUser = {
+const guestUser: AppUser = {
   id: null,
   name: null,
   role: 'guest',

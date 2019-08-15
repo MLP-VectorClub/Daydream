@@ -30,7 +30,7 @@ export class CoreEffects {
     ofType(fromActions.ActionTypes.SET_TITLE),
     map((action: fromActions.SetTitleAction) => action.payload),
     tap(data => {
-      let titleKey, titleParams = null;
+      let titleKey, titleParams;
       if (isArray(data)) {
         titleKey = data[0];
         titleParams = data[1];

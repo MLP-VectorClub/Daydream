@@ -20,7 +20,7 @@ import { filter, map, take } from 'rxjs/operators';
 export class ColorGuideComponent implements OnInit {
 
   appearances$: Observable<Appearance[]>;
-  pagination$: Observable<PageData['pagination']>;
+  pagination$: Observable<Nullable<PageData['pagination']>>;
   status$: Observable<Status>;
   breadcrumbs$: Observable<LaxBreadcrumbOption[]>;
   guideName: string;
