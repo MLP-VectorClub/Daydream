@@ -1,6 +1,6 @@
 import { GUIDE_NAMES } from 'app/app.config';
 import { GuideName } from 'app/types';
-import trim from 'lodash-es/trim';
+import { range as _range, trim } from 'lodash-es';
 
 export const sanitizeGuideName = (value: string): GuideName => {
   if (GUIDE_NAMES.includes(value as GuideName))
@@ -34,3 +34,5 @@ export const makeUrlSafe = (input: string): string => {
  */
 export const paginationParam = (page: number): number | undefined =>
   page === 1 ? undefined : page;
+
+export const range = (start: number, end: number, step = 1): number[] => _range(start, end + step, step);

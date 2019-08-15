@@ -21,6 +21,9 @@
       "SEE_CHANGES": "See exactly what was changed and why",
       "PRIVACY_POLICY": "Privacy Policy",
       "CONTACT_US": "Contact Us"
+    },
+    "PAGINATION": {
+      "JUMP_TO": "Jump to page"
     }
   },
   "TITLES": {

@@ -9,7 +9,7 @@ import { SetTitleAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
 import { Appearance, LaxBreadcrumbOption, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
-import omit from 'lodash-es/omit';
+import { omit } from 'lodash-es';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
@@ -66,10 +66,6 @@ export class ColorGuideComponent implements OnInit {
   changePage(page: number) {
     const queryParams = omit({ ...this.route.snapshot.queryParams, page: paginationParam(page) }, 'size');
     this.router.navigate(['.'], { relativeTo: this.route, queryParams });
-  }
-
-  changePageSize(size: number) {
-    this.store.dispatch(new fromColorGuideActions.ChangePageSizeAction(size));
   }
 
   private getBreadcrumbs(guideName: Nullable<string>): LaxBreadcrumbOption[] {

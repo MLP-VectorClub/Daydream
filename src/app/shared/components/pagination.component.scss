@@ -3,3 +3,22 @@
 .pagination-wrapper {
   text-align: center;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  li {
+    display: block;
+
+    &:not(:last-child) {
+      margin-right: .2rem;
+    }
+  }
+}
+
+.jump-to-form {
+  nz-input-number {
+    margin-right: .5rem;
+  }
+}

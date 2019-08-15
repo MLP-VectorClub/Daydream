@@ -45,7 +45,7 @@
     "intersection-observer": "^0.7.0",
     "lodash-es": "^4.17.15",
     "ng-in-viewport": "^6.0.3",
-    "ng-zorro-antd": "^8.1.0",
+    "ng-zorro-antd": "^8.2.0",
     "ngx-progressive-image-loader": "^3.0.2",
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",

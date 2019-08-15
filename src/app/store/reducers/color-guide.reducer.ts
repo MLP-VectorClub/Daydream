@@ -26,7 +26,6 @@ export function reducer(state: State = defaultState, action: fromActions.ColorGu
     case fromActions.ActionTypes.LOAD_APPEARANCES_NAY:
       return adapter.removeAll({ ...state, status: Status.NAY });
 
-
     default:
       return state;
   }
