@@ -45,6 +45,7 @@
               "src/favicon.ico",
               "src/robots.txt",
               "src/_redirects",
+              "src/_headers",
               "src/assets"
             ],
             "styles": [
