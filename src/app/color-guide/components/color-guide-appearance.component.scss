@@ -2,4 +2,22 @@
   display: flex;
   flex-flow: row nowrap;
   padding: 0 10px;
+
+  .notes {
+    margin-top: 6px;
+
+    .notes-text {
+      white-space: pre-wrap;
+    }
+
+    &:empty {
+      display: none
+    }
+
+    span:not(:last-child) {
+      margin-right: 5px;
+      padding-right: 5px;
+      border-right: 1px solid;
+    }
+  }
 }

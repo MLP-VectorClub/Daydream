@@ -51,7 +51,7 @@ export class ColorGuideComponent implements OnInit {
         const page = sanitizePageParam(query.page);
         const q = sanitizeSearchParam(query.q);
         const size = sanitizePageSizeParam(GUIDE_PAGE_SIZES)(query.size);
-        return { guide, page, q, size };
+        return { guide, page, q, size, previews: true };
       }),
     ).subscribe(params => {
       this.guideName = this.trans.instant(`COLOR_GUIDE.GUIDE_NAMES.${params.guide.toUpperCase()}`);

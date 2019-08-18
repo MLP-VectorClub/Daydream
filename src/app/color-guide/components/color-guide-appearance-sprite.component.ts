@@ -41,7 +41,7 @@ export class ColorGuideAppearanceSpriteComponent implements OnInit, OnChanges, O
     const { appearance } = changes;
     if (appearance && appearance.currentValue) {
       const value = appearance.currentValue as Appearance;
-      if (value.sprite) {
+      if (value.sprite && value.sprite.preview) {
         this.imageSource$.next(value.sprite.preview);
         this.loadFullSize();
       }

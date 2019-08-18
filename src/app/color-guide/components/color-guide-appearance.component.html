@@ -7,7 +7,7 @@
       <a [routerLink]="appearance | appearancePage" class="appearance-name">{{appearance.label}}</a>
     </div>
     <div class="notes">
-      <span *ngIf="appearance.notes" [innerHTML]="appearance.notes"></span>
+      <span *ngIf="appearance.notes" class="notes-text" [innerHTML]="appearance.notes"></span>
       <span *ngIf="appearance.hasCutieMarks">Cutie mark available</span>
     </div>
   </div>
