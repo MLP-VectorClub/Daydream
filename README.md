@@ -1,6 +1,6 @@
-# MLPVectorClub
+# Daydream
 
-A work-in-progress SPA frontend for [MLPVC-RR](https://github.com/seinopsys/MLPVC-RR)
+Work-in-progress SPA frontend for the [MLP Vector Club](https://github.com/MLP-VectorClub)'s website 
 
 ## Built with
 

@@ -1,6 +1,6 @@
 {
-  "name": "mlpvectorclub",
-  "version": "0.0.0",
+  "name": "daydream",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "npm run write-git-info && ng serve --host $HOST --proxy-config development.proxy.json --ssl true --ssl-cert \"$SSL_CERT\" --ssl-key \"$SSL_KEY\"",

@@ -2,7 +2,7 @@ import { GuideName } from 'app/types';
 import { range } from 'lodash-es';
 import { NzBreakPoint } from 'ng-zorro-antd';
 
-export const GITHUB_URL = 'https://github.com/SeinopSys/MLPVectorClub';
+export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Daydream';
 export const PROJECT_NAME = GITHUB_URL.split('/').pop();
 export const CLUB_URL = 'https://www.deviantart.com/mlp-vectorclub';
 
