@@ -4,6 +4,7 @@ import * as buildUrl from 'build-url';
 import { mapValues, omitBy } from 'lodash-es';
 
 export const ENDPOINTS = {
+  OAUTH_TOKEN: '/oauth/token',
   APPEARANCES: (params: QueryPublicAppearancesRequest) =>
     buildUrl('', {
       path: `${API_PREFIX}/appearances`,

@@ -8,6 +8,13 @@ export interface ObjectOf<T> {
 export interface Environment {
   production: boolean;
   backendDomain: string;
+  oauthClientId: number;
+  pusher: PusherEnv;
+}
+
+export interface PusherEnv {
+  key: string;
+  cluster: string;
 }
 
 export interface PaginationItem {

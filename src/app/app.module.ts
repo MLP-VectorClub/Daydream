@@ -17,7 +17,7 @@ import { HeaderModule } from 'app/header/header.module';
 import { environment } from 'environments/environment';
 import { noop } from 'lodash-es';
 import { InViewportModule } from 'ng-in-viewport';
-import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
+import { en_US, NZ_I18N, NzLayoutModule } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppEffects } from './app.effects';
@@ -32,23 +32,23 @@ registerLocaleData(en);
     AppComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'mlpvectorclub' }),
+    BrowserModule.withServerTransition({appId: 'mlpvectorclub'}),
     InViewportModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     environment.production ? [] : StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),
     EffectsModule.forRoot([AppEffects]),
     TranslateModule.forRoot(),
-    NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
     CoreModule,
     HeaderModule,
     FooterModule,
     ErrorModule,
+    NzLayoutModule,
   ],
   providers: [
     {
@@ -63,7 +63,7 @@ registerLocaleData(en);
       }),
       deps: [TranslateService],
     },
-    { provide: NZ_I18N, useValue: en_US },
+    {provide: NZ_I18N, useValue: en_US},
   ],
   bootstrap: [AppComponent],
 })

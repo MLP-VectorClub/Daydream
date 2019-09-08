@@ -7,7 +7,5 @@ import { environment } from 'environments/environment';
 if (environment.production)
   enableProdMode();
 
-document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule, { preserveWhitespaces: false })
+platformBrowserDynamic().bootstrapModule(AppModule, { preserveWhitespaces: false })
   .catch(err => console.error(err));
-});
