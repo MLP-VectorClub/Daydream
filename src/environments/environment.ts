@@ -7,7 +7,6 @@ import { Environment } from 'app/types';
 export const environment: Environment = {
   production: false,
   backendDomain: 'api.mlpvector.lc',
-  oauthClientId: 2,
   pusher: {
     key: '947070ef494f813efdfc',
     cluster: 'us2',

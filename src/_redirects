@@ -1,2 +1,2 @@
-/api/*  https://mlpvector.club/api/:splat  200
+/api/*  https://api.mlpvector.club/:splat  200
 /*    /index.html   200

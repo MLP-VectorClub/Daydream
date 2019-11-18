@@ -8,7 +8,6 @@ export interface ObjectOf<T> {
 export interface Environment {
   production: boolean;
   backendDomain: string;
-  oauthClientId: number;
   pusher: PusherEnv;
 }
 
