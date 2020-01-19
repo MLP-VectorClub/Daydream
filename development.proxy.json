@@ -1,7 +1,12 @@
 {
-  "/api": {
+  "/api/*": {
     "target": "https://api.mlpvector.lc",
-    "changeOrigin": true,
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "headers": {
+      "Host": "api.mlpvector.lc"
+    }
   }
 }

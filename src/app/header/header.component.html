@@ -1,28 +1,80 @@
-<header>
-  <nav>
-    <ul *appVar="user$ | async as user">
-      <li class="sidebar-toggle">
-        <i *appVar="sidebarCollapsed$ | async as isCollapsed" class="toggle fa fa-fw"
-          [class.fa-chevron-left]="!isCollapsed" [class.fa-chevron-right]="isCollapsed"
-          (click)="toggleSidebar()"></i>
-        <span class="notif-cnt" [title]="'GLOBAL.HEADER.NEW_NOTIFICATIONS' | translate"></span>
-      </li>
-      <li><a routerLink='/episode/latest'>{{'TITLES.LATEST_EPISODE' | translate}}</a></li>
-      <li><a routerLink='/show'>{{'TITLES.SHOW' | translate}}</a></li>
-      <li><a routerLink='/cg'>{{'TITLES.COLOR_GUIDE' | translate}}</a></li>
-      <li><a routerLink='/events'>{{'TITLES.EVENTS' | translate}}</a></li>
-      <ng-container *ngIf="signedIn$ | async">
-        <li>
-          <app-user-link [userName]="user.name" [text]="'TITLES.ACCOUNT' | translate"></app-user-link>
+<ng-container *appVar="signedIn$ | async as signedIn">
+  <nav class="navbar sticky-top navbar-dark bg-primary navbar-expand-lg" *appVar="user$ | async as user">
+    <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+    <button class="navbar-toggler" id="account-menu-toggler" type="button" (click)="toggleAccountMenu()">
+      <span class="sr-only">{{'GLOBAL.HEADER.ACCOUNT_MENU' | translate}}</span>
+      <app-avatar-wrap [avatarUrl]="user.avatarUrl" [avatarProvider]="user.avatarProvider" [size]="40"></app-avatar-wrap>
+    </button>
+
+    <span class="navbar-brand d-lg-none">MLP Vector Club</span>
+
+    <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+    <button class="navbar-toggler" type="button" (click)="toggleNav()">
+      <i class="fa fa-fw" [class.fa-bars]="isNavCollapsed" [class.fa-times]="!isNavCollapsed"></i>
+    </button>
+
+    <div [ngbCollapse]="isAccountMenuCollapsed" class="collapse navbar-collapse" id="account-menu">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span class="nav-link active">
+            <app-user-link *ngIf="signedIn; else defaultUsername" [userName]="user.name"></app-user-link>
+            <ng-template #defaultUsername>
+              {{'GLOBAL.GUEST_USER_NAME' | translate}}
+            </ng-template>
+            <small class="d-block text-uppercase">{{user.role | roleLabel}}</small>
+          </span>
         </li>
-      </ng-container>
-      <ng-container *ngIf="user.role | permission:'staff'">
-        <li><a routerLink='/users'>{{'TITLES.USERS' | translate}}</a></li>
-        <li><a routerLink='/admin'>{{'TITLES.ADMIN' | translate}}</a></li>
-      </ng-container>
-      <li><a routerLink='/about'>{{'TITLES.ABOUT' | translate}}</a></li>
-      <li><a [href]="c.CLUB_URL" target="_blank" rel="noopener">MLP-VectorClub</a></li>
-    </ul>
-    <div id="to-the-top" class="fa fa-arrow-up"></div>
+        <li *ngIf="signedIn" class="nav-item">
+          <a #logoutTrigger="ngbPopover" class="nav-link" [popoverTitle]="'GLOBAL.CONFIRM_POPOVER.TITLE' | translate" [ngbPopover]="logoutConfirm" placement="bottom">{{'GLOBAL.HEADER.LOGOUT' | translate}}</a>
+          <ng-template #logoutConfirm>
+            <button class="btn btn-primary" (click)="logoutTrigger.close(); logout()">{{'GLOBAL.CONFIRM_POPOVER.YES' | translate}}</button>
+            <button class="btn btn-light" (click)="logoutTrigger.close()">{{'GLOBAL.CONFIRM_POPOVER.NO' | translate}}</button>
+          </ng-template>
+        </li>
+        <li *ngIf="!signedIn" class="nav-item">
+          <a class="nav-link">{{'GLOBAL.HEADER.LOGIN' | translate}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+    <div [ngbCollapse]="isNavCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav" drag-scroll>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/episode/latest'>{{'TITLES.LATEST_EPISODE' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/show'>{{'TITLES.SHOW' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/cg'>{{'TITLES.COLOR_GUIDE' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/events'>{{'TITLES.EVENTS' | translate}}</a>
+        </li>
+        <ng-container *ngIf="signedIn">
+          <li class="nav-item">
+            <app-user-link [userName]="user.name" [text]="'TITLES.ACCOUNT' | translate"></app-user-link>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="user.role | permission:'staff'">
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/users'>{{'TITLES.USERS' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/admin'>{{'TITLES.ADMIN' | translate}}</a>
+          </li>
+        </ng-container>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/about'>{{'TITLES.ABOUT' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [href]="c.CLUB_URL" target="_blank" rel="noopener">
+            MLP-VectorClub
+            <i class="fa fa-external-link-alt"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav>
-</header>
+</ng-container>

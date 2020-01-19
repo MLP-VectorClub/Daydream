@@ -3,7 +3,10 @@
     "SITE_NAME": "MLP Vector Club",
     "GUEST_USER_NAME": "Curious Pony",
     "HEADER": {
-      "NEW_NOTIFICATIONS": "New notifications"
+      "NEW_NOTIFICATIONS": "New notifications",
+      "ACCOUNT_MENU": "Account menu",
+      "LOGOUT": "Log out",
+      "LOGIN": "Log in"
     },
     "FOOTER": {
       "APP_VERSION": [
@@ -24,6 +27,11 @@
     },
     "PAGINATION": {
       "JUMP_TO": "Jump to page"
+    },
+    "CONFIRM_POPOVER": {
+      "TITLE": "Are you sure?",
+      "YES": "Eeyup",
+      "NO": "Nope"
     }
   },
   "TITLES": {

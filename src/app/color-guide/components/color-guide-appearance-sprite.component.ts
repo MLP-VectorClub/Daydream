@@ -1,6 +1,18 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { SpriteUrlPipe } from 'app/shared/pipes';
 import { Appearance, Nullable, Status } from 'app/types';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -8,7 +20,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 @Component({
   selector: 'app-color-guide-appearance-sprite',
   templateUrl: './color-guide-appearance-sprite.component.html',
-  styleUrls: ['./color-guide-appearance-sprite.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ColorGuideAppearanceSpriteComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -77,10 +89,10 @@ export class ColorGuideAppearanceSpriteComponent implements OnInit, OnChanges, O
     this.unsub();
     this.loadSubscription = this.http.get(spriteUrl, { responseType: 'blob' }).subscribe(
       () => {
-        this.status = Status.YAY;
+        this.status = Status.SUCCESS;
         this.imageSource$.next(spriteUrl);
       },
-      () => this.status = Status.NAY,
+      () => this.status = Status.FAILURE,
       () => this.loadSubscription = null,
     );
   }

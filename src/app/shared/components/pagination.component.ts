@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { range } from 'app/shared/utils';
@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent implements OnInit, OnChanges, OnDestroy {
 

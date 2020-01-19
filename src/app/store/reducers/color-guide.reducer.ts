@@ -20,11 +20,11 @@ export function reducer(state: State = defaultState, action: fromActions.ColorGu
     case fromActions.ActionTypes.LOAD_APPEARANCES:
       return { ...state, status: Status.LOAD };
 
-    case fromActions.ActionTypes.LOAD_APPEARANCES_YAY:
-      return adapter.addAll(action.payload.appearances, { ...state, status: Status.YAY, pagination: action.payload.pagination });
+    case fromActions.ActionTypes.LOAD_APPEARANCES_SUCCESS:
+      return adapter.addAll(action.payload.appearances, { ...state, status: Status.SUCCESS, pagination: action.payload.pagination });
 
-    case fromActions.ActionTypes.LOAD_APPEARANCES_NAY:
-      return adapter.removeAll({ ...state, status: Status.NAY });
+    case fromActions.ActionTypes.LOAD_APPEARANCES_FAILURE:
+      return adapter.removeAll({ ...state, status: Status.FAILURE });
 
     default:
       return state;

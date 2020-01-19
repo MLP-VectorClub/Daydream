@@ -1,60 +1,27 @@
 $primary: #2C73B1;
+$secondary: #1E3DB3;
+$blurple: #7289DA;
+$fella: #05CC47;
+$primary-dark: darken($primary, 20);
 
-$error-color: #f5222d;
+$link-color: $primary;
 
-$header-height: 50px;
-$sidebar-width: 330px;
-$sidebar-breakpoint: 1200px;
-$sidebar-background: darken($primary, 20);
-// Mobile to desktop breakpoint
-$breakpoint: 650px;
 $avatar-size: 50px;
+$footer-height: 2.5rem;
 
-$monospace: 'Consolas', monospace;
-$cursive: 'Celestia', 'Lucida Calligraphy', 'Monotype Corsiva', cursive;
-$regular-font: 'Arimo', sans-serif;
+$font-family-monospace: 'Consolas', monospace;
+$font-family-sans-serif: 'Arimo', sans-serif;
 
-$sidebar-content-color: rgba(white, .75);
-$sidebar-content-border: rgba(white, .3);
-$sidebar-content-background: rgba(white, .1);
-%sidebar-content {
-  color: $sidebar-content-color;
-  background-color: $sidebar-content-background;
-  border: 1px solid $sidebar-content-border;
-}
+$headings-font-family: 'Celestia', 'Lucida Calligraphy', 'Monotype Corsiva', cursive;
 
-$footer-height: 38px;
-$content-margin: 8px;
-$original-line-height: 1.15;
+$breadcrumb-padding-y: .5rem;
+$breadcrumb-padding-x: .5rem;
+$breadcrumb-border-radius: 0;
+$breadcrumb-bg: $primary-dark;
+$breadcrumb-active-color: #fff;
+$breadcrumb-divider-color: rgba($breadcrumb-active-color, .5);
 
-%navbar-li {
-  a {
-    display: inline-block;
-    color: inherit;
-    text-decoration: none;
-    padding: 1px 3.5px;
-    height: 24px;
-    line-height: 22px;
-    border-radius: 3px;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: background-color .2s linear;
-
-    &:hover { background-color: rgba(white, .2) }
-
-    &:active { background-color: rgba(white, .5) }
-  }
-}
-
-%contains-external-links {
-  a[href^=http]:after {
-    font-style: italic;
-    content: "";
-    width: 12px;
-    height: 12px;
-    background-image: url(/assets/img/extlink.svg);
-    background-size: 12px;
-    display: inline-block;
-    margin-left: 2px;
-  }
-}
+$theme-colors: (
+  "blurple": $blurple,
+  "fella": $fella,
+)

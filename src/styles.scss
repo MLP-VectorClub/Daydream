@@ -1,25 +1,19 @@
 @import "scss/vars";
 @import "scss/fonts";
-@import '~ngx-progressive-image-loader/ngx-progressive-image-loader';
-
-@include progressive-image-loader(0.5);
+@import "scss/mixins";
+@import "~bootstrap/scss/bootstrap";
+@import "app/app.component";
 
 html {
-  font-size: 16px;
+  background-color: $primary;
+  min-height: 100vh;
 }
 
 body {
-  overflow-x: auto;
-  overflow-y: scroll;
-  padding-top: $header-height;
   background-color: #fff;
   background-image: url(/assets/img/grid-16x16.svg), url(/assets/img/grid-4x4.svg);
 }
 
-app-root > * {
-  min-height: 100vh;
-}
-
-.ant-layout {
-  background: transparent !important;
+.breadcrumb-item.active {
+  font-weight: bold;
 }

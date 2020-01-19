@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { fallbackLanguage, supportedLanguages } from 'app/app.config';
+import { CSRF_COOKIE_NAME, fallbackLanguage, supportedLanguages } from 'app/app.config';
 import { CoreModule } from 'app/core/core.module';
 import { ErrorModule } from 'app/error/error.module';
 import { FooterModule } from 'app/footer/footer.module';
@@ -17,11 +17,15 @@ import { HeaderModule } from 'app/header/header.module';
 import { environment } from 'environments/environment';
 import { noop } from 'lodash-es';
 import { InViewportModule } from 'ng-in-viewport';
-import { en_US, NZ_I18N, NzLayoutModule } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppEffects } from './app.effects';
 import { metaReducers, reducers } from './store/reducers';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { ENDPOINTS } from './shared/endpoints';
+import { CookieService } from 'ngx-cookie-service';
 
 export const NGRX_STATE = makeStateKey('NGRX_STATE');
 
@@ -32,11 +36,19 @@ registerLocaleData(en);
     AppComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'mlpvectorclub'}),
+    BrowserModule,
     InViewportModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
     environment.production ? [] : StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),
@@ -48,22 +60,28 @@ registerLocaleData(en);
     HeaderModule,
     FooterModule,
     ErrorModule,
-    NzLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    NgbModule,
   ],
   providers: [
+    CookieService,
     {
       provide: APP_INITIALIZER,
       multi: true,
-      useFactory: (translate: TranslateService) => () => new Promise(resolve => {
+      useFactory: (translate: TranslateService, http: HttpClient, cookies: CookieService) => () => new Promise(resolve => {
         translate.addLangs(supportedLanguages);
         supportedLanguages.forEach(lang => {
           translate.setTranslation(lang, require(`../assets/i18n/${lang}.json`));
         });
-        translate.use(fallbackLanguage).subscribe(noop, noop, resolve);
+        translate.use(fallbackLanguage).subscribe(noop, noop, () => {
+          if (cookies.check(CSRF_COOKIE_NAME))
+            http.get(ENDPOINTS.CSRF_INIT).subscribe(noop, noop, resolve);
+          else resolve();
+        });
       }),
-      deps: [TranslateService],
+      deps: [TranslateService, HttpClient, CookieService],
     },
-    {provide: NZ_I18N, useValue: en_US},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

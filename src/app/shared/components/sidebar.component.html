@@ -1,8 +1,0 @@
-<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" class="sidebar"
-  [nzBreakpoint]="c.sidebarBreakpoint" [nzWidth]="330">
-  <!-- shared sidebar content goes here -->
-  <app-sidebar-user-info [user]="user$ | async"></app-sidebar-user-info>
-
-  <!-- components can place widgets inside -->
-  <ng-content></ng-content>
-</nz-sider>

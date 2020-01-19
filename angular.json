@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "daydream": {
+    "celestia": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -46,11 +46,11 @@
               "src/robots.txt",
               "src/_redirects",
               "src/_headers",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "src/theme.less",
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -58,7 +58,10 @@
                 "src"
               ]
             },
-            "scripts": [],
+            "scripts": [
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+              "node_modules/@clr/icons/clr-icons.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -84,31 +87,33 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "daydream:build"
+            "browserTarget": "celestia:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "daydream:build:production"
+              "browserTarget": "celestia:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "daydream:build"
+            "browserTarget": "celestia:build"
           }
         }
       }
     }
   },
-  "defaultProject": "daydream",
+  "defaultProject": "celestia",
   "cli": {
     "defaultCollection": "@ngrx/schematics"
   }

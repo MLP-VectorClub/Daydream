@@ -12,8 +12,17 @@ export class AuthEffects {
   checkAuthEffect$: Observable<fromActions.AuthActions> = this.actions$.pipe(
     ofType(fromActions.ActionTypes.CHECK_AUTH),
     switchMap(() => this.userService.getMe().pipe(
-      map(user => new fromActions.CheckAuthYay(user)),
-      catchError(() => of(new fromActions.CheckAuthNay())),
+      map(user => new fromActions.CheckAuthSuccess(user)),
+      catchError(() => of(new fromActions.CheckAuthFailure())),
+    )),
+  );
+
+  @Effect()
+  logoutEffect$: Observable<fromActions.AuthActions> = this.actions$.pipe(
+    ofType(fromActions.ActionTypes.LOGOUT),
+    switchMap(() => this.userService.logout().pipe(
+      map(() => new fromActions.LogoutSuccess()),
+      catchError(() => of(new fromActions.LogoutFailure())),
     )),
   );
 

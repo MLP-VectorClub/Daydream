@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { LaxBreadcrumbOption } from 'app/types';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { BreadcrumbItem } from 'app/types';
 
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BreadcrumbsComponent {
 
   @Input()
-  items: LaxBreadcrumbOption[] = [];
+  items: BreadcrumbItem[] = [];
 
 }

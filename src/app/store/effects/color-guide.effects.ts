@@ -19,8 +19,8 @@ export class ColorGuideEffects {
     switchMap(({ payload }) => {
       this.lastLoadedAppearancesPayload = payload;
       return this.colorGuideService.getAll(payload).pipe(
-        map(data => new fromActions.LoadAppearancesYay(data)),
-        catchError(() => of(new fromActions.LoadAppearancesNay())),
+        map(data => new fromActions.LoadAppearancesSuccess(data)),
+        catchError(() => of(new fromActions.LoadAppearancesFailure())),
       );
     }),
   );

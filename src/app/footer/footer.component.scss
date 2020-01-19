@@ -1,26 +1,27 @@
-@import "scss/vars";
-
 footer {
-  font-size: 1rem;
-  line-height: 18px;
-  position: fixed;
-  z-index: 3;
-  bottom: 0;
-  left: 0;
-  display: block;
-  overflow: hidden;
-  box-sizing: border-box;
-  width: 100%;
-  height: $footer-height;
-  padding: 10px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #fff;
+  color: color-yiq($primary);
   background: $primary;
+
+  @include media-breakpoint-up(lg) {
+    height: $footer-height;
+    position: sticky;
+    bottom: 0;
+  }
 
   a {
     cursor: pointer;
-    text-decoration: underline;
-    color: inherit;
+    text-decoration: underline !important;
+
+    &, &:hover, &:active {
+      color: inherit;
+    }
+  }
+
+  .divider {
+    &:before {
+      content: "|";
+      padding: .5rem;
+
+    }
   }
 }

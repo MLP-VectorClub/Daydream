@@ -1,107 +1,20 @@
-@import "scss/vars";
+#account-menu-toggler {
+  padding: 0 !important;
+  border: 0 !important;
+}
 
-header {
-  position: fixed;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  box-sizing: border-box;
-  width: 100%;
-  height: $header-height;
-  color: #fff;
-  background-color: $primary;
-  @extend %contains-external-links;
-
-  nav {
-    font-size: 0;
-    line-height: 0;
-    display: block;
-    width: 100%;
-    height: 50px;
-    cursor: default;
-    user-select: none;
-    white-space: nowrap;
-
-    ul {
-      display: block;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      height: $header-height + 30px;
-      margin: 0;
-      padding: 0;
-      padding-top: 13px !important;
-      padding-right: 13px !important;
-      padding-left: 13px !important;
-      list-style: none;
-
-      li {
-        font-size: 18px;
-        line-height: 24px;
-        display: inline-block;
-        box-sizing: border-box;
-        height: 24px;
-        vertical-align: middle;
-        color: #fff;
-
-        &:not(:first-child) {
-          margin-left: 7px;
-          @extend %navbar-li;
-        }
-
-        &.sidebar-toggle {
-          $sidebar-toggle-size: 45px;
-          position: relative;
-          width: $sidebar-toggle-size;
-          height: $sidebar-toggle-size;
-          margin: ($header-height - $sidebar-toggle-size)/2;
-          cursor: pointer;
-          transition: background-color .35s linear;
-
-          @media all and (min-width: $sidebar-breakpoint) {
-            display: none;
-          }
-
-          + li {
-            margin-left: 0 !important;
-          }
-
-          > .notif-cnt {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.5em;
-            position: absolute;
-            z-index: 6;
-            right: 0;
-            bottom: 0;
-            display: inline-block;
-            overflow: hidden;
-            max-width: 100%;
-            height: 22.5px;
-            padding: 0 4px;
-            cursor: pointer;
-            transition-timing-function: linear;
-            transition-duration: .35s;
-            transition-property: opacity, font-size, padding, height, line-height, box-shadow;
-            text-align: center;
-            color: $error-color;
-            border-radius: 4px;
-            background: #fff;
-            box-shadow: 0 0 5px 2px $primary;
-            text-shadow: 0 1px 0 rgba($error-color, .3);
-            will-change: opacity, font-size, padding, height, line-height, box-shadow;
-
-            &:empty {
-              display: none;
-            }
-          }
-        }
-      }
-    }
-
-    #to-the-top {
-      display: none;
-    }
+@include media-breakpoint-up(lg) {
+  #account-menu {
+    display: none !important;
   }
 }
 
+.navbar-brand {
+  font-weight: bold;
+  @include outline(2);
+  font-family: $headings-font-family;
+
+  &, &:hover, &:active {
+    color: #000 !important;
+  }
+}

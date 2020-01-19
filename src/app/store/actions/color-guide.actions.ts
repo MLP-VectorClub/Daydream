@@ -3,8 +3,8 @@ import { QueryPublicAppearancesRequest, QueryPublicAppearancesResult } from 'app
 
 export enum ActionTypes {
   LOAD_APPEARANCES = '[COLOR GUIDE] Load Appearances',
-  LOAD_APPEARANCES_YAY = '[COLOR GUIDE] Load Appearances Yay',
-  LOAD_APPEARANCES_NAY = '[COLOR GUIDE] Load Appearances Nay',
+  LOAD_APPEARANCES_SUCCESS = '[COLOR GUIDE] Load Appearances Success',
+  LOAD_APPEARANCES_FAILURE = '[COLOR GUIDE] Load Appearances Failure',
 }
 
 export class LoadAppearancesAction implements Action {
@@ -14,18 +14,18 @@ export class LoadAppearancesAction implements Action {
   }
 }
 
-export class LoadAppearancesYay implements Action {
-  readonly type = ActionTypes.LOAD_APPEARANCES_YAY;
+export class LoadAppearancesSuccess implements Action {
+  readonly type = ActionTypes.LOAD_APPEARANCES_SUCCESS;
 
   constructor(public payload: QueryPublicAppearancesResult) {
   }
 }
 
-export class LoadAppearancesNay implements Action {
-  readonly type = ActionTypes.LOAD_APPEARANCES_NAY;
+export class LoadAppearancesFailure implements Action {
+  readonly type = ActionTypes.LOAD_APPEARANCES_FAILURE;
 }
 
 export type ColorGuideActions =
   LoadAppearancesAction |
-  LoadAppearancesYay |
-  LoadAppearancesNay;
+  LoadAppearancesSuccess |
+  LoadAppearancesFailure;

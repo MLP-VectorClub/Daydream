@@ -1,4 +1,4 @@
-<ng-container *ngIf="status !== s.NAY; else nayNotify">
+<ng-container *ngIf="status !== s.FAILURE; else nayNotify">
   <ng-template #paginationComponent>
     <app-pagination [data]="pagination"
       [status]="status"
@@ -7,17 +7,15 @@
 
   <ng-template [ngTemplateOutlet]="paginationComponent"></ng-template>
 
-  <nz-list [nzDataSource]="appearances" [nzRenderItem]="itemTemplate" nzItemLayout="horizontal" [nzLoading]="status === s.LOAD">
-    <ng-template #itemTemplate let-item>
-      <nz-list-item>
-        <app-color-guide-appearance [appearance]="item"></app-color-guide-appearance>
-      </nz-list-item>
-    </ng-template>
-  </nz-list>
+  <div [ngClass]="{'spinner-border spinner-border-sm': status === s.LOAD}">
+    <ng-container *ngIf="status === s.SUCCESS">
+      <app-color-guide-appearance *ngFor="let item of appearances" [appearance]="item"></app-color-guide-appearance>
+    </ng-container>
+  </div>
 
   <ng-template [ngTemplateOutlet]="paginationComponent"></ng-template>
 </ng-container>
 
 <ng-template #nayNotify>
-  <nz-alert nzType="error" [nzMessage]="'COLOR_GUIDE.LOADING_ERROR' | translate"></nz-alert>
+  <ngb-alert [dismissible]="false" type="danger">{{'COLOR_GUIDE.LOADING_ERROR' | translate}}</ngb-alert>
 </ng-template>

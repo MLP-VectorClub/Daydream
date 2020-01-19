@@ -1,5 +1,5 @@
-@import 'scss/vars';
-
-.layout {
-  margin-left: $sidebar-width;
-}
+@import "footer/footer.component";
+@import "header/header.component";
+@import "shared/shared.component";
+@import "error/error.component";
+@import "color-guide/color-guide.component";

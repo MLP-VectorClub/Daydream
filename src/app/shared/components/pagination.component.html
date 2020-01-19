@@ -3,12 +3,12 @@
     <ul class="pagination" *ngIf="items.length > 0">
       <li *ngFor="let item of items">
         <ng-container *ngIf="item.pageNumber === null; else nonNavigator">
-          <button nz-button nzType="link" nz-popover nzPopoverTrigger="click" [nzPopoverContent]="goto" nzPopoverPlacement="bottom"
-            (nzVisibleChange)="displayPopover($event)">{{item.label}}</button>
+          <button [ngbPopover]="goto" (shown)="displayPopover(true)" (hidden)="displayPopover(false)">{{item.label}}</button>
         </ng-container>
         <ng-template #nonNavigator>
-          <button *appVar="loading && lastPressedPage === item.pageNumber as selfLoading" nz-button [nzLoading]="selfLoading"
+          <button class="btn btn-primary" *appVar="loading && lastPressedPage === item.pageNumber as selfLoading"
             [disabled]="item.pageNumber === data.currentPage" (click)="pageChange(item.pageNumber)">
+            <span class="spinner-border spinner-border-sm" *ngIf="selfLoading"></span>
             {{ selfLoading ? '' : item.label}}
           </button>
         </ng-template>
@@ -20,8 +20,9 @@
 <ng-template #goto>
   <form [formGroup]="jumpForm" (submit)="jumpSubmit()" class="jump-to-form">
     {{'GLOBAL.PAGINATION.JUMP_TO' | translate}}:
-    <nz-input-number formControlName="page" [nzMin]="1" [nzMax]="data.totalPages"></nz-input-number>
-    <button *appVar="status === s.LOAD as loading" nz-button [nzLoading]="loading" nzType="primary">
+    <input type="number" formControlName="page" min="1" max="data.totalPages">
+    <button class="btn btn-primary" *appVar="status === s.LOAD as loading">
+      <span class="spinner-border spinner-border-sm" *ngIf="loading"></span>
       <i *ngIf="!loading" class="fa fa-step-forward"></i>
     </button>
   </form>

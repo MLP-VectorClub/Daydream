@@ -8,7 +8,7 @@ import * as fromColorGuideActions from 'app/store/actions/color-guide.actions';
 import { SetTitleAction } from 'app/store/actions/core.actions';
 import { AppState } from 'app/store/reducers';
 import * as fromReducer from 'app/store/reducers/color-guide.reducer';
-import { Appearance, LaxBreadcrumbOption, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
+import { Appearance, BreadcrumbItem, Nullable, PageData, QueryPublicAppearancesRequest, Status } from 'app/types';
 import { omit } from 'lodash-es';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -22,10 +22,10 @@ export class ColorGuideComponent implements OnInit {
   appearances$: Observable<Appearance[]>;
   pagination$: Observable<Nullable<PageData['pagination']>>;
   status$: Observable<Status>;
-  breadcrumbs$: Observable<LaxBreadcrumbOption[]>;
+  breadcrumbs$: Observable<BreadcrumbItem[]>;
   guideName: string;
 
-  private breadcrumbsSource = new BehaviorSubject<LaxBreadcrumbOption[]>(this.getBreadcrumbs(null));
+  private breadcrumbsSource = new BehaviorSubject<BreadcrumbItem[]>(this.getBreadcrumbs(null));
   private skip = false;
 
   constructor(private store: Store<AppState>,
@@ -68,7 +68,7 @@ export class ColorGuideComponent implements OnInit {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams });
   }
 
-  private getBreadcrumbs(guideName: Nullable<string>): LaxBreadcrumbOption[] {
+  private getBreadcrumbs(guideName: Nullable<string>): BreadcrumbItem[] {
     return [
       {
         url: null,

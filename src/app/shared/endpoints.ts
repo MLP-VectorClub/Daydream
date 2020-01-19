@@ -4,6 +4,10 @@ import * as buildUrl from 'build-url';
 import { mapValues, omitBy } from 'lodash-es';
 
 export const ENDPOINTS = {
+  CSRF_INIT: `${API_PREFIX}/../airlock/csrf-cookie`,
+  USERS_LOGIN: `${API_PREFIX}/users/login`,
+  USERS_LOGOUT: `${API_PREFIX}/users/logout`,
+  USERS_ME: `${API_PREFIX}/users/me`,
   APPEARANCES: (params: QueryPublicAppearancesRequest) =>
     buildUrl('', {
       path: `${API_PREFIX}/appearances`,
@@ -19,6 +23,4 @@ export const ENDPOINTS = {
       path: `${API_PREFIX}/appearances/${appearanceId}/palette`,
       // TODO hash
     }),
-  USERS_LOGIN: '/users/login',
-  USERS_ME: `${API_PREFIX}/users/me`,
 };

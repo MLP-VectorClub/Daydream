@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { LaxBreadcrumbOption } from 'app/types';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { BreadcrumbItem } from 'app/types';
 
 @Component({
   selector: 'app-error',
   templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NotFoundComponent {
 
-  breadcrumbs: LaxBreadcrumbOption[] = [
+  breadcrumbs: BreadcrumbItem[] = [
     {
       label: 'ERROR_PAGES.BREADCRUMBS.START',
       url: null,

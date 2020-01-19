@@ -22,10 +22,10 @@ const guestUser: AppUser = {
 
 export function reducer(state: State = defaultState, action: fromActions.AuthActions): State {
   switch (action.type) {
-    case fromActions.ActionTypes.CHECK_AUTH_YAY:
+    case fromActions.ActionTypes.CHECK_AUTH_SUCCESS:
       return { signedIn: true, data: action.payload };
 
-    case fromActions.ActionTypes.CHECK_AUTH_NAY:
+    case fromActions.ActionTypes.CHECK_AUTH_FAILURE:
       return { signedIn: false, data: guestUser };
 
     default:

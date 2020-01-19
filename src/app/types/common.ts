@@ -21,3 +21,9 @@ export interface PaginationItem {
   queryParams?: ObjectOf<string>;
   pageNumber: Nullable<number>;
 }
+
+export interface BreadcrumbItem {
+  label: Nullable<string>;
+  url: Nullable<string>;
+  current?: boolean;
+}

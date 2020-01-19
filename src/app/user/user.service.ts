@@ -15,4 +15,8 @@ export class UserService {
   public getMe(): Observable<User> {
     return this.http.get<User>(ENDPOINTS.USERS_ME);
   }
+
+  logout() {
+    return this.http.post(ENDPOINTS.USERS_LOGOUT, null);
+  }
 }

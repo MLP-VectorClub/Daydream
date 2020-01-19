@@ -1,8 +1,7 @@
 import { GuideName } from 'app/types';
 import { range } from 'lodash-es';
-import { NzBreakPoint } from 'ng-zorro-antd';
 
-export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Daydream';
+export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Celestia';
 export const PROJECT_NAME = GITHUB_URL.split('/').pop();
 export const CLUB_URL = 'https://www.deviantart.com/mlp-vectorclub';
 
@@ -12,9 +11,11 @@ export const CLUB_URL = 'https://www.deviantart.com/mlp-vectorclub';
 export const API_PREFIX = '/api/v0';
 export const GUEST_AVATAR = '/assets/img/guest.svg';
 
+export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';
+
 export const supportedLanguages = ['en'];
 export const fallbackLanguage = 'en';
-export const sidebarBreakpoint: NzBreakPoint = 'xl';
+export const sidebarBreakpoint = 'xl';
 
 export const GUIDE_NAMES: GuideName[] = ['pony', 'eqg'];
 

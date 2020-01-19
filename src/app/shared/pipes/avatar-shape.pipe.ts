@@ -1,15 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AvatarProvider } from 'app/types';
-import { NzAvatarShape } from 'ng-zorro-antd';
+
+type AvatarShape = 'square' | 'circle';
 
 @Pipe({ name: 'avatarShape' })
 export class AvatarShapePipe implements PipeTransform {
-  private readonly shapeMap: { [key in AvatarProvider]: NzAvatarShape } = {
+  private readonly shapeMap: { [key in AvatarProvider]: AvatarShape } = {
     deviantart: 'square',
     discord: 'circle',
   };
 
-  transform(provider: AvatarProvider): NzAvatarShape {
+  transform(provider: AvatarProvider): AvatarShape {
     return this.shapeMap[provider];
   }
 }

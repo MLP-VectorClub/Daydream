@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,7 +11,6 @@ import {
   MainComponent,
   PageHeaderComponent,
   PaginationComponent,
-  SidebarComponent,
   SidebarUserInfoComponent,
   TimeComponent,
   UserLinkComponent,
@@ -19,11 +18,10 @@ import {
 import { AboveContentComponent } from 'app/shared/components/above-content.component';
 import { VarDirective } from 'app/shared/directives';
 import { AppearancePagePipe, AvatarShapePipe, PaletteUrlPipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 const declarations = [
   // Components
-  SidebarComponent,
   ContentComponent,
   AvatarWrapComponent,
   SidebarUserInfoComponent,
@@ -48,22 +46,21 @@ const declarations = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    TranslateModule,
-    NgZorroAntdModule,
-    RouterModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        TranslateModule,
+        RouterModule,
+        ReactiveFormsModule,
+        NgbPopoverModule,
+    ],
   exports: [
     ...declarations,
     CoreModule,
     TranslateModule,
-    NgZorroAntdModule,
     RouterModule,
   ],
-  declarations,
+  declarations
 })
 export class SharedModule {
 }

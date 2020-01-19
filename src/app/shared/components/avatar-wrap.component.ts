@@ -1,19 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { GUEST_AVATAR } from 'app/app.config';
-import { AvatarProvider } from 'app/types';
+import { AvatarProvider, Nullable } from 'app/types';
 
 @Component({
   selector: 'app-avatar-wrap',
   templateUrl: './avatar-wrap.component.html',
-  styleUrls: ['./avatar-wrap.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AvatarWrapComponent {
 
   @Input()
-  avatarUrl: string;
+  avatarUrl: Nullable<string>;
 
   @Input()
   avatarProvider: AvatarProvider;
+
+  @Input()
+  size: number;
 
   guestAvatar = GUEST_AVATAR;
 
