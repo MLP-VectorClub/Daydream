@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ViewEncapsulation } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,20 +11,18 @@ import {
   MainComponent,
   PageHeaderComponent,
   PaginationComponent,
-  SidebarUserInfoComponent,
   TimeComponent,
   UserLinkComponent,
 } from 'app/shared/components';
 import { AboveContentComponent } from 'app/shared/components/above-content.component';
 import { VarDirective } from 'app/shared/directives';
-import { AppearancePagePipe, AvatarShapePipe, PaletteUrlPipe, PermissionPipe, RoleLabelPipe, SpriteUrlPipe } from 'app/shared/pipes';
+import { AvatarShapePipe, PermissionPipe, RoleLabelPipe } from 'app/shared/pipes';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 const declarations = [
   // Components
   ContentComponent,
   AvatarWrapComponent,
-  SidebarUserInfoComponent,
   UserLinkComponent,
   TimeComponent,
   BreadcrumbsComponent,
@@ -40,20 +38,20 @@ const declarations = [
   AvatarShapePipe,
   RoleLabelPipe,
   PermissionPipe,
-  SpriteUrlPipe,
-  AppearancePagePipe,
-  PaletteUrlPipe,
+  // SpriteUrlPipe,
+  // AppearancePagePipe,
+  // PaletteUrlPipe,
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        CoreModule,
-        TranslateModule,
-        RouterModule,
-        ReactiveFormsModule,
-        NgbPopoverModule,
-    ],
+  imports: [
+    CommonModule,
+    CoreModule,
+    TranslateModule,
+    RouterModule,
+    ReactiveFormsModule,
+    NgbPopoverModule,
+  ],
   exports: [
     ...declarations,
     CoreModule,

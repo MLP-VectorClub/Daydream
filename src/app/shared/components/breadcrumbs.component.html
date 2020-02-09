@@ -1,4 +1,4 @@
-<ol *ngIf="items.length > 0" class="breadcrumb text-white">
+<ol *ngIf="items.length > 0" class="breadcrumb text-white mb-0">
   <ng-container *ngFor="let item of items">
     <ng-container *ngIf="item.label !== null">
       <li class="breadcrumb-item" [class.active]="item.current">

@@ -4,9 +4,10 @@
     "GUEST_USER_NAME": "Curious Pony",
     "HEADER": {
       "NEW_NOTIFICATIONS": "New notifications",
-      "ACCOUNT_MENU": "Account menu",
+      "ACCOUNT_MENU": "Account",
       "LOGOUT": "Log out",
-      "LOGIN": "Log in"
+      "LOGIN": "Log in",
+      "REGISTER": "Register"
     },
     "FOOTER": {
       "APP_VERSION": [
@@ -32,6 +33,32 @@
       "TITLE": "Are you sure?",
       "YES": "Eeyup",
       "NO": "Nope"
+    },
+    "AUTH_MODAL": {
+      "COMMON": {
+        "NAME": "Display Name",
+        "EMAIL": "E-mail Address",
+        "PASSWORD": "Password",
+        "PASSWORD_CONFIRMATION": "Repeat Password",
+        "REVEAL_PASSWORD": "Reveal Password",
+        "CONCEAL_PASSWORD": "Conceal Password"
+      },
+      "LOGIN": {
+        "HEADER": "Log In",
+        "SUBMIT": "Login",
+        "SWITCH_PRETEXT": "Don't have an account yet?",
+        "SWITCH_TEXT": "Create One",
+        "UNKNOWN_ERROR_PREFACE": "There was an issue while logging in",
+        "INVALID_CREDENTIALS": "The email address or password is incorrect"
+      },
+      "REGISTER": {
+        "HEADER": "Register",
+        "SUBMIT": "Create Account",
+        "SWITCH_PRETEXT": "Already have an account?",
+        "SWITCH_TEXT": "Log in",
+        "UNKNOWN_ERROR_PREFACE": "There was an issue while creating your account",
+        "PASSWORD_MISMATCH": "The passwords don't match"
+      }
     }
   },
   "TITLES": {
@@ -42,6 +69,7 @@
     "SHOW": "Show",
     "EVENTS": "Events",
     "ABOUT": "About",
+    "ADMIN": "Admin",
     "NOT_FOUND": "404"
   },
   "COLOR_GUIDE": {

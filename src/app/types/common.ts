@@ -1,3 +1,5 @@
+import { ValidationErrorResponse } from 'app/types/api';
+
 export type Nullable<T> = T | null;
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -27,3 +29,22 @@ export interface BreadcrumbItem {
   url: Nullable<string>;
   current?: boolean;
 }
+
+export enum UnifiedErrorResponseTypes {
+  UNKNOWN,
+  MESSAGE_ONLY,
+  VALIDATION_ERROR,
+  AUTHENTICATION_ERROR,
+}
+
+export type UnifiedErrorResponse = {
+  type: UnifiedErrorResponseTypes.AUTHENTICATION_ERROR;
+} | {
+  type: UnifiedErrorResponseTypes.UNKNOWN;
+  payload: string;
+} | {
+  type: UnifiedErrorResponseTypes.MESSAGE_ONLY;
+  message: string;
+} | ({
+  type: UnifiedErrorResponseTypes.VALIDATION_ERROR;
+} & ValidationErrorResponse);

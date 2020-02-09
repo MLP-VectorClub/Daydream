@@ -18,3 +18,32 @@
     color: #000 !important;
   }
 }
+
+#desktop-account-dropdown-toggler {
+  cursor: pointer !important;
+  margin-right: $navbar-nav-link-padding-x;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+
+  &:after {
+    display: none;
+  }
+
+  .dd-label {
+    margin-left: $navbar-nav-link-padding-x;
+  }
+}
+
+#desktop-account-dropdown {
+  background-color: $primary;
+
+  .user-link {
+    color: #fff;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

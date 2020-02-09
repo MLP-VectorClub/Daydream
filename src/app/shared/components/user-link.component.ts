@@ -12,7 +12,4 @@ export class UserLinkComponent {
   @Input()
   text = '';
 
-  @Input()
-  class = '';
-
 }

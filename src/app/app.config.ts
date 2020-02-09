@@ -1,4 +1,4 @@
-import { GuideName } from 'app/types';
+// import { GuideName } from 'app/types';
 import { range } from 'lodash-es';
 
 export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Celestia';
@@ -15,8 +15,7 @@ export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';
 
 export const supportedLanguages = ['en'];
 export const fallbackLanguage = 'en';
-export const sidebarBreakpoint = 'xl';
 
-export const GUIDE_NAMES: GuideName[] = ['pony', 'eqg'];
+export const GUIDE_NAMES: string[] = ['pony', 'eqg'];
 
 export const GUIDE_PAGE_SIZES = range(7, 20 + 1);

@@ -1,12 +1,15 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BreadcrumbItem } from 'app/types';
+import { Store } from '@ngrx/store';
+import { AppState } from 'app/store/reducers';
+import { SetTitleAction } from 'app/store/actions/core.actions';
 
 @Component({
   selector: 'app-error',
   templateUrl: './not-found.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class NotFoundComponent {
+export class NotFoundComponent implements OnInit {
 
   breadcrumbs: BreadcrumbItem[] = [
     {
@@ -19,5 +22,12 @@ export class NotFoundComponent {
       current: true,
     },
   ];
+
+  constructor(private store: Store<AppState>) {
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new SetTitleAction('NOT_FOUND'));
+  }
 
 }

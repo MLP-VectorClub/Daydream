@@ -1,6 +1,0 @@
-<ng-container *ngIf="appearance.sprite">
-  <div [ngClass]="{'spinner-border spinner-border-sm': status === Status.LOAD}">
-    <img [attr.src]="imageSource$ | async" [alt]="appearance.label" class="sprite-image"
-      inViewport (inViewportAction)="onIntersection($event)" #imageTag/>
-  </div>
-</ng-container>

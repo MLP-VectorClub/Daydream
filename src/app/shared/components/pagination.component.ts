@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { range } from 'app/shared/utils';
-import { Nullable, ObjectOf, PageData, PaginationItem, Status } from 'app/types';
+import { Nullable, ObjectOf, PaginationItem, Status } from 'app/types';
 import { uniq } from 'lodash-es';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { filter } from 'rxjs/operators';
 export class PaginationComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input()
-  data: PageData['pagination'];
+  data: any;
 
   @Input()
   status: Status = Status.INIT;

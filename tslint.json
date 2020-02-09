@@ -147,6 +147,10 @@
     "comma-dangle": [
       true,
       "always-multiline"
+    ],
+    "object-curly-spacing": [
+      true,
+      "always"
     ]
   }
 }

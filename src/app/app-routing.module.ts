@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from 'app/error/components/not-found.component';
 
 const routes: Routes = [
-  {
+  /*{
     path: 'cg',
     loadChildren: () => import('app/color-guide/color-guide.module').then(m => m.ColorGuideModule),
   },
@@ -15,7 +15,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'cg',
-  },
+  },*/
   {
     path: '**',
     component: NotFoundComponent,
