@@ -139,7 +139,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="uert.UNKNOWN">
             <strong>{{ 'GLOBAL.AUTH_MODAL.LOGIN.UNKNOWN_ERROR_PREFACE' | translate }}</strong>
-            <pre><code [highlight]="loginError.payload"></code></pre>
+            <pre><code>{{ loginError.payload }}</code></pre>
           </ng-container>
           <ng-container *ngSwitchCase="uert.AUTHENTICATION_ERROR">
             {{ 'GLOBAL.AUTH_MODAL.LOGIN.INVALID_CREDENTIALS' | translate }}
@@ -219,7 +219,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="uert.UNKNOWN">
             <strong>{{ 'GLOBAL.AUTH_MODAL.REGISTER.UNKNOWN_ERROR_PREFACE' | translate }}</strong>
-            <pre><code [highlight]="registerError.payload"></code></pre>
+            <pre><code>{{ registerError.payload }}</code></pre>
           </ng-container>
         </ngb-alert>
       </ng-container>

@@ -4,7 +4,6 @@ import { HeaderComponent } from 'app/header/header.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { NgbAlertModule, NgbButtonsModule, NgbCollapseModule, NgbDropdownModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -20,7 +19,6 @@ import { HighlightModule } from 'ngx-highlightjs';
     ReactiveFormsModule,
     NgbButtonsModule,
     NgbAlertModule,
-    HighlightModule,
   ],
 })
 export class HeaderModule {

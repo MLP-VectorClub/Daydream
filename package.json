@@ -48,7 +48,6 @@
     "md5": "^2.2.1",
     "ng-in-viewport": "^6.0.3",
     "ngx-cookie-service": "^2.3.0",
-    "ngx-highlightjs": "^4.0.2",
     "pusher-js": "^5.0.3",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",

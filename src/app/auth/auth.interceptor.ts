@@ -13,10 +13,11 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const setHeaders = {};
     const cookieValue = this.cookies.get(CSRF_COOKIE_NAME);
     if (cookieValue)
-      req.headers.append(`X-${CSRF_COOKIE_NAME}`, cookieValue);
-    req.headers.append(`X-Referer`, window.location.origin);
-    return next.handle(req);
+      setHeaders[`X-${CSRF_COOKIE_NAME}`] = cookieValue;
+    setHeaders['X-App-Origin'] = window.location.origin;
+    return next.handle(req.clone({ setHeaders }));
   }
 }

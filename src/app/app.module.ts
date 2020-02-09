@@ -26,15 +26,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ENDPOINTS } from './shared/endpoints';
 import { CookieService } from 'ngx-cookie-service';
-import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 
 export const NGRX_STATE = makeStateKey('NGRX_STATE');
 
 registerLocaleData(en);
-
-const getHighlightLanguages = () => ({
-  json: () => import('highlight.js/lib/languages/json'),
-});
 
 @NgModule({
   declarations: [
@@ -67,7 +62,6 @@ const getHighlightLanguages = () => ({
     ErrorModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgbModule,
-    HighlightModule,
   ],
   providers: [
     CookieService,
@@ -88,12 +82,6 @@ const getHighlightLanguages = () => ({
       deps: [TranslateService, HttpClient, CookieService],
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {
-      provide: HIGHLIGHT_OPTIONS,
-      useValue: {
-        languages: getHighlightLanguages()
-      }
-    }
   ],
   bootstrap: [AppComponent],
 })
