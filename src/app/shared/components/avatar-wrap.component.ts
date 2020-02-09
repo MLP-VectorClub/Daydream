@@ -33,6 +33,7 @@ export class AvatarWrapComponent implements OnChanges {
     if (this.email === null)
       return GUEST_AVATAR;
 
-    return `https://www.gravatar.com/avatar/${md5(this.email)}?size=${this.size}&d=${encodeURIComponent(GUEST_AVATAR)}`;
+    const defaultAvatar = encodeURIComponent(window.location.origin + GUEST_AVATAR);
+    return `https://www.gravatar.com/avatar/${md5(this.email)}?size=${this.size}&d=${defaultAvatar}`;
   }
 }
