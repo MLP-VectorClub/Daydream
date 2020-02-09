@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const cookieValue = this.cookies.get(CSRF_COOKIE_NAME);
     if (cookieValue)
       req.headers.append(`X-${CSRF_COOKIE_NAME}`, cookieValue);
+    req.headers.append(`X-Referer`, window.location.origin);
     return next.handle(req);
   }
 }
