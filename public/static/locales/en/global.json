@@ -1,0 +1,18 @@
+{
+  "header": {
+    "login": "Log Innnnn",
+    "logout": "Log Out",
+    "register": "Register"
+  },
+  "footer": "I'm here to stay (Footer)",
+  "titles": {
+    "colorGuide": "Color Guides",
+    "show": "Show",
+    "events": "Events",
+    "about": "About"
+  },
+  "error": {
+    "withStatus": "Error {{statusCode}}!",
+    "withoutStatus": "Unknown Error!"
+  }
+}

@@ -1,13 +1,15 @@
-# Celestia [![Netlify Status](https://api.netlify.com/api/v1/badges/c7be5eed-e270-4277-9456-928f6f678581/deploy-status)](https://app.netlify.com/sites/mlpvc/deploys)
+# Celestia
 
-Work-in-progress SPA frontend for the [MLP Vector Club](https://github.com/MLP-VectorClub)'s website
+Work-in-progress SPA frontend for the [MLP-VectorClub](https://github.com/MLP-VectorClub)'s website
 
 ## Built with
 
  - [TypeScript](https://www.typescriptlang.org/)
- - [Angular CLI](https://cli.angular.io/)
- - [Clarity](https://clarity.design/)
- - [ngrx](https://ngrx.io/)
- - [ngx-translate](https://github.com/ngx-translate/core)
+ - [Next.js](https://github.com/zeit/next.js)
+ - [Redux-Toolkit](https://redux-toolkit.js.org/)
+ - [redux-observable](https://redux-observable.js.org/)
+ - [next-i18next](https://github.com/isaachinman/next-i18next)
  - [Sass](https://sass-lang.com/)
- - [ng-in-viewport](https://github.com/k3nsei/ng-in-viewport)
+ - [Bootstrap 4](https://getbootstrap.com/)
+ - [Reactstrap](https://reactstrap.github.io/)
+ - [Fontawesome Free](https://fontawesome.com/license/free)

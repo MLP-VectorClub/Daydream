@@ -1,6 +1,0 @@
-/*
-  X-Frame-Options: sameorigin
-  X-XSS-Protection: 1; mode=block
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  X-Content-Type-Options: nosniff
-  Content-Security-Policy: default-src 'none';script-src 'self' code.jquery.com polyfill.io cdnjs.cloudflare.com cdn.jsdelivr.net ws.mlpvector.lc:8443;object-src 'none';style-src 'self' 'unsafe-inline' fonts.googleapis.com;img-src 'self' data: blob: i.imgur.com derpicdn.net *.deviantart.net cdn.discordapp.com i.ytimg.com image.tmdb.org *.wixmp.com www.gravatar.com;manifest-src 'self';media-src 'none';frame-src 'self' www.youtube.com www.dailymotion.com sendvid.com mega.nz;font-src 'self' fonts.gstatic.com cdnjs.cloudflare.com use.fontawesome.com;connect-src 'self' ws.mlpvector.lc:8443 wss://ws.mlpvector.lc:8443 www.gravatar.com; frame-ancestors 'self' https://mlpvector.club;form-action 'none';base-uri 'self';report-uri https://141af51e3fb970246ae335d036d52647.report-uri.com/r/d/csp/reportOnly
