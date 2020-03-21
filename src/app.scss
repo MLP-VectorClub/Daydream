@@ -1,0 +1,25 @@
+@import "scss/vars";
+@import "scss/fonts";
+
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-svg-core/styles.css";
+@import "~react-lazy-load-image-component/src/effects/opacity.css";
+
+@import "scss/mixins";
+@import "scss/components/app";
+@import "scss/components/header";
+@import "scss/components/avatar-wrap";
+
+html {
+  background-color: $primary;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #fff;
+  background-image: url(/img/grid-16x16.svg), url(/img/grid-4x4.svg);
+}
+
+.breadcrumb-item.active {
+  font-weight: bold;
+}

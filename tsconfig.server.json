@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "module": "commonjs",
+    "outDir": "dist",
+    "noEmit": false,
+    "baseUrl": "."
+  },
+  "exclude": [],
+  "include": [
+    "src/server.ts"
+  ]
+}
