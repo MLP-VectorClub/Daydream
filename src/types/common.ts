@@ -71,7 +71,4 @@ export type UnifiedErrorResponse = {
 export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'displayName' | 'email'>;
 
 type TitleKeyWithParams = [string | number, Record<string, string>];
-interface RawTitle {
-  title: Nullable<string | number>;
-}
-export type PageTitle = Nullable<string | number> | TitleKeyWithParams | RawTitle;
+export type PageTitle = Nullable<string | number> | TitleKeyWithParams;

@@ -11,7 +11,7 @@ const Error = (({ statusCode = null }) => {
   const { t } = useTranslation();
   const title = statusCode === null ? statusCode : String(statusCode);
   return (
-    <Layout title={{ title }}>
+    <Layout title={title}>
       <p>
         {statusCode
           ? t('error.withStatus', { statusCode })

@@ -16,7 +16,9 @@ export default (() => {
   }, []);
 
   const emptyTitle = title === null || title === '';
-  const titleString = Array.isArray(title) ? t(`titles.${title[0]}`, title[1]) : t(`titles.${title}`);
+  const titleString = Array.isArray(title) ? t(`titles.${title[0]}`, title[1]) : (
+    title !== null ? t(`titles.${title}`) : null
+  );
 
   return (
     <Head>

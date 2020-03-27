@@ -136,6 +136,7 @@
         ]
       }
     ],
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "no-nested-ternary": "off"
   }
 }

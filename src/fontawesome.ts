@@ -1,6 +1,6 @@
 import { config, library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faBars, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
 config.autoAddCss = false;
@@ -9,5 +9,6 @@ config.autoAddCss = false;
 library.add(
   fab,
   faBars,
+  faTimes,
   faExternalLinkAlt,
 );

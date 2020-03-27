@@ -9,7 +9,8 @@
     "colorGuide": "Color Guides",
     "show": "Show",
     "events": "Events",
-    "about": "About"
+    "about": "About",
+    "404": "Not Found"
   },
   "error": {
     "withStatus": "Error {{statusCode}}!",
