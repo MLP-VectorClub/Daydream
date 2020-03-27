@@ -12,7 +12,7 @@ const ColorGuidePage = (() => {
 }) as NextPage;
 
 ColorGuidePage.getInitialProps = async () => ({
-  namespacesRequired: ['global'],
+  namespacesRequired: ['colorGuide'],
 });
 
 export default ColorGuidePage;
