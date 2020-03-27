@@ -16,7 +16,7 @@ const AboutPage = (() => (
 )) as NextPage;
 
 AboutPage.getInitialProps = async () => ({
-  namespacesRequired: ['global'],
+  namespacesRequired: ['common'],
 });
 
 export default AboutPage;
