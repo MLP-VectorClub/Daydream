@@ -10,7 +10,7 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
     CMD_FETCH="$GIT fetch"
     CMD_YARN="sudo -u www-data yarn"
     CMD_BUILD="sudo -u www-data nice yarn build"
-    CMD_RESTART="pm2 restart pm2.json"
+    CMD_RESTART="pm2 reload pm2.json"
 
     echo "$ $CMD_CD"
     eval ${CMD_CD}
