@@ -3,7 +3,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 import UserLink from './shared/UserLink';
 import { mapRoleLabel } from '../utils';
 import { AuthModalSide, FailsafeUser, Nullable, WithTFunction } from '../types';
-import { openAuthModal } from '../store/slices/authSlice';
+import { authActions } from '../store/slices';
 
 interface PropTypes extends WithTFunction {
   user: Nullable<FailsafeUser>;
@@ -34,12 +34,12 @@ export default (({ t, user, signedIn, dispatch }) => (
       : (
         <>
           <NavItem>
-            <NavLink onClick={() => dispatch(openAuthModal(AuthModalSide.LOGIN))}>
+            <NavLink onClick={() => dispatch(authActions.openAuthModal(AuthModalSide.LOGIN))}>
               {t('header.login')}
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => dispatch(openAuthModal(AuthModalSide.REGISTER))}>
+            <NavLink onClick={() => dispatch(authActions.openAuthModal(AuthModalSide.REGISTER))}>
               {t('header.register')}
             </NavLink>
           </NavItem>

@@ -138,21 +138,6 @@ const authSlice = createSlice({
 
 export type AuthActions = ValuesOf<typeof authSlice.actions>;
 
-export const {
-  checkAuth,
-  checkAuthSuccess,
-  checkAuthFailure,
-  login,
-  loginSuccess,
-  loginFailure,
-  logout,
-  logoutSuccess,
-  logoutFailure,
-  register,
-  registerSuccess,
-  registerFailure,
-  openAuthModal,
-  closeAuthModal,
-} = authSlice.actions;
+export const authActions = authSlice.actions;
 
 export default authSlice.reducer;

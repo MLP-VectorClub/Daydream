@@ -10,7 +10,7 @@ import { RootState } from '../store/rootReducer';
 import { PROD_APP_URL } from '../config';
 import { Nullable, PageTitle } from '../types';
 import { assembleSeoUrl } from '../utils/common';
-import { setTitle } from '../store/slices/coreSlice';
+import { coreActions } from '../store/slices';
 
 type PropTypes = {
   title?: PageTitle;
@@ -35,7 +35,7 @@ const Layout = (({
   });
 
   useEffect(() => {
-    dispatch(setTitle(title));
+    dispatch(coreActions.setTitle(title));
   }, [title]);
 
   return (

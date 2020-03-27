@@ -1,3 +1,9 @@
+/* eslint-disable import/first */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('console-stamp')(console, {
+  format: ':date(yyyy-mm-dd HH:MM:ss.l) :label',
+});
+
 import https from 'https';
 import http from 'http';
 import { parse } from 'url';
@@ -15,11 +21,6 @@ import nextI18next from './i18n';
 dotenv.config();
 
 es6Promise.polyfill();
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('console-stamp')(console, {
-  format: ':date(yyyy-mm-dd HH:MM:ss.l) :label',
-});
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line @typescript-eslint/no-var-requires

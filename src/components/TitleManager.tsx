@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Head from 'next/head';
 import { useTranslation } from '../i18n';
-import { checkAuth } from '../store/slices/authSlice';
+import { authActions } from '../store/slices';
 import { RootState } from '../store/rootReducer';
 import { APP_NAME } from '../config';
 
@@ -12,7 +12,7 @@ export default (() => {
   const { title } = useSelector((store: RootState) => store.core);
 
   useEffect(() => {
-    dispatch(checkAuth());
+    dispatch(authActions.checkAuth());
   }, []);
 
   const emptyTitle = title === null || title === '';

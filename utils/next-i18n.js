@@ -8,6 +8,10 @@ module.exports = (nextConfig = {}) => ({
       options.plugins = [];
     }
 
+    const localesDir = path.resolve(__dirname, '../public/static/locales');
+
+    console.log(`Initialized next-i18next webpack plugin with localesDir: ${localesDir}`);
+
     options.plugins.push(new I18NextHMRPlugin({
       localesDir: path.resolve(__dirname, '../public/static/locales'),
     }));

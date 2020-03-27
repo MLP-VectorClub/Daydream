@@ -3,7 +3,6 @@ import NextI18Next from 'next-i18next';
 const nextI18next = new NextI18Next({
   defaultLanguage: 'en',
   otherLanguages: ['hu'],
-  defaultNS: 'global',
 });
 
 if (process.env.NODE_ENV !== 'production') {

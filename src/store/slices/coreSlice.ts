@@ -32,10 +32,6 @@ const coreSlice = createSlice({
 
 export type CoreActions = ValuesOf<typeof coreSlice.actions>;
 
-export const {
-  setLanguage,
-  toggleSidebar,
-  setTitle,
-} = coreSlice.actions;
+export const coreActions = coreSlice.actions;
 
 export default coreSlice.reducer;

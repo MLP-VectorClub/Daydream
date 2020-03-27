@@ -3,8 +3,7 @@ echo "##### post-receive hook #####"
 read oldrev newrev refname
 echo "Push triggered update to revision $newrev ($refname)"
 
-# TODO Change to master eventually
-RUN_FOR_REF="refs/heads/react-rewrite"
+RUN_FOR_REF="refs/heads/master"
 if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
     GIT="env -i git"
     CMD_CD="cd $(readlink -nf "$PWD/..")"
