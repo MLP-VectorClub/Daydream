@@ -26,7 +26,12 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
 
     if $GIT diff --name-only $oldrev $newrev | grep "^\(src\|public\)/"; then
         echo "$ $CMD_BUILD"
-        eval $CMD_BUILD
+        if eval $CMD_BUILD; then
+          echo "Build successful"
+        else
+          echo "Build failed"
+          exit 1
+        fi
     else
         echo "# Skipping build, no changes in src or public folders"
     fi
