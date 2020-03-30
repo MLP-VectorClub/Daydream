@@ -1,13 +1,12 @@
 $primary: #2C73B1;
 $secondary: #1E3DB3;
-$blurple: #7289DA;
-$fella: #05CC47;
+$discord: #7289DA;
+$deviantart: #05CC47;
 $primary-dark: darken($primary, 20);
 
 $link-color: $primary;
 
 $avatar-size: 50px;
-$footer-height: 2.5rem;
 
 $font-family-monospace: 'Consolas', monospace;
 $font-family-sans-serif: 'Arimo', sans-serif;
@@ -21,7 +20,24 @@ $breadcrumb-bg: $primary-dark;
 $breadcrumb-active-color: #fff;
 $breadcrumb-divider-color: rgba($breadcrumb-active-color, .5);
 
+$navbar-dark-color: #fff;
+
 $theme-colors: (
-  "blurple": $blurple,
-  "fella": $fella,
-)
+  "discord": $discord,
+  "deviantart": $deviantart,
+);
+
+$main-margin: .5rem;
+$sidebar-width: 20.625rem;
+$footer-height: 2.375rem;
+
+$content-outline: rgba(170, 170, 170, .8);
+$content-bg: rgba(255, 255, 255, .75);
+
+$link-color: #337287;
+$link-hover-color: desaturate(lighten($link-color, 13), 7);
+$link-color-light: lighten($link-color, 30);
+$link-hover-color-light: lighten($link-hover-color, 37);
+
+$sidebar-breakpoint-up: lg;
+$sidebar-breakpoint-down: md;

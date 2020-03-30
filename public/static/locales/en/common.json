@@ -4,7 +4,15 @@
     "logout": "Log Out",
     "register": "Register"
   },
-  "footer": "I'm here to stay (Footer)",
+  "footer": {
+    "commitTitle": "See exactly what was changed and why",
+    "noVersion": "version information unavailable",
+    "running": "Running",
+    "created": "created",
+    "visitGithub": "Visit the GitHub repository",
+    "privacyPolicy": "Privacy Policy",
+    "contactUs": "Contact Us"
+  },
   "titles": {
     "colorGuide": "Color Guides",
     "show": "Show",

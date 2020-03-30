@@ -6,7 +6,6 @@ require('console-stamp')(console, {
 
 import https from 'https';
 import http from 'http';
-import { parse } from 'url';
 import next from 'next';
 import fs from 'fs';
 import dotenv from 'dotenv';
@@ -17,6 +16,7 @@ import * as es6Promise from 'es6-promise';
 import 'isomorphic-fetch';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import nextI18next from './i18n';
+import routes from './routes';
 
 dotenv.config();
 
@@ -34,6 +34,8 @@ interface AppEnvironment {
   APP_HOST: string;
   SSL_KEY_PATH: string;
   SSL_CERT_PATH: string;
+  API_JSON_PATH: string;
+  BACKEND_HOST: string;
 }
 
 const {
@@ -42,12 +44,13 @@ const {
   APP_HOST,
   SSL_KEY_PATH,
   SSL_CERT_PATH,
+  BACKEND_HOST,
 } = process.env as Partial<AppEnvironment>;
 
 const dev = NODE_ENV !== 'production';
 const protocol = dev ? 'https' : 'http';
 const app = next({ dev, customServer: true });
-const handle = app.getRequestHandler();
+const handle = routes.getRequestHandler(app);
 
 if (
   dev && (
@@ -68,24 +71,19 @@ if (
 
   expressApp.use(cookieParser());
 
-  expressApp.get('/', (_req, res) => res.redirect('/cg', 302));
-  expressApp.get('/cg', (req, res) => app.render(req, res, '/color-guide', req.query));
-  expressApp.get('/about', (req, res) => app.render(req, res, '/about', req.query));
+  expressApp.get('/', (_req, res) => res.redirect(302, '/cg'));
+  expressApp.get('/cg', (_req, res) => res.redirect(302, '/cg/pony'));
 
   // Development Backend proxy
   if (dev) {
     expressApp.use(createProxyMiddleware('/api', {
-      target: `http://api.mlpvector.lc`,
+      target: BACKEND_HOST,
       pathRewrite: { '^/api': '/' },
       changeOrigin: true,
     }));
   }
 
-  expressApp.all('*', (req, res) => {
-    const parsedUrl = parse(req.url, true);
-
-    return handle(req, res, parsedUrl);
-  });
+  expressApp.all('*', handle);
 
   let server;
   if (dev) {

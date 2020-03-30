@@ -8,6 +8,20 @@ export enum Status {
   FAILURE
 }
 
+declare global {
+  interface Window {
+    __NEXT_DATA__: {
+      buildId: string;
+      customServer: boolean;
+      isFallback: boolean;
+      page: string;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      props: Record<string, any>;
+      query: Record<string, string>;
+    };
+  }
+}
+
 export type Nullable<T> = T | null;
 /** Allows making all or a selected subset of properties of an object nullable */
 export type NullableProps<T, K extends keyof T = keyof T> = Omit<T, K> & {

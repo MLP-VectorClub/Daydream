@@ -5,21 +5,13 @@
 @import "~@fortawesome/fontawesome-svg-core/styles.css";
 @import "~react-lazy-load-image-component/src/effects/opacity.css";
 
+@import "scss/functions";
 @import "scss/mixins";
-@import "scss/components/app";
-@import "scss/components/header";
 @import "scss/components/avatar-wrap";
+@import "scss/components/content";
+@import "scss/components/footer";
+@import "scss/components/header";
+@import "scss/components/main";
+@import "scss/components/to-the-top-arrow";
 
-html {
-  background-color: $primary;
-  min-height: 100vh;
-}
-
-body {
-  background-color: #fff;
-  background-image: url(/img/grid-16x16.svg), url(/img/grid-4x4.svg);
-}
-
-.breadcrumb-item.active {
-  font-weight: bold;
-}
+@import "scss/common";

@@ -38,3 +38,20 @@ $outline-strength-maximum: 3;
     0 0 $size $color;
   }
 }
+
+@mixin white-grid {
+  background-color: #fff;
+  background-image: url('/img/grid-16x16.svg?v=2'), url('/img/grid-4x4.svg?v=2');
+}
+
+@mixin link($color: $link-color, $hover: $link-hover-color) {
+  color: $color;
+  text-decoration: none !important;
+  transition: color .2s linear;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: $hover
+  }
+}

@@ -11,6 +11,7 @@ import { PROD_APP_URL } from '../config';
 import { Nullable, PageTitle } from '../types';
 import { assembleSeoUrl } from '../utils/common';
 import { coreActions } from '../store/slices';
+import Footer from './Footer';
 
 type PropTypes = {
   title?: PageTitle;
@@ -52,11 +53,10 @@ const Layout = (({
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Header t={t} />
-      {children}
-      <footer>
-        <hr />
-        <span>{t('footer')}</span>
-      </footer>
+      <div id="main">
+        {children}
+      </div>
+      <Footer t={t} />
     </div>
   );
 }) as NextPage<PropTypes>;

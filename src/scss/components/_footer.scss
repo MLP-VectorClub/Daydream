@@ -1,0 +1,33 @@
+#footer {
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  line-height: 18px;
+  color: #fff;
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  abbr {
+    border-bottom: 1px dashed;
+    cursor: help;
+    font-weight: bold;
+  }
+
+  @include media-breakpoint-up(lg) {
+    text-align: left;
+    z-index: 3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: $footer-height;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: $primary;
+  }
+}
