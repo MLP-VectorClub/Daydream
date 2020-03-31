@@ -14,14 +14,21 @@
     "contactUs": "Contact Us"
   },
   "titles": {
-    "colorGuide": "Color Guides",
+    "colorGuide": "Color Guide",
+    "colorGuideByName": "{{guideName}} Color Guide",
+    "colorGuideByNameAndPage": "Page {{page}} - {{guideName}} Color Guide",
     "show": "Show",
     "events": "Events",
     "about": "About",
-    "404": "Not Found"
+    "404": "Not Found",
+    "latestEpisode": "Latest Episode"
   },
   "error": {
     "withStatus": "Error {{statusCode}}!",
-    "withoutStatus": "Unknown Error!"
+    "withoutStatus": "Unknown Error!",
+    "404": {
+      "title": "404 Not Found",
+      "lead": "This page does not exist"
+    }
   }
 }

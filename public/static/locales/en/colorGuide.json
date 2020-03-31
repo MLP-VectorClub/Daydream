@@ -1,3 +1,10 @@
 {
-  "guideTitle": "{{guideName}} Color Guide"
+  "guideName": {
+    "unknown": "Unknown",
+    "pony": "Pony",
+    "eqg": "EQG"
+  },
+  "errors": {
+    "unknownGuide": "There is no guide by the specified name"
+  }
 }

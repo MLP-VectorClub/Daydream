@@ -5,20 +5,36 @@ import { rootEpic } from './rootEpic';
 
 const epicMiddleware = createEpicMiddleware<ActionsType, ActionsType, RootState>();
 
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: [epicMiddleware, ...getDefaultMiddleware()],
-});
+const createStore = (preloadedState = {}) => {
+  const store = configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: [epicMiddleware, ...getDefaultMiddleware()],
+  });
 
-epicMiddleware.run(rootEpic);
+  epicMiddleware.run(rootEpic);
+
+  return store;
+};
+
+export type AppStore = ReturnType<typeof createStore>;
+export type AppDispatch = AppStore['dispatch'];
+
+let latestStore: AppStore;
+
+export const initStore = (preloadedState = {}): AppStore => {
+  if (!latestStore) {
+    latestStore = createStore(preloadedState);
+  }
+
+  return latestStore;
+};
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./rootReducer', () => {
     const newRootReducer = require('./rootReducer').default;
-    store.replaceReducer(newRootReducer);
+    if (latestStore) {
+      latestStore.replaceReducer(newRootReducer);
+    }
   });
 }
-
-export type AppDispatch = typeof store.dispatch
-
-export default store;

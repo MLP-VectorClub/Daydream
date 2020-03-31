@@ -1,11 +1,15 @@
-import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { Nullable, WithTFunction } from '../types';
+import Link from 'next/link';
+import { Nullable } from '../types';
 import { GITHUB_URL } from '../config';
 import { BuildIdParseResult, getBuildData } from '../utils';
 import TimeAgo from './shared/TimeAgo';
+import { useTranslation } from '../i18n';
+import ContactLink from './shared/ContactLink';
+import ContactModal from './ContactModal';
 
-export default (({ t }) => {
+export default (() => {
+  const { t } = useTranslation();
   const [buildData, setBuildData] = useState<Nullable<BuildIdParseResult>>(null);
 
   useEffect(() => {
@@ -37,22 +41,26 @@ export default (({ t }) => {
   }
 
   return (
-    <footer id="footer">
-      <span id="git-info">
-        {`${t('footer.running')} `}
-        <strong>
-          <a href={GITHUB_URL} title={t('footer.visitGithub')}>
-            {GITHUB_URL.split('/').pop()}
-          </a>
-          {commitHash}
-        </strong>
-        {commitTime}
-      </span>
-      {` | `}
-      <a href="/about/privacy">{t('footer.privacyPolicy')}</a>
-      {` | `}
-      {/* TODO Extract into reusable component */}
-      <a className="send-feedback">{t('footer.contactUs')}</a>
-    </footer>
+    <>
+      <footer id="footer">
+        <span id="git-info">
+          {`${t('footer.running')} `}
+          <strong>
+            <a href={GITHUB_URL} title={t('footer.visitGithub')}>
+              {GITHUB_URL.split('/').pop()}
+            </a>
+            {commitHash}
+          </strong>
+          {commitTime}
+        </span>
+        {` | `}
+        <Link href="/about/privacy">
+          <a>{t('footer.privacyPolicy')}</a>
+        </Link>
+        {` | `}
+        <ContactLink>{t('footer.contactUs')}</ContactLink>
+      </footer>
+      <ContactModal />
+    </>
   );
-}) as NextPage<WithTFunction>;
+}) as React.FC;

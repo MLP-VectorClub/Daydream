@@ -1,5 +1,5 @@
 @function header-height() {
-  @return $nav-link-height + $navbar-padding-y + .125rem;
+  @return $nav-link-height + ($navbar-padding-y * 2);
 }
 
 @function rem($px) {

@@ -6,12 +6,13 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { CLUB_URL } from '../config';
 import { permission } from '../utils';
 import ExternalLink from './shared/ExternalLink';
-import { WithTFunction } from '../types';
 import { RootState } from '../store/rootReducer';
 import { coreActions } from '../store/slices';
 import ToTheTopArrow from './shared/ToTheTopArrow';
+import { useTranslation } from '../i18n';
 
-export default (({ t }) => {
+export default (() => {
+  const { t } = useTranslation();
   const { user } = useSelector((state: RootState) => state.auth);
   const { sidebarOpen } = useSelector((state: RootState) => state.core);
   const dispatch = useDispatch();
@@ -31,13 +32,18 @@ export default (({ t }) => {
           <Collapse navbar isOpen className="d-none d-lg-flex">
             <Nav navbar>
               <NavItem>
-                <Link href="/cg" passHref>
-                  <NavLink>{t('titles.colorGuide')}</NavLink>
+                <Link href="/episode/latest" passHref>
+                  <NavLink>{t('titles.latestEpisode')}</NavLink>
                 </Link>
               </NavItem>
               <NavItem>
                 <Link href="/show" passHref>
                   <NavLink>{t('titles.show')}</NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link href="/cg" passHref>
+                  <NavLink>{t('titles.colorGuide')}</NavLink>
                 </Link>
               </NavItem>
               <NavItem>
@@ -59,8 +65,8 @@ export default (({ t }) => {
               </NavItem>
               <NavItem>
                 <ExternalLink className="nav-link" href={CLUB_URL}>
-                  MLP-VectorClub
-                  <FontAwesomeIcon icon="external-link-alt" />
+                  <span className="mr-1">MLP-VectorClub</span>
+                  <FontAwesomeIcon icon="external-link-alt" size="sm" />
                 </ExternalLink>
               </NavItem>
             </Nav>
@@ -70,4 +76,4 @@ export default (({ t }) => {
       <ToTheTopArrow />
     </div>
   );
-}) as React.FC<WithTFunction>;
+}) as React.FC;

@@ -1,23 +1,56 @@
-import { NextPage } from 'next';
-import { range } from 'lodash';
+import { includes } from 'lodash';
+import { NextComponentType } from 'next';
+import { Alert, Pagination, PaginationItem } from 'reactstrap';
 import Layout from '../components/Layout';
 import { useTranslation } from '../i18n';
 import Content from '../components/shared/Content';
+import { GUIDE_NAMES } from '../config';
+import { AppPageContext, Nullable, TitleKeyWithParams } from '../types';
+import { notFound } from '../utils';
+import { getGuideTitle } from '../utils/colorguide';
+import { coreActions } from '../store/slices';
 
-const ColorGuidePage = (() => {
+
+interface PropTypes {
+  guide: Nullable<string>;
+  page: Nullable<string>;
+}
+
+const ColorGuidePage = (({ guide, page }) => {
   const { t } = useTranslation('colorGuide');
+  const title = getGuideTitle(t, guide);
+  const [key, params] = title as TitleKeyWithParams;
   return (
-    <Layout title="colorGuide">
+    <Layout>
       <Content>
-        <h1>{t('guideTitle', { guideName: 'Pony' })}</h1>
-        {range(0, 50).map(() => <br />)}
+        <h1>{t(`common:titles.${key}`, params)}</h1>
+        {guide === null && (
+          <Alert color="danger" className="mt-3 mb-0">{t('errors.unknownGuide')}</Alert>
+        )}
+        <Pagination>
+          <PaginationItem>{page}</PaginationItem>
+        </Pagination>
       </Content>
     </Layout>
   );
-}) as NextPage;
+}) as NextComponentType<AppPageContext<{ query: PropTypes }>, PropTypes, PropTypes>;
 
-ColorGuidePage.getInitialProps = async () => ({
-  namespacesRequired: ['colorGuide'],
-});
+ColorGuidePage.getInitialProps = async ctx => {
+  const { query, store, req } = ctx;
+  let { guide } = query;
+  const { page = '1' } = query;
+  if (!includes(GUIDE_NAMES, guide)) {
+    notFound(ctx);
+    guide = null;
+  }
+
+  const title = getGuideTitle(req.t, guide, page);
+  store.dispatch(coreActions.setTitle(title));
+  return ({
+    namespacesRequired: ['colorGuide'],
+    guide,
+    page,
+  });
+};
 
 export default ColorGuidePage;

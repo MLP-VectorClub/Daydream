@@ -15,6 +15,8 @@ export default nextI18next;
 
 /* Optionally, export class methods as named exports */
 export const {
+  Trans,
   useTranslation,
   appWithTranslation,
+  i18n,
 } = nextI18next;

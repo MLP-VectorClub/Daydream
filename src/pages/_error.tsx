@@ -1,36 +1,64 @@
 import React from 'react';
-import { NextPage } from 'next';
+import { NextComponentType } from 'next';
 import { useTranslation } from '../i18n';
 import Layout from '../components/Layout';
+import Content from '../components/shared/Content';
+import { AppPageContext, Nullable, PageTitle, WithTFunction } from '../types';
+import { coreActions } from '../store/slices';
 
 interface PropTypes {
-  statusCode?: number | null;
+  statusCode?: Nullable<number>;
+  title: PageTitle;
 }
 
-const Error = (({ statusCode = null }) => {
+type StatusHandlerProps = PropTypes & WithTFunction;
+
+const getStatusHandler = (code: Nullable<number>) => {
+  switch (code) {
+    case 404:
+      return (({ t }) => (
+        <>
+          <h1>{t('error.404.title')}</h1>
+          <p className="lead">{t('error.404.lead')}</p>
+        </>
+      )) as React.FC<StatusHandlerProps>;
+    default:
+      return (({ t, statusCode }) => (
+        <h1>
+          {statusCode
+            ? t('error.withStatus', { statusCode })
+            : t('error.withoutStatus')}
+        </h1>
+      )) as React.FC<StatusHandlerProps>;
+  }
+};
+
+const Error = (props => {
+  const { statusCode = null, title } = props;
   const { t } = useTranslation();
-  const title = statusCode === null ? statusCode : String(statusCode);
+  const Handler = getStatusHandler(statusCode);
   return (
     <Layout title={title}>
-      <p>
-        {statusCode
-          ? t('error.withStatus', { statusCode })
-          : t('error.withoutStatus')}
-      </p>
+      <Content>
+        <Handler t={t} {...props} />
+      </Content>
     </Layout>
   );
-}) as NextPage<PropTypes>;
+}) as NextComponentType<AppPageContext, PropTypes, PropTypes>;
 
-Error.getInitialProps = async ({ res, err }) => {
+Error.getInitialProps = async ({ store, res, err }) => {
   let statusCode;
   if (res) {
     ({ statusCode } = res);
   } else if (err) {
     ({ statusCode } = err);
   }
+  const title = statusCode === null ? statusCode : String(statusCode);
+  store.dispatch(coreActions.setTitle(title));
   return {
     namespacesRequired: ['common'],
     statusCode,
+    title,
   };
 };
 

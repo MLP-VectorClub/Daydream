@@ -5,12 +5,14 @@ import { PageTitle, ValuesOf } from '../../types';
 export interface CoreState {
   language: string;
   sidebarOpen: boolean;
+  contactOpen: boolean;
   title: PageTitle;
 }
 
 const initialState: CoreState = {
   language: fallbackLanguage,
   sidebarOpen: false,
+  contactOpen: false,
   title: null,
 };
 
@@ -26,6 +28,9 @@ const coreSlice = createSlice({
     },
     setTitle: (state, action: PayloadAction<CoreState['title']>) => {
       state.title = action.payload;
+    },
+    toggleContact(state, action: PayloadAction<boolean | undefined>) {
+      state.contactOpen = typeof action.payload === 'undefined' ? !state.contactOpen : action.payload;
     },
   },
 });
