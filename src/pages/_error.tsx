@@ -3,12 +3,11 @@ import { NextComponentType } from 'next';
 import { useTranslation } from '../i18n';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
-import { AppPageContext, Nullable, PageTitle, WithTFunction } from '../types';
+import { AppPageContext, Nullable, WithTFunction } from '../types';
 import { coreActions } from '../store/slices';
 
 interface PropTypes {
   statusCode?: Nullable<number>;
-  title: PageTitle;
 }
 
 type StatusHandlerProps = PropTypes & WithTFunction;
@@ -34,11 +33,11 @@ const getStatusHandler = (code: Nullable<number>) => {
 };
 
 const Error = (props => {
-  const { statusCode = null, title } = props;
+  const { statusCode = null } = props;
   const { t } = useTranslation();
   const Handler = getStatusHandler(statusCode);
   return (
-    <Layout title={title}>
+    <Layout>
       <Content>
         <Handler t={t} {...props} />
       </Content>
@@ -58,7 +57,6 @@ Error.getInitialProps = async ({ store, res, err }) => {
   return {
     namespacesRequired: ['common'],
     statusCode,
-    title,
   };
 };
 
