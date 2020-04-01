@@ -12,7 +12,6 @@ module.exports = withPlugins(
   ],
   {
     useFileSystemPublicRoutes: false,
-    compress: false,
     generateBuildId: async () => {
       const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);
       const buildId = stdout.trim();

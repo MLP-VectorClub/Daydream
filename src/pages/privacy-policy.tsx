@@ -1,18 +1,19 @@
+import { NextComponentType } from 'next';
 import { Trans, useTranslation } from '../i18n';
 import Content from '../components/shared/Content';
 import Layout from '../components/Layout';
 import ExternalLink from '../components/shared/ExternalLink';
 import ContactLink from '../components/shared/ContactLink';
+import { coreActions } from '../store/slices';
+import { AppPageContext } from '../types';
+import { PROD_APP_URL } from '../config';
 
-interface PropTypes {
-  host: string;
-}
 
-const PrivacyPolicy = (({ host }) => {
+const PrivacyPolicy = (() => {
   const { t } = useTranslation('privacyPolicy');
   return (
     <Layout>
-      <Content>
+      <Content className="privacy-policy">
         <h1>{t('title')}</h1>
         <p className="lead">{t('lead')}</p>
 
@@ -26,7 +27,7 @@ const PrivacyPolicy = (({ host }) => {
         <p>
           <Trans ns="privacyPolicy" i18nKey="p1">
             0
-            <a href={host}>{{ host }}</a>
+            <a href={PROD_APP_URL}>{{ host: PROD_APP_URL }}</a>
             2
           </Trans>
         </p>
@@ -79,6 +80,14 @@ const PrivacyPolicy = (({ host }) => {
       </Content>
     </Layout>
   );
-}) as React.FC<PropTypes>;
+}) as NextComponentType<AppPageContext>;
+
+PrivacyPolicy.getInitialProps = async ({ store }) => {
+  store.dispatch(coreActions.setTitle('privacyPolicy'));
+
+  return {
+    namespacesRequired: ['privacyPolicy'],
+  };
+};
 
 export default PrivacyPolicy;

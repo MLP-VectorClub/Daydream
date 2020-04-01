@@ -21,7 +21,8 @@
     "events": "Events",
     "about": "About",
     "404": "Not Found",
-    "latestEpisode": "Latest Episode"
+    "latestEpisode": "Latest Episode",
+    "privacyPolicy": "Privacy Policy"
   },
   "error": {
     "withStatus": "Error {{statusCode}}!",
