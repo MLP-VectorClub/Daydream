@@ -9,7 +9,7 @@ import ExternalLink from '../components/shared/ExternalLink';
 import DeviantLink from '../components/shared/DeviantLink';
 import FavMe from '../components/shared/FavMe';
 import { coreActions } from '../store/slices';
-import { AppPageContext } from '../types';
+import { AppPageContext } from '../store';
 
 const AboutPage = (() => {
   const { t } = useTranslation('about');

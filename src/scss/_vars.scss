@@ -41,5 +41,13 @@ $link-hover-color-light: lighten($link-hover-color, 37);
 
 $sidebar-breakpoint-up: lg;
 $sidebar-breakpoint-down: md;
+$SidebarBackground: darken($primary, 20);
+$SidebarBackgroundMobile: rgba($SidebarBackground, .95);
+$SidebarWidth: 330px;
+$MainMargin: 8px;
+$SidebarContentColor: rgba(white, .75);
+$SidebarContentBorder: rgba(white, .3);
+$SidebarContentBackground: rgba(white, .1);
 
 $navbar-padding-y: .313rem;
+

@@ -2,8 +2,8 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { DEV_EMAIL, DISCORD_INVITE_LINK } from '../config';
 import { RootState } from '../store/rootReducer';
-import ExternalLink from './shared/ExternalLink';
 import { coreActions } from '../store/slices';
+import ExternalLink from './shared/ExternalLink';
 
 export default (() => {
   const dispatch = useDispatch();

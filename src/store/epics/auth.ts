@@ -2,7 +2,7 @@ import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { ActionsObservable } from 'redux-observable';
 import { of } from 'rxjs';
 import { authActions } from '../slices';
-import { httpResponseMapper } from '../../utils/common';
+import { httpResponseMapper } from '../../utils';
 import { userService } from '../../services';
 import { ActionsType } from '../rootReducer';
 

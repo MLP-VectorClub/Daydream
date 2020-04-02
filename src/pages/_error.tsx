@@ -3,8 +3,9 @@ import { NextComponentType } from 'next';
 import { useTranslation } from '../i18n';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
-import { AppPageContext, Nullable, WithTFunction } from '../types';
+import { Nullable, WithTFunction } from '../types';
 import { coreActions } from '../store/slices';
+import { AppPageContext } from '../store';
 
 interface PropTypes {
   statusCode?: Nullable<number>;

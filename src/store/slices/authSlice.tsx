@@ -12,6 +12,7 @@ import {
 
 export interface AuthState {
   signedIn: boolean;
+  sessionUpdating: boolean;
   authCheck: {
     status: Status;
   };
@@ -32,6 +33,7 @@ export interface AuthState {
     side: AuthModalSide;
   };
   user: FailsafeUser;
+  notifications: object[];
 }
 
 const guestUser: FailsafeUser = {
@@ -46,6 +48,7 @@ const guestUser: FailsafeUser = {
 
 const initialState: AuthState = {
   signedIn: false,
+  sessionUpdating: false,
   authCheck: {
     status: Status.INIT,
   },
@@ -66,6 +69,7 @@ const initialState: AuthState = {
     side: AuthModalSide.LOGIN,
   },
   user: guestUser,
+  notifications: [],
 };
 
 const afterAuthChange = (state: typeof initialState, user?: FailsafeUser) => {
@@ -132,6 +136,9 @@ const authSlice = createSlice({
     },
     closeAuthModal(state, _action: PayloadAction) {
       state.authModal.open = false;
+    },
+    setSessionUpdating(state, action: PayloadAction<boolean>) {
+      state.sessionUpdating = action.payload;
     },
   },
 });

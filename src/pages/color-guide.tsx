@@ -5,10 +5,11 @@ import Layout from '../components/Layout';
 import { useTranslation } from '../i18n';
 import Content from '../components/shared/Content';
 import { GUIDE_NAMES } from '../config';
-import { AppPageContext, Nullable, TitleKeyWithParams } from '../types';
+import { Nullable, TitleKeyWithParams } from '../types';
 import { notFound } from '../utils';
 import { getGuideTitle } from '../utils/colorguide';
 import { coreActions } from '../store/slices';
+import { AppPageContext } from '../store';
 
 
 interface PropTypes {

@@ -1,24 +1,27 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { ReactNode, ReactNodeArray, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import { NextSeo } from 'next-seo/lib';
 import { NextPage } from 'next';
 import { fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import Header from './Header';
 import { RootState } from '../store/rootReducer';
 import { PROD_APP_URL } from '../config';
 import { Nullable } from '../types';
 import { assembleSeoUrl } from '../utils';
+import Header from './Header';
 import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 type PropTypes = {
   url?: Nullable<string>;
+  widgets?: ReactNode | ReactNodeArray;
 }
 
 const Layout = (({
   children,
+  widgets = null,
   url = null,
 }) => {
   const [localUrl, setLocalUrl] = useState(url);
@@ -57,6 +60,7 @@ const Layout = (({
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <Sidebar {...{ widgets }} />
       <div id="main">
         {children}
       </div>

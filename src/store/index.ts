@@ -1,5 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
+import { NextPageContext } from 'next';
+import { TFunction } from 'next-i18next';
 import rootReducer, { ActionsType, RootState } from './rootReducer';
 import { rootEpic } from './rootEpic';
 
@@ -19,6 +21,10 @@ const createStore = (preloadedState = {}) => {
 
 export type AppStore = ReturnType<typeof createStore>;
 export type AppDispatch = AppStore['dispatch'];
+export type AppPageContext<T extends object = {}> =
+  NextPageContext
+  & { store: AppStore; req: { t: TFunction } }
+  & T;
 
 let latestStore: AppStore;
 

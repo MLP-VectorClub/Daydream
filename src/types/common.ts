@@ -1,7 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { NextPageContext } from 'next';
 import { User, ValidationErrorResponse } from './api';
-import { AppStore } from '../store';
 
 export enum Status {
   INIT,
@@ -88,8 +86,3 @@ export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'di
 
 export type TitleKeyWithParams = [string, Record<string, string>];
 export type PageTitle = Nullable<string> | TitleKeyWithParams;
-
-export type AppPageContext<T extends object = {}> =
-  NextPageContext
-  & { store: AppStore; req: { t: TFunction } }
-  & T;

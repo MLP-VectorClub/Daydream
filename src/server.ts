@@ -15,7 +15,7 @@ import cookieParser from 'cookie-parser';
 import * as es6Promise from 'es6-promise';
 import 'isomorphic-fetch';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import nextI18next from './i18n';
+import nextI18next, { i18n } from './i18n';
 import routes from './routes';
 
 dotenv.config();
@@ -25,7 +25,7 @@ es6Promise.polyfill();
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { applyServerHMR } = require('i18next-hmr/server');
-  applyServerHMR(nextI18next.i18n);
+  applyServerHMR(i18n);
 }
 
 interface AppEnvironment {

@@ -7,8 +7,8 @@ import { APP_NAME, PROD_APP_URL } from '../config';
 import { appWithTranslation } from '../i18n';
 import { initStore } from '../store';
 import TitleManager from '../components/TitleManager';
-import '../app.scss';
 import '../fontawesome';
+import '../app.scss';
 
 class Celestia extends App {
   render() {

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Nullable } from '../types';
 import { GITHUB_URL } from '../config';
 import { BuildIdParseResult, getBuildData } from '../utils';
-import TimeAgo from './shared/TimeAgo';
 import { useTranslation } from '../i18n';
+import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
 import ContactModal from './ContactModal';
 

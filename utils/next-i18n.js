@@ -8,8 +8,6 @@ module.exports = (nextConfig = {}) => ({
     if (!options.plugins) {
       const localesDir = path.resolve(__dirname, '../public/static/locales');
 
-      console.log(`I18NextHMRPlugin localesDir: ${localesDir}`);
-
       if (!Array.isArray(options.plugins)) {
         options.plugins = [];
       }

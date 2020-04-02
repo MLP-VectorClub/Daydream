@@ -7,6 +7,9 @@ export interface CoreState {
   sidebarOpen: boolean;
   contactOpen: boolean;
   title: PageTitle;
+  backendDown: boolean;
+  upcomingEvents: object[];
+  usefulLinks: object[];
 }
 
 const initialState: CoreState = {
@@ -14,6 +17,9 @@ const initialState: CoreState = {
   sidebarOpen: false,
   contactOpen: false,
   title: null,
+  backendDown: false,
+  upcomingEvents: [],
+  usefulLinks: [],
 };
 
 const coreSlice = createSlice({
@@ -31,6 +37,9 @@ const coreSlice = createSlice({
     },
     toggleContact(state, action: PayloadAction<boolean | undefined>) {
       state.contactOpen = typeof action.payload === 'undefined' ? !state.contactOpen : action.payload;
+    },
+    setBackendDown(state, action: PayloadAction<boolean>) {
+      state.backendDown = action.payload;
     },
   },
 });

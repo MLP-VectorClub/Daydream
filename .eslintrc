@@ -33,17 +33,10 @@
     "node_modules"
   ],
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx",
-          ".json",
-          ".d.ts"
-        ]
-      },
       "typescript": {
         "alwaysTryTypes": true
       }

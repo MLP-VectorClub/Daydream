@@ -5,8 +5,8 @@ import Layout from '../components/Layout';
 import ExternalLink from '../components/shared/ExternalLink';
 import ContactLink from '../components/shared/ContactLink';
 import { coreActions } from '../store/slices';
-import { AppPageContext } from '../types';
 import { PROD_APP_URL } from '../config';
+import { AppPageContext } from '../store';
 
 
 const PrivacyPolicy = (() => {

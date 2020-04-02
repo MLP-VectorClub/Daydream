@@ -7,7 +7,7 @@ import {
   PostUsersRequest,
   PostUsersResult,
 } from '../types';
-import { ENDPOINTS } from '../utils/endpoints';
+import { ENDPOINTS } from '../utils';
 
 export const getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
 
