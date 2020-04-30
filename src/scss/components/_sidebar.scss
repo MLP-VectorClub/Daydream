@@ -4,7 +4,6 @@
   padding-top: 0 !important;
 
   > .mobile-nav {
-    display: block;
     position: relative;
     left: -10px;
     width: calc(100% + 20px);
@@ -89,6 +88,7 @@
     display: flex;
     flex-flow: row nowrap;
     padding: 4px;
+    margin-top: 10px;
     margin-bottom: 6px;
     border-radius: 50px;
     position: relative;

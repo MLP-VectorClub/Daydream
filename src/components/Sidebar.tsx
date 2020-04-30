@@ -10,13 +10,14 @@ import { DISCORD_INVITE_LINK } from '../config';
 import SidebarNotifications from './shared/SidebarNotifications';
 import HappeningSoon from './widgets/HappeningSoon';
 import SidebarUsefulLinks from './shared/SidebarUsefulLinks';
+import CustomIcon from './shared/CustomIcon';
 
 export default (({ widgets }) => {
   const { backendDown } = useSelector((state: RootState) => state.core);
   const { signedIn } = useSelector((state: RootState) => state.auth);
   return (
     <aside id="sidebar">
-      <div className="mobile-nav">
+      <div className="mobile-nav d-block d-lg-none">
         <MainNavigation />
       </div>
 
@@ -53,7 +54,7 @@ export default (({ widgets }) => {
                 tag={ExternalLink}
                 href={DISCORD_INVITE_LINK}
               >
-                {/* TODO Add Discord icon */}
+                <CustomIcon src="/img/discord-logo-white.svg" className="mr-2" />
                 Join Discord
               </Button>
             </ButtonGroup>
