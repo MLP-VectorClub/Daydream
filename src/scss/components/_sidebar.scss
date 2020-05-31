@@ -93,8 +93,7 @@
     border-radius: 50px;
     position: relative;
 
-    &:before {
-      content: '';
+    .spinner {
       position: absolute;
       $size: 2.5em;
       $offset: calc(50% - #{$size/2});
@@ -102,14 +101,12 @@
       left: $offset;
       width: $size;
       height: $size;
-      background: url('/img/loading-ring-white.svg') no-repeat center;
-      background-size: contain;
       display: block;
       opacity: 0;
       pointer-events: none;
     }
 
-    > *, &:before {
+    > *, .spinner {
       transition: opacity .5s;
     }
 
@@ -123,7 +120,7 @@
         pointer-events: none;
       }
 
-      &:before {
+      .spinner {
         opacity: 1;
       }
     }
@@ -157,6 +154,7 @@
       .user-name {
         display: block;
         font-size: 1.5em;
+        line-height: 1em;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -168,6 +166,7 @@
         align-items: center;
         text-transform: uppercase;
         font-size: .8em;
+        line-height: 1em;
       }
     }
   }

@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Nullable } from '../types';
-import { GITHUB_URL } from '../config';
+import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
 import { BuildIdParseResult, getBuildData } from '../utils';
 import { useTranslation } from '../i18n';
 import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
 import ContactModal from './ContactModal';
+import ExternalLink from './shared/ExternalLink';
 
 export default (() => {
   const { t } = useTranslation();
@@ -16,9 +17,11 @@ export default (() => {
     setBuildData(getBuildData());
   }, []);
 
+  let developmentMode = true;
   let commitHash: React.ReactNode = null;
-  let commitTime: React.ReactNode;
+  let commitTime: React.ReactNode = null;
   if (buildData && typeof buildData !== 'string') {
+    developmentMode = false;
     commitHash = (
       <>
         @
@@ -36,9 +39,9 @@ export default (() => {
         <TimeAgo date={buildData.commitTime} />
       </>
     );
-  } else {
-    commitTime = ` (${t('footer.noVersion')})`;
   }
+
+  const apiDocsUrl = developmentMode ? DEV_API_URL : PROD_API_URL;
 
   return (
     <>
@@ -59,6 +62,10 @@ export default (() => {
         </Link>
         {` | `}
         <ContactLink>{t('footer.contactUs')}</ContactLink>
+        {` | `}
+        <ExternalLink href={apiDocsUrl}>
+          {t('footer.api')}
+        </ExternalLink>
       </footer>
       <ContactModal />
     </>

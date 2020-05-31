@@ -41,6 +41,9 @@ const coreSlice = createSlice({
     setBackendDown(state, action: PayloadAction<boolean>) {
       state.backendDown = action.payload;
     },
+    initCsrf(_state, _action: PayloadAction) {
+      /* noop */
+    },
   },
 });
 

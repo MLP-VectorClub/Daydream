@@ -4,7 +4,7 @@ const fs = require('fs');
 require('dotenv').config();
 
 const filePath = process.env.API_JSON_PATH;
-const outputPath = 'src/interfaces/api.ts';
+const outputPath = 'src/types/api.ts';
 
 if (!fs.existsSync(filePath)){
   console.error('Missing API schema file (or API_JSON_PATH not set)');

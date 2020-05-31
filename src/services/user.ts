@@ -11,10 +11,10 @@ import { ENDPOINTS } from '../utils';
 
 export const getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
 
-export const login = (data: PostUsersLoginRequest) =>
+export const signIn = (data: PostUsersLoginRequest) =>
   Axios.post<PostUsersLoginResult>(ENDPOINTS.USERS_LOGIN, data);
 
-export const logout = () => Axios.post<PostUsersLogoutResult>(ENDPOINTS.USERS_LOGOUT, null);
+export const signOut = () => Axios.post<PostUsersLogoutResult>(ENDPOINTS.USERS_LOGOUT, null);
 
 export const register = (data: PostUsersRequest) =>
   Axios.post<PostUsersResult>(ENDPOINTS.USERS, data);

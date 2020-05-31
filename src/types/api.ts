@@ -67,7 +67,7 @@ export type ValidationErrorResponse = {
 } & ErrorResponse;
 
 /**
- * List of roles a user can have
+ * Role of a user
  */
 export type UserRole = "guest" | "user" | "member" | "assistant" | "staff" | "admin" | "developer";
 
@@ -89,13 +89,9 @@ export interface User {
   avatarProvider: AvatarProvider;
 }
 
-export interface ValueOfUser {
-  user: User;
-}
-
 export type PostUsersLoginRequest = LoginRequest
 export type PostUsersRequest = RegistrationRequest
-export interface GetAirlockCsrfCookieRequest {
+export interface GetSanctumCsrfCookieRequest {
 }
 export interface GetUsersMeRequest {
 }
@@ -116,8 +112,8 @@ export interface PostUsersResult {
 }
 
 export type PostUsers204 = any
-export type GetAirlockCsrfCookieResult = any
-export type GetUsersMeResult = ValueOfUser;
+export type GetSanctumCsrfCookieResult = any
+export type GetUsersMeResult = User;
 
 export type PostUsersLogoutResult = any
 export interface GetUsersTokensResult {}

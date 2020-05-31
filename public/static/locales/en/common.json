@@ -6,12 +6,12 @@
   },
   "footer": {
     "commitTitle": "See exactly what was changed and why",
-    "noVersion": "version information unavailable",
     "running": "Running",
     "created": "created",
     "visitGithub": "Visit the GitHub repository",
     "privacyPolicy": "Privacy Policy",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "api": "API"
   },
   "titles": {
     "colorGuide": "Color Guide",
@@ -20,6 +20,7 @@
     "show": "Show",
     "events": "Events",
     "about": "About",
+    "admin": "Admin",
     "404": "Not Found",
     "latestEpisode": "Latest Episode",
     "privacyPolicy": "Privacy Policy"
@@ -32,6 +33,16 @@
       "lead": "This page does not exist"
     }
   },
+  "sidebar": {
+    "welcome": "Welcome!",
+    "backendDown": "Signing in is not possible at the moment. Please check back later.",
+    "sessionUpdating": "Updating your session",
+    "authCheck": "Checking if yo uare logged in",
+    "signOut": "Sign Out",
+    "signIn": "Sign In",
+    "joinDiscord": "Join Discord",
+    "confirmSignOut": "Are you sure you want to sign out?"
+  },
   "guestUserName": "Curious Pony",
   "roleLabel": {
     "guest": "Guest",
@@ -41,5 +52,32 @@
     "staff": "Staff",
     "admin": "Administrator",
     "developer": "Site Developer"
+  },
+  "auth": {
+    "signInTitle": "Let's get you signed in",
+    "registerTitle": "Create an account",
+    "noAccountYet": "No account yet? Create one here!",
+    "alreadyHaveAccount": "Already have an account? Sign in here!",
+    "displayName": "Display Name",
+    "displayNameHelp": "Only English letters, digits, dashes and underscores. Must be between {{min}} and {{max}} characters. Can be changed later.",
+    "email": "E-Mail Address",
+    "password": "Password",
+    "passwordHelp": "Must be at least {{min}} characters long and not commonly used.",
+    "passwordConfirm": "Confirm Password",
+    "acceptPrivacyPolicy": "I accept the <1>Privacy Policy</1>",
+    "signInButton": "Sign In",
+    "registerButton": "Create Account",
+    "invalidCredentials": "Incorrect username or password"
+  },
+  "validation": {
+    "required": "Please fill in this field",
+    "tooLong": "Cannot be longer than {{count}} character",
+    "tooLong_plural": "Cannot be longer than {{count}} characters",
+    "tooShort": "Cannot be shorter than {{count}} character",
+    "tooShort_plural": "Cannot be shorter than {{count}} characters",
+    "email": "Pleas enter a valid e-mail address",
+    "acceptPrivacyPolicy": "You must accept the privacy policy",
+    "format": "Please match the specified format",
+    "passwordMismatch": "The two passwords don't match"
   }
 }

@@ -2,7 +2,7 @@ import { API_PREFIX } from '../config';
 // import buildUrl from 'build-url';
 
 export const ENDPOINTS = {
-  CSRF_INIT: `${API_PREFIX}/../airlock/csrf-cookie`,
+  CSRF_INIT: `${API_PREFIX}/../sanctum/csrf-cookie`,
   USERS: `${API_PREFIX}/users`,
   USERS_LOGIN: `${API_PREFIX}/users/login`,
   USERS_LOGOUT: `${API_PREFIX}/users/logout`,

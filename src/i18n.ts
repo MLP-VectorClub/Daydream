@@ -3,6 +3,10 @@ import NextI18Next from 'next-i18next';
 const nextI18next = new NextI18Next({
   defaultLanguage: 'en',
   otherLanguages: ['hu'],
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  cookieSecure: true,
+  cookieSameSite: 'lax',
 });
 
 if (process.env.NODE_ENV !== 'production') {

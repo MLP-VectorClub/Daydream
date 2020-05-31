@@ -5,3 +5,4 @@ export * from './common';
 export * from './endpoints';
 export * from './build-id-parser';
 export * from './initial-prop-helpers';
+export * from './forms';

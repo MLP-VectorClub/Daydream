@@ -3,6 +3,7 @@ import { range } from 'lodash';
 export const APP_NAME = 'MLP Vector Club';
 export const PROD_APP_URL = 'https://new.mlpvector.club';
 export const PROD_API_URL = 'https://api.mlpvector.club';
+export const DEV_API_URL = 'https://api.mlpvector.lc';
 
 export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Celestia';
 export const PROJECT_NAME = GITHUB_URL.split('/').pop();
@@ -26,3 +27,7 @@ export const GUIDE_NAMES: string[] = ['pony', 'eqg'];
 export const GUIDE_PAGE_SIZES = range(7, 20 + 1);
 
 export const TMDB_REQUIRED_MESSAGE = 'This product uses the TMDb API but is not endorsed or certified by TMDb.';
+
+export const PATHS = {
+  PRIVACY_POLICY: '/about/privacy',
+};

@@ -130,6 +130,10 @@
       }
     ],
     "prefer-destructuring": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "no-void": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "react/no-array-index-key": "off"
   }
 }

@@ -16,11 +16,11 @@ export interface AuthState {
   authCheck: {
     status: Status;
   };
-  login: {
+  signIn: {
     status: Status;
     error: Nullable<UnifiedErrorResponse>;
   };
-  logout: {
+  signOut: {
     status: Status;
     error: Nullable<UnifiedErrorResponse>;
   };
@@ -52,11 +52,11 @@ const initialState: AuthState = {
   authCheck: {
     status: Status.INIT,
   },
-  login: {
+  signIn: {
     status: Status.INIT,
     error: null,
   },
-  logout: {
+  signOut: {
     status: Status.INIT,
     error: null,
   },
@@ -66,7 +66,7 @@ const initialState: AuthState = {
   },
   authModal: {
     open: false,
-    side: AuthModalSide.LOGIN,
+    side: AuthModalSide.SIGN_IN,
   },
   user: guestUser,
   notifications: [],
@@ -80,6 +80,12 @@ const afterAuthChange = (state: typeof initialState, user?: FailsafeUser) => {
     state.signedIn = false;
     state.user = guestUser;
   }
+};
+
+const clearModalState = (state: typeof initialState) => {
+  state.signIn = { ...initialState.signIn };
+  state.signOut = { ...initialState.signOut };
+  state.register = { ...initialState.register };
 };
 
 const authSlice = createSlice({
@@ -97,45 +103,54 @@ const authSlice = createSlice({
       state.authCheck.status = Status.FAILURE;
       afterAuthChange(state);
     },
-    login(state, _action: PayloadAction<LoginRequest>) {
-      state.login.status = Status.LOAD;
+    signIn(state, _action: PayloadAction<LoginRequest>) {
+      state.signIn.status = Status.LOAD;
     },
-    loginSuccess(state, action: PayloadAction<User>) {
-      state.login.status = Status.SUCCESS;
+    signInSuccess(state, action: PayloadAction<User>) {
+      state.signIn.status = Status.SUCCESS;
+      state.authModal.open = false;
+      clearModalState(state);
       afterAuthChange(state, action.payload);
     },
-    loginFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
-      state.login.status = Status.FAILURE;
-      state.login.error = action.payload;
+    signInFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
+      state.signIn.status = Status.FAILURE;
+      state.signIn.error = action.payload;
     },
-    logout(state, _action: PayloadAction) {
-      state.logout.status = Status.LOAD;
+    signOut(state, _action: PayloadAction) {
+      state.signOut.status = Status.LOAD;
     },
-    logoutSuccess(state, _action: PayloadAction) {
-      state.logout.status = Status.SUCCESS;
+    signOutSuccess(state, _action: PayloadAction) {
+      state.signOut.status = Status.SUCCESS;
       afterAuthChange(state);
     },
-    logoutFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
-      state.logout.status = Status.FAILURE;
-      state.logout.error = action.payload;
+    signOutFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
+      state.signOut.status = Status.FAILURE;
+      state.signOut.error = action.payload;
     },
     register(state, _action: PayloadAction<RegistrationRequest>) {
       state.register.status = Status.LOAD;
     },
     registerSuccess(state, action: PayloadAction<User>) {
       state.register.status = Status.SUCCESS;
+      state.authModal.open = false;
+      clearModalState(state);
       afterAuthChange(state, action.payload);
     },
     registerFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
       state.register.status = Status.FAILURE;
       state.register.error = action.payload;
     },
-    openAuthModal(state, action: PayloadAction<AuthModalSide>) {
+    openAuthModal(state, action: PayloadAction<Nullable<AuthModalSide>>) {
       state.authModal.open = true;
-      state.authModal.side = action.payload;
+      if (action.payload === null && state.authModal.side === null) {
+        state.authModal.side = AuthModalSide.SIGN_IN;
+      } else if (action.payload !== null) {
+        state.authModal.side = action.payload;
+      }
     },
     closeAuthModal(state, _action: PayloadAction) {
       state.authModal.open = false;
+      clearModalState(state);
     },
     setSessionUpdating(state, action: PayloadAction<boolean>) {
       state.sessionUpdating = action.payload;

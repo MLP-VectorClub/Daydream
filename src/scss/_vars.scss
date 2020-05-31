@@ -1,5 +1,6 @@
 $primary: #2C73B1;
-$secondary: #1E3DB3;
+$secondary: #696E73;
+$club-blue: #1E3DB3;
 $discord: #7289DA;
 $deviantart: #05CC47;
 $primary-dark: darken($primary, 20);
@@ -25,6 +26,7 @@ $navbar-dark-color: #fff;
 $theme-colors: (
   "discord": $discord,
   "deviantart": $deviantart,
+  "club": $club-blue,
 );
 
 $main-margin: .5rem;

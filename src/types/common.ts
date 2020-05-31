@@ -1,4 +1,5 @@
 import { TFunction } from 'next-i18next';
+import { FormProps } from 'react-hook-form/dist/contextTypes';
 import { User, ValidationErrorResponse } from './api';
 
 export enum Status {
@@ -68,10 +69,13 @@ export enum UnifiedErrorResponseTypes {
   MESSAGE_ONLY,
   VALIDATION_ERROR,
   AUTHENTICATION_ERROR,
+  MISSING_CSRF_TOKEN,
 }
 
 export type UnifiedErrorResponse = {
   type: UnifiedErrorResponseTypes.AUTHENTICATION_ERROR;
+} | {
+  type: UnifiedErrorResponseTypes.MISSING_CSRF_TOKEN;
 } | {
   type: UnifiedErrorResponseTypes.UNKNOWN;
   payload: string;
@@ -86,3 +90,5 @@ export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'di
 
 export type TitleKeyWithParams = [string, Record<string, string>];
 export type PageTitle = Nullable<string> | TitleKeyWithParams;
+
+export type FormSubmitHandler = Parameters<FormProps['handleSubmit']>[0];

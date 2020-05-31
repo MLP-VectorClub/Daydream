@@ -1,4 +1,4 @@
 export enum AuthModalSide {
-  LOGIN,
+  SIGN_IN,
   REGISTER,
 }
