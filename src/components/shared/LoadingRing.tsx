@@ -17,7 +17,7 @@ export default memo<LoadingRingProps>(({ className, strokeWidth = 6 }) => (
       cx="50"
       cy="50"
       r="40"
-      stroke="#fff"
+      stroke="currentColor"
       fill="none"
       strokeWidth={String(strokeWidth)}
       strokeLinecap="round"

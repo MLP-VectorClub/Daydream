@@ -67,7 +67,9 @@
     "acceptPrivacyPolicy": "I accept the <1>Privacy Policy</1>",
     "signInButton": "Sign In",
     "registerButton": "Create Account",
-    "invalidCredentials": "Incorrect username or password"
+    "invalidCredentials": "Incorrect e-mail address or password",
+    "rateLimited": "Too many login attempts, please try again in {{count}} second",
+    "rateLimited_plural": "Too many login attempts, please try again in {{count}} seconds"
   },
   "validation": {
     "required": "Please fill in this field",

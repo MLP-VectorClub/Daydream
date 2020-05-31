@@ -70,10 +70,15 @@ export enum UnifiedErrorResponseTypes {
   VALIDATION_ERROR,
   AUTHENTICATION_ERROR,
   MISSING_CSRF_TOKEN,
+  RATE_LIMITED,
 }
 
 export type UnifiedErrorResponse = {
   type: UnifiedErrorResponseTypes.AUTHENTICATION_ERROR;
+} | {
+  type: UnifiedErrorResponseTypes.RATE_LIMITED;
+  // Seconds until another request can be sent
+  retryAfter: number;
 } | {
   type: UnifiedErrorResponseTypes.MISSING_CSRF_TOKEN;
 } | {

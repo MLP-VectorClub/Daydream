@@ -42,6 +42,13 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
         ...body,
       };
     }
+    case 429: {
+      const retryAfter = Number(err.response?.headers['retry-after']);
+      return {
+        type: UnifiedErrorResponseTypes.RATE_LIMITED,
+        retryAfter,
+      };
+    }
     default: {
       const message = get(err, 'response.data.message');
       console.error(err);

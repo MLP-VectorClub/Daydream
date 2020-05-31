@@ -1,11 +1,9 @@
 import React from 'react';
-import { NextComponentType } from 'next';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from '../i18n';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
 import { coreActions } from '../store/slices';
-import { AppPageContext } from '../store';
 
 const NotFound = (() => {
   const { t } = useTranslation('common');
@@ -19,6 +17,6 @@ const NotFound = (() => {
       </Content>
     </Layout>
   );
-}) as NextComponentType<AppPageContext>;
+}) as React.FC;
 
 export default NotFound;

@@ -250,6 +250,12 @@ export default (() => {
             <Alert color="danger">{sideState.error.message}</Alert>
           )}
 
+          {sideState.error?.type === UnifiedErrorResponseTypes.RATE_LIMITED && (
+            <Alert color="danger">
+              {t('auth.rateLimited', { count: sideState.error.retryAfter })}
+            </Alert>
+          )}
+
           <div {...loginGroupProps.submitButtonWrapper}>
             <Button {...loginGroupProps.submitButton} color="primary" disabled={isLoading}>
               <ButtonIcon
