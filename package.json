@@ -52,6 +52,7 @@
     "reactstrap": "^8.4.1",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.4",
+    "sass": "^1.26.7",
     "ts-node": "^8.7.0",
     "tsconfig-paths": "^3.9.0"
   },

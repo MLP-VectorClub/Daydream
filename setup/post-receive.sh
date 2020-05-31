@@ -24,7 +24,7 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
         echo "# Skipping yarn install, lockfile not modified"
     fi
 
-    if $GIT diff --name-only $oldrev $newrev | grep "^\(src\|public\)/"; then
+    if $GIT diff --name-only $oldrev $newrev | grep "^\(src\|public\|yarn.lock\)/"; then
         echo "$ $CMD_BUILD"
         if eval $CMD_BUILD; then
           echo "Build successful"
