@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { UncontrolledTooltip } from 'reactstrap';
 import { Nullable } from '../types';
 import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
 import { BuildIdParseResult, getBuildData } from '../utils';
@@ -27,10 +28,13 @@ export default (() => {
         @
         <a
           href={`${GITHUB_URL}/commit/${buildData.commitId}`}
-          title={t('footer.commitTitle')}
+          id="visit-github-commit"
         >
           {buildData.commitId}
         </a>
+        <UncontrolledTooltip target="visit-github-commit" placement="top">
+          {t('footer.commitTitle')}
+        </UncontrolledTooltip>
       </>
     );
     commitTime = (
@@ -49,9 +53,12 @@ export default (() => {
         <span id="git-info">
           {`${t('footer.running')} `}
           <strong>
-            <a href={GITHUB_URL} title={t('footer.visitGithub')}>
+            <a href={GITHUB_URL} id="visit-github">
               {GITHUB_URL.split('/').pop()}
             </a>
+            <UncontrolledTooltip target="visit-github" placement="top">
+              {t('footer.visitGithub')}
+            </UncontrolledTooltip>
             {commitHash}
           </strong>
           {commitTime}
