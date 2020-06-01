@@ -3,16 +3,31 @@ import React, { memo } from 'react';
 export interface LoadingRingProps {
   className?: string;
   strokeWidth?: number;
+  outline?: boolean;
 }
 
-export default memo<LoadingRingProps>(({ className, strokeWidth = 6 }) => (
+const LoadingRing: React.FC<LoadingRingProps> = ({
+  className,
+  strokeWidth = 6,
+  outline = false,
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
     preserveAspectRatio="xMidYMid"
     className={className}
   >
-    <rect x="0" y="0" width="100" height="100" fill="none" className="bk" />
+    {outline && (
+      <circle
+        cx="50"
+        cy="50"
+        r="40"
+        stroke="#fff"
+        fill="none"
+        strokeWidth={String(strokeWidth * 1.66)}
+        strokeLinecap="round"
+      />
+    )}
     <circle
       cx="50"
       cy="50"
@@ -37,4 +52,6 @@ export default memo<LoadingRingProps>(({ className, strokeWidth = 6 }) => (
       />
     </circle>
   </svg>
-));
+);
+
+export default memo(LoadingRing);
