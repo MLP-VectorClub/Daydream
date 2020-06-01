@@ -30,7 +30,7 @@ export default (() => {
       })}
       {...titleProp}
     >
-      <LoadingRing className="spinner" />
+      <LoadingRing color="white" outline={false} className="spinner" />
       <AvatarWrap {...user} size={50} />
       <div className="user-data">
         <span className="user-name">

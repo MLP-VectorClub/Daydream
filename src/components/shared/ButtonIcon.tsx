@@ -17,7 +17,11 @@ const ButtonIcon: React.FC<ButtonIconProps> = (({
   fixedWidth = false,
 }) => (
   loading ? (
-    <LoadingRing className={classNames('svg-inline--fa custom-icon', { 'mr-2': !last })} strokeWidth={15} />
+    <LoadingRing
+      className={classNames('svg-inline--fa custom-icon', { 'mr-2': !last })}
+      strokeWidth={15}
+      outline={false}
+    />
   ) : (
     icon && <FontAwesomeIcon icon={icon} fixedWidth={fixedWidth} className={classNames({ 'mr-2': !last })} />
   )

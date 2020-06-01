@@ -1,21 +1,25 @@
 import React, { memo } from 'react';
+import classNames from 'classnames';
+import { Nullable } from '../../types';
 
 export interface LoadingRingProps {
+  color?: Nullable<string>;
   className?: string;
   strokeWidth?: number;
   outline?: boolean;
 }
 
 const LoadingRing: React.FC<LoadingRingProps> = ({
+  color = null,
   className,
   strokeWidth = 6,
-  outline = false,
+  outline = true,
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
     preserveAspectRatio="xMidYMid"
-    className={className}
+    className={classNames({ [`text-${color}`]: color }, className)}
   >
     {outline && (
       <circle
