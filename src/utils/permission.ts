@@ -1,19 +1,24 @@
-import { FailsafeUser, Nullable, UserRole } from '../types';
+import { DatabaseRole, FailsafeUser, Nullable } from '../types';
 
-export const ROLE_LIST: UserRole[] = [
-  'guest', 'user', 'member', 'assistant', 'staff', 'admin', 'developer',
-];
+export const ROLE_LIST: { [k in DatabaseRole]: number } = {
+  user: 1,
+  member: 2,
+  assistant: 3,
+  staff: 3,
+  admin: 3,
+  developer: 255,
+};
 
 export const permission = (
-  userRole: UserRole | Nullable<FailsafeUser>,
-  checkAgainst: UserRole,
+  role: DatabaseRole | Nullable<FailsafeUser>,
+  checkAgainst: DatabaseRole,
 ): boolean => {
-  let initialRole: UserRole;
-  if (typeof userRole === 'string') initialRole = userRole;
+  let initialRole: DatabaseRole;
+  if (typeof role === 'string') initialRole = role;
   else {
-    if (userRole === null) return false;
+    if (role === null || role.role === null) return false;
 
-    initialRole = userRole.role;
+    initialRole = role.role;
   }
-  return ROLE_LIST.indexOf(checkAgainst) <= ROLE_LIST.indexOf(initialRole);
+  return ROLE_LIST[checkAgainst] <= ROLE_LIST[initialRole];
 };

@@ -1,8 +1,12 @@
 import NextI18Next from 'next-i18next';
+import { supportedLanguages } from './config';
+
+// FIXME Remove hardcoded concat
+const [defaultLanguage, ...otherLanguages] = supportedLanguages.concat('la');
 
 const nextI18next = new NextI18Next({
-  defaultLanguage: 'en',
-  otherLanguages: ['hu'],
+  defaultLanguage,
+  otherLanguages,
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   cookieSecure: true,

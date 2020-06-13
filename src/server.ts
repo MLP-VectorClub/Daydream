@@ -1,5 +1,8 @@
 /* eslint-disable import/first */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+import Axios from 'axios-observable';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('console-stamp')(console, {
   format: ':date(yyyy-mm-dd HH:MM:ss.l) :label',
 });
@@ -13,7 +16,6 @@ import express from 'express';
 import nextI18NextMiddleware from 'next-i18next/middleware';
 import cookieParser from 'cookie-parser';
 import * as es6Promise from 'es6-promise';
-import 'isomorphic-fetch';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import nextI18next, { i18n } from './i18n';
 import routes from './routes';
@@ -60,6 +62,10 @@ if (
 ) {
   console.error('Make sure to specify the HTTPS environment variables pointing to the desired certificate files');
   process.exit(1);
+}
+
+if (BACKEND_HOST) {
+  Axios.defaults.baseURL = BACKEND_HOST;
 }
 
 (async () => {

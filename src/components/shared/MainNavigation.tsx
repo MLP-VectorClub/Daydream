@@ -2,7 +2,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
-import { permission } from '../../utils';
+import { getProfileLink, permission } from '../../utils';
 import ExternalLink from './ExternalLink';
 import { CLUB_URL } from '../../config';
 import { useTranslation } from '../../i18n';
@@ -33,12 +33,26 @@ export default (() => {
           <NavLink>{t('titles.events')}</NavLink>
         </Link>
       </NavItem>
-      {permission(user.role, 'staff') && (
+      {user.name && (
         <NavItem>
-          <Link href="/admin" passHref>
-            <NavLink>{t('titles.admin')}</NavLink>
+          <Link href={getProfileLink(user.name)} passHref>
+            <NavLink>{t('titles.account')}</NavLink>
           </Link>
         </NavItem>
+      )}
+      {permission(user.role, 'staff') && (
+        <>
+          <NavItem>
+            <Link href="/users" passHref>
+              <NavLink>{t('titles.users')}</NavLink>
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link href="/admin" passHref>
+              <NavLink>{t('titles.admin')}</NavLink>
+            </Link>
+          </NavItem>
+        </>
       )}
       <NavItem>
         <Link href="/about" passHref>

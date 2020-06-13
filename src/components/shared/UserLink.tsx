@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getProfileLink } from '../../utils';
 
 interface PropTypes {
   userName: string;
@@ -6,7 +7,7 @@ interface PropTypes {
 }
 
 export default (({ userName, text }) => (
-  <Link href={`/@${userName}`}>
+  <Link href={getProfileLink(userName)}>
     <a className="user-link">{text || userName}</a>
   </Link>
 )) as React.FC<PropTypes>;

@@ -1,12 +1,15 @@
 import { API_PREFIX } from '../config';
+import { GetUsersUsernameRequest } from '../types';
 // import buildUrl from 'build-url';
 
 export const ENDPOINTS = {
-  CSRF_INIT: `${API_PREFIX}/../sanctum/csrf-cookie`,
+  CSRF_INIT: `${API_PREFIX}/sanctum/csrf-cookie`,
   USERS: `${API_PREFIX}/users`,
   USERS_LOGIN: `${API_PREFIX}/users/login`,
   USERS_LOGOUT: `${API_PREFIX}/users/logout`,
   USERS_ME: `${API_PREFIX}/users/me`,
+  USERS_BY_USERNAME: (params: GetUsersUsernameRequest) =>
+    `${API_PREFIX}/users/${encodeURI(params.username)}`,
   /*
   APPEARANCES: (params: QueryPublicAppearancesRequest) =>
     buildUrl('', {

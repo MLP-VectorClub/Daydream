@@ -67,33 +67,60 @@ export type ValidationErrorResponse = {
 } & ErrorResponse;
 
 /**
- * Role of a user
+ * Represents an publicly accessible representation of a user
  */
-export type UserRole = "guest" | "user" | "member" | "assistant" | "staff" | "admin" | "developer";
+export interface PublicUser {
+  id: number;
+  displayName: string;
+  /**
+   * The publicly visible role for the user
+   */
+  role: Role;
+  avatarUrl: string;
+  avatarProvider: AvatarProvider;
+  /**
+   * Hashed version of the e-mail address used in case there is no available avatarUrl to allow loading the Gravatar fallback
+   */
+  emailHash?: string;
+}
+
+export type User = PublicUser & {
+  name: string;
+  email: string;
+  /**
+   * The database-level role for the user
+   */
+  role: DatabaseRole;
+};
 
 /**
  * List of supported avatar providers
  */
-export type AvatarProvider = "deviantart" | "discord";
+export type AvatarProvider = "gravatar";
 
 /**
- * Represents an authenticated user
+ * List of roles values that can be stored by the backend
  */
-export interface User {
-  id: number;
-  name: string;
-  displayName: string;
-  email: string;
-  role: UserRole;
-  avatarUrl: string;
-  avatarProvider: AvatarProvider;
-}
+export type DatabaseRole = "user" | "member" | "assistant" | "staff" | "admin" | "developer";
+
+/**
+ * List of roles values that can be publicly displayed
+ */
+export type Role = "user" | "member" | "assistant" | "staff" | "admin";
+
+/**
+ * List of supported application-wide settings
+ */
+export type AppSettings = "dev_role_label";
 
 export type PostUsersLoginRequest = LoginRequest
 export type PostUsersRequest = RegistrationRequest
 export interface GetSanctumCsrfCookieRequest {
 }
 export interface GetUsersMeRequest {
+}
+export interface GetUsersUsernameRequest {
+  username: string
 }
 export interface PostUsersLogoutRequest {
 }
@@ -114,6 +141,8 @@ export interface PostUsersResult {
 export type PostUsers204 = any
 export type GetSanctumCsrfCookieResult = any
 export type GetUsersMeResult = User;
+
+export type GetUsersUsernameResult = PublicUser;
 
 export type PostUsersLogoutResult = any
 export interface GetUsersTokensResult {}

@@ -1,6 +1,6 @@
 import Axios from 'axios-observable';
 import {
-  GetUsersMeResult,
+  GetUsersMeResult, GetUsersUsernameRequest, GetUsersUsernameResult,
   PostUsersLoginRequest,
   PostUsersLoginResult,
   PostUsersLogoutResult,
@@ -10,6 +10,9 @@ import {
 import { ENDPOINTS } from '../utils';
 
 export const getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
+
+export const getByName = (data: GetUsersUsernameRequest) =>
+  Axios.get<GetUsersUsernameResult>(ENDPOINTS.USERS_BY_USERNAME(data));
 
 export const signIn = (data: PostUsersLoginRequest) =>
   Axios.post<PostUsersLoginResult>(ENDPOINTS.USERS_LOGIN, data);

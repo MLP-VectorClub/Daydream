@@ -10,6 +10,7 @@ import DeviantLink from '../components/shared/DeviantLink';
 import FavMe from '../components/shared/FavMe';
 import { coreActions } from '../store/slices';
 import { AppPageContext } from '../store';
+import StandardHeading from '../components/shared/StandardHeading';
 
 const AboutPage = (() => {
   const { t } = useTranslation('about');
@@ -17,13 +18,15 @@ const AboutPage = (() => {
     <Layout>
       <Content>
         <img src="/img/logo.svg" alt="MLP Vector Club Website Logo" id="about-logo" />
-        <h1>
-          <Trans ns="about" i18nKey="website">
-            <ExternalLink href={CLUB_URL}>0</ExternalLink>
-            1
-          </Trans>
-        </h1>
-        <p className="lead">{t('tagline')}</p>
+        <StandardHeading
+          heading={(
+            <Trans ns="about" i18nKey="website">
+              <ExternalLink href={CLUB_URL}>0</ExternalLink>
+              1
+            </Trans>
+          )}
+          lead={t('tagline')}
+        />
         <section className="what-s-this-site-">
           <h2 id="what-s-this-site-">
             {t('whatsThisSite.title')}

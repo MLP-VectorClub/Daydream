@@ -1,4 +1,5 @@
 import { NextComponentType } from 'next';
+import React from 'react';
 import { Trans, useTranslation } from '../i18n';
 import Content from '../components/shared/Content';
 import Layout from '../components/Layout';
@@ -7,6 +8,7 @@ import ContactLink from '../components/shared/ContactLink';
 import { coreActions } from '../store/slices';
 import { PROD_APP_URL } from '../config';
 import { AppPageContext } from '../store';
+import StandardHeading from '../components/shared/StandardHeading';
 
 
 const PrivacyPolicy = (() => {
@@ -14,8 +16,7 @@ const PrivacyPolicy = (() => {
   return (
     <Layout>
       <Content className="privacy-policy">
-        <h1>{t('title')}</h1>
-        <p className="lead">{t('lead')}</p>
+        <StandardHeading heading={t('title')} lead={t('lead')} />
 
         <blockquote>
           <Trans ns="privacyPolicy" i18nKey="tldr">

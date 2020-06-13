@@ -51,10 +51,10 @@ export const AcceptPrivacyPolicy = (() => (
   </Trans>
 )) as React.FC;
 
-type FormFields = PostUsersLoginRequest | (PostUsersRequest & {
+type FormFields = PostUsersLoginRequest & PostUsersRequest & {
   [INPUT_NAMES.PASSWORD_CONFIRM]: Pick<PostUsersLoginRequest, 'password'>;
   [INPUT_NAMES.PRIVACY]: boolean;
-});
+};
 
 export default (() => {
   const { t } = useTranslation('common');
@@ -65,6 +65,8 @@ export default (() => {
   useEffect(() => {
     if (!document.cookie.includes(`${CSRF_COOKIE_NAME}=`)) {
       dispatch(coreActions.initCsrf());
+    } else {
+      dispatch(authActions.checkAuth());
     }
   }, []);
 
@@ -231,6 +233,10 @@ export default (() => {
                   })}
                   invalid={INPUT_NAMES.PASSWORD_CONFIRM in errors}
                   disabled={isLoading}
+                  onChange={() => triggerValidation([
+                    INPUT_NAMES.PASSWORD,
+                    INPUT_NAMES.PASSWORD_CONFIRM,
+                  ])}
                 />
                 <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.PASSWORD_CONFIRM} />
               </FormGroup>
@@ -242,7 +248,7 @@ export default (() => {
             </>
           )}
 
-          {sideState.error?.type === UnifiedErrorResponseTypes.AUTHENTICATION_ERROR && (
+          {signIn.error?.type === UnifiedErrorResponseTypes.AUTHENTICATION_ERROR && (
             <Alert color="danger">{t('auth.invalidCredentials')}</Alert>
           )}
 

@@ -3,10 +3,22 @@ import md5 from 'md5';
 import { GUEST_AVATAR } from '../config';
 import { Nullable, Numeric } from '../types';
 
-export const getAvatar = ({ email, size }: { email: Nullable<string>; size: Numeric }) => {
-  if (email === null) return GUEST_AVATAR;
+interface GetAvatarOptions {
+  email: Nullable<string>;
+  emailHash?: Nullable<string>;
+  size: Numeric;
+}
 
-  return BuildUrl(`https://s.gravatar.com/avatar/${md5(email)}`, {
+export const getAvatar = ({ email, emailHash, size }: GetAvatarOptions) => {
+  let hash = emailHash;
+  if (!hash) {
+    if (email === null) return GUEST_AVATAR;
+
+    hash = md5(email);
+  }
+
+
+  return BuildUrl(`https://s.gravatar.com/avatar/${hash}`, {
     queryParams: {
       s: String(size),
     },

@@ -9,7 +9,7 @@
   border: .125rem solid;
   background-color: #efefef;
 
-  &.provider-deviantart {
+  &.provider-deviantart, &.provider-gravatar {
     border-radius: 5px;
   }
 

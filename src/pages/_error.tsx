@@ -6,6 +6,7 @@ import Content from '../components/shared/Content';
 import { Nullable, WithTFunction } from '../types';
 import { coreActions } from '../store/slices';
 import { AppPageContext } from '../store';
+import StandardHeading from '../components/shared/StandardHeading';
 
 interface PropTypes {
   statusCode?: Nullable<number>;
@@ -17,10 +18,7 @@ const getStatusHandler = (code: Nullable<number>) => {
   switch (code) {
     case 404:
       return (({ t }) => (
-        <>
-          <h1>{t('error.404.title')}</h1>
-          <p className="lead">{t('error.404.lead')}</p>
-        </>
+        <StandardHeading heading={t('error.404.title')} lead={t('error.404.lead')} />
       )) as React.FC<StatusHandlerProps>;
     default:
       return (({ t, statusCode }) => (

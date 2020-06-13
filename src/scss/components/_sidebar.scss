@@ -90,7 +90,7 @@
     padding: 4px;
     margin-top: 10px;
     margin-bottom: 6px;
-    border-radius: 50px;
+    border-radius: 5px;
     position: relative;
 
     .spinner {
@@ -110,8 +110,8 @@
       transition: opacity .5s;
     }
 
-    &.provider-deviantart {
-      border-radius: 5px;
+    &.provider-discord {
+      border-radius: 50px;
     }
 
     &.updating-session {

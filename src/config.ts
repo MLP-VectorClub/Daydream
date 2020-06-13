@@ -14,7 +14,8 @@ export const DEV_EMAIL = 'david@seinopsys.dev';
 /**
  * Global prefix for all api calls, no trailing slash
  */
-export const API_PREFIX = '/api/v0';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const API_PREFIX = (process as any).browser ? '/api' : '';
 export const GUEST_AVATAR = '/img/guest.svg';
 
 export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';

@@ -17,13 +17,18 @@
     "colorGuide": "Color Guide",
     "colorGuideByName": "{{guideName}} Color Guide",
     "colorGuideByNameAndPage": "Page {{page}} - {{guideName}} Color Guide",
+    "profile": "Profile",
+    "profileByName": "{{username}} - Profile",
+    "yourProfile": "Your Profile",
     "show": "Show",
     "events": "Events",
     "about": "About",
     "admin": "Admin",
     "404": "Not Found",
     "latestEpisode": "Latest Episode",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "users": "Users",
+    "account": "Account"
   },
   "error": {
     "withStatus": "Error {{statusCode}}!",

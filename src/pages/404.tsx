@@ -4,6 +4,7 @@ import { useTranslation } from '../i18n';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
 import { coreActions } from '../store/slices';
+import StandardHeading from '../components/shared/StandardHeading';
 
 const NotFound = (() => {
   const { t } = useTranslation('common');
@@ -12,8 +13,7 @@ const NotFound = (() => {
   return (
     <Layout>
       <Content>
-        <h1>{t('error.404.title')}</h1>
-        <p className="lead">{t('error.404.lead')}</p>
+        <StandardHeading heading={t('error.404.title')} lead={t('error.404.lead')} />
       </Content>
     </Layout>
   );

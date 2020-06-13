@@ -91,7 +91,7 @@ export type UnifiedErrorResponse = {
   type: UnifiedErrorResponseTypes.VALIDATION_ERROR;
 } & ValidationErrorResponse);
 
-export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'displayName' | 'email'>;
+export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'displayName' | 'email' | 'role'>;
 
 export type TitleKeyWithParams = [string, Record<string, string>];
 export type PageTitle = Nullable<string> | TitleKeyWithParams;

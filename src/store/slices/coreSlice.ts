@@ -47,8 +47,8 @@ const coreSlice = createSlice({
   },
 });
 
-export type CoreActions = ValuesOf<typeof coreSlice.actions>;
-
 export const coreActions = coreSlice.actions;
+
+export type CoreActions = ValuesOf<typeof coreActions>;
 
 export default coreSlice.reducer;

@@ -8,9 +8,11 @@ export const redirect = <T extends NextPageContext = NextPageContext>(ctx: T, pa
   }
 };
 
-export const notFound = <T extends NextPageContext>(ctx: T) => {
+export const setResponseStatus = <T extends NextPageContext>(ctx: T, statusCode: number) => {
   const { res } = ctx;
   if (res) {
-    res.statusCode = 404;
+    res.statusCode = statusCode;
   }
 };
+
+export const notFound = <T extends NextPageContext>(ctx: T) => setResponseStatus(ctx, 404);

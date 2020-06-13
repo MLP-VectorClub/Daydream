@@ -41,9 +41,9 @@ const guestUser: FailsafeUser = {
   name: null,
   displayName: null,
   email: null,
-  role: 'guest',
+  role: null,
   avatarUrl: null,
-  avatarProvider: 'deviantart',
+  avatarProvider: 'gravatar',
 };
 
 const initialState: AuthState = {
@@ -158,8 +158,8 @@ const authSlice = createSlice({
   },
 });
 
-export type AuthActions = ValuesOf<typeof authSlice.actions>;
-
 export const authActions = authSlice.actions;
+
+export type AuthActions = ValuesOf<typeof authActions>;
 
 export default authSlice.reducer;
