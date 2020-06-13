@@ -72,20 +72,22 @@ const initialState: AuthState = {
   notifications: [],
 };
 
+const clearModalState = (state: typeof initialState) => {
+  state.authModal.open = false;
+  state.signIn = { ...initialState.signIn };
+  state.signOut = { ...initialState.signOut };
+  state.register = { ...initialState.register };
+};
+
 const afterAuthChange = (state: typeof initialState, user?: FailsafeUser) => {
   if (user) {
     state.signedIn = true;
     state.user = user;
+    clearModalState(state);
   } else {
     state.signedIn = false;
     state.user = guestUser;
   }
-};
-
-const clearModalState = (state: typeof initialState) => {
-  state.signIn = { ...initialState.signIn };
-  state.signOut = { ...initialState.signOut };
-  state.register = { ...initialState.register };
 };
 
 const authSlice = createSlice({
@@ -108,8 +110,6 @@ const authSlice = createSlice({
     },
     signInSuccess(state, action: PayloadAction<User>) {
       state.signIn.status = Status.SUCCESS;
-      state.authModal.open = false;
-      clearModalState(state);
       afterAuthChange(state, action.payload);
     },
     signInFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
@@ -132,8 +132,6 @@ const authSlice = createSlice({
     },
     registerSuccess(state, action: PayloadAction<User>) {
       state.register.status = Status.SUCCESS;
-      state.authModal.open = false;
-      clearModalState(state);
       afterAuthChange(state, action.payload);
     },
     registerFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
@@ -149,7 +147,6 @@ const authSlice = createSlice({
       }
     },
     closeAuthModal(state, _action: PayloadAction) {
-      state.authModal.open = false;
       clearModalState(state);
     },
     setSessionUpdating(state, action: PayloadAction<boolean>) {

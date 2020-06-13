@@ -1,4 +1,3 @@
-/* eslint-disable */
 /*
  *
  *
@@ -65,6 +64,16 @@ export type ValidationErrorResponse = {
     [k: string]: string[];
   };
 } & ErrorResponse;
+
+export interface Token {
+  id: number;
+  /**
+   * Name of the token, either generated (from OS and browser version) or user-supplied if renamed
+   */
+  name: string;
+  lastUsedAt: string;
+  createdAt: string;
+}
 
 /**
  * Represents an publicly accessible representation of a user
@@ -145,6 +154,15 @@ export type GetUsersMeResult = User;
 export type GetUsersUsernameResult = PublicUser;
 
 export type PostUsersLogoutResult = any
-export interface GetUsersTokensResult {}
+export interface GetUsersTokensResult {
+  /**
+   * ID of the token used to make this request. Will be null if the request is authenticated through CookieAuth
+   */
+  currentTokenId: number;
+  /**
+   * A list of tokens that belong to the user
+   */
+  tokens: Token[];
+}
 
 export type DeleteUsersTokensIdResult = any

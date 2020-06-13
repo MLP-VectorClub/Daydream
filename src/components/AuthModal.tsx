@@ -60,7 +60,7 @@ export default (() => {
   const { t } = useTranslation('common');
   const { register: r, handleSubmit, errors: clientErrors, reset, getValues, triggerValidation } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
-  const { authModal, signIn, register } = useSelector((store: RootState) => store.auth);
+  const { authModal, signIn, register, signedIn } = useSelector((store: RootState) => store.auth);
 
   useEffect(() => {
     if (!document.cookie.includes(`${CSRF_COOKIE_NAME}=`)) {
@@ -75,6 +75,8 @@ export default (() => {
       reset();
     }
   }, [reset, authModal.open]);
+
+  if (signedIn) return null;
 
   const onSubmit: FormSubmitHandler = data => {
     switch (authModal.side) {

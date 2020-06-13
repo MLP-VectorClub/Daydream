@@ -8,6 +8,7 @@ export const ENDPOINTS = {
   USERS_LOGIN: `${API_PREFIX}/users/login`,
   USERS_LOGOUT: `${API_PREFIX}/users/logout`,
   USERS_ME: `${API_PREFIX}/users/me`,
+  USERS_TOKENS: `${API_PREFIX}/users/tokens`,
   USERS_BY_USERNAME: (params: GetUsersUsernameRequest) =>
     `${API_PREFIX}/users/${encodeURI(params.username)}`,
   /*
