@@ -42,11 +42,19 @@
     "welcome": "Welcome!",
     "backendDown": "Signing in is not possible at the moment. Please check back later.",
     "sessionUpdating": "Updating your session",
-    "authCheck": "Checking if yo uare logged in",
+    "authCheck": "Checking if you are logged in",
     "signOut": "Sign Out",
     "signIn": "Sign In",
     "joinDiscord": "Join Discord",
     "confirmSignOut": "Are you sure you want to sign out?"
+  },
+  "contact": {
+    "header": "Contact Us",
+    "howTo": "How to contact us",
+    "useAnyBelow": "You can use any of the following methods to reach out to us:",
+    "discord": "<0>Join our Discord server</0> and describe your issue/idea in the <2>#support</2> channel",
+    "deviantart": "<0>Send a note</0> to the group on DeviantArt",
+    "email": "<0>Send an e-mail</0> to {{email}}"
   },
   "guestUserName": "Curious Pony",
   "roleLabel": {
