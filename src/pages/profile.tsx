@@ -67,9 +67,7 @@ ProfilePage.getInitialProps = async ctx => {
     }
   }
 
-  if (user) {
-    store.dispatch(profileActions.setUserData(user));
-  }
+  store.dispatch(profileActions.setUserData(user));
   store.dispatch(coreActions.setTitle(getProfileTitle(username, user)));
   return ({
     namespacesRequired: ['profile'],

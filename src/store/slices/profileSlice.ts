@@ -13,7 +13,7 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setUserData(state, action: PayloadAction<PublicUser>) {
+    setUserData(state, action: PayloadAction<Nullable<PublicUser>>) {
       state.user = action.payload;
     },
   },
