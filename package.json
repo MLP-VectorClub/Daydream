@@ -78,6 +78,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "node-fetch": "^2.6.0",
     "sync-request": "^6.1.0",
     "typescript": "^3.9.5"
   },
