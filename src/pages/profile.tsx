@@ -36,7 +36,7 @@ const ProfilePage = (({ username }) => {
             <div className="d-flex justify-content-center align-items-center mb-2">
               <AvatarWrap {...user} size={75} className="flex-grow-0" />
             </div>
-            <StandardHeading heading={user.displayName} lead={mapRoleLabel(t, user.role)} />
+            <StandardHeading heading={user.name} lead={mapRoleLabel(t, user.role)} />
           </>
         )}
       </Content>

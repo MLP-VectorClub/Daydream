@@ -49,7 +49,7 @@ export const validateEmail = <T extends FieldValues>(t: TFunction) => ({
   email: (value: T['email']) => /^[^@]+@[^@]+$/.test(value) || (t('validation.email') as string),
 });
 
-export const validateDisplayName = <T extends FieldValues>(t: TFunction) => ({
+export const validateUserName = <T extends FieldValues>(t: TFunction) => ({
   ...validateMinLength(t, 5),
   ...validateMaxLength(t, 20),
   validate: {

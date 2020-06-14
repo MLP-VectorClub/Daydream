@@ -31,7 +31,7 @@ import { CSRF_COOKIE_NAME, PATHS } from '../config';
 import BootstrapErrorMessages from './shared/BootstrapErrorMessages';
 import {
   combineErrors,
-  validateDisplayName,
+  validateUserName,
   validateEmail,
   validatePassword, validateConfirmation,
   validateRequired,
@@ -111,7 +111,7 @@ export default (() => {
 
   const requiredValidation = validateRequired(t);
   const emailValidation = validateEmail<FormFields>(t);
-  const displayNameValidation = validateDisplayName<FormFields>(t);
+  const nameValidation = validateUserName<FormFields>(t);
   const passwordValidation = validatePassword(t);
   const passwordConfirmationValidation = validateConfirmation<FormFields>(
     t,
@@ -146,23 +146,23 @@ export default (() => {
 
           {authModal.side === AuthModalSide.REGISTER && (
             <FormGroup>
-              <Label htmlFor={INPUT_NAMES.NAME}>{t('auth.displayName')}</Label>
+              <Label htmlFor={INPUT_NAMES.NAME}>{t('auth.name')}</Label>
               <Input
                 type="text"
                 defaultValue=""
                 name={INPUT_NAMES.NAME}
                 innerRef={r({
                   ...requiredValidation,
-                  ...displayNameValidation,
+                  ...nameValidation,
                 })}
-                maxLength={displayNameValidation.maxLength.value}
+                maxLength={nameValidation.maxLength.value}
                 invalid={INPUT_NAMES.NAME in errors}
                 disabled={isLoading}
               />
               <FormText className="text-muted">
-                {t('auth.displayNameHelp', {
-                  min: displayNameValidation.minLength.value,
-                  max: displayNameValidation.maxLength.value,
+                {t('auth.nameHelp', {
+                  min: nameValidation.minLength.value,
+                  max: nameValidation.maxLength.value,
                 })}
               </FormText>
               <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.NAME} />

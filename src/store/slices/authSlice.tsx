@@ -39,7 +39,6 @@ export interface AuthState {
 const guestUser: FailsafeUser = {
   id: null,
   name: null,
-  displayName: null,
   email: null,
   role: null,
   avatarUrl: null,

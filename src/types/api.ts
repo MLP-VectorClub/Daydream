@@ -80,7 +80,7 @@ export interface Token {
  */
 export interface PublicUser {
   id: number;
-  displayName: string;
+  name: string;
   /**
    * The publicly visible role for the user
    */
