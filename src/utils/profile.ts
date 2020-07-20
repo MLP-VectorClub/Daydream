@@ -16,4 +16,4 @@ export const getProfileTitle = (
 export type ProfileLinkOptions = NullableProps<Pick<User, 'id' | 'name'>>;
 
 export const getProfileLink = ({ id, name }: ProfileLinkOptions) =>
-  `/${id}${name ? `-${encodeURI(name)}` : ''}`;
+  `/users/${id}${name ? `-${encodeURI(name)}` : ''}`;

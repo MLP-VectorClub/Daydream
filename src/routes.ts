@@ -7,8 +7,8 @@ const routes = new Routes()
   // .add('/cg/v/:id', 'appearance')
   .add('/about/privacy', 'privacy-policy')
   .add('/@:username', 'profile')
-  .add('/:id([0-9]+)', 'profile')
-  .add('/:id([0-9]+)-:username', 'profile')
+  .add('/users/:id([0-9]+)', 'profile')
+  .add('/users/:id([0-9]+)-:username', 'profile')
   .add('about');
 
 export default routes;
