@@ -34,7 +34,10 @@
   ],
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
     },
     "import/resolver": {
       "typescript": {
@@ -134,6 +137,7 @@
     "no-void": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "consistent-return": "off"
   }
 }

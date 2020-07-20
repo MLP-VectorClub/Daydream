@@ -10,7 +10,7 @@ import TitleManager from '../components/TitleManager';
 import '../fontawesome';
 import '../app.scss';
 import AuthModal from '../components/AuthModal';
-import LoadingIndicator from '../components/LoadingIndicator';
+import ProgressIndicator from '../components/ProgressIndicator';
 
 class Celestia extends App {
   render() {
@@ -30,7 +30,7 @@ class Celestia extends App {
             site_name: APP_NAME,
           }}
         />
-        <LoadingIndicator />
+        <ProgressIndicator />
         <Component {...pageProps} />
         <AuthModal />
       </Provider>

@@ -48,7 +48,7 @@
     "react-indiana-drag-scroll": "^1.6.1",
     "react-lazy-load-image-component": "^1.4.1",
     "react-redux": "^7.2.0",
-    "react-top-loading-bar": "^1.2.0",
+    "react-topbar-progress-indicator": "^4.1.0",
     "reactstrap": "^8.4.1",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.4",
