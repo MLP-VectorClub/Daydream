@@ -10,7 +10,6 @@ import { PROD_APP_URL } from '../config';
 import { AppPageContext } from '../store';
 import StandardHeading from '../components/shared/StandardHeading';
 
-
 const PrivacyPolicy = (() => {
   const { t } = useTranslation('privacyPolicy');
   return (

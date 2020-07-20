@@ -11,7 +11,6 @@ import { getGuideTitle } from '../utils/colorguide';
 import { coreActions } from '../store/slices';
 import { AppPageContext } from '../store';
 
-
 interface PropTypes {
   guide: Nullable<string>;
   page: Nullable<string>;

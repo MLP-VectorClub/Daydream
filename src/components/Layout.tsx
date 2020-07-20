@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactNode, ReactNodeArray, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
-import { NextSeo } from 'next-seo/lib';
+import { NextSeo } from 'next-seo';
 import { NextPage } from 'next';
 import { fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';

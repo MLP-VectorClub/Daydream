@@ -42,5 +42,4 @@ const registerEpic = (action$: ActionsObservable<ActionsType>) => action$.pipe(
   )),
 );
 
-
 export default [checkAuthEpic, signInEpic, signOutEpic, registerEpic];

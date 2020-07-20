@@ -17,7 +17,6 @@ export const getAvatar = ({ email, emailHash, size }: GetAvatarOptions) => {
     hash = md5(email);
   }
 
-
   return BuildUrl(`https://s.gravatar.com/avatar/${hash}`, {
     queryParams: {
       s: String(size),

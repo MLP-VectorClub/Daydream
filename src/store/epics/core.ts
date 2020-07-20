@@ -13,5 +13,4 @@ const initCsrfEpic = (action$: ActionsObservable<ActionsType>) => action$.pipe(
   )),
 );
 
-
 export default [initCsrfEpic];
