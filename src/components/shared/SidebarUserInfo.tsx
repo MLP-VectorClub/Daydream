@@ -35,7 +35,7 @@ export default (() => {
       <div className="user-data">
         <span className="user-name">
           {signedIn ? (
-            <ProfileLink username={user.name} />
+            <ProfileLink {...user} />
           ) : t('guestUserName')}
         </span>
         <span className="user-role">

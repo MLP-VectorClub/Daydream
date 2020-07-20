@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { NextComponentType } from 'next';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
@@ -11,6 +10,7 @@ import FavMe from '../components/shared/FavMe';
 import { coreActions } from '../store/slices';
 import { AppPageContext } from '../store';
 import StandardHeading from '../components/shared/StandardHeading';
+import { Link } from '../routes';
 
 const AboutPage = (() => {
   const { t } = useTranslation('about');
@@ -42,7 +42,7 @@ const AboutPage = (() => {
             </Trans>
           </p>
           <p>
-            <Link href="/blending">
+            <Link route="/blending">
               <a>{t('attributions.blendingCalc.0')}</a>
             </Link>
             {t('attributions.blendingCalc.1')}
@@ -117,7 +117,7 @@ const AboutPage = (() => {
 
             <strong>{t('attributions.browserLogos.about.0')}</strong>
             {t('attributions.browserLogos.about.1')}
-            <Link href="/browser">
+            <Link route="/browser">
               <a>{t('attributions.browserLogos.about.2')}</a>
             </Link>
             {t('attributions.browserLogos.about.3')}

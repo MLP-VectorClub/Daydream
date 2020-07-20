@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { UncontrolledTooltip } from 'reactstrap';
 import { Nullable } from '../types';
 import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
@@ -9,6 +8,7 @@ import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
 import ContactModal from './ContactModal';
 import ExternalLink from './shared/ExternalLink';
+import { Link } from '../routes';
 
 export default (() => {
   const { t } = useTranslation();
@@ -64,7 +64,7 @@ export default (() => {
           {commitTime}
         </span>
         {` | `}
-        <Link href="/about/privacy">
+        <Link route="/about/privacy">
           <a>{t('footer.privacyPolicy')}</a>
         </Link>
         {` | `}

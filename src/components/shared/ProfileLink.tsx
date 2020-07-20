@@ -1,16 +1,19 @@
-import Link from 'next/link';
-import { Nullable } from '../../types';
+import { PropsWithChildren } from 'react';
+import { Link } from '../../routes';
+import { getProfileLink, ProfileLinkOptions } from '../../utils';
 
-export default (({ username, children = null }) => {
-  const content = children === null ? <a>{username}</a> : children;
+type PropTypes = PropsWithChildren<ProfileLinkOptions>;
 
-  if (username === null) {
+export default (({ children = null, ...rest }) => {
+  const content = children === null ? <a>{rest.name}</a> : children;
+
+  if (rest.id === null) {
     return content;
   }
 
   return (
-    <Link href={`/@${username}`} passHref={children !== null}>
+    <Link route={getProfileLink(rest)} passHref={children !== null}>
       {content}
     </Link>
   );
-}) as React.FC<{ username: Nullable<string> }>;
+}) as React.FC<PropTypes>;

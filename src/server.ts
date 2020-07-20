@@ -77,9 +77,6 @@ if (BACKEND_HOST) {
 
   expressApp.use(cookieParser());
 
-  expressApp.get('/', (_req, res) => res.redirect(302, '/cg'));
-  expressApp.get('/cg', (_req, res) => res.redirect(302, '/cg/pony'));
-
   // Development Backend proxy
   if (dev) {
     expressApp.use(createProxyMiddleware('/api', {

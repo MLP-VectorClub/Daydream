@@ -46,6 +46,7 @@ const ProfilePage = (({ username }) => {
 
 ProfilePage.getInitialProps = async ctx => {
   const { query, store } = ctx;
+  // Handle ID parameter
   const { username } = query;
 
   let user = null;

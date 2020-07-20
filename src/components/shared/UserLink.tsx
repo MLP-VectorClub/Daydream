@@ -1,13 +1,12 @@
-import Link from 'next/link';
-import { getProfileLink } from '../../utils';
+import { getProfileLink, ProfileLinkOptions } from '../../utils';
+import { Link } from '../../routes';
 
-interface PropTypes {
-  userName: string;
+interface PropTypes extends ProfileLinkOptions {
   text?: string;
 }
 
-export default (({ userName, text }) => (
-  <Link href={getProfileLink(userName)}>
-    <a className="user-link">{text || userName}</a>
+export default (({ text, ...rest }) => (
+  <Link route={getProfileLink(rest)}>
+    <a className="user-link">{text || rest.name}</a>
   </Link>
 )) as React.FC<PropTypes>;

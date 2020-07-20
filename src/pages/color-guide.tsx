@@ -2,7 +2,7 @@ import { includes } from 'lodash';
 import { NextComponentType } from 'next';
 import { Alert, Pagination, PaginationItem } from 'reactstrap';
 import Layout from '../components/Layout';
-import { useTranslation } from '../i18n';
+import { useTranslation, i18n } from '../i18n';
 import Content from '../components/shared/Content';
 import { GUIDE_NAMES } from '../config';
 import { Nullable, TitleKeyWithParams } from '../types';
@@ -44,7 +44,9 @@ ColorGuidePage.getInitialProps = async ctx => {
     guide = null;
   }
 
-  const title = getGuideTitle(req.t, guide, page);
+  const tf = req ? req.t : i18n.t.bind(i18n);
+
+  const title = getGuideTitle(tf, guide, page);
   store.dispatch(coreActions.setTitle(title));
   return ({
     namespacesRequired: ['colorGuide'],
