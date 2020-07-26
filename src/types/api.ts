@@ -244,7 +244,10 @@ export type OneBasedId = number;
 
 export type ZeroBasedId = number;
 
-export type PublicUser = ErrorResponse & {
+/**
+ * Represents an publicly accessible representation of a user
+ */
+export interface PublicUser {
   id: number;
   name: string;
   /**
@@ -257,7 +260,7 @@ export type PublicUser = ErrorResponse & {
    * Hashed version of the e-mail address used in case there is no available avatarUrl to allow loading the Gravatar fallback
    */
   emailHash?: string;
-};
+}
 
 export type User = PublicUser & {
   name: string;
