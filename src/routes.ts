@@ -1,4 +1,5 @@
-import Routes, { LinkProps as LinkPropsA } from 'next-routes';
+import Routes,
+{ LinkProps as LinkPropsA } from 'next-routes';
 import { LinkProps as LinkPropsB } from 'next/link';
 import { ComponentType } from 'react';
 

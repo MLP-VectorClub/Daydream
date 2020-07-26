@@ -1,7 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import coreReducer, { CoreActions } from './slices/coreSlice';
-import authReducer, { AuthActions } from './slices/authSlice';
-import profileReducer, { ProfileActions } from './slices/profileSlice';
+import coreReducer,
+{ CoreActions } from './slices/coreSlice';
+import authReducer,
+{ AuthActions } from './slices/authSlice';
+import profileReducer,
+{ ProfileActions } from './slices/profileSlice';
 
 const rootReducer = combineReducers({
   core: coreReducer,

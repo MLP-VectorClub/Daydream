@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 import { timer } from 'rxjs';
 import { formatDistanceToNow } from 'date-fns';
-import { distinctUntilChanged, map, tap } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  map,
+  tap,
+} from 'rxjs/operators';
 
 export default (({ date }) => {
   const [text, setText] = useState('');

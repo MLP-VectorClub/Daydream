@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 import { Router } from 'next/router';
 import TopBarProgress from 'react-topbar-progress-indicator';
 
@@ -12,12 +15,8 @@ export default (() => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const start = () => {
-      setVisible(true);
-    };
-    const complete = () => {
-      setVisible(false);
-    };
+    const start = () => void setVisible(true);
+    const complete = () => void setVisible(false);
 
     Router.events.on('routeChangeStart', start);
     Router.events.on('routeChangeComplete', complete);

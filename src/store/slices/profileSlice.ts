@@ -1,5 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Nullable, PublicUser, ValuesOf } from '../../types';
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import {
+  Nullable,
+  PublicUser,
+  ValuesOf,
+} from '../../types';
 
 export interface ProfileState {
   user: Nullable<PublicUser>;

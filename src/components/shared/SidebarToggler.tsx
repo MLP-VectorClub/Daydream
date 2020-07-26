@@ -1,6 +1,9 @@
 import { Fade as Hamburger } from 'hamburger-react';
 import { NavbarToggler } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import { useEffect } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { coreActions } from '../../store/slices';

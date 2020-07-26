@@ -1,7 +1,13 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useEffect, useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 import classNames from 'classnames';
-import { AvatarProvider, Nullable } from '../../types';
+import {
+  AvatarProvider,
+  Nullable,
+} from '../../types';
 import { getAvatar } from '../../utils';
 
 interface PropTypes {

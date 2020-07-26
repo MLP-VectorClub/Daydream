@@ -1,8 +1,15 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
 import { NextPageContext } from 'next';
 import { TFunction } from 'next-i18next';
-import rootReducer, { ActionsType, RootState } from './rootReducer';
+import rootReducer,
+{
+  ActionsType,
+  RootState,
+} from './rootReducer';
 import { rootEpic } from './rootEpic';
 
 const epicMiddleware = createEpicMiddleware<ActionsType, ActionsType, RootState>();

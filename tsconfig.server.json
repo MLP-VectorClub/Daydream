@@ -7,7 +7,6 @@
     "noEmit": false,
     "baseUrl": "."
   },
-  "exclude": [],
   "include": [
     "src/server.ts"
   ]

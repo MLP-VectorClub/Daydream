@@ -1,4 +1,7 @@
-import { getProfileLink, ProfileLinkOptions } from '../../utils';
+import {
+  getProfileLink,
+  ProfileLinkOptions,
+} from '../../utils';
 import { Link } from '../../routes';
 
 interface PropTypes extends ProfileLinkOptions {

@@ -1,10 +1,24 @@
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { CLUB_URL, DEV_EMAIL, DISCORD_INVITE_LINK } from '../config';
+import {
+  Modal,
+  ModalBody,
+  ModalHeader,
+} from 'reactstrap';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import {
+  CLUB_URL,
+  DEV_EMAIL,
+  DISCORD_INVITE_LINK,
+} from '../config';
 import { RootState } from '../store/rootReducer';
 import { coreActions } from '../store/slices';
 import ExternalLink from './shared/ExternalLink';
-import { useTranslation, Trans } from '../i18n';
+import {
+  useTranslation,
+  Trans,
+} from '../i18n';
 
 export default (() => {
   const { t } = useTranslation('common');

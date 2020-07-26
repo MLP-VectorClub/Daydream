@@ -1,4 +1,8 @@
-import React, { ReactNode, ReactNodeArray } from 'react';
+import React,
+{
+  ReactNode,
+  ReactNodeArray,
+} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface PropTypes {

@@ -1,7 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'reactstrap';
-import { useEffect, useState } from 'react';
-import { debounceTime, tap } from 'rxjs/operators';
+import {
+  useEffect,
+  useState,
+} from 'react';
+import {
+  debounceTime,
+  tap,
+} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 
 export default (() => {

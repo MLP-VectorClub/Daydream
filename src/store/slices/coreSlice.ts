@@ -1,6 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { fallbackLanguage } from '../../config';
-import { PageTitle, ValuesOf } from '../../types';
+import {
+  PageTitle,
+  Status,
+  ValuesOf,
+} from '../../types';
 
 export interface CoreState {
   language: string;
@@ -8,6 +15,10 @@ export interface CoreState {
   contactOpen: boolean;
   title: PageTitle;
   backendDown: boolean;
+  csrf: {
+    status: Status;
+    initialized: boolean;
+  };
   upcomingEvents: object[];
   usefulLinks: object[];
 }
@@ -18,6 +29,10 @@ const initialState: CoreState = {
   contactOpen: false,
   title: null,
   backendDown: false,
+  csrf: {
+    status: Status.INIT,
+    initialized: false,
+  },
   upcomingEvents: [],
   usefulLinks: [],
 };
@@ -41,8 +56,16 @@ const coreSlice = createSlice({
     setBackendDown(state, action: PayloadAction<boolean>) {
       state.backendDown = action.payload;
     },
-    initCsrf(_state, _action: PayloadAction) {
-      /* noop */
+    initCsrf(state, _action: PayloadAction) {
+      state.csrf.status = Status.LOAD;
+    },
+    initCsrfSuccess(state, _action: PayloadAction) {
+      state.csrf.initialized = true;
+      state.csrf.status = Status.SUCCESS;
+    },
+    initCsrfFailure(state, _action: PayloadAction) {
+      state.csrf.initialized = false;
+      state.csrf.status = Status.FAILURE;
     },
   },
 });

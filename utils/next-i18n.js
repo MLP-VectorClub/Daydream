@@ -1,26 +1,16 @@
 const path = require('path');
-const { I18NextHMRPlugin } = require('i18next-hmr/plugin');
 
-module.exports = (nextConfig = {}) => ({
-  ...nextConfig,
+module.exports = {
   webpack(config, options) {
-
-    if (!options.plugins) {
-      const localesDir = path.resolve(__dirname, '../public/static/locales');
-
-      if (!Array.isArray(options.plugins)) {
-        options.plugins = [];
-      }
-
-      options.plugins.push(new I18NextHMRPlugin({
-        localesDir,
-      }));
-    }
-
-    if (typeof nextConfig.webpack === 'function'){
-      return nextConfig.webpack(config, options);
+    if (!options.isServer && config.mode === 'development') {
+      const { I18NextHMRPlugin } = require('i18next-hmr/plugin');
+      config.plugins.push(
+        new I18NextHMRPlugin({
+          localesDir: path.resolve(__dirname, '../public/static/locales')
+        })
+      );
     }
 
     return config;
-  },
-});
+  }
+};

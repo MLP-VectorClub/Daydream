@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { catchError } from 'rxjs/operators';
-import auth from './epics/auth';
-import core from './epics/core';
+import auth from './epics/authEpics';
+import core from './epics/coreEpics';
 
 export const epics = [
   ...auth,

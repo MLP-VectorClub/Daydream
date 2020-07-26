@@ -17,7 +17,8 @@ import nextI18NextMiddleware from 'next-i18next/middleware';
 import cookieParser from 'cookie-parser';
 import * as es6Promise from 'es6-promise';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import nextI18next, { i18n } from './i18n';
+import nextI18next,
+{ i18n } from './i18n';
 import routes from './routes';
 
 dotenv.config();
@@ -76,6 +77,9 @@ if (BACKEND_HOST) {
   expressApp.use(nextI18NextMiddleware(nextI18next));
 
   expressApp.use(cookieParser());
+
+  expressApp.get('/', (_req, res) => res.redirect(302, '/cg'));
+  expressApp.get('/cg', (_req, res) => res.redirect(302, '/cg/pony'));
 
   // Development Backend proxy
   if (dev) {

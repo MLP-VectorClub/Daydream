@@ -1,5 +1,8 @@
 import { TFunction } from 'next-i18next';
-import { Nullable, TitleKeyWithParams } from '../types';
+import {
+  Nullable,
+  TitleKeyWithParams,
+} from '../types';
 
 export const getGuideTitle = (
   t: TFunction,

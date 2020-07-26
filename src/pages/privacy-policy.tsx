@@ -1,6 +1,9 @@
 import { NextComponentType } from 'next';
 import React from 'react';
-import { Trans, useTranslation } from '../i18n';
+import {
+  Trans,
+  useTranslation,
+} from '../i18n';
 import Content from '../components/shared/Content';
 import Layout from '../components/Layout';
 import ExternalLink from '../components/shared/ExternalLink';

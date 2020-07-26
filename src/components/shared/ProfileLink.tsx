@@ -1,6 +1,9 @@
 import { PropsWithChildren } from 'react';
 import { Link } from '../../routes';
-import { getProfileLink, ProfileLinkOptions } from '../../utils';
+import {
+  getProfileLink,
+  ProfileLinkOptions,
+} from '../../utils';
 
 type PropTypes = PropsWithChildren<ProfileLinkOptions>;
 

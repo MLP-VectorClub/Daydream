@@ -1,4 +1,10 @@
-import { Nullable, NullableProps, PageTitle, PublicUser, User } from '../types';
+import {
+  Nullable,
+  NullableProps,
+  PageTitle,
+  PublicUser,
+  User,
+} from '../types';
 
 export const getProfileTitle = (
   username: string,

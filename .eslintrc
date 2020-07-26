@@ -27,7 +27,8 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
-    "react"
+    "react",
+    "modules-newline"
   ],
   "ignorePatterns": [
     "node_modules"
@@ -138,6 +139,11 @@
     "react/prop-types": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "react/no-array-index-key": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "modules-newline/import-declaration-newline": "error",
+    "max-len": [
+      "error",
+      140
+    ]
   }
 }

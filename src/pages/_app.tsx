@@ -3,13 +3,16 @@ import App from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import { APP_NAME, PROD_APP_URL } from '../config';
+import {
+  APP_NAME,
+  PROD_APP_URL,
+} from '../config';
 import { appWithTranslation } from '../i18n';
 import { initStore } from '../store';
 import TitleManager from '../components/TitleManager';
 import '../fontawesome';
 import '../app.scss';
-import AuthModal from '../components/AuthModal';
+import AuthModal from '../components/modals/AuthModal';
 import ProgressIndicator from '../components/ProgressIndicator';
 
 class Celestia extends App {

@@ -1,9 +1,16 @@
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import {
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
 import React from 'react';
 import { Link } from '../../routes';
-import { getProfileLink, permission } from '../../utils';
+import {
+  getProfileLink,
+  permission,
+} from '../../utils';
 import ExternalLink from './ExternalLink';
 import { CLUB_URL } from '../../config';
 import { useTranslation } from '../../i18n';

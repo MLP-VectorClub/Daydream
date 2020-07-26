@@ -1,11 +1,21 @@
 import { includes } from 'lodash';
 import { NextComponentType } from 'next';
-import { Alert, Pagination, PaginationItem } from 'reactstrap';
+import {
+  Alert,
+  Pagination,
+  PaginationItem,
+} from 'reactstrap';
 import Layout from '../components/Layout';
-import { useTranslation, i18n } from '../i18n';
+import {
+  useTranslation,
+  i18n,
+} from '../i18n';
 import Content from '../components/shared/Content';
 import { GUIDE_NAMES } from '../config';
-import { Nullable, TitleKeyWithParams } from '../types';
+import {
+  Nullable,
+  TitleKeyWithParams,
+} from '../types';
 import { notFound } from '../utils';
 import { getGuideTitle } from '../utils/colorguide';
 import { coreActions } from '../store/slices';

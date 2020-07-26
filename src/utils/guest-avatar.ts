@@ -1,7 +1,10 @@
 import BuildUrl from 'build-url';
 import md5 from 'md5';
 import { GUEST_AVATAR } from '../config';
-import { Nullable, Numeric } from '../types';
+import {
+  Nullable,
+  Numeric,
+} from '../types';
 
 interface GetAvatarOptions {
   email: Nullable<string>;

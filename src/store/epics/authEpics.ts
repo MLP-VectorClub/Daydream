@@ -1,4 +1,9 @@
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  filter,
+  map,
+  switchMap,
+} from 'rxjs/operators';
 import { ActionsObservable } from 'redux-observable';
 import { of } from 'rxjs';
 import { authActions } from '../slices';

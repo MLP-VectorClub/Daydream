@@ -1,14 +1,24 @@
 import { useEffect } from 'react';
 import { NextComponentType } from 'next';
 import { AxiosError } from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import Layout from '../components/Layout';
 import { useTranslation } from '../i18n';
 import Content from '../components/shared/Content';
-import { coreActions, profileActions } from '../store/slices';
+import {
+  coreActions,
+  profileActions,
+} from '../store/slices';
 import { AppPageContext } from '../store';
 import { userService } from '../services';
-import { getProfileTitle, mapRoleLabel, setResponseStatus } from '../utils';
+import {
+  getProfileTitle,
+  mapRoleLabel,
+  setResponseStatus,
+} from '../utils';
 import { RootState } from '../store/rootReducer';
 import StandardHeading from '../components/shared/StandardHeading';
 import AvatarWrap from '../components/shared/AvatarWrap';

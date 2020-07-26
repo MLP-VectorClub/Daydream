@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import {
   AuthModalSide,
   FailsafeUser,
@@ -7,7 +10,8 @@ import {
   RegistrationRequest,
   Status,
   UnifiedErrorResponse,
-  User, ValuesOf,
+  User,
+  ValuesOf,
 } from '../../types';
 
 export interface AuthState {
@@ -49,7 +53,7 @@ const initialState: AuthState = {
   signedIn: false,
   sessionUpdating: false,
   authCheck: {
-    status: Status.INIT,
+    status: Status.LOAD,
   },
   signIn: {
     status: Status.INIT,

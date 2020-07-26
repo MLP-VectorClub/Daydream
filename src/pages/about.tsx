@@ -2,8 +2,15 @@ import React from 'react';
 import { NextComponentType } from 'next';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
-import { CLUB_URL, GITHUB_URL, TMDB_REQUIRED_MESSAGE } from '../config';
-import { Trans, useTranslation } from '../i18n';
+import {
+  CLUB_URL,
+  GITHUB_URL,
+  TMDB_REQUIRED_MESSAGE,
+} from '../config';
+import {
+  Trans,
+  useTranslation,
+} from '../i18n';
 import ExternalLink from '../components/shared/ExternalLink';
 import DeviantLink from '../components/shared/DeviantLink';
 import FavMe from '../components/shared/FavMe';

@@ -46,7 +46,9 @@
     "signOut": "Sign Out",
     "signIn": "Sign In",
     "joinDiscord": "Join Discord",
-    "confirmSignOut": "Are you sure you want to sign out?"
+    "confirmSignOut": "Are you sure you want to sign out?",
+    "csrfInitializing": "Fetching CSRF token",
+    "authInitializing": "Fetching user data"
   },
   "contact": {
     "header": "Contact Us",
@@ -71,6 +73,7 @@
     "registerTitle": "Create an account",
     "noAccountYet": "No account yet? Create one here!",
     "alreadyHaveAccount": "Already have an account? Sign in here!",
+    "loginBenefits": "An account allows you to customize the site's behavior, with many more features yet to come.",
     "name": "Display Name",
     "nameHelp": "Only English letters, digits, dashes and underscores. Must be between {{min}} and {{max}} characters. Can be changed later.",
     "email": "E-Mail Address",
@@ -82,7 +85,9 @@
     "registerButton": "Create Account",
     "invalidCredentials": "Incorrect e-mail address or password",
     "rateLimited": "Too many login attempts, please try again in {{count}} second",
-    "rateLimited_plural": "Too many login attempts, please try again in {{count}} seconds"
+    "rateLimited_plural": "Too many login attempts, please try again in {{count}} seconds",
+    "hidePassword": "Hide Password",
+    "showPassword": "Show Password"
   },
   "validation": {
     "required": "Please fill in this field",

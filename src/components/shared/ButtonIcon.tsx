@@ -6,6 +6,7 @@ import LoadingRing from './LoadingRing';
 export interface ButtonIconProps {
   loading?: boolean;
   last?: boolean;
+  first?: boolean;
   fixedWidth?: boolean;
   icon: IconProp | null;
 }
@@ -14,17 +15,18 @@ const ButtonIcon: React.FC<ButtonIconProps> = (({
   icon,
   loading = false,
   last = false,
+  first = false,
   fixedWidth = false,
 }) => (
   loading ? (
-    <LoadingRing
-      className={classNames('svg-inline--fa custom-icon', { 'mr-2': !last })}
-      strokeWidth={15}
-      outline={false}
+    <LoadingRing inline spaceLeft={last} spaceRight={first} />
+  ) : (icon && (
+    <FontAwesomeIcon
+      icon={icon}
+      fixedWidth={fixedWidth}
+      className={classNames({ 'ml-2': last, 'mr-2': first })}
     />
-  ) : (
-    icon && <FontAwesomeIcon icon={icon} fixedWidth={fixedWidth} className={classNames({ 'mr-2': !last })} />
-  )
+  ))
 ));
 
 export default ButtonIcon;

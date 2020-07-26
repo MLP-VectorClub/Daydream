@@ -1,8 +1,18 @@
-import { useEffect, useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import { Nullable } from '../types';
-import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
-import { BuildIdParseResult, getBuildData } from '../utils';
+import {
+  DEV_API_URL,
+  GITHUB_URL,
+  PROD_API_URL,
+} from '../config';
+import {
+  BuildIdParseResult,
+  getBuildData,
+} from '../utils';
 import { useTranslation } from '../i18n';
 import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';

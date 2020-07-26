@@ -1,4 +1,8 @@
-import { Collapse, Navbar, NavbarBrand } from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarBrand,
+} from 'reactstrap';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import ToTheTopArrow from './shared/ToTheTopArrow';
 import MainNavigation from './shared/MainNavigation';
