@@ -52,3 +52,46 @@ body {
 #content > :last-child {
   margin-bottom: 0 !important;
 }
+
+// Bootstrap modal overrides
+.modal {
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: $font-family-base !important;
+  }
+}
+.modal-header {
+  .modal-title {
+    font-weight: normal !important;
+    padding: $modal-header-padding-y $modal-header-padding-x;
+  }
+  .close {
+    opacity: 1;
+    margin: 0 !important;
+    padding: $modal-header-padding-y $modal-header-padding-x;
+    line-height: $headings-line-height;
+  }
+}
+.modal-content {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+@each $color, $value in $theme-colors {
+  .modal-#{$color} {
+    @if ($color != 'ui') {
+      color: $value !important;
+    }
+
+    .modal-content, .modal-header, .modal-footer {
+      border-color: $value !important;
+    }
+
+    .modal-header {
+      background-color: $value !important;
+
+      &, .close {
+        color: color-yiq($value) !important;
+      }
+    }
+  }
+}

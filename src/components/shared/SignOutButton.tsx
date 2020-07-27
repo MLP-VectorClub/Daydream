@@ -11,9 +11,11 @@ import {
   Status,
   WithTFunction,
 } from '../../types';
-import ButtonIcon from './ButtonIcon';
+import InlineIcon from './InlineIcon';
 import { RootState } from '../../store/rootReducer';
 import { authActions } from '../../store/slices';
+
+const BUTTON_ID = 'signout';
 
 export default (({ t }) => {
   const dispatch = useDispatch();
@@ -28,20 +30,20 @@ export default (({ t }) => {
   return (
     <>
       <Button
-        id="signout"
+        id={BUTTON_ID}
         onClick={() => setSignOutConfirm(true)}
         disabled={signOut.status === Status.LOAD}
       >
-        <ButtonIcon first icon="sign-out-alt" loading={signOut.status === Status.LOAD} />
+        <InlineIcon first icon="sign-out-alt" loading={signOut.status === Status.LOAD} />
         {t('sidebar.signOut')}
       </Button>
-      <Tooltip isOpen={signOutConfirm} target="signout" container="sidebar" placement="bottom">
+      <Tooltip isOpen={signOutConfirm} target={BUTTON_ID} container="sidebar" placement="bottom">
         <p className="mb-1">{t('sidebar.confirmSignOut')}</p>
         <Button size="sm" color="success" onClick={handleSignOut} className="mr-2">
-          <ButtonIcon icon="check" fixedWidth />
+          <InlineIcon icon="check" fixedWidth />
         </Button>
         <Button size="sm" color="danger" onClick={() => setSignOutConfirm(false)}>
-          <ButtonIcon icon="times" fixedWidth />
+          <InlineIcon icon="times" fixedWidth />
         </Button>
       </Tooltip>
     </>

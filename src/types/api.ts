@@ -205,6 +205,10 @@ export type AppearanceToken = string;
 export interface LoginRequest {
   email: string;
   password: string;
+  /**
+   * When using session-based auth set to true for persistent cookies, omit or use false for session cookies
+   */
+  remember?: boolean;
 }
 
 export interface RegistrationRequest {

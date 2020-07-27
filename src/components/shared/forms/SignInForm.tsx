@@ -6,6 +6,7 @@ import {
   Alert,
   Button,
   Col,
+  CustomInput,
   Form,
   FormGroup,
   Input,
@@ -13,6 +14,7 @@ import {
   InputGroupAddon,
   Label,
   Row,
+  UncontrolledTooltip,
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import {
@@ -28,7 +30,7 @@ import {
   UnifiedErrorResponseTypes,
 } from '../../../types';
 import { authActions } from '../../../store/slices';
-import ButtonIcon from '../ButtonIcon';
+import InlineIcon from '../InlineIcon';
 import BootstrapErrorMessages from '../BootstrapErrorMessages';
 import {
   combineErrors,
@@ -41,12 +43,16 @@ import RevealPasswordButton from '../RevealPasswordButton';
 enum INPUT_NAMES {
   EMAIL = 'email',
   PASSWORD = 'current-password',
+  REMEMBER = 'remember',
 }
 
 type FormFields = {
   [INPUT_NAMES.EMAIL]: string;
   [INPUT_NAMES.PASSWORD]: string;
+  [INPUT_NAMES.REMEMBER]: string;
 };
+
+// TODO Social (DeviantArt & Discord) login
 
 export default (() => {
   const { t } = useTranslation('common');
@@ -83,6 +89,7 @@ export default (() => {
     dispatch(authActions.signIn({
       email: data[INPUT_NAMES.EMAIL],
       password: data[INPUT_NAMES.PASSWORD],
+      remember: Boolean(data[INPUT_NAMES.REMEMBER]),
     }));
   };
   const isLoading = signIn.status === Status.LOAD;
@@ -154,6 +161,10 @@ export default (() => {
         </Col>
       </FormGroup>
 
+      <FormGroup>
+        <CustomInput type="checkbox" name={INPUT_NAMES.REMEMBER} label={t('auth.rememberMe')} id="remember-me" innerRef={r()} />
+      </FormGroup>
+
       {signIn.error?.type === UnifiedErrorResponseTypes.AUTHENTICATION_ERROR && (
         <Alert color="danger">{t('auth.invalidCredentials')}</Alert>
       )}
@@ -168,14 +179,22 @@ export default (() => {
         </Alert>
       )}
 
-      <Row>
+      <Row className="align-items-center">
         <Col>
-          <Button size="lg" color="primary" disabled={isLoading || rateLimitTimeout !== null}>
-            <ButtonIcon first loading={isLoading} icon="sign-in-alt" />
+          <Button color="ui" size="lg" disabled={isLoading || rateLimitTimeout !== null}>
+            <InlineIcon first loading={isLoading} icon="sign-in-alt" />
             {t('auth.signInButton')}
           </Button>
         </Col>
-        <Col />
+        <Col className="text-right">
+          <Button type="button" color="link" id="forgot-pw" aria-readonly="true">
+            {t('auth.forgotPassword')}
+          </Button>
+          <UncontrolledTooltip target="forgot-pw" fade={false}>
+            <InlineIcon icon="exclamation-triangle" color="warning" first />
+            {t('auth.pwResetNotYetAvailable')}
+          </UncontrolledTooltip>
+        </Col>
       </Row>
     </Form>
   );

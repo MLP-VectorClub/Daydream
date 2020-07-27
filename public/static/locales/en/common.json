@@ -77,17 +77,21 @@
     "name": "Display Name",
     "nameHelp": "Only English letters, digits, dashes and underscores. Must be between {{min}} and {{max}} characters. Can be changed later.",
     "email": "E-Mail Address",
+    "emailHelp": "Use a valid e-mail address that can receive messages to ensure you do not lose access to your account. This address must be confirmed after signing up. <1>We will not send you spam.</1>",
     "password": "Password",
     "passwordHelp": "Must be at least {{min}} characters long and not commonly used.",
     "passwordConfirm": "Confirm Password",
     "acceptPrivacyPolicy": "I accept the <1>Privacy Policy</1>",
+    "rememberMe": "Keep me signed in",
     "signInButton": "Sign In",
     "registerButton": "Create Account",
     "invalidCredentials": "Incorrect e-mail address or password",
     "rateLimited": "Too many login attempts, please try again in {{count}} second",
     "rateLimited_plural": "Too many login attempts, please try again in {{count}} seconds",
     "hidePassword": "Hide Password",
-    "showPassword": "Show Password"
+    "showPassword": "Show Password",
+    "forgotPassword": "Forgot password?",
+    "pwResetNotYetAvailable": "The password reset feature is not available yet"
   },
   "validation": {
     "required": "Please fill in this field",

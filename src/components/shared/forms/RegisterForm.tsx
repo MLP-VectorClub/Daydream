@@ -29,10 +29,11 @@ import {
   AuthModalSide,
   Status,
   UnifiedErrorResponseTypes,
+  WithTFunction,
 } from '../../../types';
 import { authActions } from '../../../store/slices';
 import ExternalLink from '../ExternalLink';
-import ButtonIcon from '../ButtonIcon';
+import InlineIcon from '../InlineIcon';
 import { PATHS } from '../../../config';
 import BootstrapErrorMessages from '../BootstrapErrorMessages';
 import {
@@ -51,11 +52,11 @@ enum INPUT_NAMES {
   PRIVACY = 'privacy_policy',
 }
 
-export const AcceptPrivacyPolicy = (() => (
-  <Trans ns="common" i18nKey="auth.acceptPrivacyPolicy">
+export const AcceptPrivacyPolicy = (({ t }) => (
+  <Trans t={t} i18nKey="auth.acceptPrivacyPolicy">
     0<ExternalLink href={PATHS.PRIVACY_POLICY} icon />
   </Trans>
-)) as React.FC;
+)) as React.FC<WithTFunction>;
 
 type FormFields = {
   [INPUT_NAMES.NAME]: string;
@@ -144,6 +145,12 @@ export default (() => {
             invalid={INPUT_NAMES.EMAIL in errors}
             disabled={isLoading}
           />
+          <FormText className="text-muted">
+            <Trans t={t} i18nKey="auth.emailHelp">
+              0
+              <strong>1</strong>
+            </Trans>
+          </FormText>
           <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.EMAIL} />
         </Col>
       </FormGroup>
@@ -188,7 +195,7 @@ export default (() => {
           id={INPUT_NAMES.PRIVACY}
           name={INPUT_NAMES.PRIVACY}
           type="checkbox"
-          label={<AcceptPrivacyPolicy />}
+          label={<AcceptPrivacyPolicy t={t} />}
           invalid={INPUT_NAMES.PRIVACY in errors}
           disabled={isLoading}
           innerRef={r(validateRequired(t, 'acceptPrivacyPolicy'))}
@@ -206,8 +213,8 @@ export default (() => {
         </Alert>
       )}
 
-      <Button color="primary" disabled={isLoading}>
-        <ButtonIcon first loading={isLoading} icon="user-plus" />
+      <Button color="ui" disabled={isLoading}>
+        <InlineIcon first loading={isLoading} icon="user-plus" />
         {t('auth.registerButton')}
       </Button>
     </Form>

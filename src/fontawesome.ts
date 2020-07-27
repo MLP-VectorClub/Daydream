@@ -8,14 +8,15 @@ import {
   faBars,
   faCheck,
   faCircleNotch,
+  faExclamationTriangle,
   faExternalLinkAlt,
-  faUserPlus,
+  faEye,
+  faEyeSlash,
+  faInfo,
   faSignInAlt,
   faSignOutAlt,
   faTimes,
-  faInfo,
-  faEye,
-  faEyeSlash,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
@@ -36,4 +37,5 @@ library.add(
   faSignOutAlt,
   faCircleNotch,
   faExternalLinkAlt,
+  faExclamationTriangle,
 );

@@ -12,10 +12,7 @@ import {
   MouseEventHandler,
   useEffect,
 } from 'react';
-import {
-  Trans,
-  useTranslation,
-} from '../../i18n';
+import { useTranslation } from '../../i18n';
 import { RootState } from '../../store/rootReducer';
 import {
   AuthModalSide,
@@ -26,8 +23,6 @@ import {
   authActions,
   coreActions,
 } from '../../store/slices';
-import ExternalLink from '../shared/ExternalLink';
-import { PATHS } from '../../config';
 import SignInForm from '../shared/forms/SignInForm';
 import RegisterForm from '../shared/forms/RegisterForm';
 
@@ -38,12 +33,6 @@ enum INPUT_NAMES {
   PASSWORD_CONFIRM = 'password_confirmation',
   PRIVACY = 'privacy_policy',
 }
-
-export const AcceptPrivacyPolicy = (() => (
-  <Trans ns="common" i18nKey="auth.acceptPrivacyPolicy">
-    0<ExternalLink href={PATHS.PRIVACY_POLICY} icon />
-  </Trans>
-)) as React.FC;
 
 type FormFields = PostUsersLoginRequest & PostUsersRequest & {
   [INPUT_NAMES.PASSWORD_CONFIRM]: Pick<PostUsersLoginRequest, 'password'>;
@@ -83,10 +72,12 @@ export default (() => {
   const sides = {
     [AuthModalSide.SIGN_IN]: <SignInForm />,
     [AuthModalSide.REGISTER]: <RegisterForm />,
+    // TODO Implement password reset form
+    [AuthModalSide.PASSWORD_RESET]: null,
   };
 
   return (
-    <Modal centered isOpen={authModal.open} toggle={toggleModal} backdrop="static">
+    <Modal className="modal-ui" centered isOpen={authModal.open} toggle={toggleModal} backdrop="static">
       <ModalHeader toggle={toggleModal}>{t(modalTitle)}</ModalHeader>
       <ModalBody>
         {sides[authModal.side]}

@@ -27,7 +27,7 @@ const AboutPage = (() => {
         <img src="/img/logo.svg" alt="MLP Vector Club Website Logo" id="about-logo" />
         <StandardHeading
           heading={(
-            <Trans ns="about" i18nKey="website">
+            <Trans t={t} i18nKey="website">
               <ExternalLink href={CLUB_URL}>0</ExternalLink>
               1
             </Trans>
@@ -44,7 +44,7 @@ const AboutPage = (() => {
         <section className="attributions">
           <h2>Attributions</h2>
           <p>
-            <Trans ns="about" i18nKey="attributions.github">
+            <Trans t={t} i18nKey="attributions.github">
               0<a href={`${GITHUB_URL}#attributions`}>1</a>2
             </Trans>
           </p>
@@ -86,7 +86,7 @@ const AboutPage = (() => {
             <DeviantLink username="flutterguy317" />
             <br />
 
-            <Trans ns="about" i18nKey="attributions.appLogo">
+            <Trans t={t} i18nKey="attributions.appLogo">
               <strong>0</strong>
               1
               <a href="https://www.deviantart.com/pirill-poveniy/art/Collab-Christmas-Vector-of-the-MLP-VC-Mascot-503196118">2</a>
@@ -107,14 +107,14 @@ const AboutPage = (() => {
             </Trans>
             <br />
 
-            <Trans ns="about" i18nKey="attributions.extLink">
+            <Trans t={t} i18nKey="attributions.extLink">
               <strong>0</strong>
               1
               <ExternalLink href="https://commons.wikimedia.org/wiki/File:Icon_External_Link.svg">2</ExternalLink>
             </Trans>
             <br />
 
-            <Trans ns="about" i18nKey="attributions.loadingIcons">
+            <Trans t={t} i18nKey="attributions.loadingIcons">
               <strong>0</strong>
               1
               <ExternalLink href="https://loading.io/">2</ExternalLink>
@@ -131,7 +131,7 @@ const AboutPage = (() => {
           </p>
           <ul>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.edge">
+              <Trans t={t} i18nKey="attributions.browserLogos.edge">
                 <FavMe id="d9rtlbv" />
                 1
                 <DeviantLink username="masemj" />
@@ -143,28 +143,28 @@ const AboutPage = (() => {
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.firefox">
+              <Trans t={t} i18nKey="attributions.browserLogos.firefox">
                 <FavMe id="d4b6f4v" />
                 1
                 <DeviantLink username="NoReasonToHope" />
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.chrome">
+              <Trans t={t} i18nKey="attributions.browserLogos.chrome">
                 <FavMe id="d523s3y" />
                 1
                 <DeviantLink username="he4rtofcourage" />
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.ie">
+              <Trans t={t} i18nKey="attributions.browserLogos.ie">
                 <FavMe id="d52fp08" />
                 1
                 <DeviantLink username="McSadat" />
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.opera">
+              <Trans t={t} i18nKey="attributions.browserLogos.opera">
                 <FavMe id="dacngnh" />
                 1
                 <DeviantLink username="masemj" />
@@ -176,7 +176,7 @@ const AboutPage = (() => {
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.safari">
+              <Trans t={t} i18nKey="attributions.browserLogos.safari">
                 <FavMe id="dadu3l9" />
                 1
                 <DeviantLink username="masemj" />
@@ -188,13 +188,13 @@ const AboutPage = (() => {
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.vivaldi">
+              <Trans t={t} i18nKey="attributions.browserLogos.vivaldi">
                 0
                 <ExternalLink href="https://vivaldi.com/press/">1</ExternalLink>
               </Trans>
             </li>
             <li>
-              <Trans ns="about" i18nKey="attributions.browserLogos.etc">
+              <Trans t={t} i18nKey="attributions.browserLogos.etc">
                 0
                 <ExternalLink href="https://github.com/alrra/browser-logos/">1</ExternalLink>
               </Trans>
@@ -202,10 +202,7 @@ const AboutPage = (() => {
           </ul>
           <p>
             {/* TODO Extract msg into translations */}
-            <Trans
-              ns="about"
-              i18nKey="attributions.synopsis"
-            >
+            <Trans t={t} i18nKey="attributions.synopsis">
               <strong>0</strong>
               1
               <ExternalLink href="https://www.themoviedb.org/documentation/api">2</ExternalLink>
@@ -214,7 +211,7 @@ const AboutPage = (() => {
             </Trans>
             <br />
 
-            <Trans ns="about" i18nKey="attributions.developer">
+            <Trans t={t} i18nKey="attributions.developer">
               <strong>0</strong>
               1
               <ExternalLink href="https://github.com/SeinopSys">2</ExternalLink>
@@ -239,7 +236,7 @@ const AboutPage = (() => {
           <h2>{t('atSign.title')}</h2>
           <div>
             <p>
-              <Trans ns="about" i18nKey="atSign.p1">
+              <Trans t={t} i18nKey="atSign.p1">
                 0
                 <ExternalLink href={GITHUB_URL}>1</ExternalLink>
                 2

@@ -4526,10 +4526,10 @@ i18next-fs-backend@^1.0.2:
   resolved "https://registry.yarnpkg.com/i18next-fs-backend/-/i18next-fs-backend-1.0.7.tgz#00ca4587e306f8948740408389dda73461a5d07f"
   integrity sha512-aAZ3rvshe1Zbl6JSCWrWWqbZS5JpmVNG+84YqLcgdYcm9uAxzw4xWxnA/a3044Nm2PKXE62CT+pIZjk7OEYtTw==
 
-i18next-hmr@^1.5.3:
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/i18next-hmr/-/i18next-hmr-1.5.5.tgz#140edb9684f20935eaf367f8da9f05fb4279264c"
-  integrity sha512-CCkGpbwICyXOnm7CF/l6mSmW/ElB2OEjwUd/XI0LRzAPkWVRsFCMeG5LuBLahXd7kV94F3+cTWTjaKGYbK+cjQ==
+i18next-hmr@^1.5.6:
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/i18next-hmr/-/i18next-hmr-1.5.6.tgz#aeae08594d3c2b1266d06df11c3a0cbb67215d2c"
+  integrity sha512-F5bchVrib+YYwCsnS7a3IUbvI4W4B4HfMZvs//Eok6icn7AJf1Tzjx08pXQn+Oxu2My1VJUZrPyxVYaHbGvBJA==
 
 i18next-http-backend@^1.0.8:
   version "1.0.17"
@@ -7145,7 +7145,7 @@ react@^16.12.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
 
-reactstrap@^8.4.1:
+reactstrap@^8.5.1:
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-8.5.1.tgz#dde43539602117888a138042b53703b7621c4318"
   integrity sha512-igpdw8DiW48ZtwGOo2unwlsILFlF7deiqFUAqc3wrsX/0H0OkvmezJdkjJx2X9jaHfjGdPpm0vu5VN/kk7tv+A==

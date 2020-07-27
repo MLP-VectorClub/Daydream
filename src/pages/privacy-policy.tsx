@@ -1,5 +1,6 @@
 import { NextComponentType } from 'next';
 import React from 'react';
+import { Alert } from 'reactstrap';
 import {
   Trans,
   useTranslation,
@@ -17,18 +18,21 @@ const PrivacyPolicy = (() => {
   const { t } = useTranslation('privacyPolicy');
   return (
     <Layout>
+      <Alert color="warning">
+        {t('notYetUpdated')}
+      </Alert>
       <Content className="privacy-policy">
         <StandardHeading heading={t('title')} lead={t('lead')} />
 
         <blockquote>
-          <Trans ns="privacyPolicy" i18nKey="tldr">
+          <Trans t={t} i18nKey="tldr">
             <strong>0</strong>
             1
           </Trans>
         </blockquote>
 
         <p>
-          <Trans ns="privacyPolicy" i18nKey="p1">
+          <Trans t={t} i18nKey="p1">
             0
             <a href={PROD_APP_URL}>{{ host: PROD_APP_URL }}</a>
             2
@@ -58,7 +62,7 @@ const PrivacyPolicy = (() => {
         <h2>{t('h4')}</h2>
         <p>{t('p16')}</p>
         <p>
-          <Trans ns="privacyPolicy" i18nKey="p17">
+          <Trans t={t} i18nKey="p17">
             0
             <ExternalLink href="https://www.cloudflare.com/security-policy/">1</ExternalLink>
             2
@@ -74,7 +78,7 @@ const PrivacyPolicy = (() => {
 
         <h2>{t('h6')}</h2>
         <p>
-          <Trans ns="privacyPolicy" i18nKey="p23">
+          <Trans t={t} i18nKey="p23">
             0
             <ContactLink>1</ContactLink>
             2

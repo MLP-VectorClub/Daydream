@@ -2,9 +2,25 @@ import {
   Button,
   UncontrolledTooltip,
 } from 'reactstrap';
-import { useRef } from 'react';
+import {
+  useEffect,
+  useRef,
+} from 'react';
 import { useTranslation } from '../../i18n';
-import ButtonIcon from './ButtonIcon';
+import InlineIcon from './InlineIcon';
+
+interface TooltipContentProps {
+  scheduleUpdate: () => void;
+  text: string;
+}
+
+const TooltipContent: React.FC<TooltipContentProps> = ({ scheduleUpdate, text }) => {
+  useEffect(() => {
+    scheduleUpdate();
+  }, [text]);
+
+  return <>{text}</>;
+};
 
 interface RevealPasswordButtonProps {
   setPasswordRevealed: (value: boolean) => void;
@@ -17,14 +33,17 @@ export default (({ setPasswordRevealed, passwordRevealed }) => {
   return (
     <>
       <Button
+        color="ui"
         outline
         onClick={() => setPasswordRevealed(!passwordRevealed)}
         innerRef={revealBtnRef}
       >
-        <ButtonIcon icon={passwordRevealed ? 'eye-slash' : 'eye'} fixedWidth />
+        <InlineIcon icon={passwordRevealed ? 'eye-slash' : 'eye'} fixedWidth />
       </Button>
-      <UncontrolledTooltip target={revealBtnRef}>
-        {t(passwordRevealed ? 'auth.hidePassword' : 'auth.showPassword')}
+      <UncontrolledTooltip target={revealBtnRef} fade={false}>
+        {({ scheduleUpdate }) => (
+          <TooltipContent text={t(passwordRevealed ? 'auth.hidePassword' : 'auth.showPassword')} scheduleUpdate={scheduleUpdate} />
+        )}
       </UncontrolledTooltip>
     </>
   );
