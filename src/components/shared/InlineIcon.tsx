@@ -1,46 +1,43 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classNames from 'classnames';
-import {
-  memo,
-  PropsWithChildren,
-} from 'react';
+import { memo } from 'react';
 import LoadingRing from './LoadingRing';
 import { getInlineIconClasses } from '../../utils/inline-icon-classes';
 
-export type InlineIconProps = PropsWithChildren<{
+export type InlineIconProps = {
   icon?: IconProp;
   loading?: boolean;
   last?: boolean;
   first?: boolean;
-  fixedWidth?: boolean;
   color?: string;
-}>;
+} & Omit<FontAwesomeIconProps, 'icon'>;
 
 const InlineIcon: React.FC<InlineIconProps> = (({
   icon,
   loading = false,
   last = false,
   first = false,
-  fixedWidth = false,
   color,
-  children,
+  className,
+  ...faProps
 }) => {
   if (loading) {
     return (
-      <LoadingRing inline spaceLeft={last} spaceRight={first} color={color} />
+      <LoadingRing inline spaceLeft={last} spaceRight={first} color={color} className={className} />
     );
   }
-
-  if (children) return <>{children}</>;
 
   if (!icon) return null;
 
   return (
     <FontAwesomeIcon
       icon={icon}
-      fixedWidth={fixedWidth}
-      className={classNames(getInlineIconClasses(color, first, last))}
+      className={classNames(className, getInlineIconClasses(color, first, last))}
+      {...faProps}
     />
   );
 });
