@@ -29,7 +29,6 @@
     "express": "^4.17.1",
     "hamburger-react": "^1.4.0",
     "http-proxy-middleware": "^1.0.3",
-    "husky": "^4.2.5",
     "lodash": "^4.17.19",
     "md5": "^2.2.1",
     "next": "^9.4.0",
