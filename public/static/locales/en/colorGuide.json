@@ -4,6 +4,9 @@
     "pony": "Pony",
     "eqg": "EQG"
   },
+  "appearances": {
+    "cmAvailable": "Cutie mark available"
+  },
   "errors": {
     "unknownGuide": "There is no guide by the specified name"
   }

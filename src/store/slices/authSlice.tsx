@@ -1,7 +1,5 @@
-import {
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 import {
   AuthModalSide,
   FailsafeUser,
@@ -15,11 +13,6 @@ import {
 } from '../../types';
 
 export interface AuthState {
-  signedIn: boolean;
-  sessionUpdating: boolean;
-  authCheck: {
-    status: Status;
-  };
   signIn: {
     status: Status;
     error: Nullable<UnifiedErrorResponse>;
@@ -36,25 +29,10 @@ export interface AuthState {
     open: boolean;
     side: AuthModalSide;
   };
-  user: FailsafeUser;
   notifications: object[];
 }
 
-const guestUser: FailsafeUser = {
-  id: null,
-  name: null,
-  email: null,
-  role: null,
-  avatarUrl: null,
-  avatarProvider: 'gravatar',
-};
-
 const initialState: AuthState = {
-  signedIn: false,
-  sessionUpdating: false,
-  authCheck: {
-    status: Status.LOAD,
-  },
   signIn: {
     status: Status.INIT,
     error: null,
@@ -71,7 +49,6 @@ const initialState: AuthState = {
     open: false,
     side: AuthModalSide.SIGN_IN,
   },
-  user: guestUser,
   notifications: [],
 };
 
@@ -84,12 +61,7 @@ const clearModalState = (state: typeof initialState) => {
 
 const afterAuthChange = (state: typeof initialState, user?: FailsafeUser) => {
   if (user) {
-    state.signedIn = true;
-    state.user = user;
     clearModalState(state);
-  } else {
-    state.signedIn = false;
-    state.user = guestUser;
   }
 };
 
@@ -97,16 +69,8 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    checkAuth: (state, _action: PayloadAction) => {
-      state.authCheck.status = Status.LOAD;
-    },
-    checkAuthSuccess(state, action: PayloadAction<User>) {
-      state.authCheck.status = Status.SUCCESS;
-      afterAuthChange(state, action.payload);
-    },
-    checkAuthFailure: (state, _action: PayloadAction<UnifiedErrorResponse>) => {
-      state.authCheck.status = Status.FAILURE;
-      afterAuthChange(state);
+    [HYDRATE](state, action: PayloadAction<{ auth: AuthState }>) {
+      return { ...state, ...action.payload.auth };
     },
     signIn(state, _action: PayloadAction<LoginRequest>) {
       state.signIn.status = Status.LOAD;
@@ -143,17 +107,10 @@ const authSlice = createSlice({
     },
     openAuthModal(state, action: PayloadAction<Nullable<AuthModalSide>>) {
       state.authModal.open = true;
-      if (action.payload === null && state.authModal.side === null) {
-        state.authModal.side = AuthModalSide.SIGN_IN;
-      } else if (action.payload !== null) {
-        state.authModal.side = action.payload;
-      }
+      state.authModal.side = action.payload || AuthModalSide.SIGN_IN;
     },
     closeAuthModal(state, _action: PayloadAction) {
       clearModalState(state);
-    },
-    setSessionUpdating(state, action: PayloadAction<boolean>) {
-      state.sessionUpdating = action.payload;
     },
   },
 });

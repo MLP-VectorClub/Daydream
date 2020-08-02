@@ -1,12 +1,6 @@
-import {
-  ReactNode,
-  ReactNodeArray,
-} from 'react';
+import { ReactNode, ReactNodeArray } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  Button,
-  ButtonGroup,
-} from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 import { useTranslation } from '../i18n';
 import MainNavigation from './shared/MainNavigation';
 import SidebarUserInfo from './shared/SidebarUserInfo';
@@ -19,11 +13,12 @@ import SidebarUsefulLinks from './shared/SidebarUsefulLinks';
 import CustomIcon from './shared/CustomIcon';
 import SignInButton from './shared/SignInButton';
 import SignOutButton from './shared/SignOutButton';
+import { useAuth } from '../hooks';
 
-export default (({ widgets }) => {
+const Sidebar: React.FC<{ widgets: ReactNode | ReactNodeArray }> = ({ widgets }) => {
   const { t } = useTranslation('common');
   const { backendDown } = useSelector((state: RootState) => state.core);
-  const { signedIn } = useSelector((state: RootState) => state.auth);
+  const { signedIn } = useAuth();
 
   return (
     <aside id="sidebar">
@@ -65,4 +60,6 @@ export default (({ widgets }) => {
       )}
     </aside>
   );
-}) as React.FC<{ widgets: ReactNode | ReactNodeArray }>;
+};
+
+export default Sidebar;

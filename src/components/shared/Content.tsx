@@ -1,7 +1,9 @@
 import classNames from 'classnames';
 
-export default (({ children, className = '' }) => (
+const Content: React.FC<{ className?: string }> = ({ children, className = '' }) => (
   <div id="content" className={classNames('section-container', className)}>
     {children}
   </div>
-)) as React.FC<{ className?: string }>;
+);
+
+export default Content;

@@ -18,7 +18,7 @@
     "colorGuideByName": "{{guideName}} Color Guide",
     "colorGuideByNameAndPage": "Page {{page}} - {{guideName}} Color Guide",
     "profile": "Profile",
-    "profileByName": "{{username}} - Profile",
+    "profileByName": "{{name}} - Profile",
     "yourProfile": "Your Profile",
     "show": "Show",
     "events": "Events",

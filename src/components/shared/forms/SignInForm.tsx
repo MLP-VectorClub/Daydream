@@ -1,7 +1,4 @@
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Alert,
   Button,
@@ -17,27 +14,15 @@ import {
   UncontrolledTooltip,
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from '../../../i18n';
 import { RootState } from '../../../store/rootReducer';
-import {
-  AuthModalSide,
-  Status,
-  UnifiedErrorResponseTypes,
-} from '../../../types';
+import { AuthModalSide, Status, UnifiedErrorResponseTypes } from '../../../types';
 import { authActions } from '../../../store/slices';
 import InlineIcon from '../InlineIcon';
 import BootstrapErrorMessages from '../BootstrapErrorMessages';
-import {
-  combineErrors,
-  validateEmail,
-  validatePassword,
-  validateRequired,
-} from '../../../utils';
+import { combineErrors, validateEmail, validatePassword, validateRequired } from '../../../utils';
 import RevealPasswordButton from '../RevealPasswordButton';
 
 enum INPUT_NAMES {
@@ -54,7 +39,7 @@ type FormFields = {
 
 // TODO Social (DeviantArt & Discord) login
 
-export default (() => {
+const SingInForm: React.FC = () => {
   const { t } = useTranslation('common');
   const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
@@ -198,4 +183,6 @@ export default (() => {
       </Row>
     </Form>
   );
-}) as React.FC;
+};
+
+export default SingInForm;

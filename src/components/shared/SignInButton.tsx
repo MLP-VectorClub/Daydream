@@ -1,21 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  Button,
-  UncontrolledTooltip,
-} from 'reactstrap';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
-import { useEffect } from 'react';
-import {
-  AuthModalSide,
-  Status,
-  WithTFunction,
-} from '../../types';
-import { RootState } from '../../store/rootReducer';
+import { Button, UncontrolledTooltip } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { AuthModalSide, Status, WithTFunction } from '../../types';
 import { authActions } from '../../store/slices';
 import LoadingRing from './LoadingRing';
+import { useAuth, useCsrf } from '../../hooks';
 
 interface TooltipContentProps {
   scheduleUpdate: () => void;
@@ -37,13 +27,13 @@ const TooltipContent: React.FC<TooltipContentProps> = ({ scheduleUpdate, text })
 
 const BUTTON_ID = 'signin';
 
-export default (({ t }) => {
+const SignInButton: React.FC<WithTFunction> = ({ t }) => {
   const dispatch = useDispatch();
-  const { authCheck } = useSelector((state: RootState) => state.auth);
-  const { csrf } = useSelector((state: RootState) => state.core);
+  const { authCheck } = useAuth();
+  const csrf = useCsrf();
 
   const authLoading = authCheck.status === Status.LOAD;
-  const csrfLoading = csrf.status !== Status.SUCCESS;
+  const csrfLoading = !csrf;
   const disabled = authLoading || csrfLoading;
   const openSignInModal = () => dispatch(authActions.openAuthModal(AuthModalSide.SIGN_IN));
 
@@ -65,4 +55,6 @@ export default (({ t }) => {
       )}
     </>
   );
-}) as React.FC<WithTFunction>;
+};
+
+export default SignInButton;

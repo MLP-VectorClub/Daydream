@@ -1,11 +1,5 @@
-import {
-  Button,
-  UncontrolledTooltip,
-} from 'reactstrap';
-import {
-  useEffect,
-  useRef,
-} from 'react';
+import { Button, UncontrolledTooltip } from 'reactstrap';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from '../../i18n';
 import InlineIcon from './InlineIcon';
 
@@ -27,7 +21,7 @@ interface RevealPasswordButtonProps {
   passwordRevealed: boolean;
 }
 
-export default (({ setPasswordRevealed, passwordRevealed }) => {
+const RevealPasswordButton: React.FC<RevealPasswordButtonProps> = ({ setPasswordRevealed, passwordRevealed }) => {
   const revealBtnRef = useRef<HTMLButtonElement>(null);
   const { t } = useTranslation('common');
   return (
@@ -47,4 +41,6 @@ export default (({ setPasswordRevealed, passwordRevealed }) => {
       </UncontrolledTooltip>
     </>
   );
-}) as React.FC<RevealPasswordButtonProps>;
+};
+
+export default RevealPasswordButton;

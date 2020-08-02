@@ -1,12 +1,6 @@
 import { TFunction } from 'next-i18next';
-import {
-  FieldValues,
-  FormProps,
-} from 'react-hook-form';
-import {
-  User,
-  ValidationErrorResponse,
-} from './api';
+import { FieldValues, FormProps } from 'react-hook-form';
+import { User, ValidationErrorResponse } from './api';
 
 export enum Status {
   INIT,
@@ -34,6 +28,8 @@ export type Nullable<T> = T | null;
 export type NullableProps<T, K extends keyof T = keyof T> = Omit<T, K> & {
   [P in K]: Nullable<T[P]>;
 };
+export type Optional<T> = T | undefined;
+export type OptionalProps<T, K extends keyof T = keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 /** Can be used in place of `number` to avoid having to do explicit type casting */
 export type Numeric = number | string;
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
@@ -99,7 +95,7 @@ export type UnifiedErrorResponse = {
 
 export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'email' | 'role'>;
 
-export type TitleKeyWithParams = [string, Record<string, string>];
+export type TitleKeyWithParams = [string, Record<string, Numeric>];
 export type PageTitle = Nullable<string> | TitleKeyWithParams;
 
 export type FormSubmitHandler<T = FieldValues> = Parameters<FormProps<T>['handleSubmit']>[0];

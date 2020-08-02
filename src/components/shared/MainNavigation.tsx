@@ -1,24 +1,16 @@
-import {
-  Nav,
-  NavItem,
-  NavLink,
-} from 'reactstrap';
+import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
 import React from 'react';
 import { Link } from '../../routes';
-import {
-  getProfileLink,
-  permission,
-} from '../../utils';
+import { getProfileLink, permission } from '../../utils';
 import ExternalLink from './ExternalLink';
 import { CLUB_URL } from '../../config';
 import { useTranslation } from '../../i18n';
-import { RootState } from '../../store/rootReducer';
+import { useAuth } from '../../hooks';
 
-export default (() => {
+const MainNavigation = () => {
   const { t } = useTranslation();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user } = useAuth();
   return (
     <Nav navbar>
       <NavItem>
@@ -75,4 +67,6 @@ export default (() => {
       </NavItem>
     </Nav>
   );
-}) as React.FC;
+};
+
+export default MainNavigation;

@@ -69,9 +69,40 @@ export type Role = "user" | "member" | "assistant" | "staff" | "admin";
 export type ShowType = "episode" | "movie" | "short" | "special";
 
 /**
+ * List of available sprite sizes
+ */
+export type SpriteSize = 300 | 600;
+
+/**
  * List of types tags in the color guide can have
  */
 export type TagType = "app" | "cat" | "gen" | "spec" | "char" | "warn";
+
+/**
+ * List of available user preferences
+ */
+export type UserPrefKeys =
+  | "cg_itemsperpage"
+  | "cg_hidesynon"
+  | "cg_hideclrinfo"
+  | "cg_fulllstprev"
+  | "cg_nutshell"
+  | "cg_defaultguide"
+  | "p_avatarprov"
+  | "p_vectorapp"
+  | "p_hidediscord"
+  | "p_hidepcg"
+  | "p_homelastep"
+  | "ep_hidesynopses"
+  | "ep_noappprev"
+  | "ep_revstepbtn"
+  | "a_pcgearn"
+  | "a_pcgmake"
+  | "a_pcgsprite"
+  | "a_postreq"
+  | "a_postres"
+  | "a_reserve"
+  | "pcg_slots";
 
 export type SlimAppearanceList = ErrorResponse & {
   appearances: SlimAppearance[];
@@ -85,7 +116,7 @@ export interface AppearanceList {
 }
 
 /**
- * Optional parameter that indicates whether you would like to get preview image data with the request. Typically unneccessary unless you want to display a temporary image while the larger image loads.
+ * Optional parameter that indicates whether you would like to get preview image data with the request. Typically unnecessary unless you want to display a temporary image while the larger image loads.
  */
 export type PreviewsIndicator = true;
 
@@ -125,14 +156,28 @@ export interface CommonAppearance {
 }
 
 /**
+ * Represents properties that belong to the slim appearance object only
+ */
+export type SlimAppearanceOnly = CommonAppearance;
+
+/**
  * A less heavy version of the regular Appearance schema
  */
-export type SlimAppearance = CommonAppearance;
+export type SlimAppearance = CommonAppearance & SlimAppearanceOnly;
+
+/**
+ * Represents properties that belong to the full appearance object only
+ */
+export interface AppearanceOnly {
+  created_at: string;
+  notes: string;
+  tags: SlimGuideTag[];
+}
 
 /**
  * Represents an entry in the color guide
  */
-export type Appearance = CommonAppearance & ListOfColorGroups;
+export type Appearance = CommonAppearance & AppearanceOnly & ListOfColorGroups;
 
 export interface SlimGuideTag {
   id?: OneBasedId;
@@ -149,9 +194,9 @@ export interface SlimGuideTag {
  */
 export interface Sprite {
   /**
-   * MD5 hash of the current sprite image
+   * The full URL of the current sprite image
    */
-  hash: SpriteHash;
+  path: string;
   /**
    * Data URI for a small preview image with matching proportions to the actual image, suitable for displaying as a preview while the full image loads. May not be sent based on the request parameters.
    */
@@ -196,11 +241,12 @@ export interface Color {
 
 export type GuidePageSize = number;
 
-export type SpriteSize = 300 | 600;
-
-export type SpriteHash = string;
-
 export type AppearanceToken = string;
+
+/**
+ * Contains a URL that most clients will automatically redirect to for 301 and 302 responses
+ */
+export type LocationHeader = string;
 
 export interface LoginRequest {
   email: string;
@@ -267,7 +313,6 @@ export interface PublicUser {
 }
 
 export type User = PublicUser & {
-  name: string;
   email: string;
   /**
    * The database-level role for the user
@@ -317,7 +362,6 @@ export interface GetAppearancesIdSpriteRequest {
   id: ZeroBasedId
   size: SpriteSize
   token: AppearanceToken
-  hash: SpriteHash
 }
 export interface GetAppearancesIdPreviewRequest {
   id: ZeroBasedId
@@ -329,8 +373,11 @@ export interface GetSanctumCsrfCookieRequest {
 }
 export interface GetUsersMeRequest {
 }
-export interface GetUsersUsernameRequest {
+export interface GetUsersDaUsernameRequest {
   username: string
+}
+export interface GetUsersIdRequest {
+  id: OneBasedId
 }
 export interface PostUsersLogoutRequest {
 }
@@ -346,6 +393,7 @@ export type GetAppearancesAllResult = SlimAppearanceList;
 export type GetAppearancesIdColorGroupsResult = ListOfColorGroups;
 
 export type GetAppearancesIdSpriteResult = any
+export type GetAppearancesIdSprite302 = any
 export type GetAppearancesIdPreviewResult = any
 export interface PostUsersLoginResult {
   token?: string;
@@ -360,7 +408,9 @@ export type PostUsers204 = any
 export type GetSanctumCsrfCookieResult = any
 export type GetUsersMeResult = User;
 
-export type GetUsersUsernameResult = PublicUser;
+export type GetUsersDaUsernameResult = PublicUser;
+
+export type GetUsersIdResult = PublicUser;
 
 export type PostUsersLogoutResult = any
 export interface GetUsersTokensResult {

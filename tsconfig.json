@@ -24,9 +24,13 @@
   },
   "exclude": [
     "node_modules",
-    "src/server.ts"
+    "dist",
+    ".next",
+    "out",
+    "next.config.js"
   ],
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ]

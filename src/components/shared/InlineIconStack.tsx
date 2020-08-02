@@ -1,8 +1,5 @@
 import classNames from 'classnames';
-import {
-  memo,
-  PropsWithChildren,
-} from 'react';
+import { memo, PropsWithChildren } from 'react';
 import LoadingRing from './LoadingRing';
 import { getInlineIconClasses } from '../../utils/inline-icon-classes';
 

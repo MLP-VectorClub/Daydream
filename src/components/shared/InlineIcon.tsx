@@ -1,7 +1,4 @@
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classNames from 'classnames';
 import { memo } from 'react';

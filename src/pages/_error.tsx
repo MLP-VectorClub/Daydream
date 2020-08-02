@@ -1,14 +1,10 @@
 import React from 'react';
-import { NextComponentType } from 'next';
 import { useTranslation } from '../i18n';
 import Layout from '../components/Layout';
 import Content from '../components/shared/Content';
-import {
-  Nullable,
-  WithTFunction,
-} from '../types';
+import { Nullable, WithTFunction } from '../types';
 import { coreActions } from '../store/slices';
-import { AppPageContext } from '../store';
+import { AppPageContext, wrapper } from '../store';
 import StandardHeading from '../components/shared/StandardHeading';
 
 interface PropTypes {
@@ -45,21 +41,22 @@ const Error = (props => {
       </Content>
     </Layout>
   );
-}) as NextComponentType<AppPageContext, PropTypes, PropTypes>;
+}) as React.FC<PropTypes>;
 
-Error.getInitialProps = async ({ store, res, err }) => {
+export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
+  const { store, res } = ctx as typeof ctx & AppPageContext;
   let statusCode;
   if (res) {
     ({ statusCode } = res);
-  } else if (err) {
-    ({ statusCode } = err);
   }
   const title = statusCode === null ? statusCode : String(statusCode);
   store.dispatch(coreActions.setTitle(title));
   return {
-    namespacesRequired: ['common'],
-    statusCode,
+    props: {
+      namespacesRequired: ['common'],
+      statusCode,
+    },
   };
-};
+});
 
 export default Error;

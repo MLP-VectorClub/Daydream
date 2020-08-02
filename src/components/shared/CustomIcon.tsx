@@ -7,6 +7,8 @@ export interface CustomIconProps {
   className?: string;
 }
 
-export default (({ src, alt = '', className }) => (
+const CustomIcon: React.FC<CustomIconProps> = ({ src, alt = '', className }) => (
   <img src={src} className={classNames(className, 'svg-inline--fa custom-icon')} alt={alt} />
-)) as React.FC<CustomIconProps>;
+);
+
+export default CustomIcon;

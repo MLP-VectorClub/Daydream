@@ -1,23 +1,15 @@
-import {
-  configureStore,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
-import { NextPageContext } from 'next';
 import { TFunction } from 'next-i18next';
-import rootReducer,
-{
-  ActionsType,
-  RootState,
-} from './rootReducer';
+import { createWrapper, MakeStore } from 'next-redux-wrapper';
+import rootReducer, { ActionsType, RootState } from './rootReducer';
 import { rootEpic } from './rootEpic';
 
-const epicMiddleware = createEpicMiddleware<ActionsType, ActionsType, RootState>();
+const createStore = () => {
+  const epicMiddleware = createEpicMiddleware<ActionsType, ActionsType, RootState>();
 
-const createStore = (preloadedState = {}) => {
   const store = configureStore({
     reducer: rootReducer,
-    preloadedState,
     middleware: [epicMiddleware, ...getDefaultMiddleware()],
   });
 
@@ -28,26 +20,11 @@ const createStore = (preloadedState = {}) => {
 
 export type AppStore = ReturnType<typeof createStore>;
 export type AppDispatch = AppStore['dispatch'];
-export type AppPageContext<T extends object = {}> =
-  NextPageContext
-  & { store: AppStore; req: { t: TFunction } }
-  & T;
+export type AppPageContext = { req?: { t: TFunction } };
+export type WithNamespacesRequired = { namespacesRequired: string[] };
 
-let latestStore: AppStore;
+// create a makeStore function
+const makeStore: MakeStore<RootState> = () => createStore();
 
-export const initStore = (preloadedState = {}): AppStore => {
-  if (!latestStore) {
-    latestStore = createStore(preloadedState);
-  }
-
-  return latestStore;
-};
-
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./rootReducer', () => {
-    const newRootReducer = require('./rootReducer').default;
-    if (latestStore) {
-      latestStore.replaceReducer(newRootReducer);
-    }
-  });
-}
+// export an assembled wrapper
+export const wrapper = createWrapper<RootState>(makeStore);

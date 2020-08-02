@@ -5,9 +5,10 @@ interface PropTypes {
   lead?: ReactNode;
 }
 
-export default (({ heading, lead }) => (
+const StandardHeading: React.FC<PropTypes> = ({ heading, lead }) => (
   <>
     <h1>{heading}</h1>
     <p className="lead">{lead}</p>
   </>
-)) as React.FC<PropTypes>;
+);
+export default StandardHeading;

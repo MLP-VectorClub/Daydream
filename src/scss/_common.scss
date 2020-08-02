@@ -42,13 +42,6 @@ body {
   font-weight: bold;
 }
 
-
-#content, #dialogContent, .notice {
-  a:not(.btn) {
-    @include link
-  }
-}
-
 #content > :last-child {
   margin-bottom: 0 !important;
 }

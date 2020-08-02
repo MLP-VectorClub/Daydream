@@ -1,14 +1,6 @@
-import {
-  get,
-  range as _range,
-  trim,
-} from 'lodash';
+import { get, range as _range, trim } from 'lodash';
 import { AxiosError } from 'axios';
-import {
-  UnifiedErrorResponse,
-  UnifiedErrorResponseTypes,
-  ValidationErrorResponse,
-} from '../types';
+import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from '../types';
 import { PROD_APP_URL } from '../config';
 
 export const sanitizePageParam = (value: string) => {

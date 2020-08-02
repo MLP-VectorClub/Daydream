@@ -1,14 +1,10 @@
-import {
-  Collapse,
-  Navbar,
-  NavbarBrand,
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarBrand } from 'reactstrap';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import ToTheTopArrow from './shared/ToTheTopArrow';
 import MainNavigation from './shared/MainNavigation';
 import SidebarToggler from './shared/SidebarToggler';
 
-export default (() => (
+const Header: React.FC = () => (
   <div id="header">
     <ScrollContainer>
       <Navbar expand="lg" dark className="bg-primary">
@@ -23,4 +19,6 @@ export default (() => (
     </ScrollContainer>
     <ToTheTopArrow />
   </div>
-)) as React.FC;
+);
+
+export default Header;

@@ -7,16 +7,18 @@ import {
 } from '../types';
 
 export const getProfileTitle = (
-  username: string,
-  user: Nullable<PublicUser>,
+  user?: PublicUser,
   authUserId: Nullable<number> = null,
 ): PageTitle => {
   if (user) {
     if (authUserId === user.id) {
       return 'yourProfile';
     }
+    if (user.name) {
+      return ['profileByName', { name: user.name }];
+    }
   }
-  return ['profileByName', { username }];
+  return 'profile';
 };
 
 export type ProfileLinkOptions = NullableProps<Pick<User, 'id' | 'name'>>;

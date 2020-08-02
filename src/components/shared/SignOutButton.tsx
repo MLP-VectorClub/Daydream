@@ -1,23 +1,14 @@
-import {
-  Button,
-  Tooltip,
-} from 'reactstrap';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import { Button, Tooltip } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import {
-  Status,
-  WithTFunction,
-} from '../../types';
+import { Status, WithTFunction } from '../../types';
 import InlineIcon from './InlineIcon';
 import { RootState } from '../../store/rootReducer';
 import { authActions } from '../../store/slices';
 
 const BUTTON_ID = 'signout';
 
-export default (({ t }) => {
+const SignOutButton: React.FC<WithTFunction> = ({ t }) => {
   const dispatch = useDispatch();
   const { signOut } = useSelector((state: RootState) => state.auth);
   const [signOutConfirm, setSignOutConfirm] = useState(false);
@@ -48,4 +39,6 @@ export default (({ t }) => {
       </Tooltip>
     </>
   );
-}) as React.FC<WithTFunction>;
+};
+
+export default SignOutButton;

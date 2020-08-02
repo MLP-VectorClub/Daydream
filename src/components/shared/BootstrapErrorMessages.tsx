@@ -1,9 +1,9 @@
 import { ErrorMessage } from 'react-hook-form';
 import { FormFeedback } from 'reactstrap';
 
-export type BootstrapErrorMessagesProps = Pick<Parameters<typeof ErrorMessage>[0], 'errors' | 'name'>;
+export type PropTypes = Pick<Parameters<typeof ErrorMessage>[0], 'errors' | 'name'>;
 
-export default (({ errors, name }) => {
+const BootstrapErrorMessages: React.FC<PropTypes> = ({ errors, name }) => {
   const messages = errors && errors[name];
   if (!Array.isArray(messages)) {
     return null;
@@ -12,4 +12,6 @@ export default (({ errors, name }) => {
   return Object.values(messages).map((line, i) => (
     <FormFeedback key={i} className="d-block" color="danger">{line}</FormFeedback>
   ));
-}) as React.FC<BootstrapErrorMessagesProps>;
+};
+
+export default BootstrapErrorMessages;

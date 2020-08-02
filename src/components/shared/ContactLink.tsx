@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { coreActions } from '../../store/slices';
 
-export default (({ children, ...rest }) => {
+const ContactLink: React.FC = ({ children, ...rest }) => {
   const dispatch = useDispatch();
   const openModal = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -12,4 +12,6 @@ export default (({ children, ...rest }) => {
       {children}
     </a>
   );
-}) as React.FC;
+};
+
+export default ContactLink;

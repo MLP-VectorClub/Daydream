@@ -1,27 +1,19 @@
-import {
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
-import {
-  Nullable,
-  PublicUser,
-  ValuesOf,
-} from '../../types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
+import { ValuesOf } from '../../types';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProfileState {
-  user: Nullable<PublicUser>;
 }
 
-const initialState: ProfileState = {
-  user: null,
-};
+const initialState: ProfileState = {};
 
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setUserData(state, action: PayloadAction<Nullable<PublicUser>>) {
-      state.user = action.payload;
+    [HYDRATE](state, action: PayloadAction<{ profile: ProfileState }>) {
+      return { ...state, ...action.payload.profile };
     },
   },
 });

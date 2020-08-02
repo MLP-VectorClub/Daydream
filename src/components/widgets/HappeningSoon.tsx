@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 
-export default (() => {
+const HappeningSoon: React.FC = () => {
   const { upcomingEvents } = useSelector((state: RootState) => state.core);
   return <>{upcomingEvents.map(() => null)}</>;
-}) as React.FC;
+};
+
+export default HappeningSoon;

@@ -1,11 +1,9 @@
 import { combineEpics } from 'redux-observable';
 import { catchError } from 'rxjs/operators';
 import auth from './epics/authEpics';
-import core from './epics/coreEpics';
 
 export const epics = [
   ...auth,
-  ...core,
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

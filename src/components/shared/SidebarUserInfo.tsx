@@ -1,32 +1,26 @@
-import { useSelector } from 'react-redux';
 import classNames from 'classnames';
-import { RootState } from '../../store/rootReducer';
+import React from 'react';
 import { useTranslation } from '../../i18n';
 import { mapRoleLabel } from '../../utils';
 import AvatarWrap from './AvatarWrap';
 import ProfileLink from './ProfileLink';
 import LoadingRing from './LoadingRing';
 import { Status } from '../../types';
+import { useAuth } from '../../hooks';
 
-export default (() => {
+const SidebarUserInfo: React.FC = () => {
   const { t } = useTranslation();
-  const {
-    sessionUpdating,
-    authCheck,
-    user,
-    signedIn,
-  } = useSelector((state: RootState) => state.auth);
+  const { authCheck, user, signedIn } = useAuth();
 
   const checkingAuth = authCheck.status === Status.LOAD;
 
   const titleProp: { title?: string } = {};
-  if (sessionUpdating) titleProp.title = t('sidebar.sessionUpdating');
-  else if (checkingAuth) titleProp.title = t('sidebar.authCheck');
+  if (checkingAuth) titleProp.title = t('sidebar.authCheck');
 
   return (
     <div
       className={classNames(`logged-in provider-${user.avatarProvider}`, {
-        'updating-session': sessionUpdating || checkingAuth,
+        'checking-auth': checkingAuth,
       })}
       {...titleProp}
     >
@@ -44,4 +38,6 @@ export default (() => {
       </div>
     </div>
   );
-}) as React.FC;
+};
+
+export default SidebarUserInfo;

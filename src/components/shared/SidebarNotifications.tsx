@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 
-export default (() => {
+const SidebarNotifications: React.FC = () => {
   const { notifications } = useSelector((state: RootState) => state.auth);
   return notifications.length > 0 ? (
     <section className="notifications">
@@ -9,4 +9,6 @@ export default (() => {
       {notifications}
     </section>
   ) : null;
-}) as React.FC;
+};
+
+export default SidebarNotifications;

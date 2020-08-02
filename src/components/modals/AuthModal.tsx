@@ -1,30 +1,14 @@
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
-import {
-  Modal,
-  ModalBody,
-  ModalHeader,
-} from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import {
-  MouseEventHandler,
-  useEffect,
-} from 'react';
+import React, { MouseEventHandler, useEffect } from 'react';
 import { useTranslation } from '../../i18n';
 import { RootState } from '../../store/rootReducer';
-import {
-  AuthModalSide,
-  PostUsersLoginRequest,
-  PostUsersRequest,
-} from '../../types';
-import {
-  authActions,
-  coreActions,
-} from '../../store/slices';
+import { AuthModalSide, PostUsersLoginRequest, PostUsersRequest } from '../../types';
+import { authActions } from '../../store/slices';
 import SignInForm from '../shared/forms/SignInForm';
 import RegisterForm from '../shared/forms/RegisterForm';
+import { useAuth } from '../../hooks';
 
 enum INPUT_NAMES {
   NAME = 'name',
@@ -43,15 +27,12 @@ export interface AuthModalFormProps {
   switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
 }
 
-export default (() => {
+const AuthModal: React.FC = () => {
   const { t } = useTranslation('common');
   const { reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
-  const { authModal, signedIn } = useSelector((store: RootState) => store.auth);
-
-  useEffect(() => {
-    dispatch(coreActions.initCsrf());
-  }, []);
+  const { signedIn } = useAuth();
+  const { authModal } = useSelector((store: RootState) => store.auth);
 
   useEffect(() => {
     if (!authModal.open) {
@@ -84,4 +65,6 @@ export default (() => {
       </ModalBody>
     </Modal>
   );
-}) as React.FC;
+};
+
+export default AuthModal;

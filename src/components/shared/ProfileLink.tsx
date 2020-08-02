@@ -1,13 +1,8 @@
-import { PropsWithChildren } from 'react';
+import React from 'react';
 import { Link } from '../../routes';
-import {
-  getProfileLink,
-  ProfileLinkOptions,
-} from '../../utils';
+import { getProfileLink, ProfileLinkOptions } from '../../utils';
 
-type PropTypes = PropsWithChildren<ProfileLinkOptions>;
-
-export default (({ children = null, ...rest }) => {
+const ProfileLink: React.FC<ProfileLinkOptions> = ({ children = null, ...rest }) => {
   const content = children === null ? <a>{rest.name}</a> : children;
 
   if (rest.id === null) {
@@ -19,4 +14,6 @@ export default (({ children = null, ...rest }) => {
       {content}
     </Link>
   );
-}) as React.FC<PropTypes>;
+};
+
+export default ProfileLink;

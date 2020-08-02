@@ -1,7 +1,4 @@
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Alert,
   Button,
@@ -16,21 +13,10 @@ import {
   Label,
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import {
-  useEffect,
-  useState,
-} from 'react';
-import {
-  Trans,
-  useTranslation,
-} from '../../../i18n';
+import { useEffect, useState } from 'react';
+import { Trans, useTranslation } from '../../../i18n';
 import { RootState } from '../../../store/rootReducer';
-import {
-  AuthModalSide,
-  Status,
-  UnifiedErrorResponseTypes,
-  WithTFunction,
-} from '../../../types';
+import { AuthModalSide, Status, UnifiedErrorResponseTypes, WithTFunction } from '../../../types';
 import { authActions } from '../../../store/slices';
 import ExternalLink from '../ExternalLink';
 import InlineIcon from '../InlineIcon';
@@ -65,7 +51,7 @@ type FormFields = {
   [INPUT_NAMES.PRIVACY]: boolean;
 };
 
-export default (() => {
+const RegisterForm: React.FC = () => {
   const { t } = useTranslation('common');
   const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
@@ -219,4 +205,6 @@ export default (() => {
       </Button>
     </Form>
   );
-}) as React.FC;
+};
+
+export default RegisterForm;

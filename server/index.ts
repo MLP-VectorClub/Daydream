@@ -1,32 +1,30 @@
 /* eslint-disable import/first */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import Axios from 'axios-observable';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('console-stamp')(console, {
-  format: ':date(yyyy-mm-dd HH:MM:ss.l) :label',
-});
-
 import https from 'https';
 import http from 'http';
 import next from 'next';
 import fs from 'fs';
 import dotenv from 'dotenv';
 import express from 'express';
-import nextI18NextMiddleware from 'next-i18next/middleware';
 import cookieParser from 'cookie-parser';
 import * as es6Promise from 'es6-promise';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import nextI18next,
-{ i18n } from './i18n';
-import routes from './routes';
+import { i18n } from '../src/i18n';
+import routes from '../src/routes';
+import { DEV_ENV } from '../src/config';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('console-stamp')(console, {
+  format: ':date(yyyy-mm-dd HH:MM:ss.l) :label',
+});
 
 dotenv.config();
 
 es6Promise.polyfill();
 
-if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
+if (DEV_ENV) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-extraneous-dependencies
   const { applyServerHMR } = require('i18next-hmr/server');
   applyServerHMR(i18n);
 }
@@ -72,9 +70,6 @@ if (BACKEND_HOST) {
 (async () => {
   await app.prepare();
   const expressApp = express();
-
-  await nextI18next.initPromise;
-  expressApp.use(nextI18NextMiddleware(nextI18next));
 
   expressApp.use(cookieParser());
 

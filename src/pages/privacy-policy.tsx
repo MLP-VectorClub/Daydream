@@ -1,23 +1,18 @@
-import { NextComponentType } from 'next';
 import React from 'react';
 import { Alert } from 'reactstrap';
-import {
-  Trans,
-  useTranslation,
-} from '../i18n';
+import { Trans, useTranslation } from '../i18n';
 import Content from '../components/shared/Content';
-import Layout from '../components/Layout';
 import ExternalLink from '../components/shared/ExternalLink';
 import ContactLink from '../components/shared/ContactLink';
 import { coreActions } from '../store/slices';
 import { PROD_APP_URL } from '../config';
-import { AppPageContext } from '../store';
+import { AppPageContext, wrapper } from '../store';
 import StandardHeading from '../components/shared/StandardHeading';
 
-const PrivacyPolicy = (() => {
+const PrivacyPolicy: React.FC = () => {
   const { t } = useTranslation('privacyPolicy');
   return (
-    <Layout>
+    <>
       <Alert color="warning">
         {t('notYetUpdated')}
       </Alert>
@@ -85,16 +80,19 @@ const PrivacyPolicy = (() => {
           </Trans>
         </p>
       </Content>
-    </Layout>
+    </>
   );
-}) as NextComponentType<AppPageContext>;
+};
 
-PrivacyPolicy.getInitialProps = async ({ store }) => {
+export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
+  const { store } = ctx as typeof ctx & AppPageContext;
   store.dispatch(coreActions.setTitle('privacyPolicy'));
 
   return {
-    namespacesRequired: ['privacyPolicy'],
+    props: {
+      namespacesRequired: ['privacyPolicy'],
+    },
   };
-};
+});
 
 export default PrivacyPolicy;

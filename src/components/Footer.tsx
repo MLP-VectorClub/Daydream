@@ -1,18 +1,8 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import { Nullable } from '../types';
-import {
-  DEV_API_URL,
-  GITHUB_URL,
-  PROD_API_URL,
-} from '../config';
-import {
-  BuildIdParseResult,
-  getBuildData,
-} from '../utils';
+import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
+import { BuildIdParseResult, getBuildData } from '../utils';
 import { useTranslation } from '../i18n';
 import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
@@ -20,7 +10,7 @@ import ContactModal from './ContactModal';
 import ExternalLink from './shared/ExternalLink';
 import { Link } from '../routes';
 
-export default (() => {
+const Footer: React.FC = () => {
   const { t } = useTranslation();
   const [buildData, setBuildData] = useState<Nullable<BuildIdParseResult>>(null);
 
@@ -87,4 +77,6 @@ export default (() => {
       <ContactModal />
     </>
   );
-}) as React.FC;
+};
+
+export default Footer;

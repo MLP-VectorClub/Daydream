@@ -1,8 +1,4 @@
-import {
-  DatabaseRole,
-  FailsafeUser,
-  Nullable,
-} from '../types';
+import { DatabaseRole, FailsafeUser, Nullable } from '../types';
 
 export const ROLE_LIST: { [k in DatabaseRole]: number } = {
   user: 1,

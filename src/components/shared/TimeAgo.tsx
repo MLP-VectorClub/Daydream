@@ -1,16 +1,9 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { timer } from 'rxjs';
 import { formatDistanceToNow } from 'date-fns';
-import {
-  distinctUntilChanged,
-  map,
-  tap,
-} from 'rxjs/operators';
+import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 
-export default (({ date }) => {
+const TimeAgo: React.FC<{ date: Date }> = ({ date }) => {
   const [text, setText] = useState('');
 
   useEffect(() => {
@@ -25,7 +18,7 @@ export default (({ date }) => {
     };
   }, [date]);
 
-  return (
-    <time dateTime={date.toISOString()}>{text}</time>
-  );
-}) as React.FC<{ date: Date }>;
+  return <time dateTime={date.toISOString()}>{text}</time>;
+};
+
+export default TimeAgo;

@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Router } from 'next/router';
 import TopBarProgress from 'react-topbar-progress-indicator';
 
@@ -11,7 +8,7 @@ TopBarProgress.config({
   barThickness: 2,
 });
 
-export default (() => {
+const ProgressIndicator = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -30,4 +27,6 @@ export default (() => {
   }, []);
 
   return visible && <TopBarProgress />;
-}) as React.FC;
+};
+
+export default ProgressIndicator;

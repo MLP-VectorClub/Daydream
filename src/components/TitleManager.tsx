@@ -4,7 +4,7 @@ import { useTranslation } from '../i18n';
 import { RootState } from '../store/rootReducer';
 import { APP_NAME } from '../config';
 
-export default (() => {
+const TitleManager: React.FC = () => {
   const { t } = useTranslation();
   const { title } = useSelector((store: RootState) => store.core);
 
@@ -18,4 +18,6 @@ export default (() => {
       <title>{emptyTitle ? '' : `${titleString} - `}{APP_NAME}</title>
     </Head>
   );
-}) as React.FC;
+};
+
+export default TitleManager;

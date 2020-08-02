@@ -1,8 +1,4 @@
-import React,
-{
-  ReactNode,
-  ReactNodeArray,
-} from 'react';
+import React, { ReactNode, ReactNodeArray } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface PropTypes {
@@ -15,7 +11,7 @@ interface PropTypes {
   title?: string;
 }
 
-export default (({ children, tag = null, href, className, blank = true, icon = false, title }) => {
+const ExternalLink: React.FC<PropTypes> = ({ children, tag = null, href, className, blank = true, icon = false, title }) => {
   const Tag = tag || 'a';
   const additionalProps = blank ? { target: '_blank', rel: 'noopener noreferrer' } : null;
   return (
@@ -24,4 +20,6 @@ export default (({ children, tag = null, href, className, blank = true, icon = f
       {icon && <FontAwesomeIcon size="sm" icon="external-link-alt" className="ml-2" />}
     </Tag>
   );
-}) as React.FC<PropTypes>;
+};
+
+export default ExternalLink;
