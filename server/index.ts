@@ -40,12 +40,12 @@ interface AppEnvironment {
 }
 
 const {
-  NODE_ENV,
-  APP_PORT,
-  APP_HOST,
+  NODE_ENV = 'development',
+  APP_PORT = 3000,
+  APP_HOST = '127.0.0.1',
   SSL_KEY_PATH,
   SSL_CERT_PATH,
-  BACKEND_HOST,
+  BACKEND_HOST = 'https://api.mlpvector.club',
 } = process.env as Partial<AppEnvironment>;
 
 const dev = NODE_ENV !== 'production';
