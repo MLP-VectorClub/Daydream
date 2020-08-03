@@ -29,6 +29,9 @@ export const fixPath = <T extends ParsedUrlQuery>(
   if (req.url === expectedPath || req.url?.includes('_next')) return false;
 
   res.setHeader('location', expectedPath);
+  if (req.url) {
+    res.setHeader('x-original-location', req.url);
+  }
   res.statusCode = 302;
   res.end();
   return true;
