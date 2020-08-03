@@ -3,7 +3,7 @@ import { Link } from '../../routes';
 import { getProfileLink, ProfileLinkOptions } from '../../utils';
 
 const ProfileLink: React.FC<ProfileLinkOptions> = ({ children = null, ...rest }) => {
-  const content = children === null ? <a>{rest.name}</a> : children;
+  const content = children === null ? <a>{rest.name}</a> : <>{children}</>;
 
   if (rest.id === null) {
     return content;

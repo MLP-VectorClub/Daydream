@@ -8,7 +8,7 @@ TopBarProgress.config({
   barThickness: 2,
 });
 
-const ProgressIndicator = () => {
+const ProgressIndicator: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const ProgressIndicator = () => {
     };
   }, []);
 
-  return visible && <TopBarProgress />;
+  return <>{visible && <TopBarProgress />}</>;
 };
 
 export default ProgressIndicator;

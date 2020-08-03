@@ -146,6 +146,7 @@
       140
     ],
     "@zsoltszavo/import-lines/imports-multiline": ["error", 4, 140],
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "react/no-danger": "off"
   }
 }

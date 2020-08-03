@@ -38,12 +38,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     notFound(ctx);
   }
 
-  let page: Nullable<number> = 1;
+  let page = 1;
   if (typeof query.page === 'string') {
     page = parseInt(query.page, 10);
   }
 
-  let initialData: GetAppearancesResult;
+  let initialData: Optional<GetAppearancesResult>;
   if (guide) {
     try {
       initialData = await requestObservableToPromise(colorGuideService.getAppearances({ ...query, guide, page }));

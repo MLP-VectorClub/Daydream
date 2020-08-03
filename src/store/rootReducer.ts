@@ -10,10 +10,10 @@ const appReducer = combineReducers({
   profile: profileReducer,
 });
 
-const rootReducer = (state: RootState, action: ReturnType<ActionsType>) => {
-  if (action.type === HYDRATE) return { ...state, ...(action.payload as RootState) };
+export const rootReducer = (...args: Parameters<typeof appReducer>): ReturnType<typeof appReducer> => {
+  if (args[1].type === HYDRATE) return { ...args[0], ...(args[1].payload as RootState) };
 
-  return appReducer(state, action);
+  return appReducer(...args);
 };
 
 export interface RootState {
@@ -26,5 +26,3 @@ export type ActionsType =
   CoreActions
   | AuthActions
   | ProfileActions;
-
-export default rootReducer;

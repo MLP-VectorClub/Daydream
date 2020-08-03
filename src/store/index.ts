@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
 import { TFunction } from 'next-i18next';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
-import rootReducer, { ActionsType, RootState } from './rootReducer';
+import { ActionsType, RootState, rootReducer } from './rootReducer';
 import { rootEpic } from './rootEpic';
 
 const createStore = () => {

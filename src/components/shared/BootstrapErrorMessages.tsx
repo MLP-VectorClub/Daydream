@@ -9,9 +9,13 @@ const BootstrapErrorMessages: React.FC<PropTypes> = ({ errors, name }) => {
     return null;
   }
 
-  return Object.values(messages).map((line, i) => (
-    <FormFeedback key={i} className="d-block" color="danger">{line}</FormFeedback>
-  ));
+  return (
+    <>
+      {Object.values(messages).map((line, i) => (
+        <FormFeedback key={i} className="d-block" color="danger">{line}</FormFeedback>
+      ))}
+    </>
+  );
 };
 
 export default BootstrapErrorMessages;
