@@ -21,7 +21,7 @@ import {
   Optional,
   TitleKeyWithParams,
 } from '../../../types';
-import { fixPath, notFound, PATHS, setResponseStatus } from '../../../utils';
+import { notFound, setResponseStatus } from '../../../utils';
 import { getGuideTitle } from '../../../utils/colorguide';
 import { coreActions } from '../../../store/slices';
 import { AppPageContext, wrapper } from '../../../store';
@@ -126,12 +126,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     }
   }
 
-  if (initialData) {
+  // TODO Figure out why this causes a redirect loop
+  /* if (initialData) {
     const expectedPath = PATHS.GUIDE(guide!, { page: String(initialData.pagination.currentPage) });
     if (fixPath(ctx, expectedPath, ['guide'])) {
       return;
     }
-  }
+  } */
 
   const title = getGuideTitle(req.t, guide, page);
   store.dispatch(coreActions.setTitle(title));
