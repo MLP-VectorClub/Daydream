@@ -128,7 +128,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 
   if (initialData) {
     const expectedPath = PATHS.GUIDE(guide!, { page: String(initialData.pagination.currentPage) });
-    if (fixPath(ctx, expectedPath)) {
+    if (fixPath(ctx, expectedPath, ['guide'])) {
       return;
     }
   }

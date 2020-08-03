@@ -87,7 +87,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 
   if (initialUser) {
     const expectedPath = PATHS.USER_LONG(initialUser);
-    if (fixPath(ctx, expectedPath)) {
+    if (fixPath(ctx, expectedPath, ['user'])) {
       return;
     }
   }
