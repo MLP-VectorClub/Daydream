@@ -58,13 +58,15 @@ const ColorGuidePage: React.FC<PropTypes> = ({ initialData, scrollPosition }) =>
               <Row noGutters>
                 {sprite !== null && (
                   <Col xs="auto">
-                    <LazyLoadImage
-                      className="sprite-image pr-3"
-                      src={sprite.path}
-                      placeholderSrc={sprite.preview}
-                      effect="blur"
-                      scrollPosition={scrollPosition}
-                    />
+                    <div className="pr-3">
+                      <LazyLoadImage
+                        className="sprite-image"
+                        src={sprite.path}
+                        placeholderSrc={sprite.preview}
+                        effect="blur"
+                        scrollPosition={scrollPosition}
+                      />
+                    </div>
                   </Col>
                 )}
                 <Col>

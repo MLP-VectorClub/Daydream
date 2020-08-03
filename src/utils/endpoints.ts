@@ -24,12 +24,12 @@ export const ENDPOINTS = {
   APPEARANCES: (params: GetAppearancesRequestOptionals) =>
     buildUrl('', {
       path: `${API_PREFIX}/appearances`,
-      queryParams: mapValues(omitBy(params, value => typeof value === undefined), String),
+      queryParams: mapValues(omitBy(params, value => typeof value === 'undefined'), String),
     }),
   APPEARANCE_SPRITE: (appearanceId: number, params: GetAppearancesIdSpriteRequestOptionals) =>
     buildUrl('', {
       path: `${API_PREFIX}/appearances/${appearanceId}/sprite`,
-      queryParams: mapValues(omitBy(params, value => typeof value === undefined), String),
+      queryParams: mapValues(omitBy(params, value => typeof value === 'undefined'), String),
     }),
   /*
   APPEARANCE_PALETTE: (appearanceId: number) =>
