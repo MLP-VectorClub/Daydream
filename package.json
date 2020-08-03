@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start": "cross-env NODE_ENV=production node dist/server",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "type-check": "tsc",
@@ -23,6 +23,7 @@
     "classnames": "^2.2.6",
     "console-stamp": "^3.0.0-rc4.2",
     "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.2",
     "date-fns": "^2.11.1",
     "dotenv": "^8.2.0",
     "es6-promise": "^4.2.8",
