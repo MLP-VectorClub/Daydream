@@ -1,4 +1,4 @@
-import { get, range as _range, trim } from 'lodash';
+import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
 import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from '../types';
 import { PROD_APP_URL } from '../config';
@@ -17,8 +17,6 @@ export const sanitizeSearchParam = (value?: string): string => {
   if (typeof value !== 'string') return '';
   return value.trim();
 };
-
-export const makeUrlSafe = (input: string): string => trim(input.replace(/[^A-Za-z\d-]/g, '-').replace(/-+/g, '-'), '-');
 
 /**
  * Clear way to make sure the first page does not show as a query param in the URL

@@ -9,6 +9,7 @@ import FavMe from '../../components/shared/FavMe';
 import { coreActions } from '../../store/slices';
 import { AppPageContext, wrapper } from '../../store';
 import StandardHeading from '../../components/shared/StandardHeading';
+import { PATHS } from '../../utils';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx as typeof ctx & AppPageContext;
@@ -49,7 +50,7 @@ const AboutPage: React.FC = () => {
           </Trans>
         </p>
         <p>
-          <Link href="/blending">
+          <Link href={PATHS.BLENDING}>
             <a>{t('attributions.blendingCalc.0')}</a>
           </Link>
           {t('attributions.blendingCalc.1')}

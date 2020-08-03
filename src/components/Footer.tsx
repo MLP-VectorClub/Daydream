@@ -3,7 +3,7 @@ import { UncontrolledTooltip } from 'reactstrap';
 import Link from 'next/link';
 import { Nullable } from '../types';
 import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
-import { BuildIdParseResult, getBuildData } from '../utils';
+import { BuildIdParseResult, getBuildData, PATHS } from '../utils';
 import { useTranslation } from '../i18n';
 import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
           {commitTime}
         </span>
         {` | `}
-        <Link href="/about/privacy">
+        <Link href={PATHS.PRIVACY_POLICY}>
           <a>{t('footer.privacyPolicy')}</a>
         </Link>
         {` | `}

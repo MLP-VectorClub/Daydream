@@ -17,3 +17,19 @@ export const setResponseStatus = <T extends ParsedUrlQuery>(ctx: GetServerSidePr
 };
 
 export const notFound = <T extends ParsedUrlQuery>(ctx: GetServerSidePropsContext<T>) => setResponseStatus(ctx, 404);
+
+/**
+ * @returns true if caller should halt execution
+ */
+export const fixPath = <T extends ParsedUrlQuery>(
+  ctx: GetServerSidePropsContext<T>,
+  expectedPath: string,
+): boolean => {
+  const { req, res } = ctx;
+  if (req.url === expectedPath) return false;
+
+  res.setHeader('location', expectedPath);
+  res.statusCode = 302;
+  res.end();
+  return true;
+};

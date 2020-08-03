@@ -2,7 +2,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Link from 'next/link';
-import { getProfileLink, permission } from '../../utils';
+import { getProfileLink, PATHS, permission } from '../../utils';
 import ExternalLink from './ExternalLink';
 import { CLUB_URL } from '../../config';
 import { useTranslation } from '../../i18n';
@@ -14,28 +14,28 @@ const MainNavigation = () => {
   return (
     <Nav navbar>
       <NavItem>
-        <Link href="/episode/latest" passHref>
+        <Link href={PATHS.LATEST_EPISODE} passHref>
           <NavLink>{t('titles.latestEpisode')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/show" passHref>
+        <Link href={PATHS.SHOW} passHref>
           <NavLink>{t('titles.show')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/cg/[guide]" as="/cg/pony" passHref>
+        <Link href={PATHS.GUIDE()} as="/cg/pony" passHref>
           <NavLink>{t('titles.colorGuide')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/events" passHref>
+        <Link href={PATHS.EVENTS} passHref>
           <NavLink>{t('titles.events')}</NavLink>
         </Link>
       </NavItem>
       {user.id && (
         <NavItem>
-          <Link href="/users/[user]" as={getProfileLink(user)} passHref>
+          <Link href={PATHS.USER()} as={getProfileLink(user)} passHref>
             <NavLink>{t('titles.account')}</NavLink>
           </Link>
         </NavItem>
@@ -43,19 +43,19 @@ const MainNavigation = () => {
       {permission(user.role, 'staff') && (
         <>
           <NavItem>
-            <Link href="/users" passHref>
+            <Link href={PATHS.USERS} passHref>
               <NavLink>{t('titles.users')}</NavLink>
             </Link>
           </NavItem>
           <NavItem>
-            <Link href="/admin" passHref>
+            <Link href={PATHS.ADMIN} passHref>
               <NavLink>{t('titles.admin')}</NavLink>
             </Link>
           </NavItem>
         </>
       )}
       <NavItem>
-        <Link href="/about" passHref>
+        <Link href={PATHS.ABOUT} passHref>
           <NavLink>{t('titles.about')}</NavLink>
         </Link>
       </NavItem>

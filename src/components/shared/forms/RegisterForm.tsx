@@ -20,10 +20,10 @@ import { AuthModalSide, Status, UnifiedErrorResponseTypes, WithTFunction } from 
 import { authActions } from '../../../store/slices';
 import ExternalLink from '../ExternalLink';
 import InlineIcon from '../InlineIcon';
-import { PATHS } from '../../../config';
 import BootstrapErrorMessages from '../BootstrapErrorMessages';
 import {
   combineErrors,
+  PATHS,
   validateEmail,
   validatePassword,
   validateRequired,

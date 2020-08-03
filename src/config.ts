@@ -19,7 +19,6 @@ export const DEV_ENV = process.env.NODE_ENV !== 'production';
 /**
  * Global prefix for all api calls, no trailing slash
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const API_PREFIX = process.env.BACKEND_HOST ? '' : '/api';
 if (process.env.BACKEND_HOST) {
   Axios.defaults.baseURL = process.env.BACKEND_HOST;
@@ -37,26 +36,5 @@ export const GUIDE_NAMES: GuideName[] = ['pony', 'eqg', 'pl'];
 export const GUIDE_PAGE_SIZES = range(7, 20 + 1);
 
 export const TMDB_REQUIRED_MESSAGE = 'This product uses the TMDb API but is not endorsed or certified by TMDb.';
-
-export enum RouteParams {
-  USERNAME = ':username',
-  ID = ':id([0-9]+)',
-  GUIDE = ':guide',
-}
-
-export enum RouteSegments {
-  COLORGUIDE = '(cg|colorguide)',
-  APPEARANCE = '(v|appearance)',
-}
-
-export const PATHS = {
-  ABOUT: '/about',
-  PRIVACY_POLICY: '/about/privacy',
-  USER_LEGACY: `/@${RouteParams.USERNAME}`,
-  USER: `/users/${RouteParams.ID}`,
-  USER_LONG: `/users/${RouteParams.ID}-${RouteParams.USERNAME}`,
-  GUIDE: `/${RouteSegments.COLORGUIDE}/${RouteParams.GUIDE}`,
-  APPEARANCE: `/${RouteSegments.COLORGUIDE}/${RouteSegments.APPEARANCE}/${RouteParams.GUIDE}`,
-};
 
 export const fetcher = (...args: Parameters<typeof Axios.request>) => Axios.request(...args).toPromise().then(res => res.data);

@@ -21,7 +21,7 @@ import {
   Optional,
   TitleKeyWithParams,
 } from '../../../types';
-import { notFound, setResponseStatus } from '../../../utils';
+import { fixPath, notFound, PATHS, setResponseStatus } from '../../../utils';
 import { getGuideTitle } from '../../../utils/colorguide';
 import { coreActions } from '../../../store/slices';
 import { AppPageContext, wrapper } from '../../../store';
@@ -72,6 +72,7 @@ const ColorGuidePage: React.FC<PropTypes> = ({ initialData, scrollPosition }) =>
                 <Col>
                   <h5>{el.label}</h5>
                   <div className="notes">
+                    {/* TODO Parse notes and convert links */}
                     {el.notes && <span dangerouslySetInnerHTML={{ __html: el.notes }} />}
                     {el.hasCutieMarks && (
                       <span className={classNames({ 'ml-2 pl-2 border-left': el.notes })}>
@@ -122,6 +123,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
       } else {
         console.error(e);
       }
+    }
+  }
+
+  if (initialData) {
+    const expectedPath = PATHS.GUIDE(guide!, { page: String(initialData.pagination.currentPage) });
+    if (fixPath(ctx, expectedPath)) {
+      return;
     }
   }
 
