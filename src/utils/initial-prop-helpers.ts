@@ -26,7 +26,7 @@ export const fixPath = <T extends ParsedUrlQuery>(
   expectedPath: string,
 ): boolean => {
   const { req, res } = ctx;
-  if (req.url === expectedPath) return false;
+  if (req.url === expectedPath || req.url?.includes('_next')) return false;
 
   res.setHeader('location', expectedPath);
   res.statusCode = 302;

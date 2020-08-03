@@ -1,4 +1,10 @@
-import { trim, mapValues, omitBy } from 'lodash';
+import {
+  isEmpty,
+  mapValues,
+  omit,
+  omitBy,
+  trim,
+} from 'lodash';
 import buildUrl from 'build-url';
 import { Appearance, Numeric, PublicUser } from '../types';
 
@@ -10,10 +16,19 @@ export const PATHS = {
   APPEARANCE: ({ id, label }: Appearance) => `/cg/v/${id}-${makeUrlSafe(label)}`,
   BLENDING: '/blending',
   EVENTS: '/events',
-  GUIDE: (guide = '[guide]', queryParams?: { page?: string }) => buildUrl('', {
-    path: `/cg/${guide}`,
-    queryParams: mapValues(omitBy(queryParams, el => typeof el === 'undefined'), String),
-  }),
+  GUIDE: (guide = '[guide]', params?: { page?: string }) => {
+    let paramsCopy = params;
+    if (params && params.page === '1') {
+      paramsCopy = omit(params, 'page');
+    }
+    const queryParams = mapValues(omitBy(paramsCopy, el => typeof el === 'undefined'), String);
+    const path = `/cg/${guide}`;
+    if (isEmpty(queryParams)) return path;
+    return buildUrl('', {
+      path: `/cg/${guide}`,
+      queryParams,
+    });
+  },
   LATEST_EPISODE: '/episode/latest',
   PRIVACY_POLICY: '/about/privacy',
   SHOW: '/show',

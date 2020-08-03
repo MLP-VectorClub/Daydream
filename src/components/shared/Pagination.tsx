@@ -26,13 +26,25 @@ const Pagination: React.FC<PaginationProps> = ({
         const pageNumberProp = el === 1 ? null : { [pageParam]: String(el) };
         const pathWithoutQueryString = router.asPath.replace(/[?#].*$/, '');
         const query = { ...linkParams, ...pageNumberProp };
+        const link = (
+          <PaginationLink>
+            {el}
+          </PaginationLink>
+        );
+        const active = currentPage === el;
         return (
-          <PaginationItem key={el} active={currentPage === el}>
-            <Link href={{ pathname: router.route, query }} as={{ pathname: pathWithoutQueryString, query }} passHref>
-              <PaginationLink>
-                {el}
-              </PaginationLink>
-            </Link>
+          <PaginationItem key={el} active={active}>
+            {active
+              ? link
+              : (
+                <Link
+                  href={{ pathname: router.route, query }}
+                  as={{ pathname: pathWithoutQueryString, query }}
+                  passHref
+                >
+                  {link}
+                </Link>
+              )}
           </PaginationItem>
         );
       })}
