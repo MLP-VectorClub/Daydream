@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
+import Link from 'next/link';
 import { Nullable } from '../types';
 import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
 import { BuildIdParseResult, getBuildData } from '../utils';
@@ -8,7 +9,6 @@ import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
 import ContactModal from './ContactModal';
 import ExternalLink from './shared/ExternalLink';
-import { Link } from '../routes';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
           {commitTime}
         </span>
         {` | `}
-        <Link route="/about/privacy">
+        <Link href="/about/privacy">
           <a>{t('footer.privacyPolicy')}</a>
         </Link>
         {` | `}

@@ -3,6 +3,7 @@ import Axios from 'axios-observable';
 import { GuideName } from './types';
 
 export const APP_NAME = 'MLP Vector Club';
+export const OLD_SITE_URL = 'https://mlpvector.club';
 export const PROD_APP_URL = 'https://new.mlpvector.club';
 export const PROD_API_URL = 'https://api.mlpvector.club';
 export const DEV_API_URL = 'https://api.mlpvector.lc';
@@ -19,7 +20,11 @@ export const DEV_ENV = process.env.NODE_ENV !== 'production';
  * Global prefix for all api calls, no trailing slash
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const API_PREFIX = (process as any).browser ? '/api' : '';
+export const API_PREFIX = process.env.BACKEND_HOST ? '' : '/api';
+if (process.env.BACKEND_HOST) {
+  Axios.defaults.baseURL = process.env.BACKEND_HOST;
+}
+
 export const GUEST_AVATAR = '/img/guest.svg';
 
 export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';

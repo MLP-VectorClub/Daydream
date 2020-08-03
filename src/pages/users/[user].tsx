@@ -2,25 +2,25 @@ import React, { useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { useTranslation } from '../i18n';
-import Content from '../components/shared/Content';
-import { coreActions } from '../store/slices';
-import { AppPageContext, wrapper } from '../store';
-import { getProfileTitle, mapRoleLabel, setResponseStatus } from '../utils';
-import StandardHeading from '../components/shared/StandardHeading';
-import AvatarWrap from '../components/shared/AvatarWrap';
-import { useAuth, userFetcher, useUser } from '../hooks';
-import { PublicUser } from '../types';
+import { useTranslation } from '../../i18n';
+import Content from '../../components/shared/Content';
+import { coreActions } from '../../store/slices';
+import { AppPageContext, wrapper } from '../../store';
+import { getProfileTitle, mapRoleLabel, setResponseStatus } from '../../utils';
+import StandardHeading from '../../components/shared/StandardHeading';
+import AvatarWrap from '../../components/shared/AvatarWrap';
+import { useAuth, userFetcher, useUser } from '../../hooks';
+import { GetUsersIdResult, Nullable, Optional, PublicUser } from '../../types';
 
 interface PropTypes {
-  initialUser?: PublicUser;
+  initialUser: Nullable<PublicUser>;
 }
 
 const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
   const { t } = useTranslation('profile');
   const dispatch = useDispatch();
   const { query } = useRouter();
-  const { user } = useUser(query, initialUser);
+  const { user } = useUser(query, initialUser || undefined);
   const { user: authUser } = useAuth();
 
   useEffect(() => {
@@ -45,11 +45,16 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const { query, store } = ctx as typeof ctx & AppPageContext;
 
-  const request = userFetcher(query)();
+  let id: Optional<string>;
+  let username: Optional<string>;
+  const match = typeof query.user === 'string' ? /^(?:(\d+)-|@)(.*)$/.exec(query.user) : null;
+  if (match) {
+    [id, username] = match.slice(1);
+  }
 
-  let initialUser;
+  let initialUser: Optional<GetUsersIdResult>;
   try {
-    initialUser = await request;
+    initialUser = await userFetcher({ username, id })();
   } catch (e) {
     if (e.response) {
       const { response } = e as AxiosError;
@@ -69,7 +74,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   return {
     props: {
       namespacesRequired: ['profile'],
-      initialUser,
+      initialUser: initialUser || null,
     },
   };
 });

@@ -1,14 +1,14 @@
 import React from 'react';
-import Content from '../components/shared/Content';
-import { CLUB_URL, GITHUB_URL, TMDB_REQUIRED_MESSAGE } from '../config';
-import { Trans, useTranslation } from '../i18n';
-import ExternalLink from '../components/shared/ExternalLink';
-import DeviantLink from '../components/shared/DeviantLink';
-import FavMe from '../components/shared/FavMe';
-import { coreActions } from '../store/slices';
-import { AppPageContext, wrapper } from '../store';
-import StandardHeading from '../components/shared/StandardHeading';
-import { Link } from '../routes';
+import Link from 'next/link';
+import Content from '../../components/shared/Content';
+import { CLUB_URL, GITHUB_URL, TMDB_REQUIRED_MESSAGE } from '../../config';
+import { Trans, useTranslation } from '../../i18n';
+import ExternalLink from '../../components/shared/ExternalLink';
+import DeviantLink from '../../components/shared/DeviantLink';
+import FavMe from '../../components/shared/FavMe';
+import { coreActions } from '../../store/slices';
+import { AppPageContext, wrapper } from '../../store';
+import StandardHeading from '../../components/shared/StandardHeading';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx as typeof ctx & AppPageContext;
@@ -49,7 +49,7 @@ const AboutPage: React.FC = () => {
           </Trans>
         </p>
         <p>
-          <Link route="/blending">
+          <Link href="/blending">
             <a>{t('attributions.blendingCalc.0')}</a>
           </Link>
           {t('attributions.blendingCalc.1')}
@@ -124,7 +124,7 @@ const AboutPage: React.FC = () => {
 
           <strong>{t('attributions.browserLogos.about.0')}</strong>
           {t('attributions.browserLogos.about.1')}
-          <Link route="/browser">
+          <Link href="/browser">
             <a>{t('attributions.browserLogos.about.2')}</a>
           </Link>
           {t('attributions.browserLogos.about.3')}

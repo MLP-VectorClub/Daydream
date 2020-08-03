@@ -1,7 +1,7 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Link } from '../../routes';
+import Link from 'next/link';
 import { getProfileLink, permission } from '../../utils';
 import ExternalLink from './ExternalLink';
 import { CLUB_URL } from '../../config';
@@ -14,28 +14,28 @@ const MainNavigation = () => {
   return (
     <Nav navbar>
       <NavItem>
-        <Link route="/episode/latest" passHref>
+        <Link href="/episode/latest" passHref>
           <NavLink>{t('titles.latestEpisode')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link route="/show" passHref>
+        <Link href="/show" passHref>
           <NavLink>{t('titles.show')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link route="/cg/pony" passHref>
+        <Link href="/cg/[guide]" as="/cg/pony" passHref>
           <NavLink>{t('titles.colorGuide')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link route="/events" passHref>
+        <Link href="/events" passHref>
           <NavLink>{t('titles.events')}</NavLink>
         </Link>
       </NavItem>
       {user.id && (
         <NavItem>
-          <Link route={getProfileLink(user)} passHref>
+          <Link href="/users/[user]" as={getProfileLink(user)} passHref>
             <NavLink>{t('titles.account')}</NavLink>
           </Link>
         </NavItem>
@@ -43,19 +43,19 @@ const MainNavigation = () => {
       {permission(user.role, 'staff') && (
         <>
           <NavItem>
-            <Link route="/users" passHref>
+            <Link href="/users" passHref>
               <NavLink>{t('titles.users')}</NavLink>
             </Link>
           </NavItem>
           <NavItem>
-            <Link route="/admin" passHref>
+            <Link href="/admin" passHref>
               <NavLink>{t('titles.admin')}</NavLink>
             </Link>
           </NavItem>
         </>
       )}
       <NavItem>
-        <Link route="/about" passHref>
+        <Link href="/about" passHref>
           <NavLink>{t('titles.about')}</NavLink>
         </Link>
       </NavItem>

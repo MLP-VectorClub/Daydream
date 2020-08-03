@@ -1,4 +1,3 @@
-import { ReactNode, ReactNodeArray } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, ButtonGroup } from 'reactstrap';
 import { useTranslation } from '../i18n';
@@ -15,7 +14,7 @@ import SignInButton from './shared/SignInButton';
 import SignOutButton from './shared/SignOutButton';
 import { useAuth } from '../hooks';
 
-const Sidebar: React.FC<{ widgets: ReactNode | ReactNodeArray }> = ({ widgets }) => {
+const Sidebar: React.FC = () => {
   const { t } = useTranslation('common');
   const { backendDown } = useSelector((state: RootState) => state.core);
   const { signedIn } = useAuth();
@@ -54,7 +53,7 @@ const Sidebar: React.FC<{ widgets: ReactNode | ReactNodeArray }> = ({ widgets })
               </Button>
             </ButtonGroup>
           </section>
-          {widgets}
+          {/* Widgets will go here */}
           <HappeningSoon />
         </>
       )}

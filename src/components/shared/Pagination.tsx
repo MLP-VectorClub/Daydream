@@ -2,15 +2,15 @@ import { Pagination as RSPagination, PaginationItem, PaginationLink } from 'reac
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { pickBy } from 'lodash';
-import buildUrl from 'build-url';
+import Link from 'next/link';
 import { calculatePaginationItems, PaginationProps } from '../../utils/pagination';
-import { Link } from '../../routes';
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   relevantProps,
   className,
+  pageParam = 'page',
 }) => {
   const router = useRouter();
   const pageItems = useMemo(() => calculatePaginationItems({ currentPage, totalPages }), [currentPage, totalPages]);
@@ -23,14 +23,12 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <RSPagination className={className} listClassName="justify-content-center">
       {pageItems.map(el => {
-        const pageNumberProp = el === 1 ? null : { page: String(el) };
+        const pageNumberProp = el === 1 ? null : { [pageParam]: String(el) };
         const pathWithoutQueryString = router.asPath.replace(/[?#].*$/, '');
-        const route = linkParams === null && pageNumberProp === null
-          ? pathWithoutQueryString
-          : buildUrl(pathWithoutQueryString, { queryParams: { ...linkParams, ...pageNumberProp } });
+        const query = { ...linkParams, ...pageNumberProp };
         return (
           <PaginationItem key={el} active={currentPage === el}>
-            <Link route={route} passHref>
+            <Link href={{ pathname: router.route, query }} as={{ pathname: pathWithoutQueryString, query }} passHref>
               <PaginationLink>
                 {el}
               </PaginationLink>

@@ -1,56 +1,33 @@
 import * as React from 'react';
-import { ReactNode, ReactNodeArray, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import { NextSeo } from 'next-seo';
 import { NextPage } from 'next';
-import { fromEvent } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Alert } from 'reactstrap';
+import { useRouter } from 'next/router';
 import { RootState } from '../store/rootReducer';
-import { PROD_APP_URL } from '../config';
+import { OLD_SITE_URL, PROD_APP_URL } from '../config';
 import { Nullable } from '../types';
 import { assembleSeoUrl } from '../utils';
 import Header from './Header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
+import ExternalLink from './shared/ExternalLink';
+import InlineIcon from './shared/InlineIcon';
 
 type PropTypes = {
   url?: Nullable<string>;
-  widgets?: ReactNode | ReactNodeArray;
 }
 
-const Layout = (({
-  children,
-  widgets = null,
-  url = null,
-}) => {
-  const [localUrl, setLocalUrl] = useState(url);
+const Layout = (({ children }) => {
+  const router = useRouter();
   const { language } = useSelector((state: RootState) => state.core);
-
-  useEffect(() => {
-    const updateUrl = () => {
-      const windowUrl = window.location.href;
-      if (localUrl !== windowUrl) {
-        setLocalUrl(windowUrl);
-      }
-    };
-
-    updateUrl();
-
-    const sub = fromEvent(window, 'popstate').pipe(
-      tap(() => updateUrl()),
-    ).subscribe();
-
-    return () => {
-      sub.unsubscribe();
-    };
-  });
 
   return (
     <div>
       <NextSeo
         openGraph={{
-          url: localUrl || PROD_APP_URL,
+          url: router.asPath || PROD_APP_URL,
           locale: language,
         }}
       />
@@ -60,8 +37,20 @@ const Layout = (({
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Sidebar widgets={widgets} />
+      <Sidebar />
       <div id="main">
+        <Alert color="warning" className="p-2 mb-2" fade={false}>
+          <InlineIcon icon="hard-hat" first />
+          This website is a work-in-progress, for our current live site please visit
+          {' '}
+          <ExternalLink
+            href={OLD_SITE_URL + router.asPath}
+            blank={false}
+            className="alert-link"
+          >
+            {OLD_SITE_URL + router.asPath}
+          </ExternalLink>
+        </Alert>
         {children}
       </div>
       <Footer />

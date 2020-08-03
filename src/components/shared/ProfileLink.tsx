@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '../../routes';
+import Link from 'next/link';
 import { getProfileLink, ProfileLinkOptions } from '../../utils';
 
 const ProfileLink: React.FC<ProfileLinkOptions> = ({ children = null, ...rest }) => {
@@ -10,7 +10,7 @@ const ProfileLink: React.FC<ProfileLinkOptions> = ({ children = null, ...rest })
   }
 
   return (
-    <Link route={getProfileLink(rest)} passHref={children !== null}>
+    <Link href={getProfileLink(rest)} passHref={children !== null}>
       {content}
     </Link>
   );

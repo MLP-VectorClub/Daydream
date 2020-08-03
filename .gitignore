@@ -1,5 +1,6 @@
 node_modules
 .next
-.env
-yarn-error.log
 dist
+.vercel
+.env.local
+yarn-error.log

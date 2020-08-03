@@ -1,19 +1,19 @@
 import React from 'react';
 import { Alert } from 'reactstrap';
-import { Trans, useTranslation } from '../i18n';
-import Content from '../components/shared/Content';
-import ExternalLink from '../components/shared/ExternalLink';
-import ContactLink from '../components/shared/ContactLink';
-import { coreActions } from '../store/slices';
-import { PROD_APP_URL } from '../config';
-import { AppPageContext, wrapper } from '../store';
-import StandardHeading from '../components/shared/StandardHeading';
+import { Trans, useTranslation } from '../../i18n';
+import Content from '../../components/shared/Content';
+import ExternalLink from '../../components/shared/ExternalLink';
+import ContactLink from '../../components/shared/ContactLink';
+import { coreActions } from '../../store/slices';
+import { PROD_APP_URL } from '../../config';
+import { AppPageContext, wrapper } from '../../store';
+import StandardHeading from '../../components/shared/StandardHeading';
 
 const PrivacyPolicy: React.FC = () => {
   const { t } = useTranslation('privacyPolicy');
   return (
     <>
-      <Alert color="warning">
+      <Alert color="warning" className="p-2 mb-2" fade={false}>
         {t('notYetUpdated')}
       </Alert>
       <Content className="privacy-policy">
