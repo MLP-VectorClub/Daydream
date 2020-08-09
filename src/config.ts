@@ -1,6 +1,6 @@
 import { range } from 'lodash';
 import Axios from 'axios-observable';
-import { ReactQueryProviderConfig } from 'react-query/types/react/ReactQueryConfigProvider';
+import { ReactQueryProviderConfig } from 'react-query';
 import { GuideName } from './types';
 
 export const APP_NAME = 'MLP Vector Club';
