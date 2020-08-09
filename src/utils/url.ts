@@ -11,6 +11,7 @@ import { Appearance, Numeric, PublicUser } from '../types';
 export const makeUrlSafe = (input: string): string => trim(input.replace(/[^A-Za-z\d-]/g, '-').replace(/-+/g, '-'), '-');
 
 export const PATHS = {
+  ROOT: '/',
   ABOUT: '/about',
   ADMIN: '/admin',
   APPEARANCE: ({ id, label }: Appearance) => `/cg/v/${id}-${makeUrlSafe(label)}`,

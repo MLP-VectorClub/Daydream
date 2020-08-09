@@ -1,5 +1,6 @@
 import { range } from 'lodash';
 import Axios from 'axios-observable';
+import { ReactQueryProviderConfig } from 'react-query/types/react/ReactQueryConfigProvider';
 import { GuideName } from './types';
 
 export const APP_NAME = 'MLP Vector Club';
@@ -35,6 +36,8 @@ export const GUIDE_NAMES: GuideName[] = ['pony', 'eqg', 'pl'];
 
 export const GUIDE_PAGE_SIZES = range(7, 20 + 1);
 
-export const TMDB_REQUIRED_MESSAGE = 'This product uses the TMDb API but is not endorsed or certified by TMDb.';
-
-export const fetcher = (...args: Parameters<typeof Axios.request>) => Axios.request(...args).toPromise().then(res => res.data);
+export const REACT_QUERY_CONFIG: ReactQueryProviderConfig = {
+  queries: {
+    staleTime: 60e3,
+  },
+};

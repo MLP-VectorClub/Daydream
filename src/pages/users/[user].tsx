@@ -15,7 +15,7 @@ import {
 } from '../../utils';
 import StandardHeading from '../../components/shared/StandardHeading';
 import AvatarWrap from '../../components/shared/AvatarWrap';
-import { useAuth, userFetcher, useUser } from '../../hooks';
+import { transformProfileParams, useAuth, userFetcher, useUser } from '../../hooks';
 import { GetUsersIdResult, Nullable, Optional, PublicUser } from '../../types';
 
 interface PropTypes {
@@ -26,7 +26,7 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
   const { t } = useTranslation('profile');
   const dispatch = useDispatch();
   const { query } = useRouter();
-  const { user } = useUser(query, initialUser || undefined);
+  const { user } = useUser(transformProfileParams(query), initialUser || undefined);
   const { user: authUser } = useAuth();
 
   useEffect(() => {
@@ -51,24 +51,12 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const { query, store } = ctx;
 
-  let id: Optional<string>;
-  let username: Optional<string>;
-  if (typeof query.user === 'string') {
-    const matchCurrent = /^(\d+)(?:-.*)?$/.exec(query.user);
-    if (matchCurrent) {
-      [, id] = matchCurrent;
-    } else {
-      const matchDa = /^@([A-Za-z\d-]{1,20})$/.exec(query.user);
-      if (matchDa) {
-        [, username] = matchDa;
-      }
-    }
-  }
+  const params = transformProfileParams(query);
 
   let initialUser: Optional<GetUsersIdResult>;
-  if (id || username) {
+  if ('id' in params || 'username' in params) {
     try {
-      initialUser = await userFetcher({ username, id })();
+      initialUser = await userFetcher(params)();
     } catch (e) {
       if (e.response) {
         const { response } = e as AxiosError;

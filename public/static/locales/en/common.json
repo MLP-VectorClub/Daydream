@@ -1,7 +1,7 @@
 {
   "header": {
-    "login": "Log In",
-    "logout": "Log Out",
+    "signin": "Sign In",
+    "signout": "Sign Out",
     "register": "Register"
   },
   "footer": {
@@ -70,10 +70,10 @@
   },
   "auth": {
     "signInTitle": "Let's get you signed in",
-    "registerTitle": "Create an account",
+    "signUpTitle": "Create an account",
     "noAccountYet": "No account yet? Create one here!",
     "alreadyHaveAccount": "Already have an account? Sign in here!",
-    "loginBenefits": "An account allows you to customize the site's behavior, with many more features yet to come.",
+    "accountBenefits": "An account allows you to customize the site's behavior, with many more features yet to come.",
     "name": "Display Name",
     "nameHelp": "Only English letters, digits, dashes and underscores. Must be between {{min}} and {{max}} characters. Can be changed later.",
     "email": "E-Mail Address",
@@ -86,12 +86,16 @@
     "signInButton": "Sign In",
     "registerButton": "Create Account",
     "invalidCredentials": "Incorrect e-mail address or password",
-    "rateLimited": "Too many login attempts, please try again in {{count}} second",
-    "rateLimited_plural": "Too many login attempts, please try again in {{count}} seconds",
+    "rateLimited": "Too many signin attempts, please try again in {{count}} second",
+    "rateLimited_plural": "Too many signin attempts, please try again in {{count}} seconds",
     "hidePassword": "Hide Password",
     "showPassword": "Show Password",
     "forgotPassword": "Forgot password?",
-    "pwResetNotYetAvailable": "The password reset feature is not available yet"
+    "pwResetNotYetAvailable": "The password reset feature is not available yet",
+    "socialSignIn": {
+      "alternatively": "alternatively",
+      "signInWith": "Sign in with {{provider}}"
+    }
   },
   "validation": {
     "required": "Please fill in this field",
@@ -103,5 +107,6 @@
     "acceptPrivacyPolicy": "You must accept the privacy policy",
     "format": "Please match the specified format",
     "passwordMismatch": "The two passwords don't match"
-  }
+  },
+  "tmdb_disclaimer": "This product uses the TMDb API but is not endorsed or certified by TMDb."
 }

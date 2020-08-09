@@ -4,24 +4,11 @@ import { useForm } from 'react-hook-form';
 import React, { MouseEventHandler, useEffect } from 'react';
 import { useTranslation } from '../../i18n';
 import { RootState } from '../../store/rootReducer';
-import { AuthModalSide, PostUsersLoginRequest, PostUsersRequest } from '../../types';
+import { AuthModalSide, User } from '../../types';
 import { authActions } from '../../store/slices';
 import SignInForm from '../shared/forms/SignInForm';
 import RegisterForm from '../shared/forms/RegisterForm';
 import { useAuth } from '../../hooks';
-
-enum INPUT_NAMES {
-  NAME = 'name',
-  EMAIL = 'email',
-  PASSWORD = 'password',
-  PASSWORD_CONFIRM = 'password_confirmation',
-  PRIVACY = 'privacy_policy',
-}
-
-type FormFields = PostUsersLoginRequest & PostUsersRequest & {
-  [INPUT_NAMES.PASSWORD_CONFIRM]: Pick<PostUsersLoginRequest, 'password'>;
-  [INPUT_NAMES.PRIVACY]: boolean;
-};
 
 export interface AuthModalFormProps {
   switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
@@ -29,9 +16,9 @@ export interface AuthModalFormProps {
 
 const AuthModal: React.FC = () => {
   const { t } = useTranslation('common');
-  const { reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
+  const { reset } = useForm({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
-  const { signedIn } = useAuth();
+  const { signedIn, user } = useAuth();
   const { authModal } = useSelector((store: RootState) => store.auth);
 
   useEffect(() => {
@@ -39,6 +26,12 @@ const AuthModal: React.FC = () => {
       reset();
     }
   }, [reset, authModal.open]);
+
+  useEffect(() => {
+    if (signedIn && authModal.open) {
+      dispatch(authActions.signInSuccess(user as User));
+    }
+  }, [signedIn]);
 
   if (signedIn) return null;
 
@@ -48,7 +41,7 @@ const AuthModal: React.FC = () => {
       : authActions.openAuthModal(null)
   ));
 
-  const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? 'auth.signInTitle' : 'auth.registerTitle';
+  const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? 'auth.signInTitle' : 'auth.signUpTitle';
 
   const sides = {
     [AuthModalSide.SIGN_IN]: <SignInForm />,

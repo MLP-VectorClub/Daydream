@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Content from '../../components/shared/Content';
-import { CLUB_URL, GITHUB_URL, TMDB_REQUIRED_MESSAGE } from '../../config';
+import { CLUB_URL, GITHUB_URL } from '../../config';
 import { Trans, useTranslation } from '../../i18n';
 import ExternalLink from '../../components/shared/ExternalLink';
 import DeviantLink from '../../components/shared/DeviantLink';
@@ -208,7 +208,7 @@ const AboutPage: React.FC = () => {
             1
             <ExternalLink href="https://www.themoviedb.org/documentation/api">2</ExternalLink>
             3
-            {{ msg: TMDB_REQUIRED_MESSAGE }}
+            {{ msg: t('common:tmdb_disclaimer') }}
           </Trans>
           <br />
 

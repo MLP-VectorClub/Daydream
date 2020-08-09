@@ -3,9 +3,9 @@ import { HYDRATE } from 'next-redux-wrapper';
 import {
   AuthModalSide,
   FailsafeUser,
-  LoginRequest,
   Nullable,
-  RegistrationRequest,
+  PostUsersRequest,
+  PostUsersSigninRequest,
   Status,
   UnifiedErrorResponse,
   User,
@@ -22,6 +22,10 @@ export interface AuthState {
     error: Nullable<UnifiedErrorResponse>;
   };
   register: {
+    status: Status;
+    error: Nullable<UnifiedErrorResponse>;
+  };
+  registerOauth: {
     status: Status;
     error: Nullable<UnifiedErrorResponse>;
   };
@@ -42,6 +46,10 @@ const initialState: AuthState = {
     error: null,
   },
   register: {
+    status: Status.INIT,
+    error: null,
+  },
+  registerOauth: {
     status: Status.INIT,
     error: null,
   },
@@ -72,7 +80,7 @@ const authSlice = createSlice({
     [HYDRATE](state, action: PayloadAction<{ auth: AuthState }>) {
       return { ...state, ...action.payload.auth };
     },
-    signIn(state, _action: PayloadAction<LoginRequest>) {
+    signIn(state, _action: PayloadAction<PostUsersSigninRequest>) {
       state.signIn.status = Status.LOAD;
     },
     signInSuccess(state, action: PayloadAction<User>) {
@@ -94,7 +102,7 @@ const authSlice = createSlice({
       state.signOut.status = Status.FAILURE;
       state.signOut.error = action.payload;
     },
-    register(state, _action: PayloadAction<RegistrationRequest>) {
+    register(state, _action: PayloadAction<PostUsersRequest>) {
       state.register.status = Status.LOAD;
     },
     registerSuccess(state, action: PayloadAction<User>) {

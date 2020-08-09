@@ -4,6 +4,7 @@ import {
   faArrowUp,
   faBars,
   faCheck,
+  faCheckCircle,
   faCircleNotch,
   faExclamationTriangle,
   faExternalLinkAlt,
@@ -35,6 +36,7 @@ library.add(
   faSignInAlt,
   faSignOutAlt,
   faCircleNotch,
+  faCheckCircle,
   faExternalLinkAlt,
   faExclamationTriangle,
 );

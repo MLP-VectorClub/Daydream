@@ -6,8 +6,11 @@ html {
 body {
   background: $primary;
   margin: 0 !important;
-  padding-top: header-height();
   min-height: 100vh;
+
+  &:not(.layout-disabled) {
+    padding-top: header-height();
+  }
 
   @include media-breakpoint-up(lg) {
     @include white-grid;

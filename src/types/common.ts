@@ -32,7 +32,6 @@ export type Optional<T> = T | undefined;
 export type OptionalProps<T, K extends keyof T = keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 /** Can be used in place of `number` to avoid having to do explicit type casting */
 export type Numeric = number | string;
-export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type ValuesOf<T> = T[keyof T];
 
 export interface WithTFunction {

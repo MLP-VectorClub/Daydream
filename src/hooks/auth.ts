@@ -1,6 +1,6 @@
-import useSWR from 'swr';
-import { ENDPOINTS, requestObservableToPromise, resultToStatus } from '../utils';
-import { FailsafeUser, GetUsersMeResult, Status } from '../types';
+import { useQuery } from 'react-query';
+import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from '../utils';
+import { FailsafeUser, Status, UnifiedErrorResponse, UnifiedErrorResponseTypes } from '../types';
 import { getMe } from '../services/user';
 import { useCsrf } from './core';
 
@@ -25,19 +25,19 @@ const currentUserFetcher = () => requestObservableToPromise(getMe());
 
 export function useAuth(): CurrentUserHookValue {
   const csrf = useCsrf();
-  const { data: user, error: userError } = useSWR<GetUsersMeResult>(
-    !csrf ? null : ENDPOINTS.USERS_ME,
+  const { status, data: user, isError } = useQuery(
+    ENDPOINTS.USERS_ME,
     currentUserFetcher,
-    { shouldRetryOnError: false },
+    { enabled: csrf, retry: (_failureCount, error: UnifiedErrorResponse) => error.type !== UnifiedErrorResponseTypes.AUTHENTICATION_ERROR },
   );
 
-  const signedIn = !userError && Boolean(user);
+  const signedIn = !isError && Boolean(user);
 
   return {
     signedIn,
     user: signedIn ? user! : guestUser,
     authCheck: {
-      status: resultToStatus(user, userError),
+      status: mapQueryStatus(status),
     },
   };
 }

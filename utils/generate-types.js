@@ -1,7 +1,7 @@
 const { GenerateTypings } = require('openapi-to-typescript');
 const fs = require('fs');
 
-require('dotenv').config();
+require('dotenv').config({ path: '.env.local' });
 
 const filePath = process.env.API_JSON_PATH;
 const outputPath = 'src/types/api.ts';

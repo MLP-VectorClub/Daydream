@@ -1,10 +1,5 @@
-import {
-  Nullable,
-  NullableProps,
-  PageTitle,
-  PublicUser,
-  User,
-} from '../types';
+import { Nullable, Numeric, PageTitle, PublicUser } from '../types';
+import { PATHS } from './url';
 
 export const getProfileTitle = (
   user?: PublicUser,
@@ -21,7 +16,10 @@ export const getProfileTitle = (
   return 'profile';
 };
 
-export type ProfileLinkOptions = NullableProps<Pick<User, 'id' | 'name'>>;
+export type ProfileLinkOptions = {
+  id: Nullable<Numeric>;
+  name?: Nullable<string>;
+};
 
-export const getProfileLink = ({ id, name }: ProfileLinkOptions) =>
-  `/users/${id}${name ? `-${encodeURI(name)}` : ''}`;
+export const getProfileLink = (props: ProfileLinkOptions) =>
+  (props.name ? PATHS.USER_LONG(props as PublicUser) : PATHS.USER(props.id!));

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import App from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
-import { SWRConfig } from 'swr';
 import { AppContextType, AppInitialProps, AppPropsType, NextComponentType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
-import { APP_NAME, fetcher, PROD_APP_URL } from '../config';
+import { ReactQueryDevtools } from 'react-query-devtools';
+import { ReactQueryConfigProvider } from 'react-query';
+import { APP_NAME, DEV_ENV, PROD_APP_URL, REACT_QUERY_CONFIG } from '../config';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { wrapper } from '../store';
 import TitleManager from '../components/TitleManager';
@@ -15,17 +16,16 @@ import AuthModal from '../components/modals/AuthModal';
 import ProgressIndicator from '../components/ProgressIndicator';
 import { ENDPOINTS } from '../utils';
 import Layout from '../components/Layout';
+import { LayoutContext } from '../hooks/layout';
 
 const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPropsType> = props => {
-  const {
-    Component,
-    pageProps,
-  } = props;
+  const { Component, pageProps } = props;
+  const [disabled, setLayoutDisabled] = useState(false);
 
   const { language } = useTranslation().i18n;
 
   return (
-    <SWRConfig value={{ fetcher }}>
+    <ReactQueryConfigProvider config={REACT_QUERY_CONFIG}>
       <TitleManager />
       <DefaultSeo
         openGraph={{
@@ -40,11 +40,16 @@ const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPr
         <link rel="preload" href={ENDPOINTS.USERS_ME} as="fetch" crossOrigin="anonymous" />
       </Head>
       <ProgressIndicator />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <LayoutContext.Provider value={{ disabled, setLayoutDisabled }}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </LayoutContext.Provider>
       <AuthModal />
-    </SWRConfig>
+      {DEV_ENV && (
+        <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
+      )}
+    </ReactQueryConfigProvider>
   );
 };
 

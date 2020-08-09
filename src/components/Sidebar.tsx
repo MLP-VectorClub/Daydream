@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
       <SidebarUserInfo />
 
       {backendDown && (
-        <section className="login">
+        <section className="signin">
           <h2>{t('sidebar.welcome')}</h2>
           <p>{t('sidebar.backendDown')}</p>
         </section>
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
         <>
           {signedIn && <SidebarNotifications />}
 
-          <section className={signedIn ? 'welcome' : 'login'}>
+          <section className={signedIn ? 'welcome' : 'signin'}>
             <SidebarUsefulLinks />
             <ButtonGroup>
               {signedIn

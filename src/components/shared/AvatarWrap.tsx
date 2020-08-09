@@ -1,8 +1,8 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import classNames from 'classnames';
 import { AvatarProvider, Nullable } from '../../types';
-import { getAvatar } from '../../utils';
+import { GUEST_AVATAR } from '../../config';
 
 interface PropTypes {
   avatarUrl: Nullable<string>;
@@ -13,20 +13,19 @@ interface PropTypes {
   className?: string;
 }
 
-const AvatarWrap: React.FC<PropTypes> = ({
+const AvatarWrap: React.FC<PropTypes> = memo(({
   avatarProvider,
   avatarUrl,
   size,
-  email = null,
-  emailHash = null,
-  className = '',
+  className,
 }) => (
   <div className={classNames(`avatar-wrap provider-${avatarProvider}`, className)}>
     <LazyLoadImage
-      src={avatarUrl || getAvatar({ email, emailHash, size })}
+      src={avatarUrl || GUEST_AVATAR}
       className="avatar"
       style={{ width: `${size}px`, height: `${size}px` }}
     />
   </div>
-);
-export default memo(AvatarWrap);
+));
+
+export default AvatarWrap;

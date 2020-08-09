@@ -5,6 +5,8 @@ import { NextSeo } from 'next-seo';
 import { NextPage } from 'next';
 import { Alert } from 'reactstrap';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import classNames from 'classnames';
 import { RootState } from '../store/rootReducer';
 import { OLD_SITE_URL, PROD_APP_URL } from '../config';
 import { Nullable } from '../types';
@@ -14,14 +16,24 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import ExternalLink from './shared/ExternalLink';
 import InlineIcon from './shared/InlineIcon';
+import { useLayout } from '../hooks/layout';
 
 type PropTypes = {
   url?: Nullable<string>;
 }
 
 const Layout = (({ children }) => {
+  const { disabled } = useLayout();
   const router = useRouter();
   const { language } = useSelector((state: RootState) => state.core);
+
+  useEffect(() => {
+    document.body.className = classNames({ 'layout-disabled': disabled });
+  }, [disabled]);
+
+  if (disabled) {
+    return <>{children}</>;
+  }
 
   return (
     <div>

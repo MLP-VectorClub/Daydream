@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { CSSProperties, memo } from 'react';
 import classNames from 'classnames';
 import { Nullable } from '../../types';
 
@@ -10,6 +10,7 @@ export interface LoadingRingProps {
   inline?: boolean;
   spaceLeft?: boolean;
   spaceRight?: boolean;
+  style?: CSSProperties;
 }
 
 const LoadingRing: React.FC<LoadingRingProps> = ({
@@ -20,6 +21,7 @@ const LoadingRing: React.FC<LoadingRingProps> = ({
   inline = false,
   spaceLeft = false,
   spaceRight = false,
+  style,
 }) => {
   const renderedStrokeWidth = inline ? 15 : strokeWidth;
   const renderedOutline = inline ? false : outline;
@@ -35,6 +37,7 @@ const LoadingRing: React.FC<LoadingRingProps> = ({
         'ml-2': inline && spaceLeft,
         'svg-inline--fa custom-icon': inline,
       }, className)}
+      style={style}
     >
       {renderedOutline && (
         <circle

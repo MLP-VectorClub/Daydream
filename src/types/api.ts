@@ -69,6 +69,11 @@ export type Role = "user" | "member" | "assistant" | "staff" | "admin";
 export type ShowType = "episode" | "movie" | "short" | "special";
 
 /**
+ * List of available social signin providers
+ */
+export type SocialProvider = "deviantart" | "discord";
+
+/**
  * List of available sprite sizes
  */
 export type SpriteSize = 300 | 600;
@@ -103,6 +108,11 @@ export type UserPrefKeys =
   | "a_postres"
   | "a_reserve"
   | "pcg_slots";
+
+/**
+ * List of available vector apps
+ */
+export type VectorApp = "illustrator" | "inkscape" | "ponyscape";
 
 export type SlimAppearanceList = ErrorResponse & {
   appearances: SlimAppearance[];
@@ -248,13 +258,20 @@ export type AppearanceToken = string;
  */
 export type LocationHeader = string;
 
-export interface LoginRequest {
+export interface SigninRequest {
   email: string;
   password: string;
   /**
    * When using session-based auth set to true for persistent cookies, omit or use false for session cookies
    */
   remember?: boolean;
+}
+
+export interface OauthCode {
+  /**
+   * The authorization code received from the provider
+   */
+  code: string;
 }
 
 export interface RegistrationRequest {
@@ -306,10 +323,6 @@ export interface PublicUser {
   role: Role;
   avatarUrl: string;
   avatarProvider: AvatarProvider;
-  /**
-   * Hashed version of the e-mail address used in case there is no available avatarUrl to allow loading the Gravatar fallback
-   */
-  emailHash?: string;
 }
 
 export type User = PublicUser & {
@@ -367,7 +380,11 @@ export interface GetAppearancesIdPreviewRequest {
   id: ZeroBasedId
   token: AppearanceToken
 }
-export type PostUsersLoginRequest = LoginRequest
+export type PostUsersSigninRequest = SigninRequest
+export interface GetUsersOauthSigninProviderRequest {
+  provider: SocialProvider
+}
+export type PostUsersOauthSigninProviderRequest = OauthCode
 export type PostUsersRequest = RegistrationRequest
 export interface GetSanctumCsrfCookieRequest {
 }
@@ -379,7 +396,7 @@ export interface GetUsersDaUsernameRequest {
 export interface GetUsersIdRequest {
   id: OneBasedId
 }
-export interface PostUsersLogoutRequest {
+export interface PostUsersSignoutRequest {
 }
 export interface GetUsersTokensRequest {
 }
@@ -395,11 +412,17 @@ export type GetAppearancesIdColorGroupsResult = ListOfColorGroups;
 export type GetAppearancesIdSpriteResult = any
 export type GetAppearancesIdSprite302 = any
 export type GetAppearancesIdPreviewResult = any
-export interface PostUsersLoginResult {
+export interface PostUsersSigninResult {
   token?: string;
 }
 
-export type PostUsersLogin204 = any
+export type PostUsersSignin204 = any
+export type GetUsersOauthSigninProviderResult = any
+export interface PostUsersOauthSigninProviderResult {
+  token?: string;
+}
+
+export type PostUsersOauthSigninProvider204 = any
 export interface PostUsersResult {
   token?: string;
 }
@@ -412,7 +435,7 @@ export type GetUsersDaUsernameResult = PublicUser;
 
 export type GetUsersIdResult = PublicUser;
 
-export type PostUsersLogoutResult = any
+export type PostUsersSignoutResult = any
 export interface GetUsersTokensResult {
   /**
    * ID of the token used to make this request. Will be null if the request is authenticated through CookieAuth

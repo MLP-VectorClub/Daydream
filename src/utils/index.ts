@@ -7,5 +7,5 @@ export * from './build-id-parser';
 export * from './initial-prop-helpers';
 export * from './forms';
 export * from './profile';
-export * from './swr-utils';
+export * from './react-query-utils';
 export * from './url';

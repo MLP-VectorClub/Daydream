@@ -35,7 +35,7 @@ export const fixPath = <T extends ParsedUrlQuery>(
   const requestUrlParts = parseRelativeUrl(req.url);
   const strippedParams = mapValues(omitBy(
     omit(
-      requestUrlParts.searchParams,
+      { ...requestUrlParts.searchParams },
       ['page', ...stripParams],
     ),
     el => typeof el === 'undefined',
@@ -45,6 +45,7 @@ export const fixPath = <T extends ParsedUrlQuery>(
     hash: requestUrlParts.hash,
     queryParams: isEmpty(strippedParams) ? undefined : strippedParams,
   });
+
   if (requestUrl === expectedPath) return false;
 
   res.setHeader('location', expectedPath);

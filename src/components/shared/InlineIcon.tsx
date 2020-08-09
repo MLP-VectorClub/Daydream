@@ -1,17 +1,9 @@
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import LoadingRing from './LoadingRing';
 import { getInlineIconClasses } from '../../utils/inline-icon-classes';
-
-export type InlineIconProps = {
-  icon?: IconProp;
-  loading?: boolean;
-  last?: boolean;
-  first?: boolean;
-  color?: string;
-} & Omit<FontAwesomeIconProps, 'icon'>;
+import { InlineIconProps } from '../../types/component-props';
 
 const InlineIcon: React.FC<InlineIconProps> = (({
   icon,
