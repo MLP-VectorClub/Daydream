@@ -16,7 +16,7 @@ const oauthRegistrationFetcher = (data: RegisterOauthRequest) => () => requestOb
 export function useOAuth(query: ParsedUrlQuery) {
   const { authCheck, user } = useAuth();
   const key = ENDPOINTS.USERS_OAUTH_SIGNIN_PROVIDER({ provider: query.provider as SocialProvider });
-  const { status, data, error } = useQuery<PostUsersOauthSigninProviderResult, UnifiedErrorResponse, typeof key>(
+  const { status, data, error } = useQuery<PostUsersOauthSigninProviderResult, typeof key, UnifiedErrorResponse>(
     key,
     oauthRegistrationFetcher(query as unknown as RegisterOauthRequest),
     {

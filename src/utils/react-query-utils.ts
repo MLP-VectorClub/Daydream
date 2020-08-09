@@ -5,13 +5,13 @@ import { httpResponseMapper } from './common';
 
 export function mapQueryStatus(status: QueryStatus) {
   switch (status) {
-    case QueryStatus.Idle:
+    case 'idle':
       return Status.INIT;
-    case QueryStatus.Loading:
+    case 'loading':
       return Status.LOAD;
-    case QueryStatus.Success:
+    case 'success':
       return Status.SUCCESS;
-    case QueryStatus.Error:
+    case 'error':
       return Status.FAILURE;
     default:
       throw new Error(`Unknown query status: ${status}`);
