@@ -1,28 +1,39 @@
-import { useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import Link from 'next/link';
-import { Nullable } from '../types';
-import { DEV_API_URL, GITHUB_URL, PROD_API_URL } from '../config';
-import { BuildIdParseResult, getBuildData, PATHS } from '../utils';
+import { GetServerSideProps } from 'next';
+import React from 'react';
+import { GetAboutConnectionResult } from '../types';
+import {
+  BACKEND_GITHUB_URL,
+  BACKEND_PROJECT_NAME,
+  DEV_API_URL,
+  DEV_ENV,
+  GITHUB_URL,
+  PROD_API_URL,
+  PROJECT_NAME,
+} from '../config';
+import { getBuildData, isClientSide, PATHS } from '../utils';
 import { useTranslation } from '../i18n';
 import TimeAgo from './shared/TimeAgo';
 import ContactLink from './shared/ContactLink';
 import ContactModal from './ContactModal';
 import ExternalLink from './shared/ExternalLink';
+import { connectionFetcher, useConnectionInfo } from '../hooks';
+import Abbr from './shared/Abbr';
 
-const Footer: React.FC = () => {
+const buildData = isClientSide ? getBuildData() : null;
+
+interface PropTypes {
+  initialServerInfo?: GetAboutConnectionResult;
+}
+
+const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
   const { t } = useTranslation();
-  const [buildData, setBuildData] = useState<Nullable<BuildIdParseResult>>(null);
+  const { serverInfo, loading, backendDown } = useConnectionInfo(initialServerInfo);
 
-  useEffect(() => {
-    setBuildData(getBuildData());
-  }, []);
-
-  let developmentMode = true;
   let commitHash: React.ReactNode = null;
   let commitTime: React.ReactNode = null;
   if (buildData && typeof buildData !== 'string') {
-    developmentMode = false;
     commitHash = (
       <>
         @
@@ -32,7 +43,7 @@ const Footer: React.FC = () => {
         >
           {buildData.commitId}
         </a>
-        <UncontrolledTooltip target="visit-github-commit" placement="top">
+        <UncontrolledTooltip target="visit-github-commit" placement="top" fade={false}>
           {t('footer.commitTitle')}
         </UncontrolledTooltip>
       </>
@@ -44,24 +55,59 @@ const Footer: React.FC = () => {
       </>
     );
   }
+  let backendCommitHash: React.ReactNode = null;
+  let backendCommitTime: React.ReactNode = null;
+  if (!loading && !backendDown && serverInfo) {
+    backendCommitHash = (
+      <>
+        @
+        <a
+          href={`${BACKEND_GITHUB_URL}/commit/${serverInfo.commitId}`}
+          id="visit-backend-github-commit"
+        >
+          {serverInfo.commitId}
+        </a>
+        <UncontrolledTooltip target="visit-backend-github-commit" placement="top" fade={false}>
+          {t('footer.commitTitle')}
+        </UncontrolledTooltip>
+      </>
+    );
+    backendCommitTime = serverInfo.commitDate && (
+      <>
+        {` ${t('footer.created')} `}
+        <TimeAgo date={serverInfo.commitDate} />
+      </>
+    );
+  }
 
-  const apiDocsUrl = developmentMode ? DEV_API_URL : PROD_API_URL;
+  const apiDocsUrl = DEV_ENV ? DEV_API_URL : PROD_API_URL;
 
   return (
     <>
       <footer id="footer">
         <span id="git-info">
-          {`${t('footer.running')} `}
+          {`${t('footer.frontend')}: `}
           <strong>
             <a href={GITHUB_URL} id="visit-github">
-              {GITHUB_URL.split('/').pop()}
+              {PROJECT_NAME}
             </a>
-            <UncontrolledTooltip target="visit-github" placement="top">
+            <UncontrolledTooltip target="visit-github" placement="top" fade={false}>
               {t('footer.visitGithub')}
             </UncontrolledTooltip>
             {commitHash}
           </strong>
           {commitTime}
+          {` | ${t('footer.backend')}: `}
+          <strong>
+            <a href={BACKEND_GITHUB_URL} id="visit-backend-github">
+              {BACKEND_PROJECT_NAME}
+            </a>
+            <UncontrolledTooltip target="visit-backend-github" placement="top" fade={false}>
+              {t('footer.visitGithub')}
+            </UncontrolledTooltip>
+            {backendCommitHash}
+          </strong>
+          {backendCommitTime}
         </span>
         {` | `}
         <Link href={PATHS.PRIVACY_POLICY}>
@@ -70,13 +116,23 @@ const Footer: React.FC = () => {
         {` | `}
         <ContactLink>{t('footer.contactUs')}</ContactLink>
         {` | `}
-        <ExternalLink href={apiDocsUrl}>
-          {t('footer.api')}
-        </ExternalLink>
+        <Abbr id="api-docs" title={t('footer.apiMeaning')}>
+          <ExternalLink id="api-docs" href={apiDocsUrl}>
+            {t('footer.api')}
+          </ExternalLink>
+        </Abbr>
       </footer>
       <ContactModal />
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const props: PropTypes = {
+    initialServerInfo: await connectionFetcher(),
+  };
+
+  return { props };
 };
 
 export default Footer;

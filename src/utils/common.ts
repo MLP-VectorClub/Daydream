@@ -29,6 +29,10 @@ export const range = (start: number, end: number, step = 1): number[] =>
 
 export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
   switch (err.response?.status) {
+    case 503: {
+      const message = get(err, 'response.data.message');
+      return { type: UnifiedErrorResponseTypes.BACKEND_DOWN, message };
+    }
     case 419:
       return { type: UnifiedErrorResponseTypes.MISSING_CSRF_TOKEN };
     case 401:

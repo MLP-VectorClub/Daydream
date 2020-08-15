@@ -11,14 +11,14 @@ import {
   PublicUser,
   SocialProvider,
   Status,
+  UnifiedErrorResponseTypes,
   User,
 } from '../../types';
-import { useLayout } from '../../hooks/layout';
+import { useLayout, useOAuth } from '../../hooks';
 import { ENDPOINTS, PATHS, setResponseStatus } from '../../utils';
 import Center from '../../components/shared/Center';
 import { SOCIAL_PROVIDERS } from '../../fancy-config';
 import InlineIcon from '../../components/shared/InlineIcon';
-import { useOAuth } from '../../hooks/oauth';
 import LoadingRing from '../../components/shared/LoadingRing';
 
 interface PropTypes {
@@ -63,7 +63,7 @@ const OAuthPage: React.FC<PropTypes> = () => {
   if (query.code) {
     if (status === Status.FAILURE) {
       query.error = 'server_error';
-      if (error && 'message' in error) {
+      if (error && error.type === UnifiedErrorResponseTypes.MESSAGE_ONLY) {
         // eslint-disable-next-line @typescript-eslint/camelcase
         query.error_description = error.message;
       }

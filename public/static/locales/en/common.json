@@ -6,12 +6,14 @@
   },
   "footer": {
     "commitTitle": "See exactly what was changed and why",
-    "running": "Running",
+    "frontend": "Frontend",
+    "backend": "Backend",
     "created": "created",
     "visitGithub": "Visit the GitHub repository",
     "privacyPolicy": "Privacy Policy",
     "contactUs": "Contact Us",
-    "api": "API"
+    "api": "API",
+    "apiMeaning": "Application Programming Interface"
   },
   "titles": {
     "colorGuide": "Color Guide",

@@ -72,6 +72,7 @@ export enum UnifiedErrorResponseTypes {
   AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR',
   MISSING_CSRF_TOKEN = 'MISSING_CSRF_TOKEN',
   RATE_LIMITED = 'RATE_LIMITED',
+  BACKEND_DOWN = 'BACKEND_DOWN',
 }
 
 export type UnifiedErrorResponse = {
@@ -85,6 +86,9 @@ export type UnifiedErrorResponse = {
 } | {
   type: UnifiedErrorResponseTypes.UNKNOWN;
   payload: string;
+} | {
+  type: UnifiedErrorResponseTypes.BACKEND_DOWN;
+  message: string;
 } | {
   type: UnifiedErrorResponseTypes.MESSAGE_ONLY;
   message: string;

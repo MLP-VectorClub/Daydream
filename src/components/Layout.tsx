@@ -16,7 +16,7 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import ExternalLink from './shared/ExternalLink';
 import InlineIcon from './shared/InlineIcon';
-import { useLayout } from '../hooks/layout';
+import { useLayout } from '../hooks';
 
 type PropTypes = {
   url?: Nullable<string>;

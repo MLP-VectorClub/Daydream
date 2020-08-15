@@ -11,6 +11,8 @@ export const DEV_API_URL = 'https://api.mlpvector.lc';
 
 export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Celestia';
 export const PROJECT_NAME = GITHUB_URL.split('/').pop();
+export const BACKEND_GITHUB_URL = 'https://github.com/MLP-VectorClub/Luna';
+export const BACKEND_PROJECT_NAME = BACKEND_GITHUB_URL.split('/').pop();
 export const CLUB_URL = 'https://www.deviantart.com/mlp-vectorclub';
 export const DISCORD_INVITE_LINK = 'https://discord.gg/hrffb8k';
 export const DEV_EMAIL = 'david@seinopsys.dev';

@@ -26,7 +26,7 @@ import { getGuideTitle } from '../../../utils/colorguide';
 import { coreActions } from '../../../store/slices';
 import { AppPageContext, wrapper } from '../../../store';
 import Pagination from '../../../components/shared/Pagination';
-import { guideFetcher, useGuide } from '../../../hooks/color-guide';
+import { guideFetcher, useGuide } from '../../../hooks';
 
 interface PropTypes {
   guide: Nullable<GuideName>;

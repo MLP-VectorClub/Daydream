@@ -16,7 +16,7 @@ import AuthModal from '../components/modals/AuthModal';
 import ProgressIndicator from '../components/ProgressIndicator';
 import { ENDPOINTS } from '../utils';
 import Layout from '../components/Layout';
-import { LayoutContext } from '../hooks/layout';
+import { LayoutContext } from '../hooks';
 
 const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPropsType> = props => {
   const { Component, pageProps } = props;

@@ -91,3 +91,7 @@ body {
     }
   }
 }
+
+abbr[aria-label] {
+  @extend abbr[title];
+}

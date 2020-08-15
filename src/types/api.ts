@@ -114,6 +114,20 @@ export type UserPrefKeys =
  */
 export type VectorApp = "illustrator" | "inkscape" | "ponyscape";
 
+/**
+ * An object containing information about the connection made to the server
+ */
+export interface ConnectionInfo {
+  /**
+   * The IP address the server believe this request originated from
+   */
+  ip: string;
+  /**
+   * The value of the X-Forwarded-For HTTP header as received by the server
+   */
+  proxiedIps: string;
+}
+
 export type SlimAppearanceList = ErrorResponse & {
   appearances: SlimAppearance[];
 };
@@ -179,7 +193,7 @@ export type SlimAppearance = CommonAppearance & SlimAppearanceOnly;
  * Represents properties that belong to the full appearance object only
  */
 export interface AppearanceOnly {
-  created_at: string;
+  created_at: IsoStandardDate;
   notes: string;
   tags: SlimGuideTag[];
 }
@@ -287,6 +301,11 @@ export interface ErrorResponse {
   message: string;
 }
 
+/**
+ * An ISO 8601 standard compliant date as a string
+ */
+export type IsoStandardDate = string;
+
 export type ValidationErrorResponse = {
   /**
    * A map containing error messages for each field that did not pass validation
@@ -339,8 +358,8 @@ export interface Token {
    * Name of the token, either generated (from OS and browser version) or user-supplied if renamed
    */
   name: string;
-  lastUsedAt: string;
-  createdAt: string;
+  lastUsedAt: IsoStandardDate;
+  createdAt: IsoStandardDate;
 }
 
 export interface PageData {
@@ -353,10 +372,26 @@ export interface PageData {
 }
 
 /**
+ * An object containing information related to the verion of this appilcation that's currently running on the server
+ */
+export interface CommitData {
+  /**
+   * Abbreviated commit ID of the backend application, indicating the version currently deployed on the server (at least 7 characters long)
+   */
+  commitId: string;
+  /**
+   * Date at which the commit currently deployed on the server was authored
+   */
+  commitTime: IsoStandardDate;
+}
+
+/**
  * List of supported application-wide settings
  */
 export type AppSettings = "dev_role_label";
 
+export interface GetAboutConnectionRequest {
+}
 export interface GetAppearancesRequest {
   guide: GuideName
   page: PageNumber
@@ -403,6 +438,8 @@ export interface GetUsersTokensRequest {
 export interface DeleteUsersTokensIdRequest {
   id: number
 }
+export type GetAboutConnectionResult = ConnectionInfo & CommitData;
+
 export type GetAppearancesResult = AppearanceList & PageData;
 
 export type GetAppearancesAllResult = SlimAppearanceList;
