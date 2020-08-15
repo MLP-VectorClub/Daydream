@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { Button } from 'reactstrap';
 import { useTranslation } from '../../i18n';
 import StandardHeading from '../../components/shared/StandardHeading';
 import Content from '../../components/shared/Content';
@@ -17,7 +18,7 @@ interface PropTypes {
 
 export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forwardedFor, initialServerInfo }) => {
   const { t } = useTranslation('connection');
-  const { serverInfo, loading, backendDown } = useConnectionInfo(initialServerInfo);
+  const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
   return (
     <Content>
       <Head>
@@ -34,14 +35,19 @@ export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forward
         {backendDown && (
           <InlineIcon color="danger" icon="server" />
         )}
-        {loading && (
+        {fetching && (
           <InlineIcon loading last />
         )}
       </h3>
-      <p><strong>{t('commitId')}:</strong> <code>{JSON.stringify(serverInfo?.commitId)}</code></p>
-      <p><strong>{t('commitTime')}:</strong> <code>{JSON.stringify(serverInfo?.commitTime)}</code></p>
-      <p><strong>{t('connectingAddress')}:</strong> <code>{JSON.stringify(serverInfo?.ip)}</code></p>
-      <p><strong>{t('forwardedFor')}:</strong> <code>{JSON.stringify(serverInfo?.proxiedIps)}</code></p>
+      <p><strong>{t('commitId')}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.commitId)}</code></p>
+      <p><strong>{t('commitTime')}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.commitTime)}</code></p>
+      <p><strong>{t('connectingAddress')}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.ip)}</code></p>
+      <p><strong>{t('forwardedFor')}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.proxiedIps)}</code></p>
+
+      <Button onClick={makeStale} disabled={fetching}>
+        <InlineIcon icon="sync" first loading={fetching} />
+        {t('updateBackend')}
+      </Button>
     </Content>
   );
 };

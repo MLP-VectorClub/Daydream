@@ -14,6 +14,7 @@ import {
   faInfo,
   faSignInAlt,
   faSignOutAlt,
+  faSync,
   faTimes,
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +28,7 @@ library.add(
   faEye,
   faInfo,
   faBars,
+  faSync,
   faCheck,
   faTimes,
   faHardHat,

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { queryCache, useQuery } from 'react-query';
 import {
   GetAboutConnectionResult,
   MappedAboutConnectionResult,
@@ -13,17 +13,21 @@ interface ServerInfoHookValue {
   serverInfo?: MappedAboutConnectionResult;
   backendDown: boolean;
   loading: boolean;
+  fetching: boolean;
+  makeStale: VoidFunction;
 }
 
 export const connectionFetcher = () => requestObservableToPromise(aboutService.getConnection());
 
 export function useConnectionInfo(initialData?: GetAboutConnectionResult): ServerInfoHookValue {
+  const key = ENDPOINTS.CONNECTION_INFO;
   const {
     isLoading: loading,
+    isFetching: fetching,
     data,
     error,
-  } = useQuery<GetAboutConnectionResult, typeof ENDPOINTS.CONNECTION_INFO, UnifiedErrorResponse>(
-    ENDPOINTS.CONNECTION_INFO,
+  } = useQuery<GetAboutConnectionResult, typeof key, UnifiedErrorResponse>(
+    key,
     connectionFetcher,
     { enabled: isClientSide, initialData, refetchInterval: 60e3 },
   );
@@ -34,7 +38,11 @@ export function useConnectionInfo(initialData?: GetAboutConnectionResult): Serve
 
   return {
     loading,
+    fetching,
     serverInfo,
     backendDown: !loading && error?.type === UnifiedErrorResponseTypes.BACKEND_DOWN,
+    makeStale: () => {
+      queryCache.invalidateQueries(key);
+    },
   };
 }

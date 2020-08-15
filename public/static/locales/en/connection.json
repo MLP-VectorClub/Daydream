@@ -5,5 +5,6 @@
   "connectingAddress": "Connecting IP Address",
   "forwardedFor": "Forwarded IP Addresses",
   "commitId": "Server Commit ID",
-  "commitTime": "Server Commit Time"
+  "commitTime": "Server Commit Time",
+  "updateBackend": "Refresh results"
 }
