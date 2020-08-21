@@ -105,7 +105,7 @@
     "tooLong_plural": "Cannot be longer than {{count}} characters",
     "tooShort": "Cannot be shorter than {{count}} character",
     "tooShort_plural": "Cannot be shorter than {{count}} characters",
-    "email": "Pleas enter a valid e-mail address",
+    "email": "Please enter a valid e-mail address",
     "acceptPrivacyPolicy": "You must accept the privacy policy",
     "format": "Please match the specified format",
     "passwordMismatch": "The two passwords don't match"
