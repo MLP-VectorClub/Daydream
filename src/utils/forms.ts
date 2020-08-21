@@ -1,5 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { FieldValues, FormContextValues } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form';
 import { FieldErrors } from 'react-hook-form/dist/types';
 import { get } from 'lodash';
 import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from '../types';
@@ -56,14 +56,3 @@ export const validatePassword = (t: TFunction) => ({
   ...validateMinLength(t, 8),
   ...validateMaxLength(t, 300),
 });
-
-export const validateConfirmation = <T extends FieldValues>(
-  t: TFunction,
-  getValues: FormContextValues<T>['getValues'],
-  inputName: string,
-  key = 'passwordMismatch',
-) => ({
-    validate: {
-      confirmed: (value: string) => value === getValues(inputName) || (t(`validation.${key}`) as string),
-    },
-  });

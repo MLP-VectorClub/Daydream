@@ -82,7 +82,6 @@
     "emailHelp": "Use a valid e-mail address that can receive messages to ensure you do not lose access to your account. This address must be confirmed after signing up. <1>We will not send you spam.</1>",
     "password": "Password",
     "passwordHelp": "Must be at least {{min}} characters long and not commonly used.",
-    "passwordConfirm": "Confirm Password",
     "acceptPrivacyPolicy": "I accept the <1>Privacy Policy</1>",
     "rememberMe": "Keep me signed in",
     "signInButton": "Sign In",
@@ -107,8 +106,7 @@
     "tooShort_plural": "Cannot be shorter than {{count}} characters",
     "email": "Please enter a valid e-mail address",
     "acceptPrivacyPolicy": "You must accept the privacy policy",
-    "format": "Please match the specified format",
-    "passwordMismatch": "The two passwords don't match"
+    "format": "Please match the specified format"
   },
   "tmdb_disclaimer": "This product uses the TMDb API but is not endorsed or certified by TMDb."
 }
