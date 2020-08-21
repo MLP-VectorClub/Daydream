@@ -1,0 +1,112 @@
+{
+  "header": {
+    "signin": "Belépés",
+    "signout": "Kilépés",
+    "register": "Regisztráció"
+  },
+  "footer": {
+    "commitTitle": "Nézd meg pontosan mi változott és miért",
+    "frontend": "Felület",
+    "backend": "Háttérrendszer",
+    "created": "létrehozva:",
+    "visitGithub": "Látogasd meg a GitHub-on",
+    "privacyPolicy": "Adatvédelmi Nyilatkozat",
+    "contactUs": "Kapcsolat",
+    "api": "API",
+    "apiMeaning": "Alkalmazásprogramozási felület"
+  },
+  "titles": {
+    "colorGuide": "Színsegéd",
+    "colorGuideByName": "{{guideName}} Színsegéd",
+    "colorGuideByNameAndPage": "{{page}}. oldal - {{guideName}} Színsegéd",
+    "profile": "Profil",
+    "profileByName": "{{name}} - Profil",
+    "yourProfile": "Saját Profilod",
+    "show": "Műsor",
+    "events": "Események",
+    "about": "Rólunk",
+    "admin": "Admin",
+    "404": "Nem Található",
+    "latestEpisode": "Legújabb Epizód",
+    "privacyPolicy": "Adatvédelmi Nyilatkozat",
+    "users": "Felhasználók",
+    "account": "Fiók"
+  },
+  "error": {
+    "withStatus": "Hiba {{statusCode}}!",
+    "withoutStatus": "Ismeretlen Hiba!",
+    "404": {
+      "title": "404 Nem Található",
+      "lead": "Ez az oldal nem létezik"
+    }
+  },
+  "sidebar": {
+    "welcome": "Üdvözöllek!",
+    "backendDown": "Jelenleg nem lehet belépni, kérlek látogass vissza később.",
+    "sessionUpdating": "Munkameneted frissítése folyamatban",
+    "authCheck": "Ellenőrizzük, hogy be vagy-e lépve",
+    "signOut": "Kilépés",
+    "signIn": "Belépés",
+    "joinDiscord": "Csatlakozz Discord-on",
+    "confirmSignOut": "Biztosan ki szeretnél lépni?",
+    "csrfInitializing": "CSRF zseton beszerzése",
+    "authInitializing": "Felhasználó adatok beszerzése"
+  },
+  "contact": {
+    "header": "Kapcsolat",
+    "howTo": "Hogyan tudsz velünk kapcsolatba lépni",
+    "useAnyBelow": "Az alábbi módszerek bármelyikét használhatod, hogy elérj bennünket:",
+    "discord": "<0>Csatlakozz a Discord szerverünkhöz</0> és írd le a problémád/javaslatod a <2>#support</2> csatornában",
+    "deviantart": "<0>Küldj egy jegyzetet</0> a csoportnak DeviantArt-on",
+    "email": "<0>Küldj egy e-mail-t</0> a {{email}} címre"
+  },
+  "guestUserName": "Kíváncsi Póni",
+  "roleLabel": {
+    "guest": "Vendég",
+    "user": "DeviantArt Felhasználó",
+    "member": "Klubtag",
+    "assistant": "Segéd",
+    "staff": "Személyzet",
+    "admin": "Adminisztrátor",
+    "developer": "Oldal Fejlesztő"
+  },
+  "auth": {
+    "signInTitle": "Kerülj beljebb",
+    "signUpTitle": "Hozz létre egy fiókot",
+    "noAccountYet": "Még nincs fiókod? Itt létrehozhatsz egyet!",
+    "alreadyHaveAccount": "Már van fiókod? Itt beléphetsz!",
+    "accountBenefits": "A fiók lehetővé teszi, hogy testre szabd az oldal működését, és még sok más szolgáltatás várható.",
+    "name": "Megjelenített Név",
+    "nameHelp": "Csak angol betűk, számok, kötőjelek és alulvonások. Hossza {{min}} és {{max}} karakter között lehet. Később megváltoztatható.",
+    "email": "E-Mail Cím",
+    "emailHelp": "Használj egy érvényes e-mail címet amely képes levelek fogadására hogy a későbbiekben ne feszítsd el a fiókodhoz való hozzáférést. Ezt a címet meg kell majd erősítened a regisztráció után. <1>Nem fogunk levélszemetet küldeni.</1>",
+    "password": "Jelszó",
+    "passwordHelp": "Legalább {{min}} karakter hosszú és nehezen kitalálható kell legyen.",
+    "acceptPrivacyPolicy": "Elfogadom az <1>Adatvédelmi Nyilatkozat</1>ot",
+    "rememberMe": "Maradjak belépve",
+    "signInButton": "Belépés",
+    "registerButton": "Fiók Létrehozása",
+    "invalidCredentials": "Érvénytelen e-mail cím vagy jelszó",
+    "rateLimited": "Túl sokszor próbáltál belépni, kérlek {{count}} másodperc múlva próbálkozz újra",
+    "rateLimited_plural": "Túl sokszor próbáltál belépni, kérlek {{count}} másodperc múlva próbálkozz újra",
+    "hidePassword": "Jelszó Elrejtése",
+    "showPassword": "Jelszó Mutatása",
+    "forgotPassword": "Elfelejtett jelszó?",
+    "pwResetNotYetAvailable": "A jelszó helyreállítás funkció még nem elérhető",
+    "socialSignIn": {
+      "alternatively": "vagy",
+      "signInWith": "{{provider}} belépés"
+    }
+  },
+  "validation": {
+    "required": "Ez a mező kötelező",
+    "tooLong": "Nem lehet hosszabb, mint {{count}} karakter",
+    "tooLong_plural": "Nem lehet hosszabb, mint {{count}} karakter",
+    "tooShort": "Nem lehet rövidebb, mint {{count}} karakter",
+    "tooShort_plural": "Nem lehet rövidebb, mint {{count}} karakter",
+    "email": "Adj meg egy érvényes e-mail címet",
+    "acceptPrivacyPolicy": "El kell fogadnod az adatvédelmi nyilatkozatot",
+    "format": "Kövesd a megadott formátumot"
+  },
+  "tmdb_disclaimer": "Ez az oldal felhasználja a TMDb API-t, de nem jóváhagyott vagy hitelesített a TMDb által."
+}
