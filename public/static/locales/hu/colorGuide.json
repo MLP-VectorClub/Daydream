@@ -1,0 +1,13 @@
+{
+  "guideName": {
+    "unknown": "Ismeretlen",
+    "pony": "Póni",
+    "eqg": "EQL"
+  },
+  "appearances": {
+    "cmAvailable": "Szépségjegy elérhető"
+  },
+  "errors": {
+    "unknownGuide": "Nem található színsegéd a megadott névvel"
+  }
+}
