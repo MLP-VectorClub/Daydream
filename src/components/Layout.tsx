@@ -1,13 +1,11 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head';
-import { useSelector } from 'react-redux';
 import { NextSeo } from 'next-seo';
 import { NextPage } from 'next';
 import { Alert } from 'reactstrap';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import classNames from 'classnames';
-import { RootState } from '../store/rootReducer';
 import { OLD_SITE_URL, PROD_APP_URL } from '../config';
 import { Nullable } from '../types';
 import { assembleSeoUrl } from '../utils';
@@ -17,6 +15,7 @@ import Sidebar from './Sidebar';
 import ExternalLink from './shared/ExternalLink';
 import InlineIcon from './shared/InlineIcon';
 import { useLayout } from '../hooks';
+import { useTranslation } from '../i18n';
 
 type PropTypes = {
   url?: Nullable<string>;
@@ -25,7 +24,7 @@ type PropTypes = {
 const Layout = (({ children }) => {
   const { disabled } = useLayout();
   const router = useRouter();
-  const { language } = useSelector((state: RootState) => state.core);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     document.body.className = classNames({ 'layout-disabled': disabled });
@@ -40,7 +39,7 @@ const Layout = (({ children }) => {
       <NextSeo
         openGraph={{
           url: router.asPath || PROD_APP_URL,
-          locale: language,
+          locale: i18n.language,
         }}
       />
       <Head>
@@ -53,8 +52,7 @@ const Layout = (({ children }) => {
       <div id="main">
         <Alert color="warning" className="p-2 mb-2" fade={false}>
           <InlineIcon icon="hard-hat" first />
-          This website is a work-in-progress, for our current live site please visit
-          {' '}
+          {`${t('wipNotice')} `}
           <ExternalLink
             href={OLD_SITE_URL + router.asPath}
             blank={false}

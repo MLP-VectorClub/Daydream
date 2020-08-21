@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { useTranslation } from '../i18n';
 import MainNavigation from './shared/MainNavigation';
 import SidebarUserInfo from './shared/SidebarUserInfo';
@@ -37,19 +37,20 @@ const Sidebar: React.FC = () => {
 
           <section className={signedIn ? 'welcome' : 'signin'}>
             <SidebarUsefulLinks />
-            <ButtonGroup>
+            <div className="mb-2">
               {signedIn
                 ? <SignOutButton t={t} />
                 : <SignInButton t={t} />}
-              <Button
-                color="discord"
-                tag={ExternalLink}
-                href={DISCORD_INVITE_LINK}
-              >
-                <CustomIcon src="/img/discord-logo-white.svg" className="mr-2" />
-                {t('sidebar.joinDiscord')}
-              </Button>
-            </ButtonGroup>
+            </div>
+            <Button
+              color="discord"
+              size="sm"
+              tag={ExternalLink}
+              href={DISCORD_INVITE_LINK}
+            >
+              <CustomIcon src="/img/discord-logo-white.svg" className="mr-2" />
+              {t('sidebar.joinDiscord')}
+            </Button>
           </section>
           {/* Widgets will go here */}
           <HappeningSoon />

@@ -21,8 +21,7 @@ import {
   Optional,
   TitleKeyWithParams,
 } from '../../../types';
-import { notFound, setResponseStatus } from '../../../utils';
-import { getGuideTitle } from '../../../utils/colorguide';
+import { notFound, setResponseStatus, getGuideTitle } from '../../../utils';
 import { coreActions } from '../../../store/slices';
 import { AppPageContext, wrapper } from '../../../store';
 import Pagination from '../../../components/shared/Pagination';
@@ -40,7 +39,7 @@ const ColorGuidePage: React.FC<PropTypes> = ({ initialData, scrollPosition }) =>
   const guide = query.guide as GuideName;
   const page = query.page ? Number(query.page) : undefined;
   const data = useGuide({ guide, page, previews: true }, initialData || undefined);
-  const { t } = useTranslation('colorGuide');
+  const { t } = useTranslation('color-guide');
   const title = getGuideTitle(t, guide);
   const [titleKey, titleParams] = title as TitleKeyWithParams;
   return (
@@ -138,7 +137,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   store.dispatch(coreActions.setTitle(title));
   return {
     props: {
-      namespacesRequired: ['colorGuide'],
+      namespacesRequired: ['color-guide'],
       guide,
       page,
       initialData: initialData || null,

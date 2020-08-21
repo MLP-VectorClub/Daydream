@@ -20,14 +20,39 @@
 
   @include media-breakpoint-up(lg) {
     text-align: left;
-    z-index: 3;
+    z-index: 4;
     position: fixed;
     bottom: 0;
     left: 0;
     height: $footer-height;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     background: $primary;
+  }
+}
+
+#language-selector {
+  user-select: none;
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-item {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &.active, &:active {
+      img {
+        box-shadow: $dropdown-link-active-color 0 0 0 .1em;
+      }
+    }
+  }
+
+  .language-flag {
+    display: inline;
+    height: 1em;
+    margin-right: .5rem;
+    border-radius: .1em;
   }
 }

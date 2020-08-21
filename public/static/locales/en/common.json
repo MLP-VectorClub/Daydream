@@ -5,6 +5,8 @@
     "register": "Register"
   },
   "footer": {
+    "changeLanguage": "Change language",
+    "current": "Current",
     "commitTitle": "See exactly what was changed and why",
     "frontend": "Frontend",
     "backend": "Backend",
@@ -13,7 +15,7 @@
     "privacyPolicy": "Privacy Policy",
     "contactUs": "Contact Us",
     "api": "API",
-    "apiMeaning": "Application Programming Interface"
+    "apiMeaning": "Application Programming Interface – for developers"
   },
   "titles": {
     "colorGuide": "Color Guide",
@@ -108,5 +110,6 @@
     "acceptPrivacyPolicy": "You must accept the privacy policy",
     "format": "Please match the specified format"
   },
-  "tmdb_disclaimer": "This product uses the TMDb API but is not endorsed or certified by TMDb."
+  "tmdb_disclaimer": "This product uses the TMDb API but is not endorsed or certified by TMDb.",
+  "wipNotice": "This website is a work-in-progress, for our current live site please visit"
 }

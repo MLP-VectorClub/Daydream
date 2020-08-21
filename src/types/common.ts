@@ -2,6 +2,13 @@ import { TFunction } from 'next-i18next';
 import { FieldValues, FormProps } from 'react-hook-form';
 import { User, ValidationErrorResponse } from './api';
 
+export type AvailableLanguage = 'hu' | 'en';
+
+export type LanguagesConfig = Record<AvailableLanguage, {
+  nativeName: string;
+  locale: Locale;
+}>;
+
 export enum Status {
   INIT,
   LOAD,

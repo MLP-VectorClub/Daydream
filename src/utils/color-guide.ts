@@ -7,7 +7,7 @@ export const getGuideTitle = (
   page: Nullable<Numeric> = null,
 ): TitleKeyWithParams => {
   const guideExists = guide !== null;
-  const guideName = t(`colorGuide:guideName.${guideExists ? guide : 'unknown'}`);
+  const guideName = t(`color-guide:guideName.${guideExists ? guide : 'unknown'}`);
   if (page === null) {
     return ['colorGuideByName', { guideName }];
   }

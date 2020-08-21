@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React, { memo } from 'react';
 import LoadingRing from './LoadingRing';
-import { getInlineIconClasses } from '../../utils/inline-icon-classes';
+import { getInlineIconClasses } from '../../utils';
 import { InlineIconProps } from '../../types/component-props';
 
 const InlineIcon: React.FC<InlineIconProps> = (({

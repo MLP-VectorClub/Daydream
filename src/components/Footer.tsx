@@ -20,6 +20,7 @@ import ContactModal from './ContactModal';
 import ExternalLink from './shared/ExternalLink';
 import { connectionFetcher, useConnectionInfo } from '../hooks';
 import Abbr from './shared/Abbr';
+import LanguageDropdown from './shared/LanguageDropdown';
 
 const buildData = isClientSide ? getBuildData() : null;
 
@@ -85,6 +86,8 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
   return (
     <>
       <footer id="footer">
+        <LanguageDropdown />
+        {` | `}
         <span id="git-info">
           {`${t('footer.frontend')}: `}
           <strong>

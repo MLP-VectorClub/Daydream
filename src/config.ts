@@ -1,7 +1,9 @@
 import { range } from 'lodash';
 import Axios from 'axios-observable';
 import { ReactQueryProviderConfig } from 'react-query';
-import { GuideName } from './types';
+import huLocale from 'date-fns/locale/hu';
+import enLocale from 'date-fns/locale/en-US';
+import { AvailableLanguage, GuideName, LanguagesConfig } from './types';
 
 export const APP_NAME = 'MLP Vector Club';
 export const OLD_SITE_URL = 'https://mlpvector.club';
@@ -31,8 +33,18 @@ export const GUEST_AVATAR = '/img/guest.svg';
 
 export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';
 
-export const supportedLanguages = ['en'];
-export const fallbackLanguage = 'en';
+export const LANGUAGES: LanguagesConfig = {
+  en: {
+    nativeName: 'English',
+    locale: enLocale,
+  },
+  hu: {
+    nativeName: 'Magyar',
+    locale: huLocale,
+  },
+};
+
+export const DEFAULT_LANGUAGE: AvailableLanguage = 'en';
 
 export const GUIDE_NAMES: GuideName[] = ['pony', 'eqg', 'pl'];
 

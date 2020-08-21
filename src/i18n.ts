@@ -1,14 +1,15 @@
 import NextI18Next from 'next-i18next';
 import path from 'path';
-import { DEV_ENV, supportedLanguages } from './config';
+import { DEFAULT_LANGUAGE, DEV_ENV, LANGUAGES } from './config';
 
-// FIXME Remove hardcoded concat
-const [defaultLanguage, ...otherLanguages] = supportedLanguages.concat('la');
+const defaultNS = 'common';
 
 const nextI18next = new NextI18Next({
-  defaultLanguage,
-  otherLanguages,
-  defaultNS: 'common',
+  defaultLanguage: DEFAULT_LANGUAGE,
+  otherLanguages: Object.keys(LANGUAGES).filter(el => el !== DEFAULT_LANGUAGE),
+  fallbackLng: DEFAULT_LANGUAGE,
+  defaultNS,
+  fallbackNS: defaultNS,
   strictMode: DEV_ENV,
   detection: {
     caches: ['cookie'],

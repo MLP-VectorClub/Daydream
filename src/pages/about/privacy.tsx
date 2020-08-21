@@ -10,7 +10,7 @@ import { AppPageContext, wrapper } from '../../store';
 import StandardHeading from '../../components/shared/StandardHeading';
 
 const PrivacyPolicy: React.FC = () => {
-  const { t } = useTranslation('privacyPolicy');
+  const { t } = useTranslation('privacy-policy');
   return (
     <>
       <Alert color="warning" className="p-2 mb-2" fade={false}>
@@ -90,7 +90,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 
   return {
     props: {
-      namespacesRequired: ['privacyPolicy'],
+      namespacesRequired: ['privacypolicy'],
     },
   };
 });

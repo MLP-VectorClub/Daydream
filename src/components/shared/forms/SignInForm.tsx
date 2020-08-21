@@ -37,10 +37,10 @@ import {
   validateEmail,
   validatePassword,
   validateRequired,
+  popupOpenCenter,
 } from '../../../utils';
 import RevealPasswordButton from '../RevealPasswordButton';
 import { SOCIAL_PROVIDERS } from '../../../fancy-config';
-import { popupOpenCenter } from '../../../utils/popup';
 
 enum INPUT_NAMES {
   EMAIL = 'email',

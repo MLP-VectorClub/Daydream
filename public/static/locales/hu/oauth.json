@@ -1,0 +1,13 @@
+{
+  "authTitle": "{{provider}} OAuth 2.0 Hitelesítés",
+  "creatingSession": "Munkamenet létrehozása",
+  "loadingUserData": "Profil adatok betöltése",
+  "welcome": "Üdvözöllek {{name}}!",
+  "close": "Bezárás",
+  "unknownError": "Ismeretlen hiba történt a hitelesítés során, kérlek próbálkozz újra később.",
+  "errorTypes": {
+    "access_denied": "Hozzáférés Megtagadva",
+    "unknown_error": "Ismeretlen Hiba",
+    "server_error": "Szerverhiba"
+  }
+}
