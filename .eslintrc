@@ -29,7 +29,7 @@
   "plugins": [
     "@typescript-eslint",
     "react",
-    "@zsoltszavo/import-lines"
+    "import-newlines"
   ],
   "ignorePatterns": [
     "node_modules"
@@ -145,7 +145,7 @@
       "error",
       140
     ],
-    "@zsoltszavo/import-lines/imports-multiline": ["error", 4, 140],
+    "import-newlines/enforce": ["error", 4, 140],
     "@typescript-eslint/no-non-null-assertion": "off",
     "react/no-danger": "off"
   }
