@@ -1,4 +1,3 @@
-import { includes } from 'lodash';
 import {
   Alert,
   Card,
@@ -10,10 +9,8 @@ import React from 'react';
 import { LazyLoadImage, ScrollPosition, trackWindowScroll } from 'react-lazy-load-image-component';
 import classNames from 'classnames';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
 import { useTranslation } from '../../../i18n';
 import Content from '../../../components/shared/Content';
-import { GUIDE_NAMES } from '../../../config';
 import {
   GetAppearancesResult,
   GuideName,
@@ -21,7 +18,7 @@ import {
   Optional,
   TitleKeyWithParams,
 } from '../../../types';
-import { notFound, setResponseStatus, getGuideTitle } from '../../../utils';
+import { getGuideTitle, notFound, resolveGuideName, setResponseStatus } from '../../../utils';
 import { coreActions } from '../../../store/slices';
 import { AppPageContext, wrapper } from '../../../store';
 import Pagination from '../../../components/shared/Pagination';
@@ -34,10 +31,7 @@ interface PropTypes {
   scrollPosition: ScrollPosition;
 }
 
-const ColorGuidePage: React.FC<PropTypes> = ({ initialData, scrollPosition }) => {
-  const { query } = useRouter();
-  const guide = query.guide as GuideName;
-  const page = query.page ? Number(query.page) : undefined;
+const ColorGuidePage: React.FC<PropTypes> = ({ guide, page, initialData, scrollPosition }) => {
   const data = useGuide({ guide, page, previews: true }, initialData || undefined);
   const { t } = useTranslation('color-guide');
   const title = getGuideTitle(t, guide);
@@ -93,10 +87,8 @@ const ColorGuidePage: React.FC<PropTypes> = ({ initialData, scrollPosition }) =>
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const { query, store, req } = ctx as typeof ctx & AppPageContext;
 
-  let guide: Nullable<GuideName> = null;
-  if (typeof query.guide === 'string' && includes(GUIDE_NAMES, query.guide)) {
-    guide = query.guide as GuideName;
-  } else {
+  const guide = resolveGuideName(query.guide) || null;
+  if (!guide) {
     notFound(ctx);
   }
 

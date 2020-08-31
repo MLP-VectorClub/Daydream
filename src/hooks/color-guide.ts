@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { GetAppearancesRequestOptionals, GetAppearancesResult, OptionalProps, Status } from '../types';
+import { GetAppearancesRequestOptionals, GetAppearancesResult, NullableProps, Status } from '../types';
 import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from '../utils';
 import { colorGuideService } from '../services';
 
@@ -7,7 +7,7 @@ interface GuideHookValue extends Partial<GetAppearancesResult> {
   status: Status;
 }
 
-type Params = OptionalProps<GetAppearancesRequestOptionals, 'guide'>;
+type Params = NullableProps<GetAppearancesRequestOptionals, 'guide'>;
 
 export const guideFetcher = (params: Params) => () => {
   if (!params.guide) return Promise.resolve(undefined);
