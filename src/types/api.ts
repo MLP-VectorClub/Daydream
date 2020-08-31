@@ -331,7 +331,7 @@ export type OneBasedId = number;
 export type ZeroBasedId = number;
 
 /**
- * Represents an publicly accessible representation of a user
+ * Represents a publicly accessible representation of a user
  */
 export interface PublicUser {
   id: number;

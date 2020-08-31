@@ -27,8 +27,6 @@ if (DEV_ENV) {
   applyClientHMR(nextI18next.i18n);
 }
 
-export default nextI18next;
-
 /* Optionally, export class methods as named exports */
 export const {
   Trans,

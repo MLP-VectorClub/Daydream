@@ -26,7 +26,7 @@ export function useConnectionInfo(initialData?: GetAboutConnectionResult): Serve
     isFetching: fetching,
     data,
     error,
-  } = useQuery<GetAboutConnectionResult, typeof key, UnifiedErrorResponse>(
+  } = useQuery<GetAboutConnectionResult, UnifiedErrorResponse>(
     key,
     connectionFetcher,
     { enabled: isClientSide, initialData, refetchInterval: 60e3 },

@@ -33,6 +33,7 @@ const dev = NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+// TODO Figure out why changed language does not persist when app is deployed
 i18nextHmr.applyServerHMR(i18n);
 
 if (

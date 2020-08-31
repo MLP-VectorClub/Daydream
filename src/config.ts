@@ -1,9 +1,8 @@
 import { range } from 'lodash';
 import Axios from 'axios-observable';
-import { ReactQueryProviderConfig } from 'react-query';
-import huLocale from 'date-fns/locale/hu';
-import enLocale from 'date-fns/locale/en-US';
+import { ReactQueryConfig } from 'react-query/types/core/types';
 import { AvailableLanguage, GuideName, LanguagesConfig } from './types';
+import { enLocale, huLocale } from './date-fns-locales';
 
 export const APP_NAME = 'MLP Vector Club';
 export const OLD_SITE_URL = 'https://mlpvector.club';
@@ -50,8 +49,9 @@ export const GUIDE_NAMES: GuideName[] = ['pony', 'eqg', 'pl'];
 
 export const GUIDE_PAGE_SIZES = range(7, 20 + 1);
 
-export const REACT_QUERY_CONFIG: ReactQueryProviderConfig = {
+export const REACT_QUERY_CONFIG: ReactQueryConfig = {
   queries: {
     staleTime: 60e3,
+    keepPreviousData: true,
   },
 };

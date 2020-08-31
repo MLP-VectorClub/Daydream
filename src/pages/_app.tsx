@@ -22,7 +22,7 @@ const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPr
   const { Component, pageProps } = props;
   const [disabled, setLayoutDisabled] = useState(false);
 
-  const { language } = useTranslation().i18n;
+  const { i18n: { language } } = useTranslation();
 
   return (
     <ReactQueryConfigProvider config={REACT_QUERY_CONFIG}>
