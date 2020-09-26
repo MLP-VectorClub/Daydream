@@ -95,3 +95,22 @@ body {
 abbr[aria-label] {
   @extend abbr[title];
 }
+
+.app-illustrator {
+  @include vapp(#f80, 'illustrator');
+}
+
+.app-inkscape {
+  @include vapp(#0af, 'inkscape');
+}
+
+.app-ponyscape {
+  @include vapp(#f00, 'ponyscape');
+}
+
+#content, .modal-content, .notice {
+  a:not(.btn) {
+    font-weight: bold;
+    text-decoration: none;
+  }
+}

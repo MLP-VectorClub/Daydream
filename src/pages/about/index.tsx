@@ -10,18 +10,17 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import DeviantLink from 'src/components/shared/DeviantLink';
 import FavMe from 'src/components/shared/FavMe';
 import StandardHeading from 'src/components/shared/StandardHeading';
+import { WithI18nNamespaces } from 'src/types';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx as typeof ctx & AppPageContext;
   store.dispatch(coreActions.setTitle('about'));
   return {
-    props: {
-      namespacesRequired: ['about'],
-    },
+    props: {},
   };
 });
 
-const AboutPage: React.FC = () => {
+const AboutPage: React.FC<WithI18nNamespaces> = () => {
   const { t } = useTranslation('about');
   return (
     <Content>
@@ -108,6 +107,46 @@ const AboutPage: React.FC = () => {
           </Trans>
           <br />
 
+          <Trans t={t} i18nKey="attributions.guideLogos.about">
+            <strong>0</strong>
+            1
+          </Trans>
+          <ul>
+            <li>
+              <Trans
+                t={t}
+                i18nKey="attributions.guideLogos.item"
+                values={{ guideName: t('color-guide:guideName.pony'), artist: 'Drakizora' }}
+              >
+                <a href="http://fav.me/db60g3n">0</a>
+                1
+                <a href="https://www.deviantart.com/drakizora">2</a>
+              </Trans>
+            </li>
+            <li>
+              <Trans
+                t={t}
+                i18nKey="attributions.guideLogos.item"
+                values={{ guideName: t('color-guide:guideName.eqg'), artist: 'Charleston-and-itchy' }}
+              >
+                <a href="http://fav.me/d6923sw">0</a>
+                1
+                <a href="https://www.deviantart.com/charleston-and-itchy">2</a>
+              </Trans>
+            </li>
+            <li>
+              <Trans
+                t={t}
+                i18nKey="attributions.guideLogos.item"
+                values={{ guideName: t('color-guide:guideName.pl'), artist: 'illumnious' }}
+              >
+                <a href="http://fav.me/ddztpnc">0</a>
+                1
+                <a href="https://www.deviantart.com/illumnious">2</a>
+              </Trans>
+            </li>
+          </ul>
+
           <Trans t={t} i18nKey="attributions.extLink">
             <strong>0</strong>
             1
@@ -123,12 +162,13 @@ const AboutPage: React.FC = () => {
           </Trans>
           <br />
 
-          <strong>{t('attributions.browserLogos.about.0')}</strong>
-          {t('attributions.browserLogos.about.1')}
+          {t('attributions.browserLogos.about.0')}
+          <strong>{t('attributions.browserLogos.about.1')}</strong>
+          {t('attributions.browserLogos.about.2')}
           <Link href="/browser">
-            <a>{t('attributions.browserLogos.about.2')}</a>
+            <a>{t('attributions.browserLogos.about.3')}</a>
           </Link>
-          {t('attributions.browserLogos.about.3')}
+          {t('attributions.browserLogos.about.4')}
         </p>
         <ul>
           <li>
@@ -202,7 +242,6 @@ const AboutPage: React.FC = () => {
           </li>
         </ul>
         <p>
-          {/* TODO Extract msg into translations */}
           <Trans t={t} i18nKey="attributions.synopsis">
             <strong>0</strong>
             1
@@ -247,6 +286,10 @@ const AboutPage: React.FC = () => {
       </section>
     </Content>
   );
+};
+
+AboutPage.defaultProps = {
+  i18nNamespaces: ['about', 'color-guide'],
 };
 
 export default AboutPage;

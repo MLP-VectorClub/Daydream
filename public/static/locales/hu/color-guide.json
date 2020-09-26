@@ -1,8 +1,15 @@
 {
+  "index": {
+    "lead": "Itt találod az összes klub személyzet által készített színsegédet",
+    "developerRes": "Resources for developers: <1>API</1> (WIP)",
+    "entry": "{{count}} entry",
+    "entry_plural": "{{count}} entries"
+  },
   "guideName": {
     "unknown": "Ismeretlen",
-    "pony": "Póni",
-    "eqg": "EQL"
+    "pony": "Varázslatos Barátság",
+    "eqg": "Equestria Lányai",
+    "pl": "Póni Élet"
   },
   "appearances": {
     "cmAvailable": "Szépségjegy elérhető"

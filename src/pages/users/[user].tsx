@@ -13,12 +13,18 @@ import {
   setResponseStatus,
 } from 'src/utils';
 import { transformProfileParams, useAuth, userFetcher, useUser } from 'src/hooks';
-import { GetUsersIdResult, Nullable, Optional, PublicUser } from 'src/types';
+import {
+  GetUsersIdResult,
+  Nullable,
+  Optional,
+  PublicUser,
+  WithI18nNamespaces,
+} from 'src/types';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import Content from 'src/components/shared/Content';
 
-interface PropTypes {
+interface PropTypes extends WithI18nNamespaces {
   initialUser: Nullable<PublicUser>;
 }
 
@@ -28,6 +34,7 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
   const { query } = useRouter();
   const { user } = useUser(transformProfileParams(query), initialUser || undefined);
   const { user: authUser } = useAuth();
+  // TODO Return limited user prefs
 
   useEffect(() => {
     dispatch(coreActions.setTitle(getProfileTitle(user, authUser.id)));
@@ -39,7 +46,12 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
       {user && (
         <>
           <div className="d-flex justify-content-center align-items-center mb-2">
-            <AvatarWrap {...user} size={75} className="flex-grow-0" />
+            <AvatarWrap
+              avatarUrl={user.avatarUrl}
+              avatarProvider={user.avatarProvider}
+              size={75}
+              className="flex-grow-0"
+            />
           </div>
           <StandardHeading heading={user.name} lead={mapRoleLabel(t, user.role)} />
         </>
@@ -83,10 +95,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   store.dispatch(coreActions.setTitle(getProfileTitle(initialUser)));
   return {
     props: {
-      namespacesRequired: ['profile'],
       initialUser: initialUser || null,
     },
   };
 });
+
+ProfilePage.defaultProps = {
+  i18nNamespaces: ['profile'],
+};
 
 export default ProfilePage;

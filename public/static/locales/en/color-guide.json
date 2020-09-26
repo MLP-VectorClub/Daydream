@@ -1,4 +1,10 @@
 {
+  "index": {
+    "lead": "Here you can find all color guides maintained by the club staff",
+    "developerRes": "Resources for developers: <1>API</1> (WIP)",
+    "entry": "{{count}} entry",
+    "entry_plural": "{{count}} entries"
+  },
   "guideName": {
     "unknown": "Unknown",
     "pony": "Friendship is Magic",

@@ -9,6 +9,7 @@ import {
   Nullable,
   Optional,
   TitleKeyWithParams,
+  WithI18nNamespaces,
 } from 'src/types';
 import { getGuideTitle, notFound, resolveGuideName, setResponseStatus } from 'src/utils';
 import { coreActions } from 'src/store/slices';
@@ -18,7 +19,7 @@ import AppearanceItem from 'src/components/colorguide/AppearanceItem';
 import Pagination from 'src/components/shared/Pagination';
 import Content from 'src/components/shared/Content';
 
-interface PropTypes {
+interface PropTypes extends WithI18nNamespaces {
   guide: Nullable<GuideName>;
   page: number;
   initialData: Nullable<GetAppearancesResult>;
@@ -90,12 +91,15 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   store.dispatch(coreActions.setTitle(title));
   return {
     props: {
-      namespacesRequired: ['color-guide'],
       guide,
       page,
       initialData: initialData || null,
     },
   };
 });
+
+ColorGuidePage.defaultProps = {
+  i18nNamespaces: ['color-guide'],
+};
 
 export default trackWindowScroll<PropTypes>(ColorGuidePage);

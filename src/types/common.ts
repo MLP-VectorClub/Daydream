@@ -1,6 +1,6 @@
 import { TFunction } from 'next-i18next';
 import { FieldValues, FormProps } from 'react-hook-form';
-import { User, ValidationErrorResponse } from 'src/types/api';
+import { GetUsersMeResult, User, ValidationErrorResponse } from 'src/types/api';
 
 export type AvailableLanguage = 'hu' | 'en' | 'de' | 'ru';
 
@@ -44,6 +44,9 @@ export type ValuesOf<T> = T[keyof T];
 
 export interface WithTFunction {
   t: TFunction;
+}
+export interface WithI18nNamespaces {
+  i18nNamespaces?: string[];
 }
 
 export interface ObjectOf<T> {
@@ -104,7 +107,7 @@ export type UnifiedErrorResponse = {
   type: UnifiedErrorResponseTypes.VALIDATION_ERROR;
 } & ValidationErrorResponse);
 
-export type FailsafeUser = User | (NullableProps<Omit<User, 'id'>, 'name' | 'avatarUrl' | 'email' | 'role'> & { id: null });
+export type FailsafeUser = GetUsersMeResult | (NullableProps<Omit<User, 'id'>, 'name' | 'avatarUrl' | 'email' | 'role'> & { id: null });
 
 export type TitleKeyWithParams = [string, Record<string, Numeric>];
 export type PageTitle = Nullable<string> | TitleKeyWithParams;

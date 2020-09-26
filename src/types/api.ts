@@ -87,27 +87,27 @@ export type TagType = "app" | "cat" | "gen" | "spec" | "char" | "warn";
  * List of available user preferences
  */
 export type UserPrefKeys =
-  | "cg_itemsperpage"
-  | "cg_hidesynon"
-  | "cg_hideclrinfo"
-  | "cg_fulllstprev"
-  | "cg_nutshell"
-  | "cg_defaultguide"
-  | "p_avatarprov"
-  | "p_vectorapp"
-  | "p_hidediscord"
-  | "p_hidepcg"
-  | "p_homelastep"
-  | "ep_hidesynopses"
-  | "ep_noappprev"
-  | "ep_revstepbtn"
-  | "a_pcgearn"
-  | "a_pcgmake"
-  | "a_pcgsprite"
-  | "a_postreq"
-  | "a_postres"
-  | "a_reserve"
-  | "pcg_slots";
+  | "cgItemsperpage"
+  | "cgHidesynon"
+  | "cgHideclrinfo"
+  | "cgFulllstprev"
+  | "cgNutshell"
+  | "cgDefaultguide"
+  | "pAvatarprov"
+  | "pVectorapp"
+  | "pHidediscord"
+  | "pHidepcg"
+  | "pHomelastep"
+  | "epHidesynopses"
+  | "epNoappprev"
+  | "epRevstepbtn"
+  | "aPcgearn"
+  | "aPcgmake"
+  | "aPcgsprite"
+  | "aPostreq"
+  | "aPostres"
+  | "aReserve"
+  | "pcgSlots";
 
 /**
  * List of available vector apps
@@ -115,11 +115,47 @@ export type UserPrefKeys =
 export type VectorApp = "illustrator" | "inkscape" | "ponyscape";
 
 /**
+ * An object containing the number of entries in each color guide
+ */
+export interface GuideEntryCounts {
+  pony: number;
+  eqg: number;
+  pl: number;
+}
+
+/**
+ * A list of preferences for the current user (or defaults if not signed in)
+ */
+export interface UserPrefs {
+  cgItemsperpage: number;
+  cgHidesynon: boolean;
+  cgHideclrinfo: boolean;
+  cgFulllstprev: boolean;
+  cgNutshell: boolean;
+  cgDefaultguide: GuideName;
+  pAvatarprov: AvatarProvider;
+  pVectorapp: VectorApp;
+  pHidediscord: boolean;
+  pHidepcg: boolean;
+  pHomelastep: boolean;
+  epHidesynopses: boolean;
+  epNoappprev: boolean;
+  epRevstepbtn: boolean;
+  aPcgearn: boolean;
+  aPcgmake: boolean;
+  aPcgsprite: boolean;
+  aPostreq: boolean;
+  aPostres: boolean;
+  aReserve: boolean;
+  pcgSlots: number;
+}
+
+/**
  * An object containing information about the connection made to the server
  */
 export interface ConnectionInfo {
   /**
-   * The IP address the server believe this request originated from
+   * The IP address the server believes this request originated from
    */
   ip: string;
   /**
@@ -169,6 +205,9 @@ export interface CommonAppearance {
    */
   label: string;
   order: Order;
+  /**
+   * The sprite that belongs to this appearance, or null if there is none
+   */
   sprite: Sprite;
   /**
    * Indicates whether there are any cutie marks tied to this appearance
@@ -241,7 +280,7 @@ export interface ColorGroup {
 }
 
 /**
- * A color entry. Colors may link to other colors, in which case `linkedTo` will be set to the link target, but `hex` will always point to the value that should be displayed.
+ * A color entry
  */
 export interface Color {
   id: OneBasedId;
@@ -254,7 +293,6 @@ export interface Color {
    * The color value in uppercase hexadecimal form, including a # prefix
    */
   hex: string;
-  linkedTo?: Color;
 }
 
 export type GuidePageSize = number;
@@ -354,13 +392,16 @@ export type UsefulLink = PublicUsefulLink & {
   minrole: string;
 };
 
-export type PublicUser = ErrorResponse & {
+/**
+ * Represents a publicly accessible representation of a user
+ */
+export interface PublicUser {
   id: number;
   name: string;
   role: Role;
   avatarUrl: string;
   avatarProvider: AvatarProvider;
-};
+}
 
 export type User = PublicUser & {
   email: string;
@@ -394,6 +435,9 @@ export interface CommitData {
    * Abbreviated commit ID of the backend application, indicating the version currently deployed on the server (at least 7 characters long)
    */
   commitId: string;
+  /**
+   * Date at which the commit currently deployed on the server was authored
+   */
   commitTime: IsoStandardDate;
 }
 
@@ -433,9 +477,13 @@ export interface GetUsersOauthSigninProviderRequest {
 }
 export type PostUsersOauthSigninProviderRequest = OauthCode
 export type PostUsersRequest = RegistrationRequest
+export interface GetColorGuidesRequest {
+}
 export interface GetSanctumCsrfCookieRequest {
 }
 export interface GetUsefulLinksSidebarRequest {
+}
+export interface GetUserPrefsMeRequest {
 }
 export interface GetUsersMeRequest {
 }
@@ -479,8 +527,14 @@ export interface PostUsersResult {
 }
 
 export type PostUsers204 = any
+export interface GetColorGuidesResult {
+  entryCounts: GuideEntryCounts;
+}
+
 export type GetSanctumCsrfCookieResult = any
 export type GetUsefulLinksSidebarResult = PublicUsefulLink[];
+
+export type GetUserPrefsMeResult = UserPrefs;
 
 export type GetUsersMeResult = User;
 

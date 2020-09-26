@@ -21,11 +21,16 @@
     "inkscapeTeam": "Inkscape csapat",
     "ponyscapeLogo": "Ponyscape logo",
     "appLogo": "Az <0>alkalmazás logóján</0> a csoport kabalája – Penny Curve – szerepel. A kép a <2>Christmas Vector of the MLP-VC Mascot</2> (készítette: <4>Pirill-Poveniy</4>, <6>thediscorded</6>, <8>masemj</8> & <10>Ambassad0r</10>) képen lévő arckifejezést és a <12>Penny Curve (MLP-VectorClub Mascot 2.0)</12> (készítette: <14>Ambassad0r</14>) képen lévő sörény modellt és szem színt használja.",
+    "guideLogos": {
+      "about": "A <0>színsegéd logó vektorokat</0> az alábbi művészek készítették, és a design-juk © Hasbro Studios, LLC.",
+      "item": "<0>{{guideName}}</0> logóját készítette: <2>{{artist}}</2>"
+    },
     "extLink": "<0>Külső hivatkozás ikon</0> (GPL licencelt) a <2>Wikimedia Commons</2>ról beszerezve",
     "loadingIcons": "A <0>vektor-alapú betöltés ikonok</0> a <2>Loading.io</2> segítségével lettek generálva (néhány már nem elérhető)",
     "browserLogos": {
       "about": [
-        "A böngésző ikonok",
+        "A ",
+        "böngésző ikonok",
         " (melyek a munkamenet listában és a ",
         "Böngésző felismerés tesztelő oldalon",
         "vannak használva):"
@@ -48,7 +53,7 @@
     "asterisk": "Közvetlen linkeket nem tudunk elfogadni ezen szolgáltatóktól, mert azok nem tartalmaznak elegendő információt mind az előnézet és a teljes kép linkjének beszerzéséhez."
   },
   "atSign": {
-    "title": "Mi található a @ jel után a láblécben?",
+    "title": "Mi található a @ jelek után a láblécben?",
     "p1": "Ez a weboldal nyílt forráskódú, mely a <1>GitHub-on</1> megtekinthető. Amit ott látsz az a commit azonosító, ami a kód legfrissebb verziójára hivatkozik – amit a weboldal jelenleg is futtat. Amikor egy frissítés élesítésre kerül ez az érték automatikusan változik. A szerveren található kód megegyezik a fenti linken találhatóval, rejtett módosítások nélkül."
   }
 }

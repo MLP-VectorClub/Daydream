@@ -7,12 +7,18 @@ import { authActions } from 'src/store/slices';
 import { userService } from 'src/services';
 import { ActionsType } from 'src/store/rootReducer';
 
+const invalidateUserSpecificQueries = () => {
+  queryCache.invalidateQueries(ENDPOINTS.USER_PREFS_ME);
+  queryCache.invalidateQueries(ENDPOINTS.USEFUL_LINKS_SIDEBAR);
+};
+
 const signInEpic = (action$: ActionsObservable<ActionsType>) => action$.pipe(
   filter(authActions.signIn.match),
   switchMap(action => userService.signIn(action.payload).pipe(
     switchMap(() => userService.getMe().pipe(
       map(response => {
         queryCache.setQueryData(ENDPOINTS.USERS_ME, response.data);
+        invalidateUserSpecificQueries();
         return authActions.signInSuccess(response.data);
       }),
     )),
@@ -25,6 +31,7 @@ const signOutEpic = (action$: ActionsObservable<ActionsType>) => action$.pipe(
   switchMap(() => userService.signOut().pipe(
     map(() => {
       queryCache.setQueryData(ENDPOINTS.USERS_ME, undefined);
+      invalidateUserSpecificQueries();
       return authActions.signOutSuccess();
     }),
     catchError(err => of(authActions.signOutFailure(httpResponseMapper(err)))),
@@ -37,6 +44,7 @@ const registerEpic = (action$: ActionsObservable<ActionsType>) => action$.pipe(
     switchMap(() => userService.getMe().pipe(
       map(response => {
         queryCache.setQueryData(ENDPOINTS.USERS_ME, response.data);
+        invalidateUserSpecificQueries();
         return authActions.registerSuccess(response.data);
       }),
     )),

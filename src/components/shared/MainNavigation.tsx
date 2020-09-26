@@ -1,6 +1,6 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { getProfileLink, PATHS, permission } from 'src/utils';
 import { CLUB_URL } from 'src/config';
@@ -8,17 +8,33 @@ import { useTranslation } from 'src/i18n';
 import { useAuth } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { User } from 'src/types';
+import { usePrefs } from 'src/hooks/prefs';
+import { LinkProps } from 'next/dist/client/link';
 
 const MainNavigation = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
-  const getHomePath = useCallback((_u: User) => '/cg', [user.id]);
+  const { signedIn, user } = useAuth();
+  const prefs = usePrefs(signedIn);
+  const defaultGuideLinkProps = useMemo<LinkProps>(() => {
+    if (prefs?.cgDefaultguide) {
+      return { href: PATHS.GUIDE(), as: PATHS.GUIDE(prefs.cgDefaultguide) };
+    }
+
+    return { href: PATHS.GUIDE_INDEX, as: PATHS.GUIDE_INDEX };
+  }, [prefs]);
+  const homeLinkProps = useMemo<LinkProps>(() => {
+    if (prefs?.pHomelastep === true) {
+      return { href: PATHS.LATEST_EPISODE };
+    }
+
+    return defaultGuideLinkProps;
+  }, [prefs, defaultGuideLinkProps]);
+
   return (
     <Nav navbar>
       <NavItem>
-        {user.id !== null && (
-          <Link href={getHomePath(user)} passHref>
+        {signedIn && (
+          <Link {...homeLinkProps} passHref>
             <NavLink>
               <InlineIcon first icon="home" />
               {t('titles.home')}
@@ -37,7 +53,7 @@ const MainNavigation = () => {
         </Link>
       </NavItem>
       <NavItem>
-        <Link href={PATHS.GUIDE()} as="/cg/pony" passHref>
+        <Link {...defaultGuideLinkProps} passHref>
           <NavLink>{t('titles.colorGuide')}</NavLink>
         </Link>
       </NavItem>
@@ -46,7 +62,7 @@ const MainNavigation = () => {
           <NavLink>{t('titles.events')}</NavLink>
         </Link>
       </NavItem>
-      {user.id !== null && (
+      {signedIn && (
         <NavItem>
           <Link href={PATHS.USER()} as={getProfileLink(user)} passHref>
             <NavLink>{t('titles.account')}</NavLink>

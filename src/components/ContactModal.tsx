@@ -50,7 +50,7 @@ const ContactModal: React.FC = () => {
             <p>{t('contact.lookingForTranslators.intro')}</p>
             <p>{t('contact.lookingForTranslators.wantedLanguages')}</p>
             <ul>
-              {map(filter(LANGUAGES, l => !l.enabled), l => <li>{l.nativeName}</li>)}
+              {map(filter(LANGUAGES, l => !l.enabled), (l, i) => <li key={i}>{l.nativeName}</li>)}
             </ul>
             <p>{t('contact.lookingForTranslators.howToHelp')}</p>
           </>

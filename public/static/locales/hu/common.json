@@ -21,6 +21,7 @@
     "colorGuide": "Színsegéd",
     "colorGuideByName": "{{guideName}} Színsegéd",
     "colorGuideByNameAndPage": "{{page}}. oldal - {{guideName}} Színsegéd",
+    "colorGuideList": "Színsegédek Listája",
     "profile": "Profil",
     "profileByName": "{{name}} - Profil",
     "yourProfile": "Saját Profilod",
@@ -64,6 +65,7 @@
     "deviantart": "<0>Küldj egy jegyzetet</0> a csoportnak DeviantArt-on",
     "email": "<0>Küldj egy e-mail-t</0> a {{email}} címre",
     "lookingForTranslators": {
+      "title": "Fordítókat keresünk",
       "intro": "A projekt önkénteseket keres az alkalmazás különböző nyelvekre fordításához.",
       "wantedLanguages": "Jelenleg az alábbi nyelvekhez lenne szükségünk anyanyelvű fordítók segítségére:",
       "howToHelp": "Ha segíteni szeretnél vedd fel velünk a kapcsolatot a fenti lehetőségeken. Kérlek vedd figyelembe, hogy a fordítási erőfeszítések összehangolása miatt Discord fiók szükséges."

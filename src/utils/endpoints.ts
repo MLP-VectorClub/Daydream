@@ -13,6 +13,7 @@ export const ENDPOINTS = {
   SLEEP: `${API_PREFIX}/about/sleep`,
   CONNECTION_INFO: `${API_PREFIX}/about/connection`,
   CSRF_INIT: `${API_PREFIX}/sanctum/csrf-cookie`,
+  USER_PREFS_ME: `${API_PREFIX}/user-prefs/me`,
   USERS: `${API_PREFIX}/users`,
   USERS_SIGNIN: `${API_PREFIX}/users/signin`,
   USERS_SIGNOUT: `${API_PREFIX}/users/signout`,
@@ -26,7 +27,7 @@ export const ENDPOINTS = {
   //   `${API_PREFIX}/users/oauth/signup/${params.provider}`,
   USERS_BY_USERNAME: (params: GetUsersDaUsernameRequest) =>
     `${API_PREFIX}/users/da/${encodeURI(params.username)}`,
-
+  GUIDE_INDEX: `${API_PREFIX}/color-guides`,
   APPEARANCES: (params: GetAppearancesRequestOptionals) =>
     buildUrl('', {
       path: `${API_PREFIX}/appearances`,

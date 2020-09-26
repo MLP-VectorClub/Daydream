@@ -4,12 +4,10 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { GetAboutConnectionResult } from 'src/types';
 import {
+  API_DOCS_URL,
   BACKEND_GITHUB_URL,
   BACKEND_PROJECT_NAME,
-  DEV_API_URL,
-  DEV_ENV,
   GITHUB_URL,
-  PROD_API_URL,
   PROJECT_NAME,
 } from 'src/config';
 import { getBuildData, isClientSide, PATHS } from 'src/utils';
@@ -81,8 +79,6 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
     );
   }
 
-  const apiDocsUrl = DEV_ENV ? DEV_API_URL : PROD_API_URL;
-
   return (
     <>
       <footer id="footer">
@@ -120,7 +116,7 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
         <ContactLink>{t('footer.contactUs')}</ContactLink>
         {` | `}
         <Abbr id="api-docs" title={t('footer.apiMeaning')}>
-          <ExternalLink id="api-docs" href={apiDocsUrl}>
+          <ExternalLink id="api-docs" href={API_DOCS_URL}>
             {t('footer.api')}
           </ExternalLink>
         </Abbr>

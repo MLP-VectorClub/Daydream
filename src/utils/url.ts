@@ -17,6 +17,7 @@ export const PATHS = {
   APPEARANCE: ({ id, label }: Appearance) => `/cg/v/${id}-${makeUrlSafe(label)}`,
   BLENDING: '/blending',
   EVENTS: '/events',
+  GUIDE_INDEX: '/cg',
   GUIDE: (guide = '[guide]', params?: { page?: string }) => {
     let paramsCopy = params;
     if (params && params.page === '1') {

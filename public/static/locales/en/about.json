@@ -21,10 +21,15 @@
     "inkscapeTeam": "Inkscape team",
     "ponyscapeLogo": "Ponyscape logo",
     "appLogo": "<0>Application logo</0> features Penny Curve, the mascot of our group. The image is based on an expression from <2>Christmas Vector of the MLP-VC Mascot</2> (made by <4>Pirill-Poveniy</4>, <6>thediscorded</6>, <8>masemj</8> & <10>Ambassad0r</10>) with the mane design and eye colours from <12>Penny Curve (MLP-VectorClub Mascot 2.0)</12> (made by <14>Ambassad0r</14>)",
+    "guideLogos": {
+      "about": "<0>Color Guide logo vectors</0> were made by the following artists and their design is © Hasbro Studios, LLC.",
+      "item": "<0>{{guideName}}</0> logo by <2>{{artist}}</2>"
+    },
     "extLink": "<0>External link icon</0> (licensed GPL) taken from <2>Wikimedia Commons</2>",
     "loadingIcons": "<0>Vector-based loading icons</0> were generated using <2>Loading.io</2> (some are no longer available)",
     "browserLogos": {
       "about": [
+        "",
         "Browser logos",
         " (used in session list & the ",
         "Browser recognition testing page",
@@ -48,7 +53,7 @@
     "asterisk": "Using direct links from these providers is not supported due to the URLs lacking the identifiers necessary for adding both their preview and full size versions to posts."
   },
   "atSign": {
-    "title": "What's after the @ sign in the footer?",
+    "title": "What's after the @ signs in the footer?",
     "p1": "This website is open source and you can find the code <1>on GitHub</1>. What you're seeing is the commit ID which refers to the most recent version of the code the site is currently operating on. Whenever a new update is deployed, the version number changes automatically. The code on the server mirrors the repository exactly with no hidden alterations."
   }
 }

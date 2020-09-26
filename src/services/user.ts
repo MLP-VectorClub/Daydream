@@ -1,5 +1,6 @@
 import Axios from 'axios-observable';
 import {
+  GetUserPrefsMeResult,
   GetUsersDaUsernameRequest,
   GetUsersDaUsernameResult,
   GetUsersIdRequest,
@@ -38,3 +39,6 @@ export const register = (data: PostUsersRequest) =>
 
 export const getTokens = (data: GetUsersTokensRequest) =>
   Axios.post<GetUsersTokensResult>(ENDPOINTS.USERS_TOKENS, data);
+
+export const getPrefs = () =>
+  Axios.get<GetUserPrefsMeResult>(ENDPOINTS.USER_PREFS_ME);

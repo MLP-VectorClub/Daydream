@@ -3,14 +3,14 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { Button } from 'reactstrap';
 import { useTranslation } from 'src/i18n';
-import { GetAboutConnectionResult, Nullable } from 'src/types';
+import { GetAboutConnectionResult, Nullable, WithI18nNamespaces } from 'src/types';
 import { connectionFetcher, useConnectionInfo } from 'src/hooks';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import Content from 'src/components/shared/Content';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Abbr from 'src/components/shared/Abbr';
 
-interface PropTypes {
+interface PropTypes extends WithI18nNamespaces {
   connectingAddress: Nullable<string>;
   forwardedFor: Nullable<string | string[]>;
   initialServerInfo?: GetAboutConnectionResult;
@@ -70,6 +70,10 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 
   return { props };
+};
+
+ConnectionPage.defaultProps = {
+  i18nNamespaces: ['common', 'connection'],
 };
 
 export default ConnectionPage;

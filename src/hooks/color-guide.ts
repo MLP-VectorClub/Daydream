@@ -1,5 +1,11 @@
 import { useQuery } from 'react-query';
-import { GetAppearancesRequestOptionals, GetAppearancesResult, NullableProps, Status } from 'src/types';
+import {
+  GetAppearancesRequestOptionals,
+  GetAppearancesResult,
+  GetColorGuidesResult,
+  NullableProps,
+  Status,
+} from 'src/types';
 import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from 'src/utils';
 import { colorGuideService } from 'src/services';
 
@@ -26,4 +32,17 @@ export function useGuide(params: Params, initialData?: GetAppearancesResult): Gu
     ...data,
     status: mapQueryStatus(status),
   };
+}
+
+export const guideIndexDataFetcher = () =>
+  requestObservableToPromise(colorGuideService.getIndexData());
+
+export function useGuideIndexData(initialData?: GetColorGuidesResult) {
+  const { data } = useQuery(
+    ENDPOINTS.GUIDE_INDEX,
+    guideIndexDataFetcher,
+    { initialData },
+  );
+
+  return data;
 }

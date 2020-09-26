@@ -1,0 +1,76 @@
+#guide-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0;
+  padding: 0;
+
+  @include media-breakpoint-up(lg) {
+    flex-wrap: nowrap;
+  }
+
+  a {
+    flex: 1 1 100%;
+    max-width: calc(100% - 10px);
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid rgba(black, .1);
+    background-color: rgba(black, .05);
+    margin: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-decoration: none !important;
+  }
+
+  figure {
+    margin: 0;
+    padding: 10px;
+
+    @include media-breakpoint-down(lg) {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      .guide-icon {
+        width: 75px;
+        height: 75px;
+      }
+
+      figcaption {
+        text-align: left;
+        padding-left: 10px;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: block;
+
+      .guide-icon {
+        height: 100px;
+      }
+    }
+
+    @include media-breakpoint-up($sidebar-breakpoint-up) {
+      .guide-icon {
+        height: 200px;
+      }
+    }
+  }
+
+  .guide-icon {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 100%;
+  }
+
+  .guide-name, .guide-count {
+    display: block;
+  }
+
+  .guide-count {
+    color: black;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+}

@@ -22,6 +22,7 @@
     "colorGuide": "Color Guide",
     "colorGuideByName": "{{guideName}} Color Guide",
     "colorGuideByNameAndPage": "Page {{page}} - {{guideName}} Color Guide",
+    "colorGuideList": "Color Guide List",
     "profile": "Profile",
     "profileByName": "{{name}} - Profile",
     "yourProfile": "Your Profile",

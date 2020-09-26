@@ -24,11 +24,6 @@ module.exports = withPlugins(
           permanent: false,
         },
         {
-          source: '/cg',
-          destination: `/cg/pony`,
-          permanent: false,
-        },
-        {
           source: '/colorguide/appearance/:path*',
           destination: `/cg/v/:path*`,
           permanent: true,

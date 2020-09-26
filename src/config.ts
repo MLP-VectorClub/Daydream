@@ -19,6 +19,7 @@ export const DISCORD_INVITE_LINK = 'https://discord.gg/hrffb8k';
 export const DEV_EMAIL = 'david@seinopsys.dev';
 
 export const DEV_ENV = process.env.NODE_ENV !== 'production';
+export const API_DOCS_URL = DEV_ENV ? DEV_API_URL : PROD_API_URL;
 
 /**
  * Global prefix for all api calls, no trailing slash

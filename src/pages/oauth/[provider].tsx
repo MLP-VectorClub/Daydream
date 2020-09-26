@@ -12,6 +12,7 @@ import {
   Status,
   UnifiedErrorResponseTypes,
   User,
+  WithI18nNamespaces,
 } from 'src/types';
 import { useLayout, useOAuth } from 'src/hooks';
 import { ENDPOINTS, PATHS, setResponseStatus } from 'src/utils';
@@ -21,7 +22,7 @@ import StandardHeading from 'src/components/shared/StandardHeading';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import LoadingRing from 'src/components/shared/LoadingRing';
 
-interface PropTypes {
+interface PropTypes extends WithI18nNamespaces {
   initialUser: Nullable<PublicUser>;
 }
 
@@ -108,10 +109,12 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   if (query.error || query.error_description) setResponseStatus(ctx, 500);
 
   return {
-    props: {
-      namespacesRequired: ['oauth'],
-    },
+    props: {},
   };
+};
+
+OAuthPage.defaultProps = {
+  i18nNamespaces: ['oauth'],
 };
 
 export default OAuthPage;

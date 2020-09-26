@@ -17,6 +17,7 @@ import AuthModal from 'src/components/modals/AuthModal';
 import ProgressIndicator from 'src/components/ProgressIndicator';
 import Layout from 'src/components/Layout';
 import { LayoutContext } from 'src/hooks';
+import { WithI18nNamespaces } from 'src/types';
 
 const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPropsType> = props => {
   const { Component, pageProps } = props;
@@ -55,7 +56,17 @@ const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPr
 
 Celestia.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext);
-  return { ...appProps };
+  const { defaultProps } = appContext.Component;
+
+  return {
+    ...appProps,
+    pageProps: {
+      namespacesRequired: [
+        ...(appProps.pageProps.namespacesRequired || []),
+        ...((defaultProps as WithI18nNamespaces)?.i18nNamespaces || []),
+      ],
+    },
+  };
 };
 
 export default wrapper.withRedux(appWithTranslation(Celestia));

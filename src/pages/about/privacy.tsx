@@ -8,8 +8,9 @@ import Content from 'src/components/shared/Content';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import ContactLink from 'src/components/shared/ContactLink';
 import StandardHeading from 'src/components/shared/StandardHeading';
+import { WithI18nNamespaces } from 'src/types';
 
-const PrivacyPolicy: React.FC = () => {
+const PrivacyPolicy: React.FC<WithI18nNamespaces> = () => {
   const { t } = useTranslation('privacy-policy');
   return (
     <>
@@ -89,10 +90,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   store.dispatch(coreActions.setTitle('privacyPolicy'));
 
   return {
-    props: {
-      namespacesRequired: ['privacypolicy'],
-    },
+    props: {},
   };
 });
+
+PrivacyPolicy.defaultProps = {
+  i18nNamespaces: ['privacy-policy'],
+};
 
 export default PrivacyPolicy;
