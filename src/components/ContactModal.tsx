@@ -1,10 +1,11 @@
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { CLUB_URL, DEV_EMAIL, DISCORD_INVITE_LINK } from '../config';
-import { RootState } from '../store/rootReducer';
-import { coreActions } from '../store/slices';
-import ExternalLink from './shared/ExternalLink';
-import { useTranslation, Trans } from '../i18n';
+import { map, filter, some } from 'lodash';
+import { Trans, useTranslation } from 'src/i18n';
+import { RootState } from 'src/store/rootReducer';
+import { coreActions } from 'src/store/slices';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import { CLUB_URL, DEV_EMAIL, DISCORD_INVITE_LINK, LANGUAGES } from 'src/config';
 
 const ContactModal: React.FC = () => {
   const { t } = useTranslation('common');
@@ -43,6 +44,17 @@ const ContactModal: React.FC = () => {
             </Trans>
           </li>
         </ul>
+        {some(LANGUAGES, l => !l.enabled) && (
+          <>
+            <h4 className="alert-heading">{t('contact.lookingForTranslators.title')}</h4>
+            <p>{t('contact.lookingForTranslators.intro')}</p>
+            <p>{t('contact.lookingForTranslators.wantedLanguages')}</p>
+            <ul>
+              {map(filter(LANGUAGES, l => !l.enabled), l => <li>{l.nativeName}</li>)}
+            </ul>
+            <p>{t('contact.lookingForTranslators.howToHelp')}</p>
+          </>
+        )}
       </ModalBody>
     </Modal>
   );

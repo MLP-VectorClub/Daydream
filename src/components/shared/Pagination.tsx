@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { pickBy } from 'lodash';
 import Link from 'next/link';
-import { calculatePaginationItems, PaginationProps } from '../../utils';
+import { calculatePaginationItems, PaginationProps } from 'src/utils';
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,

@@ -62,7 +62,8 @@
         ]
       }
     ],
-    "indent": [
+    "indent": "off",
+    "@typescript-eslint/indent": [
       "error",
       2,
       {
@@ -145,7 +146,11 @@
       "error",
       140
     ],
-    "import-newlines/enforce": ["error", 4, 140],
+    "import-newlines/enforce": [
+      "error",
+      4,
+      140
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
     "react/no-danger": "off"
   }

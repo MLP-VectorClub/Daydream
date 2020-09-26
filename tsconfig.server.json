@@ -5,7 +5,11 @@
     "outDir": "dist",
     "target": "es2017",
     "isolatedModules": false,
-    "noEmit": false
+    "noEmit": false,
+    "baseUrl": ".",
+    "paths": {
+      "src": ["./src"]
+    }
   },
   "include": ["server/**/*.ts"]
 }

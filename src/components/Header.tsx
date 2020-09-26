@@ -1,8 +1,8 @@
 import { Collapse, Navbar, NavbarBrand } from 'reactstrap';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import ToTheTopArrow from './shared/ToTheTopArrow';
-import MainNavigation from './shared/MainNavigation';
-import SidebarToggler from './shared/SidebarToggler';
+import ToTheTopArrow from 'src/components/shared/ToTheTopArrow';
+import MainNavigation from 'src/components/shared/MainNavigation';
+import SidebarToggler from 'src/components/shared/SidebarToggler';
 
 const Header: React.FC = () => (
   <div id="header">

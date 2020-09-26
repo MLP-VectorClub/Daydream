@@ -1,6 +1,6 @@
 import { ENDPOINTS } from 'src/utils';
 import { useQuery } from 'react-query';
-import { initCsrf } from '../services/core';
+import { getSidebarUsefulLinks, initCsrf } from 'src/services/core';
 
 const csrfFetcher = () => initCsrf().toPromise().then(r => r.status === 204);
 
@@ -9,6 +9,14 @@ export function useCsrf() {
     refetchInterval: 3600e3,
     refetchOnWindowFocus: false,
   });
+
+  return data;
+}
+
+const usefulLinksFetcher = () => getSidebarUsefulLinks().toPromise().then(r => r.data);
+
+export function useSidebarUsefulLinks() {
+  const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, usefulLinksFetcher);
 
   return data;
 }

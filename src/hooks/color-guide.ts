@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
-import { GetAppearancesRequestOptionals, GetAppearancesResult, NullableProps, Status } from '../types';
-import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from '../utils';
-import { colorGuideService } from '../services';
+import { GetAppearancesRequestOptionals, GetAppearancesResult, NullableProps, Status } from 'src/types';
+import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from 'src/utils';
+import { colorGuideService } from 'src/services';
 
 interface GuideHookValue extends Partial<GetAppearancesResult> {
   status: Status;

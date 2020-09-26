@@ -1,3 +1,3 @@
-export * from './authSlice';
-export * from './coreSlice';
-export * from './profileSlice';
+export * from 'src/store/slices/authSlice';
+export * from 'src/store/slices/coreSlice';
+export * from 'src/store/slices/profileSlice';

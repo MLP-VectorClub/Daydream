@@ -1,7 +1,7 @@
 import { Status } from 'src/types';
 import { AxiosObservable } from 'axios-observable/lib/axios-observable.interface';
 import { QueryStatus } from 'react-query';
-import { httpResponseMapper } from './common';
+import { httpResponseMapper } from 'src/utils/common';
 
 export function mapQueryStatus(status: QueryStatus) {
   switch (status) {

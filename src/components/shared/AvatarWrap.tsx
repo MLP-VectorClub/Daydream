@@ -1,8 +1,8 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React, { memo } from 'react';
 import classNames from 'classnames';
-import { AvatarProvider, Nullable } from '../../types';
-import { GUEST_AVATAR } from '../../config';
+import { AvatarProvider, Nullable } from 'src/types';
+import { GUEST_AVATAR } from 'src/config';
 
 interface PropTypes {
   avatarUrl: Nullable<string>;

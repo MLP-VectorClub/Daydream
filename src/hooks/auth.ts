@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
-import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from '../utils';
-import { FailsafeUser, Status, UnifiedErrorResponse, UnifiedErrorResponseTypes } from '../types';
-import { getMe } from '../services/user';
-import { useCsrf } from './core';
+import { getMe } from 'src/services/user';
+import { FailsafeUser, Status, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
+import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from 'src/utils';
+import { useCsrf } from 'src/hooks/core';
 
 const guestUser: FailsafeUser = {
   id: null,

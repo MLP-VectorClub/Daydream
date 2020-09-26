@@ -1,4 +1,4 @@
-import { calculatePaginationItems, PaginationItems } from '../pagination';
+import { calculatePaginationItems, PaginationItems } from 'src/utils/pagination';
 
 describe('calculatePaginationItems', () => {
   it('should return an array of numbers up to 6 items', () => {

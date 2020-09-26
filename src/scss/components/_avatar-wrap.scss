@@ -8,6 +8,7 @@
   color: #777;
   border: .125rem solid;
   background-color: #efefef;
+  box-sizing: content-box;
 
   &.provider-deviantart, &.provider-gravatar {
     border-radius: 5px;
@@ -15,10 +16,5 @@
 
   &.provider-discord {
     border-radius: 50%;
-  }
-
-  .avatar {
-    width: $avatar-size;
-    height: $avatar-size;
   }
 }

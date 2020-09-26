@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getProfileLink, PATHS, ProfileLinkOptions } from '../../utils';
+import { getProfileLink, PATHS, ProfileLinkOptions } from 'src/utils';
 
 interface PropTypes extends ProfileLinkOptions {
   text?: string;

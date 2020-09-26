@@ -1,6 +1,6 @@
 import React, { CSSProperties, memo } from 'react';
 import classNames from 'classnames';
-import { Nullable } from '../../types';
+import { Nullable } from 'src/types';
 
 export interface LoadingRingProps {
   color?: Nullable<string>;

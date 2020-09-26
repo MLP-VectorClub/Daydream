@@ -2,7 +2,7 @@ import { UncontrolledTooltip } from 'reactstrap';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { GetAboutConnectionResult } from '../types';
+import { GetAboutConnectionResult } from 'src/types';
 import {
   BACKEND_GITHUB_URL,
   BACKEND_PROJECT_NAME,
@@ -11,16 +11,16 @@ import {
   GITHUB_URL,
   PROD_API_URL,
   PROJECT_NAME,
-} from '../config';
-import { getBuildData, isClientSide, PATHS } from '../utils';
-import { useTranslation } from '../i18n';
-import TimeAgo from './shared/TimeAgo';
-import ContactLink from './shared/ContactLink';
-import ContactModal from './ContactModal';
-import ExternalLink from './shared/ExternalLink';
-import { connectionFetcher, useConnectionInfo } from '../hooks';
-import Abbr from './shared/Abbr';
-import LanguageDropdown from './shared/LanguageDropdown';
+} from 'src/config';
+import { getBuildData, isClientSide, PATHS } from 'src/utils';
+import { useTranslation } from 'src/i18n';
+import TimeAgo from 'src/components/shared/TimeAgo';
+import ContactLink from 'src/components/shared/ContactLink';
+import ContactModal from 'src/components/ContactModal';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import { connectionFetcher, useConnectionInfo } from 'src/hooks';
+import Abbr from 'src/components/shared/Abbr';
+import LanguageDropdown from 'src/components/shared/LanguageDropdown';
 
 const buildData = isClientSide ? getBuildData() : null;
 

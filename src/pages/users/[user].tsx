@@ -2,21 +2,21 @@ import React, { useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { useTranslation } from '../../i18n';
-import Content from '../../components/shared/Content';
-import { coreActions } from '../../store/slices';
-import { wrapper } from '../../store';
+import { useTranslation } from 'src/i18n';
+import { coreActions } from 'src/store/slices';
+import { wrapper } from 'src/store';
 import {
   fixPath,
   getProfileTitle,
   mapRoleLabel,
   PATHS,
   setResponseStatus,
-} from '../../utils';
-import StandardHeading from '../../components/shared/StandardHeading';
-import AvatarWrap from '../../components/shared/AvatarWrap';
-import { transformProfileParams, useAuth, userFetcher, useUser } from '../../hooks';
-import { GetUsersIdResult, Nullable, Optional, PublicUser } from '../../types';
+} from 'src/utils';
+import { transformProfileParams, useAuth, userFetcher, useUser } from 'src/hooks';
+import { GetUsersIdResult, Nullable, Optional, PublicUser } from 'src/types';
+import StandardHeading from 'src/components/shared/StandardHeading';
+import AvatarWrap from 'src/components/shared/AvatarWrap';
+import Content from 'src/components/shared/Content';
 
 interface PropTypes {
   initialUser: Nullable<PublicUser>;

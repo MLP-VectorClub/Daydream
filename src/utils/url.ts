@@ -6,7 +6,7 @@ import {
   trim,
 } from 'lodash';
 import buildUrl from 'build-url';
-import { Appearance, Numeric, PublicUser } from '../types';
+import { Appearance, Numeric, PublicUser } from 'src/types';
 
 export const makeUrlSafe = (input: string): string => trim(input.replace(/[^A-Za-z\d-]/g, '-').replace(/-+/g, '-'), '-');
 

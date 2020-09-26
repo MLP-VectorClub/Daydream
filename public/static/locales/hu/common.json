@@ -14,7 +14,8 @@
     "visitGithub": "Látogasd meg a GitHub-on",
     "privacyPolicy": "Adatvédelmi Nyilatkozat",
     "contactUs": "Kapcsolat",
-    "apiMeaning": "Application Programming Interface – fejlesztők számára"
+    "apiMeaning": "Application Programming Interface – fejlesztők számára",
+    "translatorsWanted": "Fordítókat keresünk!"
   },
   "titles": {
     "colorGuide": "Színsegéd",
@@ -31,7 +32,8 @@
     "latestEpisode": "Legújabb Epizód",
     "privacyPolicy": "Adatvédelmi Nyilatkozat",
     "users": "Felhasználók",
-    "account": "Fiók"
+    "account": "Fiók",
+    "home": "Főoldal"
   },
   "error": {
     "withStatus": "Hiba {{statusCode}}!",
@@ -51,7 +53,8 @@
     "joinDiscord": "Csatlakozz Discord-on",
     "confirmSignOut": "Biztosan ki szeretnél lépni?",
     "csrfInitializing": "CSRF zseton beszerzése",
-    "authInitializing": "Felhasználó adatok beszerzése"
+    "authInitializing": "Felhasználó adatok beszerzése",
+    "usefulLinks": "Hasznos linkek"
   },
   "contact": {
     "header": "Kapcsolat",
@@ -59,7 +62,12 @@
     "useAnyBelow": "Az alábbi módszerek bármelyikét használhatod, hogy elérj bennünket:",
     "discord": "<0>Csatlakozz a Discord szerverünkhöz</0> és írd le a problémád/javaslatod a <2>#support</2> csatornában",
     "deviantart": "<0>Küldj egy jegyzetet</0> a csoportnak DeviantArt-on",
-    "email": "<0>Küldj egy e-mail-t</0> a {{email}} címre"
+    "email": "<0>Küldj egy e-mail-t</0> a {{email}} címre",
+    "lookingForTranslators": {
+      "intro": "A projekt önkénteseket keres az alkalmazás különböző nyelvekre fordításához.",
+      "wantedLanguages": "Jelenleg az alábbi nyelvekhez lenne szükségünk anyanyelvű fordítók segítségére:",
+      "howToHelp": "Ha segíteni szeretnél vedd fel velünk a kapcsolatot a fenti lehetőségeken. Kérlek vedd figyelembe, hogy a fordítási erőfeszítések összehangolása miatt Discord fiók szükséges."
+    }
   },
   "guestUserName": "Kíváncsi Póni",
   "roleLabel": {

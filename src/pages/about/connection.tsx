@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { Button } from 'reactstrap';
-import { useTranslation } from '../../i18n';
-import StandardHeading from '../../components/shared/StandardHeading';
-import Content from '../../components/shared/Content';
-import { GetAboutConnectionResult, Nullable } from '../../types';
-import { connectionFetcher, useConnectionInfo } from '../../hooks';
-import InlineIcon from '../../components/shared/InlineIcon';
-import Abbr from '../../components/shared/Abbr';
+import { useTranslation } from 'src/i18n';
+import { GetAboutConnectionResult, Nullable } from 'src/types';
+import { connectionFetcher, useConnectionInfo } from 'src/hooks';
+import StandardHeading from 'src/components/shared/StandardHeading';
+import Content from 'src/components/shared/Content';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import Abbr from 'src/components/shared/Abbr';
 
 interface PropTypes {
   connectingAddress: Nullable<string>;

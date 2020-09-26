@@ -14,13 +14,10 @@ import {
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { Trans, useTranslation } from '../../../i18n';
-import { RootState } from '../../../store/rootReducer';
-import { AuthModalSide, Status, UnifiedErrorResponseTypes, WithTFunction } from '../../../types';
-import { authActions } from '../../../store/slices';
-import ExternalLink from '../ExternalLink';
-import InlineIcon from '../InlineIcon';
-import BootstrapErrorMessages from '../BootstrapErrorMessages';
+import { Trans, useTranslation } from 'src/i18n';
+import { RootState } from 'src/store/rootReducer';
+import { AuthModalSide, Status, UnifiedErrorResponseTypes, WithTFunction } from 'src/types';
+import { authActions } from 'src/store/slices';
 import {
   combineErrors,
   PATHS,
@@ -28,8 +25,11 @@ import {
   validatePassword,
   validateRequired,
   validateUserName,
-} from '../../../utils';
-import RevealPasswordButton from '../RevealPasswordButton';
+} from 'src/utils';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages';
+import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 enum INPUT_NAMES {
   NAME = 'name',

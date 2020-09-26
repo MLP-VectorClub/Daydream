@@ -19,18 +19,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { map } from 'lodash';
 import { fromEvent } from 'rxjs';
 import { queryCache } from 'react-query';
-import { useTranslation } from '../../../i18n';
-import { RootState } from '../../../store/rootReducer';
+import { useTranslation } from 'src/i18n';
+import { RootState } from 'src/store/rootReducer';
 import {
   AuthModalSide,
   Nullable,
   SocialProvider,
   Status,
   UnifiedErrorResponseTypes,
-} from '../../../types';
-import { authActions } from '../../../store/slices';
-import InlineIcon from '../InlineIcon';
-import BootstrapErrorMessages from '../BootstrapErrorMessages';
+} from 'src/types';
+import { authActions } from 'src/store/slices';
 import {
   combineErrors,
   ENDPOINTS,
@@ -38,9 +36,11 @@ import {
   validatePassword,
   validateRequired,
   popupOpenCenter,
-} from '../../../utils';
-import RevealPasswordButton from '../RevealPasswordButton';
-import { SOCIAL_PROVIDERS } from '../../../fancy-config';
+} from 'src/utils';
+import { SOCIAL_PROVIDERS } from 'src/fancy-config';
+import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages';
+import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 enum INPUT_NAMES {
   EMAIL = 'email',

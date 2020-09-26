@@ -1,8 +1,8 @@
 import { range } from 'lodash';
 import Axios from 'axios-observable';
 import { ReactQueryConfig } from 'react-query/types/core/types';
-import { AvailableLanguage, GuideName, LanguagesConfig } from './types';
-import { enLocale, huLocale } from './date-fns-locales';
+import { AvailableLanguage, GuideName, LanguagesConfig } from 'src/types';
+import { enLocale, huLocale, deLocale, ruLocale } from 'src/date-fns-locales';
 
 export const APP_NAME = 'MLP Vector Club';
 export const OLD_SITE_URL = 'https://mlpvector.club';
@@ -36,10 +36,22 @@ export const LANGUAGES: LanguagesConfig = {
   en: {
     nativeName: 'English',
     locale: enLocale,
+    enabled: true,
+  },
+  ru: {
+    nativeName: 'Русский',
+    locale: ruLocale,
+    enabled: false,
+  },
+  de: {
+    nativeName: 'Detusch',
+    locale: deLocale,
+    enabled: false,
   },
   hu: {
     nativeName: 'Magyar',
     locale: huLocale,
+    enabled: true,
   },
 };
 

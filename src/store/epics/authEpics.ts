@@ -2,10 +2,10 @@ import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { ActionsObservable } from 'redux-observable';
 import { of } from 'rxjs';
 import { queryCache } from 'react-query';
-import { authActions } from '../slices';
-import { ENDPOINTS, httpResponseMapper } from '../../utils';
-import { userService } from '../../services';
-import { ActionsType } from '../rootReducer';
+import { ENDPOINTS, httpResponseMapper } from 'src/utils';
+import { authActions } from 'src/store/slices';
+import { userService } from 'src/services';
+import { ActionsType } from 'src/store/rootReducer';
 
 const signInEpic = (action$: ActionsObservable<ActionsType>) => action$.pipe(
   filter(authActions.signIn.match),

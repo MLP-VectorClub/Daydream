@@ -1,15 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import Content from '../../components/shared/Content';
-import { CLUB_URL, GITHUB_URL } from '../../config';
-import { Trans, useTranslation } from '../../i18n';
-import ExternalLink from '../../components/shared/ExternalLink';
-import DeviantLink from '../../components/shared/DeviantLink';
-import FavMe from '../../components/shared/FavMe';
-import { coreActions } from '../../store/slices';
-import { AppPageContext, wrapper } from '../../store';
-import StandardHeading from '../../components/shared/StandardHeading';
-import { PATHS } from '../../utils';
+import { CLUB_URL, GITHUB_URL } from 'src/config';
+import { Trans, useTranslation } from 'src/i18n';
+import { coreActions } from 'src/store/slices';
+import { AppPageContext, wrapper } from 'src/store';
+import { PATHS } from 'src/utils';
+import Content from 'src/components/shared/Content';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import DeviantLink from 'src/components/shared/DeviantLink';
+import FavMe from 'src/components/shared/FavMe';
+import StandardHeading from 'src/components/shared/StandardHeading';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx as typeof ctx & AppPageContext;

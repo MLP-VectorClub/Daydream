@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import React, { MouseEventHandler, useEffect } from 'react';
-import { useTranslation } from '../../i18n';
-import { RootState } from '../../store/rootReducer';
-import { AuthModalSide, User } from '../../types';
-import { authActions } from '../../store/slices';
-import SignInForm from '../shared/forms/SignInForm';
-import RegisterForm from '../shared/forms/RegisterForm';
-import { useAuth } from '../../hooks';
+import { useTranslation } from 'src/i18n';
+import { RootState } from 'src/store/rootReducer';
+import { AuthModalSide, User } from 'src/types';
+import { authActions } from 'src/store/slices';
+import { useAuth } from 'src/hooks';
+import SingInForm from 'src/components/shared/forms/SignInForm';
+import RegisterForm from 'src/components/shared/forms/RegisterForm';
 
 export interface AuthModalFormProps {
   switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
@@ -44,7 +44,7 @@ const AuthModal: React.FC = () => {
   const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? 'auth.signInTitle' : 'auth.signUpTitle';
 
   const sides = {
-    [AuthModalSide.SIGN_IN]: <SignInForm />,
+    [AuthModalSide.SIGN_IN]: <SingInForm />,
     [AuthModalSide.REGISTER]: <RegisterForm />,
     // TODO Implement password reset form
     [AuthModalSide.PASSWORD_RESET]: null,

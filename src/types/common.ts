@@ -1,12 +1,13 @@
 import { TFunction } from 'next-i18next';
 import { FieldValues, FormProps } from 'react-hook-form';
-import { User, ValidationErrorResponse } from './api';
+import { User, ValidationErrorResponse } from 'src/types/api';
 
-export type AvailableLanguage = 'hu' | 'en';
+export type AvailableLanguage = 'hu' | 'en' | 'de' | 'ru';
 
 export type LanguagesConfig = Record<AvailableLanguage, {
   nativeName: string;
   locale: Locale;
+  enabled: boolean;
 }>;
 
 export enum Status {
@@ -103,7 +104,7 @@ export type UnifiedErrorResponse = {
   type: UnifiedErrorResponseTypes.VALIDATION_ERROR;
 } & ValidationErrorResponse);
 
-export type FailsafeUser = NullableProps<User, 'id' | 'name' | 'avatarUrl' | 'email' | 'role'>;
+export type FailsafeUser = User | (NullableProps<Omit<User, 'id'>, 'name' | 'avatarUrl' | 'email' | 'role'> & { id: null });
 
 export type TitleKeyWithParams = [string, Record<string, Numeric>];
 export type PageTitle = Nullable<string> | TitleKeyWithParams;

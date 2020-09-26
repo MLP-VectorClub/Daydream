@@ -6,16 +6,16 @@ import { NextPage } from 'next';
 import { Alert } from 'reactstrap';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { OLD_SITE_URL, PROD_APP_URL } from '../config';
-import { Nullable } from '../types';
-import { assembleSeoUrl } from '../utils';
-import Header from './Header';
-import Footer from './Footer';
-import Sidebar from './Sidebar';
-import ExternalLink from './shared/ExternalLink';
-import InlineIcon from './shared/InlineIcon';
-import { useLayout } from '../hooks';
-import { useTranslation } from '../i18n';
+import { OLD_SITE_URL, PROD_APP_URL } from 'src/config';
+import { Nullable } from 'src/types';
+import { assembleSeoUrl } from 'src/utils';
+import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
+import Sidebar from 'src/components/Sidebar';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import { useLayout } from 'src/hooks';
+import { useTranslation } from 'src/i18n';
 
 type PropTypes = {
   url?: Nullable<string>;

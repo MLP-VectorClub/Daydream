@@ -2,7 +2,7 @@ import { TFunction } from 'next-i18next';
 import { FieldValues } from 'react-hook-form';
 import { FieldErrors } from 'react-hook-form/dist/types';
 import { get } from 'lodash';
-import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from '../types';
+import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
 
 export const combineErrors = <FormValues extends FieldValues = FieldValues>(
   clientErrors: FieldErrors<FormValues>,

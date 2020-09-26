@@ -1,13 +1,13 @@
 import buildUrl from 'build-url';
 import { mapValues, omitBy } from 'lodash';
-import { API_PREFIX } from '../config';
 import {
   GetAppearancesIdSpriteRequestOptionals,
   GetAppearancesRequestOptionals,
   GetUsersDaUsernameRequest,
   GetUsersIdRequest,
   GetUsersOauthSigninProviderRequest,
-} from '../types';
+} from 'src/types';
+import { API_PREFIX } from 'src/config';
 
 export const ENDPOINTS = {
   SLEEP: `${API_PREFIX}/about/sleep`,
@@ -44,4 +44,5 @@ export const ENDPOINTS = {
       // TODO hash
     }),
   */
+  USEFUL_LINKS_SIDEBAR: `${API_PREFIX}/useful-links/sidebar`,
 };

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
-import { useTranslation } from '../i18n';
-import { RootState } from '../store/rootReducer';
-import { APP_NAME } from '../config';
+import { useTranslation } from 'src/i18n';
+import { RootState } from 'src/store/rootReducer';
+import { APP_NAME } from 'src/config';
 
 const TitleManager: React.FC = () => {
   const { t } = useTranslation();

@@ -5,7 +5,7 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as i18nextHmr from 'i18next-hmr/server';
-import { i18n } from './i18n';
+import { i18n } from 'src/i18n';
 
 interface AppEnvironment {
   NODE_ENV: string;

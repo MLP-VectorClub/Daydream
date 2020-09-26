@@ -1,12 +1,13 @@
 import NextI18Next from 'next-i18next';
 import path from 'path';
-import { DEFAULT_LANGUAGE, DEV_ENV, LANGUAGES } from './config';
+import { DEFAULT_LANGUAGE, DEV_ENV, LANGUAGES } from 'src/config';
+import { AvailableLanguage } from 'src/types';
 
 const defaultNS = 'common';
 
 const nextI18next = new NextI18Next({
   defaultLanguage: DEFAULT_LANGUAGE,
-  otherLanguages: Object.keys(LANGUAGES).filter(el => el !== DEFAULT_LANGUAGE),
+  otherLanguages: Object.keys(LANGUAGES).filter(el => el !== DEFAULT_LANGUAGE && LANGUAGES[el as AvailableLanguage].enabled),
   fallbackLng: DEFAULT_LANGUAGE,
   defaultNS,
   fallbackNS: defaultNS,

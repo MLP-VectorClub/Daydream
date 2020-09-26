@@ -1,7 +1,7 @@
 import { Button, UncontrolledTooltip } from 'reactstrap';
 import { useEffect, useRef } from 'react';
-import { useTranslation } from '../../i18n';
-import InlineIcon from './InlineIcon';
+import { useTranslation } from 'src/i18n';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 interface TooltipContentProps {
   scheduleUpdate: () => void;

@@ -1,5 +1,5 @@
-import { SocialProviderConfig, SocialProvider } from './types';
-import InlineIcon from './components/shared/InlineIcon';
+import { SocialProviderConfig, SocialProvider } from 'src/types';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 /**
  * @file This file is meant to house configuration options that could not be placed into config.ts

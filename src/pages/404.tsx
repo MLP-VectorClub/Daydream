@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTranslation } from '../i18n';
-import Content from '../components/shared/Content';
-import { coreActions } from '../store/slices';
-import StandardHeading from '../components/shared/StandardHeading';
-import { wrapper } from '../store';
+import { useTranslation } from 'src/i18n';
+import Content from 'src/components/shared/Content';
+import StandardHeading from 'src/components/shared/StandardHeading';
+import { coreActions } from 'src/store/slices';
+import { wrapper } from 'src/store';
 
 export const getStaticProps = wrapper.getStaticProps(({ store }) => {
   store.dispatch(coreActions.setTitle('404'));

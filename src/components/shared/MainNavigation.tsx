@@ -1,18 +1,31 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useCallback } from 'react';
 import Link from 'next/link';
-import { getProfileLink, PATHS, permission } from '../../utils';
-import ExternalLink from './ExternalLink';
-import { CLUB_URL } from '../../config';
-import { useTranslation } from '../../i18n';
-import { useAuth } from '../../hooks';
+import { getProfileLink, PATHS, permission } from 'src/utils';
+import { CLUB_URL } from 'src/config';
+import { useTranslation } from 'src/i18n';
+import { useAuth } from 'src/hooks';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import { User } from 'src/types';
 
 const MainNavigation = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const getHomePath = useCallback((_u: User) => '/cg', [user.id]);
   return (
     <Nav navbar>
+      <NavItem>
+        {user.id !== null && (
+          <Link href={getHomePath(user)} passHref>
+            <NavLink>
+              <InlineIcon first icon="home" />
+              {t('titles.home')}
+            </NavLink>
+          </Link>
+        )}
+      </NavItem>
       <NavItem>
         <Link href={PATHS.LATEST_EPISODE} passHref>
           <NavLink>{t('titles.latestEpisode')}</NavLink>
@@ -33,7 +46,7 @@ const MainNavigation = () => {
           <NavLink>{t('titles.events')}</NavLink>
         </Link>
       </NavItem>
-      {user.id && (
+      {user.id !== null && (
         <NavItem>
           <Link href={PATHS.USER()} as={getProfileLink(user)} passHref>
             <NavLink>{t('titles.account')}</NavLink>

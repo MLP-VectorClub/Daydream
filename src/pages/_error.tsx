@@ -1,10 +1,10 @@
 import React from 'react';
-import { useTranslation } from '../i18n';
-import Layout from '../components/Layout';
-import Content from '../components/shared/Content';
-import { Nullable } from '../types';
-import { wrapper } from '../store';
-import StandardHeading from '../components/shared/StandardHeading';
+import { Nullable } from 'src/types';
+import { useTranslation } from 'src/i18n';
+import Layout from 'src/components/Layout';
+import Content from 'src/components/shared/Content';
+import StandardHeading from 'src/components/shared/StandardHeading';
+import { wrapper } from 'src/store';
 
 interface PropTypes {
   statusCode?: Nullable<number>;

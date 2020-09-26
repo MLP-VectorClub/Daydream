@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import coreReducer, { CoreActions, CoreState } from './slices/coreSlice';
-import authReducer, { AuthActions, AuthState } from './slices/authSlice';
-import profileReducer, { ProfileActions, ProfileState } from './slices/profileSlice';
+import coreReducer, { CoreActions, CoreState } from 'src/store/slices/coreSlice';
+import authReducer, { AuthActions, AuthState } from 'src/store/slices/authSlice';
+import profileReducer, { ProfileActions, ProfileState } from 'src/store/slices/profileSlice';
 
 const appReducer = combineReducers({
   core: coreReducer,

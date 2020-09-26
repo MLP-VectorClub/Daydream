@@ -10,7 +10,7 @@ import {
   UnifiedErrorResponse,
   User,
   ValuesOf,
-} from '../../types';
+} from 'src/types';
 
 export interface AuthState {
   signIn: {

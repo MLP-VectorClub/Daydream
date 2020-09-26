@@ -1,7 +1,7 @@
 import { UncontrolledTooltip } from 'reactstrap';
 import React, { ReactNode, useMemo } from 'react';
 import md5 from 'md5';
-import { Nullable } from '../../types';
+import { Nullable } from 'src/types';
 
 interface PropTypes {
   id?: Nullable<string>;

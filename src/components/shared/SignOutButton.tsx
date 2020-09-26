@@ -1,10 +1,10 @@
 import { Button, Tooltip } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { Status, WithTFunction } from '../../types';
-import InlineIcon from './InlineIcon';
-import { RootState } from '../../store/rootReducer';
-import { authActions } from '../../store/slices';
+import { Status, WithTFunction } from 'src/types';
+import { RootState } from 'src/store/rootReducer';
+import { authActions } from 'src/store/slices';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 const BUTTON_ID = 'signout';
 

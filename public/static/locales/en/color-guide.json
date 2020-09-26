@@ -1,8 +1,9 @@
 {
   "guideName": {
     "unknown": "Unknown",
-    "pony": "Pony",
-    "eqg": "EQG"
+    "pony": "Friendship is Magic",
+    "pl": "Pony Life",
+    "eqg": "Equestria Girls"
   },
   "appearances": {
     "cmAvailable": "Cutie mark available"

@@ -15,7 +15,8 @@
     "privacyPolicy": "Privacy Policy",
     "contactUs": "Contact Us",
     "api": "API",
-    "apiMeaning": "Application Programming Interface – for developers"
+    "apiMeaning": "Application Programming Interface – for developers",
+    "translatorsWanted": "Translators wanted!"
   },
   "titles": {
     "colorGuide": "Color Guide",
@@ -32,7 +33,8 @@
     "latestEpisode": "Latest Episode",
     "privacyPolicy": "Privacy Policy",
     "users": "Users",
-    "account": "Account"
+    "account": "Account",
+    "home": "Home"
   },
   "error": {
     "withStatus": "Error {{statusCode}}!",
@@ -52,7 +54,8 @@
     "joinDiscord": "Join Discord",
     "confirmSignOut": "Are you sure you want to sign out?",
     "csrfInitializing": "Fetching CSRF token",
-    "authInitializing": "Fetching user data"
+    "authInitializing": "Fetching user data",
+    "usefulLinks": "Useful links"
   },
   "contact": {
     "header": "Contact Us",
@@ -60,7 +63,13 @@
     "useAnyBelow": "You can use any of the following methods to reach out to us:",
     "discord": "<0>Join our Discord server</0> and describe your issue/idea in the <2>#support</2> channel",
     "deviantart": "<0>Send a note</0> to the group on DeviantArt",
-    "email": "<0>Send an e-mail</0> to {{email}}"
+    "email": "<0>Send an e-mail</0> to {{email}}",
+    "lookingForTranslators": {
+      "title": "Translators wanted",
+      "intro": "This project is looking for volunteers to help translate this site to various languages.",
+      "wantedLanguages": "We are currently looking for native speakers to help with translations for these languages:",
+      "howToHelp": "If you are interested please get in touch via the options above. Please note that a Discord account is required so we can coordinate translation efforts."
+    }
   },
   "guestUserName": "Curious Pony",
   "roleLabel": {

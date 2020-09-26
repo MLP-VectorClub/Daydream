@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { PageTitle, ValuesOf } from '../../types';
+import { PageTitle, ValuesOf } from 'src/types';
 
 export interface CoreState {
   sidebarOpen: boolean;
   contactOpen: boolean;
+  colorAvgOpen: boolean;
   title: PageTitle;
   upcomingEvents: object[];
-  usefulLinks: object[];
 }
 
 const initialState: CoreState = {
   sidebarOpen: false,
   contactOpen: false,
+  colorAvgOpen: false,
   title: null,
   upcomingEvents: [],
-  usefulLinks: [],
 };
 
 const coreSlice = createSlice({
@@ -33,6 +33,9 @@ const coreSlice = createSlice({
     },
     toggleContact(state, action: PayloadAction<boolean | undefined>) {
       state.contactOpen = typeof action.payload === 'undefined' ? !state.contactOpen : action.payload;
+    },
+    toggleColorAvg(state, action: PayloadAction<boolean | undefined>) {
+      state.colorAvgOpen = typeof action.payload === 'undefined' ? !state.colorAvgOpen : action.payload;
     },
   },
 });

@@ -1,7 +1,7 @@
 import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
-import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from '../types';
-import { PROD_APP_URL } from '../config';
+import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
+import { PROD_APP_URL } from 'src/config';
 
 export const sanitizePageParam = (value: string) => {
   const page = parseInt(value, 10);

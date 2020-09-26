@@ -1,16 +1,16 @@
 import { Button } from 'reactstrap';
-import { useTranslation } from '../i18n';
-import MainNavigation from './shared/MainNavigation';
-import SidebarUserInfo from './shared/SidebarUserInfo';
-import ExternalLink from './shared/ExternalLink';
-import { DISCORD_INVITE_LINK } from '../config';
-import SidebarNotifications from './shared/SidebarNotifications';
-import HappeningSoon from './widgets/HappeningSoon';
-import SidebarUsefulLinks from './shared/SidebarUsefulLinks';
-import CustomIcon from './shared/CustomIcon';
-import SignInButton from './shared/SignInButton';
-import SignOutButton from './shared/SignOutButton';
-import { useAuth, useConnectionInfo } from '../hooks';
+import { useTranslation } from 'src/i18n';
+import MainNavigation from 'src/components/shared/MainNavigation';
+import SidebarUserInfo from 'src/components/shared/SidebarUserInfo';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import { DISCORD_INVITE_LINK } from 'src/config';
+import SidebarNotifications from 'src/components/shared/SidebarNotifications';
+import HappeningSoon from 'src/components/widgets/HappeningSoon';
+import SidebarUsefulLinks from 'src/components/shared/SidebarUsefulLinks';
+import CustomIcon from 'src/components/shared/CustomIcon';
+import SignInButton from 'src/components/shared/SignInButton';
+import SignOutButton from 'src/components/shared/SignOutButton';
+import { useAuth, useConnectionInfo } from 'src/hooks';
 
 const Sidebar: React.FC = () => {
   const { t } = useTranslation('common');

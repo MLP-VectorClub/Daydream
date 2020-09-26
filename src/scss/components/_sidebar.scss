@@ -207,17 +207,16 @@
       }
     }
 
-    &.welcome .links {
-      list-style: none;
+    .links {
       border-radius: 5px;
       margin: 0 0 6px;
       padding: 5px;
       line-height: 1.2em;
 
-      &:before {
-        content: "Useful links";
+      h3 {
         display: block;
         border-bottom: 1px solid $SidebarContentBorder;
+        font-family: $font-family-base;
         font-size: 1.2em;
         line-height: 1.2em;
         margin-bottom: 5px;
@@ -225,34 +224,36 @@
         font-weight: bold;
       }
 
-      &:empty {
-        display: none
-      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
 
-      li {
-        display: inline-block;
-        white-space: normal;
-
-        a {
+        > li {
           display: inline-block;
-          text-decoration: none;
-          color: inherit;
-          border-bottom: 1px solid transparent;
-          transition: border-bottom-color .2s linear;
-        }
+          white-space: normal;
 
-        &:not(:last-child):after {
-          content: ",";
-          margin-right: .3em;
-          display: inline-block;
-        }
+          a {
+            display: inline-block;
+            text-decoration: none;
+            color: inherit !important;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom-color .2s linear;
+          }
 
-        &:not(.active) a:hover:not(:active) {
-          border-bottom-color: initial;
-        }
+          &:not(:last-child):after {
+            content: ",";
+            margin-right: .3em;
+            display: inline-block;
+          }
 
-        &.active a {
-          border-bottom-color: rgba(255, 255, 255, .5);
+          &:not(.active) a:hover:not(:active) {
+            border-bottom-color: initial;
+          }
+
+          &.active a {
+            border-bottom-color: rgba(255, 255, 255, .5);
+          }
         }
       }
     }
@@ -425,7 +426,7 @@
   }
 }
 
-@include media-breakpoint-down($sidebar-breakpoint-down){
+@include media-breakpoint-down($sidebar-breakpoint-down) {
   #sidebar {
     transition: left .5s ease-in-out;
     will-change: left;

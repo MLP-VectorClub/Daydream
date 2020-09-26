@@ -11,8 +11,6 @@ $primary-dark: darken($primary, 20);
 $link-color: $primary;
 $component-active-bg: $ui;
 
-$avatar-size: 50px;
-
 $font-family-monospace: 'Consolas', monospace;
 $font-family-sans-serif: 'Arimo', sans-serif;
 
@@ -56,7 +54,7 @@ $link-hover-color-light: lighten($link-hover-color, 37);
 
 $sidebar-breakpoint-up: lg;
 $sidebar-breakpoint-down: md;
-$SidebarBackground: darken($primary, 20);
+$SidebarBackground: darken($primary, 24);
 $SidebarBackgroundMobile: rgba($SidebarBackground, .95);
 $SidebarWidth: 330px;
 $MainMargin: 8px;

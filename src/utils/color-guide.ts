@@ -6,8 +6,8 @@ import {
   Numeric,
   Optional,
   TitleKeyWithParams,
-} from '../types';
-import { GUIDE_NAMES } from '../config';
+} from 'src/types';
+import { GUIDE_NAMES } from 'src/config';
 
 export const resolveGuideName = (guide?: string | string[]): Optional<GuideName> => {
   if (typeof guide !== 'undefined') {

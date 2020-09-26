@@ -6,17 +6,17 @@ import { AppContextType, AppInitialProps, AppPropsType, NextComponentType } from
 import { Router } from 'next/router';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ReactQueryConfigProvider } from 'react-query';
-import { APP_NAME, DEV_ENV, PROD_APP_URL, REACT_QUERY_CONFIG } from '../config';
-import { appWithTranslation, useTranslation } from '../i18n';
-import { wrapper } from '../store';
-import TitleManager from '../components/TitleManager';
+import { ENDPOINTS } from 'src/utils';
+import { APP_NAME, DEV_ENV, PROD_APP_URL, REACT_QUERY_CONFIG } from 'src/config';
+import { appWithTranslation, useTranslation } from 'src/i18n';
+import { wrapper } from 'src/store';
+import TitleManager from 'src/components/TitleManager';
 import '../fontawesome';
 import '../app.scss';
-import AuthModal from '../components/modals/AuthModal';
-import ProgressIndicator from '../components/ProgressIndicator';
-import { ENDPOINTS } from '../utils';
-import Layout from '../components/Layout';
-import { LayoutContext } from '../hooks';
+import AuthModal from 'src/components/modals/AuthModal';
+import ProgressIndicator from 'src/components/ProgressIndicator';
+import Layout from 'src/components/Layout';
+import { LayoutContext } from 'src/hooks';
 
 const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPropsType> = props => {
   const { Component, pageProps } = props;

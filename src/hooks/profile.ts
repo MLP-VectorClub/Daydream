@@ -1,9 +1,9 @@
 import { ParsedUrlQuery } from 'querystring';
 import { useQuery } from 'react-query';
-import { GetUsersDaUsernameRequest, GetUsersIdRequest, Optional, PublicUser } from '../types';
-import { ENDPOINTS, requestObservableToPromise } from '../utils';
-import { useCsrf } from './core';
-import { userService } from '../services';
+import { GetUsersDaUsernameRequest, GetUsersIdRequest, Optional, PublicUser } from 'src/types';
+import { ENDPOINTS, requestObservableToPromise } from 'src/utils';
+import { userService } from 'src/services';
+import { useCsrf } from 'src/hooks/core';
 
 interface UserHookValue {
   user?: PublicUser;

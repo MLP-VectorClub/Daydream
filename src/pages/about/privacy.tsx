@@ -1,13 +1,13 @@
 import React from 'react';
 import { Alert } from 'reactstrap';
-import { Trans, useTranslation } from '../../i18n';
-import Content from '../../components/shared/Content';
-import ExternalLink from '../../components/shared/ExternalLink';
-import ContactLink from '../../components/shared/ContactLink';
-import { coreActions } from '../../store/slices';
-import { PROD_APP_URL } from '../../config';
-import { AppPageContext, wrapper } from '../../store';
-import StandardHeading from '../../components/shared/StandardHeading';
+import { Trans, useTranslation } from 'src/i18n';
+import { coreActions } from 'src/store/slices';
+import { PROD_APP_URL } from 'src/config';
+import { AppPageContext, wrapper } from 'src/store';
+import Content from 'src/components/shared/Content';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import ContactLink from 'src/components/shared/ContactLink';
+import StandardHeading from 'src/components/shared/StandardHeading';
 
 const PrivacyPolicy: React.FC = () => {
   const { t } = useTranslation('privacy-policy');

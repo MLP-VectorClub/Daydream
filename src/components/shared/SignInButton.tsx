@@ -2,10 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, UncontrolledTooltip } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
-import { AuthModalSide, Status, WithTFunction } from '../../types';
-import { authActions } from '../../store/slices';
-import LoadingRing from './LoadingRing';
-import { useAuth, useCsrf } from '../../hooks';
+import { AuthModalSide, Status, WithTFunction } from 'src/types';
+import { authActions } from 'src/store/slices';
+import { useAuth, useCsrf } from 'src/hooks';
+import LoadingRing from 'src/components/shared/LoadingRing';
 
 interface TooltipContentProps {
   scheduleUpdate: () => void;

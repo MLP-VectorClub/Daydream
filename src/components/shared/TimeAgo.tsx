@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { timer } from 'rxjs';
 import { formatDistanceToNow } from 'date-fns';
 import { distinctUntilChanged, map, tap } from 'rxjs/operators';
-import { useDateLocale } from '../../hooks/date-locale';
+import { useDateLocale } from 'src/hooks/date-locale';
 
 const TimeAgo: React.FC<{ date: Date }> = ({ date }) => {
   const locale = useDateLocale();

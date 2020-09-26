@@ -1,5 +1,5 @@
-import { Nullable, Numeric, PageTitle, PublicUser } from '../types';
-import { PATHS } from './url';
+import { Nullable, Numeric, PageTitle, PublicUser } from 'src/types';
+import { PATHS } from 'src/utils/url';
 
 export const getProfileTitle = (
   user?: PublicUser,

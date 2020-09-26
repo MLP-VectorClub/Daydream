@@ -1,5 +1,5 @@
 import { range, uniq } from 'lodash';
-import { PageData } from '../types';
+import { PageData } from 'src/types';
 
 export const GO_TO_ITEM = '\u{2026}';
 

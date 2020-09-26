@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { ValuesOf } from '../../types';
+import { ValuesOf } from 'src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProfileState {

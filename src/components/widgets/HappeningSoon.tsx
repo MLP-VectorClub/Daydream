@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
+import { RootState } from 'src/store/rootReducer';
 
 const HappeningSoon: React.FC = () => {
   const { upcomingEvents } = useSelector((state: RootState) => state.core);

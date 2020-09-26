@@ -4,8 +4,7 @@ import { GetServerSideProps } from 'next';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
-import { useTranslation } from '../../i18n';
-import StandardHeading from '../../components/shared/StandardHeading';
+import { useTranslation } from 'src/i18n';
 import {
   Nullable,
   PublicUser,
@@ -13,13 +12,14 @@ import {
   Status,
   UnifiedErrorResponseTypes,
   User,
-} from '../../types';
-import { useLayout, useOAuth } from '../../hooks';
-import { ENDPOINTS, PATHS, setResponseStatus } from '../../utils';
-import Center from '../../components/shared/Center';
-import { SOCIAL_PROVIDERS } from '../../fancy-config';
-import InlineIcon from '../../components/shared/InlineIcon';
-import LoadingRing from '../../components/shared/LoadingRing';
+} from 'src/types';
+import { useLayout, useOAuth } from 'src/hooks';
+import { ENDPOINTS, PATHS, setResponseStatus } from 'src/utils';
+import { SOCIAL_PROVIDERS } from 'src/fancy-config';
+import Center from 'src/components/shared/Center';
+import StandardHeading from 'src/components/shared/StandardHeading';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import LoadingRing from 'src/components/shared/LoadingRing';
 
 interface PropTypes {
   initialUser: Nullable<PublicUser>;

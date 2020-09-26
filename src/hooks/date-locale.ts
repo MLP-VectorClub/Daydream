@@ -1,6 +1,6 @@
-import { useTranslation } from '../i18n';
-import { LANGUAGES } from '../config';
-import { AvailableLanguage } from '../types';
+import { AvailableLanguage } from 'src/types';
+import { useTranslation } from 'src/i18n';
+import { LANGUAGES } from 'src/config';
 
 export const useDateLocale = (): Locale => {
   const { i18n: { language } } = useTranslation();

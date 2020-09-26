@@ -2,7 +2,7 @@
   "name": "@mlp-vectorclub/celestia",
   "version": "0.1.0",
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json src/server.ts",
+    "dev": "ts-node -r tsconfig-paths/register --project tsconfig.server.json src/server.ts",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
@@ -34,7 +34,7 @@
     "http-proxy-middleware": "^1.0.3",
     "lodash": "^4.17.19",
     "md5": "^2.2.1",
-    "next": "^9.4.0",
+    "next": "^9.5.3",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.4.0",
     "next-i18next": "^6.0.1",

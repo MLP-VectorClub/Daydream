@@ -14,8 +14,8 @@ import {
   PostUsersSigninResult,
   PostUsersSignoutResult,
   RegisterOauthRequest,
-} from '../types';
-import { ENDPOINTS } from '../utils';
+} from 'src/types';
+import { ENDPOINTS } from 'src/utils';
 
 export const getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
 

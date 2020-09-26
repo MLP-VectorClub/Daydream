@@ -1,28 +1,22 @@
-import {
-  Alert,
-  Card,
-  CardBody,
-  Col,
-  Row,
-} from 'reactstrap';
+import { Alert } from 'reactstrap';
 import React from 'react';
-import { LazyLoadImage, ScrollPosition, trackWindowScroll } from 'react-lazy-load-image-component';
-import classNames from 'classnames';
+import { ScrollPosition, trackWindowScroll } from 'react-lazy-load-image-component';
 import { AxiosError } from 'axios';
-import { useTranslation } from '../../../i18n';
-import Content from '../../../components/shared/Content';
+import { useTranslation } from 'src/i18n';
 import {
   GetAppearancesResult,
   GuideName,
   Nullable,
   Optional,
   TitleKeyWithParams,
-} from '../../../types';
-import { getGuideTitle, notFound, resolveGuideName, setResponseStatus } from '../../../utils';
-import { coreActions } from '../../../store/slices';
-import { AppPageContext, wrapper } from '../../../store';
-import Pagination from '../../../components/shared/Pagination';
-import { guideFetcher, useGuide } from '../../../hooks';
+} from 'src/types';
+import { getGuideTitle, notFound, resolveGuideName, setResponseStatus } from 'src/utils';
+import { coreActions } from 'src/store/slices';
+import { AppPageContext, wrapper } from 'src/store';
+import { guideFetcher, useGuide } from 'src/hooks';
+import AppearanceItem from 'src/components/colorguide/AppearanceItem';
+import Pagination from 'src/components/shared/Pagination';
+import Content from 'src/components/shared/Content';
 
 interface PropTypes {
   guide: Nullable<GuideName>;
@@ -43,42 +37,9 @@ const ColorGuidePage: React.FC<PropTypes> = ({ guide, page, initialData, scrollP
         <Alert color="danger" className="mt-3 mb-0">{t('errors.unknownGuide')}</Alert>
       )}
       {data.pagination && <Pagination {...data.pagination} className="mb-3" />}
-      {data.appearances && data.appearances.map(el => {
-        const sprite = (el.sprite as Nullable<typeof el.sprite>);
-        return (
-          <Card key={el.id} className="appearance-item mb-3">
-            <CardBody className="p-2">
-              <Row noGutters>
-                {sprite !== null && (
-                  <Col xs="auto">
-                    <div className="pr-3">
-                      <LazyLoadImage
-                        className="sprite-image"
-                        src={sprite.path}
-                        placeholderSrc={sprite.preview}
-                        effect="blur"
-                        scrollPosition={scrollPosition}
-                      />
-                    </div>
-                  </Col>
-                )}
-                <Col>
-                  <h5>{el.label}</h5>
-                  <div className="notes">
-                    {/* TODO Parse notes and convert links */}
-                    {el.notes && <span dangerouslySetInnerHTML={{ __html: el.notes }} />}
-                    {el.hasCutieMarks && (
-                      <span className={classNames({ 'ml-2 pl-2 border-left': el.notes })}>
-                        {t('appearances.cmAvailable')}
-                      </span>
-                    )}
-                  </div>
-                </Col>
-              </Row>
-            </CardBody>
-          </Card>
-        );
-      })}
+      {data.appearances && data.appearances.map(el => (
+        <AppearanceItem key={el.id} appearance={el} scrollPosition={scrollPosition} />
+      ))}
       {data.pagination && <Pagination {...data.pagination} className="mb-3" />}
     </Content>
   );

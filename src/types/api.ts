@@ -169,9 +169,6 @@ export interface CommonAppearance {
    */
   label: string;
   order: Order;
-  /**
-   * The sprite that belongs to this appearance, or null if there is none
-   */
   sprite: Sprite;
   /**
    * Indicates whether there are any cutie marks tied to this appearance
@@ -257,9 +254,6 @@ export interface Color {
    * The color value in uppercase hexadecimal form, including a # prefix
    */
   hex: string;
-  /**
-   * This field used to indicate if this color was linked to another color, however, this feature was removed and this field now only ever returns null
-   */
   linkedTo?: Color;
 }
 
@@ -331,24 +325,45 @@ export type OneBasedId = number;
 export type ZeroBasedId = number;
 
 /**
- * Represents a publicly accessible representation of a user
+ * Contains publicly accessible properties of useful links
  */
-export interface PublicUser {
+export interface PublicUsefulLink {
+  id: OneBasedId;
+  /**
+   * The URL this link points to
+   */
+  url: string;
+  /**
+   * The link text to display on the page
+   */
+  label: string;
+  /**
+   * The title text associated with the link providing additional context about why it's useful
+   */
+  title?: string;
+  order: Order;
+}
+
+/**
+ * Contains all stored properties of useful links
+ */
+export type UsefulLink = PublicUsefulLink & {
+  /**
+   * The minimum role required to be able to see this link in application the sidebar
+   */
+  minrole: string;
+};
+
+export type PublicUser = ErrorResponse & {
   id: number;
   name: string;
-  /**
-   * The publicly visible role for the user
-   */
   role: Role;
   avatarUrl: string;
   avatarProvider: AvatarProvider;
-}
+};
 
 export type User = PublicUser & {
   email: string;
-  /**
-   * The database-level role for the user
-   */
   role: DatabaseRole;
 };
 
@@ -379,9 +394,6 @@ export interface CommitData {
    * Abbreviated commit ID of the backend application, indicating the version currently deployed on the server (at least 7 characters long)
    */
   commitId: string;
-  /**
-   * Date at which the commit currently deployed on the server was authored
-   */
   commitTime: IsoStandardDate;
 }
 
@@ -422,6 +434,8 @@ export interface GetUsersOauthSigninProviderRequest {
 export type PostUsersOauthSigninProviderRequest = OauthCode
 export type PostUsersRequest = RegistrationRequest
 export interface GetSanctumCsrfCookieRequest {
+}
+export interface GetUsefulLinksSidebarRequest {
 }
 export interface GetUsersMeRequest {
 }
@@ -466,6 +480,8 @@ export interface PostUsersResult {
 
 export type PostUsers204 = any
 export type GetSanctumCsrfCookieResult = any
+export type GetUsefulLinksSidebarResult = PublicUsefulLink[];
+
 export type GetUsersMeResult = User;
 
 export type GetUsersDaUsernameResult = PublicUser;

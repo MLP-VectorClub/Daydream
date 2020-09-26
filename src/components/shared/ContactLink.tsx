@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { coreActions } from '../../store/slices';
+import { coreActions } from 'src/store/slices';
 
 const ContactLink: React.FC = ({ children, ...rest }) => {
   const dispatch = useDispatch();

@@ -7,12 +7,16 @@ import {
 } from 'reactstrap';
 import React, { useCallback, useState } from 'react';
 import toPairs from 'lodash/toPairs';
-import { useTranslation } from '../../i18n';
-import { LANGUAGES } from '../../config';
-import { AvailableLanguage } from '../../types';
-import InlineIcon from './InlineIcon';
+import { useDispatch } from 'react-redux';
+import { some } from 'lodash';
+import { useTranslation } from 'src/i18n';
+import { LANGUAGES } from 'src/config';
+import { AvailableLanguage } from 'src/types';
+import { coreActions } from 'src/store/slices';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 const LanguageDropdown: React.FC = () => {
+  const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -46,12 +50,20 @@ const LanguageDropdown: React.FC = () => {
         <DropdownItem header>
           {t('footer.changeLanguage')}
         </DropdownItem>
-        {toPairs(LANGUAGES).map(([key, value]) => (
+        {toPairs(LANGUAGES).filter(([, l]) => l.enabled).map(([key, value]) => (
           <DropdownItem key={key} onClick={changeLanguage(key)} {...getCurrentProps(key)}>
             <img className="language-flag" src={`/static/flags/${key}.svg`} alt="" />
             <span>{value.nativeName}</span>
           </DropdownItem>
         ))}
+        {some(LANGUAGES, l => !l.enabled) && (
+          <>
+            <DropdownItem divider />
+            <DropdownItem onClick={() => dispatch(coreActions.toggleContact(true))}>
+              <strong>{t('footer.translatorsWanted')}</strong>
+            </DropdownItem>
+          </>
+        )}
       </DropdownMenu>
     </Dropdown>
   );

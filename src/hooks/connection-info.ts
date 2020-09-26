@@ -5,9 +5,9 @@ import {
   Optional,
   UnifiedErrorResponse,
   UnifiedErrorResponseTypes,
-} from '../types';
-import { ENDPOINTS, isClientSide, requestObservableToPromise } from '../utils';
-import { aboutService } from '../services';
+} from 'src/types';
+import { ENDPOINTS, isClientSide, requestObservableToPromise } from 'src/utils';
+import { aboutService } from 'src/services';
 
 interface ServerInfoHookValue {
   serverInfo?: MappedAboutConnectionResult;

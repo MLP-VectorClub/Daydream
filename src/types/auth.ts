@@ -1,4 +1,4 @@
-import { InlineIconProps } from './component-props';
+import { InlineIconProps } from 'src/types/component-props';
 
 export enum AuthModalSide {
   SIGN_IN,
