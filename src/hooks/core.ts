@@ -15,8 +15,8 @@ export function useCsrf() {
 
 const usefulLinksFetcher = () => getSidebarUsefulLinks().toPromise().then(r => r.data);
 
-export function useSidebarUsefulLinks() {
-  const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, usefulLinksFetcher);
+export function useSidebarUsefulLinks(enabled: boolean) {
+  const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, usefulLinksFetcher, { enabled });
 
   return data;
 }
