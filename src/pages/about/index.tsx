@@ -43,7 +43,7 @@ const AboutPage: React.FC = () => {
         <p>{t('whatsThisSite.p2')}</p>
       </section>
       <section className="attributions">
-        <h2>Attributions</h2>
+        <h2>{t('attributions.title')}</h2>
         <p>
           <Trans t={t} i18nKey="attributions.github">
             0<a href={`${GITHUB_URL}#attributions`}>1</a>2
