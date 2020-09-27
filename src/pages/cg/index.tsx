@@ -9,6 +9,7 @@ import { GetColorGuidesResult, GuideName, WithI18nNamespaces } from 'src/types';
 import { guideIndexDataFetcher, useGuideIndexData } from 'src/hooks';
 import { coreActions } from 'src/store/slices';
 import { AppPageContext, wrapper } from 'src/store';
+import { Card, CardBody } from 'reactstrap';
 
 interface PropTypes extends WithI18nNamespaces {
   initialData: GetColorGuidesResult;
@@ -53,8 +54,8 @@ const GuideIndexPage: React.FC<PropTypes> = ({ initialData }) => {
           const guideName = t(`guideName.${code}`);
           return (
             <Link key={code} href={PATHS.GUIDE()} as={PATHS.GUIDE(code)}>
-              <a>
-                <figure>
+              <Card tag="a">
+                <CardBody tag="figure">
                   <img
                     src="/img/blank-pixel.png"
                     className="guide-icon"
@@ -65,8 +66,8 @@ const GuideIndexPage: React.FC<PropTypes> = ({ initialData }) => {
                     <span className="guide-name">{guideName}</span>
                     <span className="guide-count">{t('index.entry', { count: data?.entryCounts[code] })}</span>
                   </figcaption>
-                </figure>
-              </a>
+                </CardBody>
+              </Card>
             </Link>
           );
         })}
