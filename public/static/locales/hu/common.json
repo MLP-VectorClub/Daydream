@@ -119,6 +119,10 @@
     "acceptPrivacyPolicy": "El kell fogadnod az adatvédelmi nyilatkozatot",
     "format": "Kövesd a megadott formátumot"
   },
+  "pagination": {
+    "page": "Oldal",
+    "go": "Ugrás"
+  },
   "tmdb_disclaimer": "Ez az oldal felhasználja a TMDb API-t, de nem jóváhagyott vagy hitelesített a TMDb által.",
   "wipNotice": "Ez a weboldal még építés alatt áll, a jelenlegi élő weboldalunkat itt éred el:"
 }

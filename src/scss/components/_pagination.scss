@@ -1,0 +1,9 @@
+.page-item-ellipsis .page-link {
+  background-color: mix($ui, $body-bg, 5%);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: mix($ui, $body-bg, 10%);
+  }
+}

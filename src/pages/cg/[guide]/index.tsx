@@ -31,17 +31,18 @@ const ColorGuidePage: React.FC<PropTypes> = ({ guide, page, initialData, scrollP
   const { t } = useTranslation('color-guide');
   const title = getGuideTitle(t, guide);
   const [titleKey, titleParams] = title as TitleKeyWithParams;
+  const pagination = data.pagination && <Pagination {...data.pagination} className="mb-3" />;
   return (
     <Content>
       <h1>{t(`common:titles.${titleKey}`, titleParams)}</h1>
       {guide === null && (
         <Alert color="danger" className="mt-3 mb-0">{t('errors.unknownGuide')}</Alert>
       )}
-      {data.pagination && <Pagination {...data.pagination} className="mb-3" />}
+      {pagination}
       {data.appearances && data.appearances.map(el => (
         <AppearanceItem key={el.id} appearance={el} scrollPosition={scrollPosition} />
       ))}
-      {data.pagination && <Pagination {...data.pagination} className="mb-3" />}
+      {pagination}
     </Content>
   );
 };

@@ -120,6 +120,10 @@
     "acceptPrivacyPolicy": "You must accept the privacy policy",
     "format": "Please match the specified format"
   },
+  "pagination": {
+    "page": "Page",
+    "go": "Go"
+  },
   "tmdb_disclaimer": "This product uses the TMDb API but is not endorsed or certified by TMDb.",
   "wipNotice": "This website is a work-in-progress, for our current live site please visit"
 }

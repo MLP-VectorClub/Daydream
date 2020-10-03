@@ -3,9 +3,7 @@ import { PageData } from 'src/types';
 
 export const GO_TO_ITEM = '\u{2026}';
 
-// TODO Handle & add "go to" item
-// export type PaginationItems = Array<number | typeof GO_TO_ITEM>;
-export type PaginationItems = number[];
+export type PaginationItems = Array<number | typeof GO_TO_ITEM>;
 
 type PageDataRelevantProps = Pick<PageData['pagination'], 'currentPage' | 'totalPages'>;
 
@@ -13,6 +11,7 @@ export interface PaginationProps extends PageDataRelevantProps {
   relevantProps?: string[];
   className?: string;
   pageParam?: string;
+  size?: string;
 }
 
 interface CalculatePaginationItemsOptions extends PageDataRelevantProps {
@@ -43,7 +42,7 @@ export const calculatePaginationItems = ({
   const maxItems = 3 + context * 2;
   if (total < maxItems) return range(1, total + 1);
 
-  return uniq([
+  const sequence = uniq([
     1,
     ...range(
       Math.max(currentPage - context, 1),
@@ -51,4 +50,20 @@ export const calculatePaginationItems = ({
     ),
     totalPages,
   ]);
+
+  const items: PaginationItems = [];
+  sequence.forEach((currentItem, i) => {
+    if (i > 0) {
+      const previousItem = sequence[i - 1];
+      const expectedValue = Math.min(previousItem + 1, totalPages);
+      if (currentItem !== expectedValue) {
+        const diff = currentItem - previousItem;
+        items.push(diff > 2 ? GO_TO_ITEM : previousItem + 1);
+      }
+    }
+
+    items.push(currentItem);
+  });
+
+  return items;
 };
