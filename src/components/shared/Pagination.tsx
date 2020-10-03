@@ -94,6 +94,7 @@ const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, t
           fade={false}
           autohide={false}
           delay={tooltipOpen ? 500 : undefined}
+          className="tooltip-go-to-page"
         >
           <InputGroup size={size}>
             <InputGroupAddon addonType="prepend">

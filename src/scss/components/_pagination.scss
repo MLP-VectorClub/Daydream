@@ -7,3 +7,7 @@
     background-color: mix($ui, $body-bg, 10%);
   }
 }
+
+.tooltip-go-to-page .tooltip-inner {
+  max-width: 15rem;
+}
