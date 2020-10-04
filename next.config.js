@@ -1,12 +1,10 @@
 const withPlugins = require('next-compose-plugins');
 const withESLint = require('./utils/next-eslint');
-const withI18n = require('./utils/next-i18n');
 const { promisify } = require('util');
 const execFile = promisify(require('child_process').execFile);
 module.exports = withPlugins(
   [
     [withESLint],
-    [withI18n],
   ],
   {
     useFileSystemPublicRoutes: false,

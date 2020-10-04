@@ -1,5 +1,6 @@
 import { Nullable, Numeric, PageTitle, PublicUser } from 'src/types';
 import { PATHS } from 'src/utils/url';
+import { common } from 'src/strings';
 
 export const getProfileTitle = (
   user?: PublicUser,
@@ -7,13 +8,13 @@ export const getProfileTitle = (
 ): PageTitle => {
   if (user) {
     if (authUserId === user.id) {
-      return 'yourProfile';
+      return common.titles.yourProfile;
     }
     if (user.name) {
-      return ['profileByName', { name: user.name }];
+      return common.titles.profileByName(user.name);
     }
   }
-  return 'profile';
+  return common.titles.profile;
 };
 
 export type ProfileLinkOptions = {

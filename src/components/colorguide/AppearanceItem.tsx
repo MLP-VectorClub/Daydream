@@ -3,7 +3,7 @@ import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component';
 import classNames from 'classnames';
 import React from 'react';
 import { Appearance, Nullable } from 'src/types';
-import { useTranslation } from 'src/i18n';
+import { colorGuide } from 'src/strings';
 
 export interface AppearanceItemProps {
   appearance: Appearance;
@@ -11,7 +11,6 @@ export interface AppearanceItemProps {
 }
 
 const AppearanceItem = ({ appearance, scrollPosition }: AppearanceItemProps) => {
-  const { t } = useTranslation('color-guide');
   const sprite = (appearance.sprite as Nullable<typeof appearance.sprite>);
   return (
     <Card key={appearance.id} className="appearance-item mb-3">
@@ -37,7 +36,7 @@ const AppearanceItem = ({ appearance, scrollPosition }: AppearanceItemProps) => 
               {appearance.notes && <span dangerouslySetInnerHTML={{ __html: appearance.notes }} />}
               {appearance.hasCutieMarks && (
                 <span className={classNames({ 'ml-2 pl-2 border-left': appearance.notes })}>
-                  {t('appearances.cmAvailable')}
+                  {colorGuide.appearances.cmAvailable}
                 </span>
               )}
             </div>

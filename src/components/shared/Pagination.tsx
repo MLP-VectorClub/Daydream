@@ -1,9 +1,6 @@
 import {
   Button,
   Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Pagination as RSPagination,
   PaginationItem,
   PaginationLink,
@@ -12,6 +9,7 @@ import {
 import React, {
   PropsWithChildren,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -20,8 +18,9 @@ import { useRouter } from 'next/router';
 import { pickBy } from 'lodash';
 import Link from 'next/link';
 import { calculatePaginationItems, GO_TO_ITEM, PaginationProps } from 'src/utils';
-import { useTranslation } from 'src/i18n';
 import { ParsedUrlQuery } from 'querystring';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import { common } from 'src/strings';
 
 type PageLinkProps = PropsWithChildren<{
   number: number;
@@ -56,59 +55,70 @@ interface GotoPaginationItemProps {
   defaultValue: number;
   totalPages: number;
   pageParam: string;
-  size?: string;
+  tooltipPos: PaginationProps['tooltipPos'];
 }
 
-const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, totalPages, pageParam, size }) => {
-  const { t } = useTranslation('common');
-  const linkRef = useRef<HTMLAnchorElement>(null);
+const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, totalPages, pageParam, tooltipPos }) => {
+  const linkRef = useRef<HTMLButtonElement>(null);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [target, setTarget] = useState(defaultValue);
+  const [focusInput, setFocusInput] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const toggleTooltip = useCallback(() => {
     const newState = !tooltipOpen;
     setTooltipOpen(newState);
     if (newState) {
       setTarget(defaultValue);
+      setFocusInput(true);
     }
   }, [tooltipOpen, defaultValue]);
-  const handleKeypress = useCallback(e => {
+  const handleKeypress = useCallback((e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter' || e.key === ' ') toggleTooltip();
   }, []);
-  const handleChange = useCallback(e => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setTarget(parseInt(e.target.value, 10));
   }, []);
 
+  useEffect(() => {
+    if (focusInput && inputRef.current) {
+      inputRef.current.focus();
+      setFocusInput(false);
+    }
+  }, [focusInput]);
+
   return (
     <PaginationItem className="page-item-ellipsis">
-      <a className="page-link" ref={linkRef} onClick={toggleTooltip} onKeyPress={handleKeypress}>
-        {GO_TO_ITEM}
-      </a>
+      <button type="button" className="page-link" ref={linkRef} onClick={toggleTooltip} onKeyPress={handleKeypress}>
+        <InlineIcon icon={tooltipOpen ? (tooltipPos === 'top' ? 'chevron-down' : 'chevron-up') : 'ellipsis-h'} fixedWidth />
+      </button>
       {linkRef.current !== null && (
         <Tooltip
           target={linkRef.current}
-          placement="bottom"
+          placement={tooltipPos}
           trigger="click"
           toggle={toggleTooltip}
           isOpen={tooltipOpen}
           fade={false}
-          autohide={false}
           delay={tooltipOpen ? 500 : undefined}
           className="tooltip-go-to-page"
         >
-          <InputGroup size={size}>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>
-                {t('pagination.page')}:
-              </InputGroupText>
-            </InputGroupAddon>
-            <Input type="number" min="1" max={totalPages} value={target} onChange={handleChange} />
-            <InputGroupAddon addonType="append">
-              <PageLink number={target} pageParam={pageParam}>
-                <Button color="ui" tag="a" onClick={toggleTooltip}>{t('pagination.go')}</Button>
-              </PageLink>
-            </InputGroupAddon>
-          </InputGroup>
+          <div className="d-flex align-items-center">
+            <span className="mr-2">{common.pagination.page}:</span>
+            <Input
+              className="mr-2"
+              bsSize="sm"
+              type="number"
+              min="1"
+              max={totalPages}
+              value={target}
+              onChange={handleChange}
+              innerRef={inputRef}
+            />
+            <PageLink number={target} pageParam={pageParam}>
+              <Button size="sm" color="light" tag="a" onClick={toggleTooltip}>{common.pagination.go}</Button>
+            </PageLink>
+          </div>
         </Tooltip>
       )}
     </PaginationItem>
@@ -122,6 +132,7 @@ const Pagination: React.FC<PaginationProps> = ({
   className,
   pageParam = 'page',
   size,
+  tooltipPos,
 }) => {
   const pageItems = useMemo(() => calculatePaginationItems({ currentPage, totalPages }), [currentPage, totalPages]);
 
@@ -134,8 +145,17 @@ const Pagination: React.FC<PaginationProps> = ({
               ? (pageItems[i + 1] as number) - 1
               : (pageItems[i - 1] as number) + 1
           );
+          const gotoItemProps = {
+            totalPages,
+            defaultValue,
+            pageParam,
+            tooltipPos,
+          };
           return (
-            <GotoPaginationItem key={`goto-${i}`} totalPages={totalPages} defaultValue={defaultValue} pageParam={pageParam} size={size} />
+            <GotoPaginationItem
+              key={`goto-${i}`}
+              {...gotoItemProps}
+            />
           );
         }
         const active = currentPage === el;

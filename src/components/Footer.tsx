@@ -11,14 +11,13 @@ import {
   PROJECT_NAME,
 } from 'src/config';
 import { getBuildData, isClientSide, PATHS } from 'src/utils';
-import { useTranslation } from 'src/i18n';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import ContactLink from 'src/components/shared/ContactLink';
 import ContactModal from 'src/components/ContactModal';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { connectionFetcher, useConnectionInfo } from 'src/hooks';
 import Abbr from 'src/components/shared/Abbr';
-import LanguageDropdown from 'src/components/shared/LanguageDropdown';
+import { common } from 'src/strings';
 
 const buildData = isClientSide ? getBuildData() : null;
 
@@ -27,7 +26,6 @@ interface PropTypes {
 }
 
 const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
-  const { t } = useTranslation();
   const { serverInfo, loading, backendDown } = useConnectionInfo(initialServerInfo);
 
   let commitHash: React.ReactNode = null;
@@ -43,13 +41,13 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
           {buildData.commitId}
         </a>
         <UncontrolledTooltip target="visit-github-commit" placement="top" fade={false}>
-          {t('footer.commitTitle')}
+          {common.footer.commitTitle}
         </UncontrolledTooltip>
       </>
     );
     commitTime = (
       <>
-        {` ${t('footer.created')} `}
+        {` ${common.footer.created} `}
         <TimeAgo date={buildData.commitTime} />
       </>
     );
@@ -67,13 +65,13 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
           {serverInfo.commitId}
         </a>
         <UncontrolledTooltip target="visit-backend-github-commit" placement="top" fade={false}>
-          {t('footer.commitTitle')}
+          {common.footer.commitTitle}
         </UncontrolledTooltip>
       </>
     );
     backendCommitTime = serverInfo.commitDate && (
       <>
-        {` ${t('footer.created')} `}
+        {` ${common.footer.created} `}
         <TimeAgo date={serverInfo.commitDate} />
       </>
     );
@@ -82,27 +80,25 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
   return (
     <>
       <footer id="footer">
-        <LanguageDropdown />
-        {` | `}
         <span id="git-info">
-          {`${t('footer.frontend')}: `}
+          {`${common.footer.frontend}: `}
           <strong>
             <a href={GITHUB_URL} id="visit-github">
               {PROJECT_NAME}
             </a>
             <UncontrolledTooltip target="visit-github" placement="top" fade={false}>
-              {t('footer.visitGithub')}
+              {common.footer.visitGithub}
             </UncontrolledTooltip>
             {commitHash}
           </strong>
           {commitTime}
-          {` | ${t('footer.backend')}: `}
+          {` | ${common.footer.backend}: `}
           <strong>
             <a href={BACKEND_GITHUB_URL} id="visit-backend-github">
               {BACKEND_PROJECT_NAME}
             </a>
             <UncontrolledTooltip target="visit-backend-github" placement="top" fade={false}>
-              {t('footer.visitGithub')}
+              {common.footer.visitGithub}
             </UncontrolledTooltip>
             {backendCommitHash}
           </strong>
@@ -110,14 +106,14 @@ const Footer: React.FC<PropTypes> = ({ initialServerInfo }) => {
         </span>
         {` | `}
         <Link href={PATHS.PRIVACY_POLICY}>
-          <a>{t('footer.privacyPolicy')}</a>
+          <a>{common.footer.privacyPolicy}</a>
         </Link>
         {` | `}
-        <ContactLink>{t('footer.contactUs')}</ContactLink>
+        <ContactLink>{common.footer.contactUs}</ContactLink>
         {` | `}
-        <Abbr id="api-docs" title={t('footer.apiMeaning')}>
+        <Abbr id="api-docs" title={common.footer.apiMeaning}>
           <ExternalLink id="api-docs" href={API_DOCS_URL}>
-            {t('footer.api')}
+            {common.footer.api}
           </ExternalLink>
         </Abbr>
       </footer>

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { PageTitle, ValuesOf } from 'src/types';
+import { BreadcrumbEntry, PageTitle, ValuesOf } from 'src/types';
 
 export interface CoreState {
   sidebarOpen: boolean;
@@ -8,6 +8,7 @@ export interface CoreState {
   colorAvgOpen: boolean;
   title: PageTitle;
   upcomingEvents: object[];
+  breadcrumbs: BreadcrumbEntry[];
 }
 
 const initialState: CoreState = {
@@ -16,6 +17,7 @@ const initialState: CoreState = {
   colorAvgOpen: false,
   title: null,
   upcomingEvents: [],
+  breadcrumbs: [],
 };
 
 const coreSlice = createSlice({
@@ -28,7 +30,7 @@ const coreSlice = createSlice({
     toggleSidebar(state, action: PayloadAction<boolean | undefined>) {
       state.sidebarOpen = typeof action.payload === 'undefined' ? !state.sidebarOpen : action.payload;
     },
-    setTitle: (state, action: PayloadAction<CoreState['title']>) => {
+    setTitle(state, action: PayloadAction<CoreState['title']>) {
       state.title = action.payload;
     },
     toggleContact(state, action: PayloadAction<boolean | undefined>) {
@@ -36,6 +38,12 @@ const coreSlice = createSlice({
     },
     toggleColorAvg(state, action: PayloadAction<boolean | undefined>) {
       state.colorAvgOpen = typeof action.payload === 'undefined' ? !state.colorAvgOpen : action.payload;
+    },
+    setBreadcrumbs(state, action: PayloadAction<CoreState['breadcrumbs']>) {
+      (state as CoreState).breadcrumbs = action.payload;
+    },
+    resetBreadcrumbs(state, _action: PayloadAction) {
+      (state as CoreState).breadcrumbs = initialState.breadcrumbs;
     },
   },
 });

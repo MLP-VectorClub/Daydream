@@ -1,6 +1,5 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
-import { TFunction } from 'next-i18next';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import { ActionsType, RootState, rootReducer } from 'src/store/rootReducer';
 import { rootEpic } from 'src/store/rootEpic';
@@ -20,7 +19,6 @@ const createStore = () => {
 
 export type AppStore = ReturnType<typeof createStore>;
 export type AppDispatch = AppStore['dispatch'];
-export type AppPageContext = { req?: { t: TFunction } };
 export type WithNamespacesRequired = { namespacesRequired: string[] };
 
 // create a makeStore function

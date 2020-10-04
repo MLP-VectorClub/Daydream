@@ -1,12 +1,5 @@
-import { TFunction } from 'next-i18next';
 import { includes } from 'lodash';
-import {
-  GuideName,
-  Nullable,
-  Numeric,
-  Optional,
-  TitleKeyWithParams,
-} from 'src/types';
+import { GuideName, Nullable, Numeric, Optional } from 'src/types';
 import { GUIDE_NAMES } from 'src/config';
 
 export const resolveGuideName = (guide?: string | string[]): Optional<GuideName> => {
@@ -18,16 +11,29 @@ export const resolveGuideName = (guide?: string | string[]): Optional<GuideName>
   }
 };
 
+const guideNameMap: Record<GuideName, string> = {
+  pony: 'Friendship is Magic',
+  pl: 'Pony Life',
+  eqg: 'Equestria Girls',
+};
+
+export const getGuideLabel = (
+  guide: string | null,
+): string => {
+  if (guide !== null && guide in guideNameMap) {
+    return guideNameMap[guide as GuideName];
+  }
+  return 'Unknown';
+};
+
 export const getGuideTitle = (
-  t: TFunction,
   guide: Nullable<string> = null,
   page: Nullable<Numeric> = null,
-): TitleKeyWithParams => {
-  const guideExists = guide !== null;
-  const guideName = t(`color-guide:guideName.${guideExists ? guide : 'unknown'}`);
+): string => {
+  const guideName = getGuideLabel(guide);
   if (page === null) {
-    return ['colorGuideByName', { guideName }];
+    return `${guideName} Color Guide`;
   }
 
-  return ['colorGuideByNameAndPage', { guideName, page }];
+  return `Page ${page} - ${guideName} Color Guide`;
 };

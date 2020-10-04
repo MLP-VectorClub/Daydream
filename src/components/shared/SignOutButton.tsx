@@ -1,14 +1,15 @@
 import { Button, Tooltip } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { Status, WithTFunction } from 'src/types';
+import React, { useState } from 'react';
+import { Status } from 'src/types';
 import { RootState } from 'src/store/rootReducer';
 import { authActions } from 'src/store/slices';
 import InlineIcon from 'src/components/shared/InlineIcon';
+import { common } from 'src/strings';
 
 const BUTTON_ID = 'signout';
 
-const SignOutButton: React.FC<WithTFunction> = ({ t }) => {
+const SignOutButton: React.FC = () => {
   const dispatch = useDispatch();
   const { signOut } = useSelector((state: RootState) => state.auth);
   const [signOutConfirm, setSignOutConfirm] = useState(false);
@@ -26,10 +27,10 @@ const SignOutButton: React.FC<WithTFunction> = ({ t }) => {
         disabled={signOut.status === Status.LOAD}
       >
         <InlineIcon first icon="sign-out-alt" loading={signOut.status === Status.LOAD} />
-        {t('sidebar.signOut')}
+        {common.sidebar.signOut}
       </Button>
       <Tooltip isOpen={signOutConfirm} target={BUTTON_ID} container="sidebar" placement="bottom">
-        <p className="mb-1">{t('sidebar.confirmSignOut')}</p>
+        <p className="mb-1">{common.sidebar.confirmSignOut}</p>
         <Button size="sm" color="success" onClick={handleSignOut} className="mr-2">
           <InlineIcon icon="check" fixedWidth />
         </Button>

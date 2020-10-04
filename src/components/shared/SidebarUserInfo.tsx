@@ -1,24 +1,22 @@
 import classNames from 'classnames';
 import React from 'react';
-import { useTranslation } from 'src/i18n';
 import { mapRoleLabel } from 'src/utils';
 import { Status } from 'src/types';
-import { useAuth } from 'src/hooks';
+import { useAuth, usePrefs } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import ProfileLink from 'src/components/shared/ProfileLink';
-import { usePrefs } from 'src/hooks/prefs';
 import { get } from 'lodash';
+import { common } from 'src/strings';
 
 const SidebarUserInfo: React.FC = () => {
-  const { t } = useTranslation();
   const { authCheck, user, signedIn } = useAuth();
   const prefs = usePrefs(signedIn);
 
   const checkingAuth = authCheck.status === Status.LOAD;
 
   const titleProp: { title?: string } = {};
-  if (checkingAuth) titleProp.title = t('sidebar.authCheck');
+  if (checkingAuth) titleProp.title = common.sidebar.authCheck;
 
   return (
     <div
@@ -38,10 +36,10 @@ const SidebarUserInfo: React.FC = () => {
         <span className="user-name">
           {signedIn ? (
             <ProfileLink {...user} />
-          ) : t('guestUserName')}
+          ) : common.guestUserName}
         </span>
         <span className="user-role">
-          <span>{mapRoleLabel(t, user.role)}</span>
+          <span>{mapRoleLabel(user.role)}</span>
         </span>
       </div>
     </div>

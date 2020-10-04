@@ -1,14 +1,5 @@
-import { TFunction } from 'next-i18next';
 import { FieldValues, FormProps } from 'react-hook-form';
 import { GetUsersMeResult, User, ValidationErrorResponse } from 'src/types/api';
-
-export type AvailableLanguage = 'hu' | 'en' | 'de' | 'ru';
-
-export type LanguagesConfig = Record<AvailableLanguage, {
-  nativeName: string;
-  locale: Locale;
-  enabled: boolean;
-}>;
 
 export enum Status {
   INIT,
@@ -41,13 +32,6 @@ export type OptionalProps<T, K extends keyof T = keyof T> = Omit<T, K> & Partial
 /** Can be used in place of `number` to avoid having to do explicit type casting */
 export type Numeric = number | string;
 export type ValuesOf<T> = T[keyof T];
-
-export interface WithTFunction {
-  t: TFunction;
-}
-export interface WithI18nNamespaces {
-  i18nNamespaces?: string[];
-}
 
 export interface ObjectOf<T> {
   [key: string]: T;
@@ -109,7 +93,6 @@ export type UnifiedErrorResponse = {
 
 export type FailsafeUser = GetUsersMeResult | (NullableProps<Omit<User, 'id'>, 'name' | 'avatarUrl' | 'email' | 'role'> & { id: null });
 
-export type TitleKeyWithParams = [string, Record<string, Numeric>];
-export type PageTitle = Nullable<string> | TitleKeyWithParams;
+export type PageTitle = Nullable<string>;
 
 export type FormSubmitHandler<T = FieldValues> = Parameters<FormProps<T>['handleSubmit']>[0];

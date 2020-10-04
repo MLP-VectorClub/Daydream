@@ -19,7 +19,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { map } from 'lodash';
 import { fromEvent } from 'rxjs';
 import { queryCache } from 'react-query';
-import { useTranslation } from 'src/i18n';
 import { RootState } from 'src/store/rootReducer';
 import {
   AuthModalSide,
@@ -41,6 +40,7 @@ import { SOCIAL_PROVIDERS } from 'src/fancy-config';
 import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages';
 import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
 import InlineIcon from 'src/components/shared/InlineIcon';
+import { common } from 'src/strings';
 
 enum INPUT_NAMES {
   EMAIL = 'email',
@@ -60,7 +60,6 @@ interface SocialPopupRef {
 }
 
 const SingInForm: React.FC = () => {
-  const { t } = useTranslation('common');
   const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
   const { authModal, signIn } = useSelector((store: RootState) => store.auth);
@@ -145,26 +144,26 @@ const SingInForm: React.FC = () => {
   const isLoading = signIn.status === Status.LOAD;
   const errors = combineErrors(clientErrors, signIn.error);
 
-  const requiredValidation = validateRequired(t);
-  const emailValidation = validateEmail<FormFields>(t);
-  const passwordValidation = validatePassword(t);
+  const requiredValidation = validateRequired();
+  const emailValidation = validateEmail<FormFields>();
+  const passwordValidation = validatePassword();
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <p className="text-center">
         <a href="#" onClick={() => dispatch(authActions.openAuthModal(AuthModalSide.REGISTER))}>
-          {t('auth.noAccountYet')}
+          {common.auth.noAccountYet}
         </a>
       </p>
 
       <p className="text-center text-info">
         <FontAwesomeIcon icon="info" className="mr-2" />
-        {t('auth.accountBenefits')}
+        {common.auth.accountBenefits}
       </p>
 
       <FormGroup row>
         <Label htmlFor={INPUT_NAMES.EMAIL} className="text-right" sm={4}>
-          {t('auth.email')}
+          {common.auth.email}
         </Label>
         <Col sm={8}>
           <Input
@@ -184,7 +183,7 @@ const SingInForm: React.FC = () => {
 
       <FormGroup row>
         <Label htmlFor={INPUT_NAMES.PASSWORD} className="text-right" sm={4}>
-          {t('auth.password')}
+          {common.auth.password}
         </Label>
         <Col sm={8}>
           <InputGroup>
@@ -212,11 +211,11 @@ const SingInForm: React.FC = () => {
       </FormGroup>
 
       <FormGroup>
-        <CustomInput type="checkbox" name={INPUT_NAMES.REMEMBER} label={t('auth.rememberMe')} id="remember-me" innerRef={r()} />
+        <CustomInput type="checkbox" name={INPUT_NAMES.REMEMBER} label={common.auth.rememberMe} id="remember-me" innerRef={r()} />
       </FormGroup>
 
       {signIn.error?.type === UnifiedErrorResponseTypes.AUTHENTICATION_ERROR && (
-        <Alert color="danger">{t('auth.invalidCredentials')}</Alert>
+        <Alert color="danger">{common.auth.invalidCredentials}</Alert>
       )}
 
       {signIn.error?.type === UnifiedErrorResponseTypes.MESSAGE_ONLY && (
@@ -225,7 +224,7 @@ const SingInForm: React.FC = () => {
 
       {signIn.error?.type === UnifiedErrorResponseTypes.RATE_LIMITED && (
         <Alert color="danger">
-          {t('auth.rateLimited', { count: signIn.error.retryAfter })}
+          {common.auth.rateLimited(signIn.error.retryAfter)}
         </Alert>
       )}
 
@@ -233,24 +232,24 @@ const SingInForm: React.FC = () => {
         <Col>
           <Button color="ui" size="lg" disabled={isLoading || rateLimitTimeout !== null}>
             <InlineIcon first loading={isLoading} icon="sign-in-alt" />
-            {t('auth.signInButton')}
+            {common.auth.signInButton}
           </Button>
         </Col>
         <Col className="text-right">
           <Button type="button" color="link" id="forgot-pw" aria-readonly="true">
-            {t('auth.forgotPassword')}
+            {common.auth.forgotPassword}
           </Button>
           <UncontrolledTooltip target="forgot-pw" fade={false}>
             <InlineIcon icon="exclamation-triangle" color="warning" first />
-            {t('auth.pwResetNotYetAvailable')}
+            {common.auth.pwResetNotYetAvailable}
           </UncontrolledTooltip>
         </Col>
       </Row>
 
       <FormGroup tag="fieldset" className="text-center border-top mt-3 pt-3">
-        <legend className="text-uppercase w-auto mx-auto px-2"><small>{t('auth.socialSignIn.alternatively')}</small></legend>
+        <legend className="text-uppercase w-auto mx-auto px-2"><small>{common.auth.socialSignIn.alternatively}</small></legend>
         {map(SOCIAL_PROVIDERS, (settings, provider: SocialProvider) => {
-          const text = t('auth.socialSignIn.signInWith', { provider: settings.name });
+          const text = common.auth.socialSignIn.signInWith(settings.name);
           return (
             <Button type="button" key={provider} color={provider} className="mx-2" onClick={signInWith(provider, text)}>
               {settings.renderIcon({ first: true })}

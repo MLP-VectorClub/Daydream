@@ -1,8 +1,8 @@
-import { TFunction } from 'next-i18next';
 import { FieldValues } from 'react-hook-form';
 import { FieldErrors } from 'react-hook-form/dist/types';
 import { get } from 'lodash';
 import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
+import { common } from 'src/strings';
 
 export const combineErrors = <FormValues extends FieldValues = FieldValues>(
   clientErrors: FieldErrors<FormValues>,
@@ -26,33 +26,33 @@ export const combineErrors = <FormValues extends FieldValues = FieldValues>(
   return copy;
 };
 
-export const validateRequired = (t: TFunction, key = 'required') => ({ required: t(`validation.${key}`) });
-export const validateMinLength = (t: TFunction, count: number, key = 'tooShort') => ({
+export const validateRequired = (key: keyof typeof common.validation = 'required') => ({ required: common.validation[key] });
+export const validateMinLength = (count: number, key: keyof typeof common.validation = 'tooShort') => ({
   minLength: {
     value: count,
-    message: t(`validation.${key}`, { count }),
+    message: common.validation[key].replace('{{count}}', String(count)),
   },
 });
-export const validateMaxLength = (t: TFunction, count: number, key = 'tooLong') => ({
+export const validateMaxLength = (count: number, key: keyof typeof common.validation = 'tooLong') => ({
   maxLength: {
     value: count,
-    message: t(`validation.${key}`, { count }),
+    message: common.validation[key].replace('{{count}}', String(count)),
   },
 });
 
-export const validateEmail = <T extends FieldValues>(t: TFunction) => ({
-  email: (value: T['email']) => /^[^@]+@[^@]+$/.test(value) || (t('validation.email') as string),
+export const validateEmail = <T extends FieldValues>() => ({
+  email: (value: T['email']) => /^[^@]+@[^@]+$/.test(value) || common.validation.email,
 });
 
-export const validateUserName = <T extends FieldValues>(t: TFunction) => ({
-  ...validateMinLength(t, 5),
-  ...validateMaxLength(t, 20),
+export const validateUserName = <T extends FieldValues>() => ({
+  ...validateMinLength(5),
+  ...validateMaxLength(20),
   validate: {
-    name: (value: T['name']) => /^[A-Za-z\d_-]+$/.test(value) || (t('validation.format') as string),
+    name: (value: T['name']) => /^[A-Za-z\d_-]+$/.test(value) || common.validation.format,
   },
 });
 
-export const validatePassword = (t: TFunction) => ({
-  ...validateMinLength(t, 8),
-  ...validateMaxLength(t, 300),
+export const validatePassword = () => ({
+  ...validateMinLength(8),
+  ...validateMaxLength(300),
 });

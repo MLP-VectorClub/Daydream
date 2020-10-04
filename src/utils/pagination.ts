@@ -12,6 +12,7 @@ export interface PaginationProps extends PageDataRelevantProps {
   className?: string;
   pageParam?: string;
   size?: string;
+  tooltipPos: 'top' | 'bottom';
 }
 
 interface CalculatePaginationItemsOptions extends PageDataRelevantProps {

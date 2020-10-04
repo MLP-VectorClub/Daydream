@@ -8,16 +8,17 @@
 @import "scss/functions";
 @import "scss/mixins";
 @import "scss/components/avatar-wrap";
+@import "scss/components/breadcrumbs";
 @import "scss/components/content";
 @import "scss/components/footer";
 @import "scss/components/header";
 @import "scss/components/main";
-@import "scss/components/to-the-top-arrow";
-@import "scss/components/sidebar";
 @import "scss/components/pagination";
+@import "scss/components/sidebar";
+@import "scss/components/to-the-top-arrow";
 
 @import "scss/common";
 @import "scss/pages/about";
-@import "scss/pages/privacy-policy";
-@import "scss/pages/color-guide/index";
 @import "scss/pages/color-guide/guide";
+@import "scss/pages/color-guide/index";
+@import "scss/pages/privacy-policy";

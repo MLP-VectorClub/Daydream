@@ -4,16 +4,7 @@ import { GetServerSideProps } from 'next';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
-import { useTranslation } from 'src/i18n';
-import {
-  Nullable,
-  PublicUser,
-  SocialProvider,
-  Status,
-  UnifiedErrorResponseTypes,
-  User,
-  WithI18nNamespaces,
-} from 'src/types';
+import { SocialProvider, Status, UnifiedErrorResponseTypes, User } from 'src/types';
 import { useLayout, useOAuth } from 'src/hooks';
 import { ENDPOINTS, PATHS, setResponseStatus } from 'src/utils';
 import { SOCIAL_PROVIDERS } from 'src/fancy-config';
@@ -21,14 +12,10 @@ import Center from 'src/components/shared/Center';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import LoadingRing from 'src/components/shared/LoadingRing';
+import { oauth } from 'src/strings';
 
-interface PropTypes extends WithI18nNamespaces {
-  initialUser: Nullable<PublicUser>;
-}
-
-const OAuthPage: React.FC<PropTypes> = () => {
+const OAuthPage: React.FC = () => {
   const { setLayoutDisabled } = useLayout();
-  const { t } = useTranslation('oauth');
   const { query, replace } = useRouter();
   const closeFnRef = useRef<VoidFunction | null>(null);
   const { status, error, user } = useOAuth(query);
@@ -61,6 +48,8 @@ const OAuthPage: React.FC<PropTypes> = () => {
     else replace(PATHS.USER_LONG(user as User));
   }, [authorized]);
 
+  const header = `${provider} OAuth 2.0 Authentication`;
+
   if (query.code) {
     if (status === Status.FAILURE) {
       query.error = 'server_error';
@@ -72,9 +61,9 @@ const OAuthPage: React.FC<PropTypes> = () => {
       const color = authorized ? 'success' : 'primary';
       const message = authorized
         ? null
-        : `${t(success ? 'loadingUserData' : 'creatingSession')}…`;
+        : `${success ? 'Loading profile data' : 'Creating session'}…`;
       return (
-        <Center color={color} header={t('authTitle', { provider })} className="text-center">
+        <Center color={color} header={header} className="text-center">
           {!authorized ? (
             <LoadingRing color={color} style={{ width: '200px' }} />
           ) : (
@@ -88,16 +77,18 @@ const OAuthPage: React.FC<PropTypes> = () => {
     }
   }
 
+  const { errorTypes } = oauth;
+
   return (
-    <Center color="danger" header={t('authTitle', { provider })} className="text-center">
+    <Center color="danger" header={header} className="text-center">
       <StandardHeading
-        heading={t(`errorTypes.${query.error || 'unknown_error'}`)}
-        lead={query.error_description || t('unknownError')}
+        heading={query.error in errorTypes ? errorTypes[query.error as keyof typeof errorTypes] : errorTypes.unknown_error}
+        lead={query.error_description || 'There was an unknown error while authenticating, please try again later.'}
       />
       {closeFnRef.current !== null && (
         <Button color="danger" onClick={closeFnRef.current}>
           <InlineIcon first icon="times" />
-          {t('close')}
+          Dismiss
         </Button>
       )}
     </Center>
@@ -111,10 +102,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   return {
     props: {},
   };
-};
-
-OAuthPage.defaultProps = {
-  i18nNamespaces: ['oauth'],
 };
 
 export default OAuthPage;

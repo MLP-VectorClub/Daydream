@@ -1,5 +1,4 @@
 import { Button } from 'reactstrap';
-import { useTranslation } from 'src/i18n';
 import MainNavigation from 'src/components/shared/MainNavigation';
 import SidebarUserInfo from 'src/components/shared/SidebarUserInfo';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -11,9 +10,9 @@ import CustomIcon from 'src/components/shared/CustomIcon';
 import SignInButton from 'src/components/shared/SignInButton';
 import SignOutButton from 'src/components/shared/SignOutButton';
 import { useAuth, useConnectionInfo } from 'src/hooks';
+import { common } from 'src/strings';
 
 const Sidebar: React.FC = () => {
-  const { t } = useTranslation('common');
   const { signedIn } = useAuth();
   const { backendDown } = useConnectionInfo();
 
@@ -27,8 +26,8 @@ const Sidebar: React.FC = () => {
 
       {backendDown && (
         <section className="signin">
-          <h2>{t('sidebar.welcome')}</h2>
-          <p>{t('sidebar.backendDown')}</p>
+          <h2>{common.sidebar.welcome}</h2>
+          <p>{common.sidebar.backendDown}</p>
         </section>
       )}
       {!backendDown && (
@@ -39,8 +38,8 @@ const Sidebar: React.FC = () => {
             <SidebarUsefulLinks />
             <div className="mb-2">
               {signedIn
-                ? <SignOutButton t={t} />
-                : <SignInButton t={t} />}
+                ? <SignOutButton />
+                : <SignInButton />}
             </div>
             <Button
               color="discord"
@@ -49,7 +48,7 @@ const Sidebar: React.FC = () => {
               href={DISCORD_INVITE_LINK}
             >
               <CustomIcon src="/img/discord-logo-white.svg" className="mr-2" />
-              {t('sidebar.joinDiscord')}
+              {common.sidebar.joinDiscord}
             </Button>
           </section>
           {/* Widgets will go here */}

@@ -4,15 +4,13 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { getProfileLink, PATHS, permission } from 'src/utils';
 import { CLUB_URL } from 'src/config';
-import { useTranslation } from 'src/i18n';
-import { useAuth } from 'src/hooks';
+import { useAuth, usePrefs } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { usePrefs } from 'src/hooks/prefs';
 import { LinkProps } from 'next/dist/client/link';
+import { common } from 'src/strings';
 
 const MainNavigation = () => {
-  const { t } = useTranslation();
   const { signedIn, user } = useAuth();
   const prefs = usePrefs(signedIn);
   const defaultGuideLinkProps = useMemo<LinkProps>(() => {
@@ -37,35 +35,35 @@ const MainNavigation = () => {
           <Link {...homeLinkProps} passHref>
             <NavLink>
               <InlineIcon first icon="home" />
-              {t('titles.home')}
+              {common.titles.home}
             </NavLink>
           </Link>
         )}
       </NavItem>
       <NavItem>
         <Link href={PATHS.LATEST_EPISODE} passHref>
-          <NavLink>{t('titles.latestEpisode')}</NavLink>
+          <NavLink>{common.titles.latestEpisode}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
         <Link href={PATHS.SHOW} passHref>
-          <NavLink>{t('titles.show')}</NavLink>
+          <NavLink>{common.titles.show}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
         <Link {...defaultGuideLinkProps} passHref>
-          <NavLink>{t('titles.colorGuide')}</NavLink>
+          <NavLink>{common.titles.colorGuide}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
         <Link href={PATHS.EVENTS} passHref>
-          <NavLink>{t('titles.events')}</NavLink>
+          <NavLink>{common.titles.events}</NavLink>
         </Link>
       </NavItem>
       {signedIn && (
         <NavItem>
           <Link href={PATHS.USER()} as={getProfileLink(user)} passHref>
-            <NavLink>{t('titles.account')}</NavLink>
+            <NavLink>{common.titles.account}</NavLink>
           </Link>
         </NavItem>
       )}
@@ -73,19 +71,19 @@ const MainNavigation = () => {
         <>
           <NavItem>
             <Link href={PATHS.USERS} passHref>
-              <NavLink>{t('titles.users')}</NavLink>
+              <NavLink>{common.titles.users}</NavLink>
             </Link>
           </NavItem>
           <NavItem>
             <Link href={PATHS.ADMIN} passHref>
-              <NavLink>{t('titles.admin')}</NavLink>
+              <NavLink>{common.titles.admin}</NavLink>
             </Link>
           </NavItem>
         </>
       )}
       <NavItem>
         <Link href={PATHS.ABOUT} passHref>
-          <NavLink>{t('titles.about')}</NavLink>
+          <NavLink>{common.titles.about}</NavLink>
         </Link>
       </NavItem>
       <NavItem>

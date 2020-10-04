@@ -1,14 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { useTranslation } from 'src/i18n';
 import { useAuth, useSidebarUsefulLinks } from 'src/hooks';
 import React, { useCallback } from 'react';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Link from 'next/link';
+import { common } from 'src/strings';
 
 const SidebarUsefulLinks: React.FC = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('common');
   const { signedIn } = useAuth();
   const usefulLinks = useSidebarUsefulLinks(signedIn);
   const dispatchActionByAnchor = useCallback((anchor: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -27,7 +26,7 @@ const SidebarUsefulLinks: React.FC = () => {
 
   return (
     <div className="links">
-      <h3>{t('sidebar.usefulLinks')}</h3>
+      <h3>{common.sidebar.usefulLinks}</h3>
       <ul>
         {usefulLinks.map(el => {
           let link: JSX.Element;

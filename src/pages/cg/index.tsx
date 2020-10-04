@@ -1,22 +1,25 @@
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
-import { Trans, useTranslation } from 'src/i18n';
 import { API_DOCS_URL, GUIDE_NAMES } from 'src/config';
 import ExternalLink from 'src/components/shared/ExternalLink';
-import { PATHS } from 'src/utils';
+import { getGuideLabel, PATHS } from 'src/utils';
 import Link from 'next/link';
-import { GetColorGuidesResult, GuideName, WithI18nNamespaces } from 'src/types';
+import { GetColorGuidesResult, GuideName } from 'src/types';
 import { guideIndexDataFetcher, useGuideIndexData } from 'src/hooks';
 import { coreActions } from 'src/store/slices';
-import { AppPageContext, wrapper } from 'src/store';
+import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
+import React from 'react';
+import { NextPage } from 'next';
+import { plural } from 'src/utils/plural';
+import { colorGuide } from 'src/strings';
 
-interface PropTypes extends WithI18nNamespaces {
+interface PropTypes {
   initialData: GetColorGuidesResult;
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { store } = ctx as typeof ctx & AppPageContext;
+  const { store } = ctx as typeof ctx;
   let initialData: GetColorGuidesResult = {
     entryCounts: GUIDE_NAMES.reduce((acc, c) => ({ ...acc, [c]: 0 }), {} as Record<GuideName, number>),
   };
@@ -28,30 +31,38 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   }
 
   store.dispatch(coreActions.setTitle('colorGuideList'));
+  store.dispatch(coreActions.setBreadcrumbs([
+    { label: colorGuide.index.breadcrumb, active: true },
+  ]));
+
+  const props: PropTypes = {
+    initialData,
+  };
 
   return {
-    props: { initialData },
+    props,
   };
 });
 
-const GuideIndexPage: React.FC<PropTypes> = ({ initialData }) => {
-  const { t } = useTranslation('color-guide');
+const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
   const data = useGuideIndexData(initialData);
+
   return (
     <Content>
-      <StandardHeading heading={t('common:titles.colorGuideList')} lead={t('index.lead')} />
+      <StandardHeading heading={colorGuide.index.heading} lead={colorGuide.index.lead} />
       <p className="text-center">
-        <Trans t={t} i18nKey="index.developerRes">
-          0
-          <ExternalLink href={API_DOCS_URL}>1</ExternalLink>
-          2
-        </Trans>
+        Resources for developers:
+        {' '}
+        <ExternalLink href={API_DOCS_URL}>API</ExternalLink>
+        {' '}
+        (WIP)
       </p>
 
       <div id="guide-list">
         {GUIDE_NAMES.map(code => {
           const logoPath = `/img/logos/${code}.svg`;
-          const guideName = t(`guideName.${code}`);
+          const guideName = getGuideLabel(code);
+          const entryCount = data?.entryCounts[code];
           return (
             <Link key={code} href={PATHS.GUIDE()} as={PATHS.GUIDE(code)}>
               <Card tag="a">
@@ -64,7 +75,7 @@ const GuideIndexPage: React.FC<PropTypes> = ({ initialData }) => {
                   />
                   <figcaption>
                     <span className="guide-name">{guideName}</span>
-                    <span className="guide-count">{t('index.entry', { count: data?.entryCounts[code] })}</span>
+                    <span className="guide-count">{plural(entryCount, 'entry', 'entries')}</span>
                   </figcaption>
                 </CardBody>
               </Card>
@@ -74,10 +85,6 @@ const GuideIndexPage: React.FC<PropTypes> = ({ initialData }) => {
       </div>
     </Content>
   );
-};
-
-GuideIndexPage.defaultProps = {
-  i18nNamespaces: ['color-guide'],
 };
 
 export default GuideIndexPage;

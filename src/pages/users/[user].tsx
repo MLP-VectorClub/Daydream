@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'src/i18n';
 import { coreActions } from 'src/store/slices';
 import { wrapper } from 'src/store';
 import {
@@ -13,23 +12,17 @@ import {
   setResponseStatus,
 } from 'src/utils';
 import { transformProfileParams, useAuth, userFetcher, useUser } from 'src/hooks';
-import {
-  GetUsersIdResult,
-  Nullable,
-  Optional,
-  PublicUser,
-  WithI18nNamespaces,
-} from 'src/types';
+import { GetUsersIdResult, Nullable, Optional, PublicUser } from 'src/types';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import Content from 'src/components/shared/Content';
+import { profile } from 'src/strings';
 
-interface PropTypes extends WithI18nNamespaces {
+interface PropTypes {
   initialUser: Nullable<PublicUser>;
 }
 
 const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
-  const { t } = useTranslation('profile');
   const dispatch = useDispatch();
   const { query } = useRouter();
   const { user } = useUser(transformProfileParams(query), initialUser || undefined);
@@ -42,7 +35,7 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
 
   return (
     <Content>
-      {!user && <StandardHeading heading={t('notFound')} lead={t('checkYourSpelling')} />}
+      {!user && <StandardHeading heading={profile.notFound} lead={profile.checkYourSpelling} />}
       {user && (
         <>
           <div className="d-flex justify-content-center align-items-center mb-2">
@@ -53,7 +46,7 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
               className="flex-grow-0"
             />
           </div>
-          <StandardHeading heading={user.name} lead={mapRoleLabel(t, user.role)} />
+          <StandardHeading heading={user.name} lead={mapRoleLabel(user.role)} />
         </>
       )}
     </Content>
@@ -93,15 +86,15 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   }
 
   store.dispatch(coreActions.setTitle(getProfileTitle(initialUser)));
+  store.dispatch(coreActions.setBreadcrumbs([
+    { label: profile.breadcrumb },
+    { label: initialUser?.name || profile.unknownUser, active: true },
+  ]));
   return {
     props: {
       initialUser: initialUser || null,
     },
   };
 });
-
-ProfilePage.defaultProps = {
-  i18nNamespaces: ['profile'],
-};
 
 export default ProfilePage;

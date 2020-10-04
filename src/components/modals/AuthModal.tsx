@@ -2,20 +2,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import React, { MouseEventHandler, useEffect } from 'react';
-import { useTranslation } from 'src/i18n';
 import { RootState } from 'src/store/rootReducer';
 import { AuthModalSide, User } from 'src/types';
 import { authActions } from 'src/store/slices';
 import { useAuth } from 'src/hooks';
 import SingInForm from 'src/components/shared/forms/SignInForm';
 import RegisterForm from 'src/components/shared/forms/RegisterForm';
+import { common } from 'src/strings';
 
 export interface AuthModalFormProps {
   switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
 }
 
 const AuthModal: React.FC = () => {
-  const { t } = useTranslation('common');
   const { reset } = useForm({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
   const { signedIn, user } = useAuth();
@@ -41,7 +40,7 @@ const AuthModal: React.FC = () => {
       : authActions.openAuthModal(null)
   ));
 
-  const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? 'auth.signInTitle' : 'auth.signUpTitle';
+  const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? common.auth.signInTitle : common.auth.signUpTitle;
 
   const sides = {
     [AuthModalSide.SIGN_IN]: <SingInForm />,
@@ -52,7 +51,7 @@ const AuthModal: React.FC = () => {
 
   return (
     <Modal className="modal-ui" centered isOpen={authModal.open} toggle={toggleModal} backdrop="static">
-      <ModalHeader toggle={toggleModal}>{t(modalTitle)}</ModalHeader>
+      <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>
       <ModalBody>
         {sides[authModal.side]}
       </ModalBody>

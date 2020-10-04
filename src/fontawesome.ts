@@ -19,6 +19,9 @@ import {
   faSync,
   faTimes,
   faUserPlus,
+  faEllipsisH,
+  faChevronUp,
+  faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
@@ -40,7 +43,10 @@ library.add(
   faEyeSlash,
   faUserPlus,
   faSignInAlt,
+  faEllipsisH,
+  faChevronUp,
   faSignOutAlt,
+  faChevronDown,
   faCircleNotch,
   faCheckCircle,
   faExternalLinkAlt,
