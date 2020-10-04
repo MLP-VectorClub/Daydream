@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import App from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
 import { AppContextType, AppInitialProps, AppPropsType, NextComponentType } from 'next/dist/next-server/lib/utils';
@@ -47,13 +46,6 @@ const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPr
       )}
     </ReactQueryConfigProvider>
   );
-};
-
-Celestia.getInitialProps = async appContext => {
-  const appProps = await App.getInitialProps(appContext);
-  return {
-    ...appProps,
-  };
 };
 
 export default wrapper.withRedux(Celestia);

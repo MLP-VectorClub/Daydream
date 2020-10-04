@@ -93,7 +93,7 @@ body {
 }
 
 abbr[aria-label] {
-  @extend abbr[title];
+  @extend abbr, [title];
 }
 
 .app-illustrator {
