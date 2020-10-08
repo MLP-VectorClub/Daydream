@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext, NextPageContext } from 'next';
-import { ParsedUrlQuery } from 'querystring';
 import { isEmpty, mapValues, omit, omitBy } from 'lodash';
 import { parseRelativeUrl } from 'next/dist/next-server/lib/router/utils/parse-relative-url';
 import buildUrl from 'build-url';
@@ -12,20 +11,20 @@ export const redirect = <T extends NextPageContext = NextPageContext>(ctx: T, pa
   }
 };
 
-export const setResponseStatus = <T extends ParsedUrlQuery>(ctx: GetServerSidePropsContext<T>, statusCode: number) => {
+export const setResponseStatus = (ctx: Pick<GetServerSidePropsContext, 'res'>, statusCode: number) => {
   const { res } = ctx;
   if (res) {
     res.statusCode = statusCode;
   }
 };
 
-export const notFound = <T extends ParsedUrlQuery>(ctx: GetServerSidePropsContext<T>) => setResponseStatus(ctx, 404);
+export const notFound = (ctx: Pick<GetServerSidePropsContext, 'res'>) => setResponseStatus(ctx, 404);
 
 /**
  * @returns true if caller should halt execution
  */
-export const fixPath = <T extends ParsedUrlQuery>(
-  ctx: GetServerSidePropsContext<T>,
+export const fixPath = (
+  ctx: Pick<GetServerSidePropsContext, 'req' | 'res'>,
   expectedPath: string,
   stripParams: string[] = [],
 ): boolean => {
@@ -35,7 +34,7 @@ export const fixPath = <T extends ParsedUrlQuery>(
   const requestUrlParts = parseRelativeUrl(req.url);
   const strippedParams = mapValues(omitBy(
     omit(
-      { ...requestUrlParts.searchParams },
+      { ...requestUrlParts.query },
       ['page', ...stripParams],
     ),
     el => typeof el === 'undefined',
