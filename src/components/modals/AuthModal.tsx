@@ -3,7 +3,7 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import React, { MouseEventHandler, useEffect } from 'react';
 import { RootState } from 'src/store/rootReducer';
-import { AuthModalSide, User } from 'src/types';
+import { AuthModalSide } from 'src/types';
 import { authActions } from 'src/store/slices';
 import { useAuth } from 'src/hooks';
 import SingInForm from 'src/components/shared/forms/SignInForm';
@@ -17,7 +17,7 @@ export interface AuthModalFormProps {
 const AuthModal: React.FC = () => {
   const { reset } = useForm({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
-  const { signedIn, user } = useAuth();
+  const { signedIn } = useAuth();
   const { authModal } = useSelector((store: RootState) => store.auth);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const AuthModal: React.FC = () => {
 
   useEffect(() => {
     if (signedIn && authModal.open) {
-      dispatch(authActions.signInSuccess(user as User));
+      dispatch(authActions.closeAuthModal());
     }
   }, [signedIn]);
 

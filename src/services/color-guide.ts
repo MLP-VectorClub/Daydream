@@ -1,4 +1,4 @@
-import Axios from 'axios-observable';
+import Axios from 'axios';
 import { GetAppearancesRequestOptionals, GetAppearancesResult, GetColorGuidesResult } from 'src/types';
 import { ENDPOINTS } from 'src/utils';
 

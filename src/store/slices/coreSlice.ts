@@ -7,7 +7,7 @@ export interface CoreState {
   contactOpen: boolean;
   colorAvgOpen: boolean;
   title: PageTitle;
-  upcomingEvents: object[];
+  upcomingEvents: Record<string, unknown>[];
   breadcrumbs: BreadcrumbEntry[];
 }
 

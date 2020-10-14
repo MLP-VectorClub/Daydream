@@ -1,5 +1,5 @@
 import { range } from 'lodash';
-import Axios from 'axios-observable';
+import Axios from 'axios';
 import { ReactQueryConfig } from 'react-query/types/core/types';
 import { GuideName } from 'src/types';
 

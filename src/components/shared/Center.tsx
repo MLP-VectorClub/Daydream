@@ -1,5 +1,5 @@
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 interface CenterProps {
@@ -9,7 +9,7 @@ interface CenterProps {
 }
 
 const Center: React.FC<CenterProps> = ({ children, header, className, color }) => (
-  <Modal className={classNames({ [`modal-${color}`]: color }, className)} centered backdrop={false} fade={false} isOpen>
+  <Modal className={classNames(className, color && `modal-${color}`)} centered backdrop={false} fade={false} isOpen>
     {Boolean(header) && (
       <ModalHeader className="justify-content-center">
         {header}

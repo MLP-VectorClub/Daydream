@@ -3,12 +3,12 @@ import { AxiosError } from 'axios';
 import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
 import { PROD_APP_URL } from 'src/config';
 
-export const sanitizePageParam = (value: string) => {
+export const sanitizePageParam = (value: string): number => {
   const page = parseInt(value, 10);
   if (isNaN(page) || page < 1) return 1;
   return page;
 };
-export const sanitizePageSizeParam = (values: number[]) => (value: string) => {
+export const sanitizePageSizeParam = (values: number[]) => (value: string): number => {
   const size = parseInt(value, 10);
   if (!values.includes(size)) return values[0];
   return size;
@@ -30,8 +30,8 @@ export const range = (start: number, end: number, step = 1): number[] =>
 export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
   switch (err.response?.status) {
     case 503: {
-      const message = get(err, 'response.data.message');
-      return { type: UnifiedErrorResponseTypes.BACKEND_DOWN, message };
+      const message = get(err, 'response.data.message') as unknown;
+      return { type: UnifiedErrorResponseTypes.BACKEND_DOWN, message: typeof message === 'string' ? message : null };
     }
     case 419:
       return { type: UnifiedErrorResponseTypes.MISSING_CSRF_TOKEN };
@@ -45,16 +45,16 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
       };
     }
     case 429: {
-      const retryAfter = Number(err.response?.headers['retry-after']);
+      const retryAfter = Number(get(err, 'response.headers.retry-after', NaN));
       return {
         type: UnifiedErrorResponseTypes.RATE_LIMITED,
         retryAfter,
       };
     }
     default: {
-      const message = get(err, 'response.data.message');
+      const message = get(err, 'response.data.message') as unknown;
       console.error(err);
-      if (message) {
+      if (typeof message === 'string') {
         return {
           type: UnifiedErrorResponseTypes.MESSAGE_ONLY,
           message,
@@ -69,6 +69,6 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
 };
 
 export const assembleSeoUrl = (host?: string, pathname?: string): string =>
-  `${host ? `https://${host}` : PROD_APP_URL}${pathname}`;
+  `${host ? `https://${host}` : PROD_APP_URL}${pathname || ''}`;
 
 export const isClientSide = typeof window !== 'undefined';

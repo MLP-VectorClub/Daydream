@@ -64,14 +64,14 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     try {
       initialData = await guideFetcher({ ...query, guide, page })();
     } catch (e) {
-      if (e.response) {
+      if ('response' in e) {
         const { response } = e as AxiosError;
         const status = response?.status;
         if (status) {
           setResponseStatus(ctx, status);
         }
         if (status !== 404) {
-          console.error(e.response);
+          console.error(response);
         }
       } else {
         console.error(e);

@@ -1,18 +1,17 @@
-import { FieldValues } from 'react-hook-form';
+import { FieldError, FieldValues } from 'react-hook-form';
 import { FieldErrors } from 'react-hook-form/dist/types';
-import { get } from 'lodash';
 import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
 import { common } from 'src/strings';
 
 export const combineErrors = <FormValues extends FieldValues = FieldValues>(
   clientErrors: FieldErrors<FormValues>,
   serverErrors: Nullable<UnifiedErrorResponse>,
-) => {
+): ValidationErrorResponse['errors'] => {
   const copy: ValidationErrorResponse['errors'] = {};
-  Object.keys(clientErrors).forEach(key => {
-    const types = get(clientErrors, [key, 'types']);
+  Object.entries(clientErrors).forEach(([key, value]) => {
+    const types = (value as FieldError)?.types;
     if (types) {
-      copy[key] = Object.values(types);
+      copy[key] = Object.values(types) as string[];
     }
   });
   if (serverErrors && serverErrors.type === UnifiedErrorResponseTypes.VALIDATION_ERROR) {

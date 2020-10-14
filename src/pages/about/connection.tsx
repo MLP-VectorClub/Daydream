@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from 'reactstrap';
-import { GetAboutConnectionResult, Nullable } from 'src/types';
+import { GetAboutConnectionResult, MappedAboutConnectionResult, Nullable } from 'src/types';
 import { connectionFetcher, useConnectionInfo } from 'src/hooks';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import Content from 'src/components/shared/Content';
@@ -18,6 +18,9 @@ interface PropTypes {
 
 export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forwardedFor, initialServerInfo }) => {
   const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
+
+  const getServerInfo = useCallback((key: keyof MappedAboutConnectionResult) => (!fetching && serverInfo ? serverInfo[key] : null), []);
+
   return (
     <Content>
       <Head>
@@ -38,10 +41,10 @@ export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forward
           <InlineIcon loading last />
         )}
       </h3>
-      <p><strong>{connection.commitId}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.commitId)}</code></p>
-      <p><strong>{connection.commitTime}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.commitTime)}</code></p>
-      <p><strong>{connection.connectingAddress}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.ip)}</code></p>
-      <p><strong>{connection.forwardedFor}:</strong> <code>{fetching ? null : JSON.stringify(serverInfo?.proxiedIps)}</code></p>
+      <p><strong>{connection.commitId}:</strong> <code>{JSON.stringify(getServerInfo('commitId'))}</code></p>
+      <p><strong>{connection.commitTime}:</strong> <code>{JSON.stringify(getServerInfo('commitTime'))}</code></p>
+      <p><strong>{connection.connectingAddress}:</strong> <code>{JSON.stringify(getServerInfo('ip'))}</code></p>
+      <p><strong>{connection.forwardedFor}:</strong> <code>{JSON.stringify(getServerInfo('proxiedIps'))}</code></p>
 
       <Button onClick={makeStale} disabled={fetching}>
         <InlineIcon icon="sync" first loading={fetching} />

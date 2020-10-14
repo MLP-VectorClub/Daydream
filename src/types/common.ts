@@ -10,6 +10,7 @@ export enum Status {
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     __NEXT_DATA__: {
       buildId: string;
       customServer: boolean;
@@ -27,7 +28,7 @@ export type Nullable<T> = T | null;
 export type NullableProps<T, K extends keyof T = keyof T> = Omit<T, K> & {
   [P in K]: Nullable<T[P]>;
 };
-export type Optional<T> = T | undefined;
+export type Optional<T> = T | undefined | void;
 export type OptionalProps<T, K extends keyof T = keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 /** Can be used in place of `number` to avoid having to do explicit type casting */
 export type Numeric = number | string;
@@ -37,15 +38,15 @@ export interface ObjectOf<T> {
   [key: string]: T;
 }
 
+export interface PusherEnv {
+  key: string;
+  cluster: string;
+}
+
 export interface Environment {
   production: boolean;
   backendDomain: string;
   pusher: PusherEnv;
-}
-
-export interface PusherEnv {
-  key: string;
-  cluster: string;
 }
 
 export interface PaginationItem {
@@ -83,7 +84,7 @@ export type UnifiedErrorResponse = {
   payload: string;
 } | {
   type: UnifiedErrorResponseTypes.BACKEND_DOWN;
-  message: string;
+  message: string | null;
 } | {
   type: UnifiedErrorResponseTypes.MESSAGE_ONLY;
   message: string;
@@ -96,3 +97,5 @@ export type FailsafeUser = GetUsersMeResult | (NullableProps<Omit<User, 'id'>, '
 export type PageTitle = Nullable<string>;
 
 export type FormSubmitHandler<T = FieldValues> = Parameters<FormProps<T>['handleSubmit']>[0];
+
+export type AppInitialProps<T = unknown> = { pageProps: T };

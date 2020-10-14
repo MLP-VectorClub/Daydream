@@ -17,6 +17,10 @@
     "SharedArrayBuffer": "readonly",
     "React": "writable"
   },
+  "ignorePatterns": [
+    "node_modules"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -25,15 +29,144 @@
     "sourceType": "module",
     "project": "./tsconfig*.json"
   },
-  "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
     "react",
     "import-newlines"
   ],
-  "ignorePatterns": [
-    "node_modules"
-  ],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": [
+          "camelCase",
+          "PascalCase",
+          "snake_case",
+          "UPPER_CASE"
+        ]
+      },
+      {
+        "selector": "parameter",
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ],
+        "leadingUnderscore": "allow"
+      }
+    ],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ],
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "camelcase": "off",
+    "consistent-return": "off",
+    "global-require": "off",
+    "implicit-arrow-linebreak": "off",
+    "import-newlines/enforce": [
+      "error",
+      4,
+      140
+    ],
+    "import/extensions": "off",
+    "import/no-dynamic-require": "off",
+    "import/prefer-default-export": "off",
+    "indent": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "max-len": [
+      "error",
+      140
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-nested-ternary": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state"
+        ]
+      }
+    ],
+    "no-plusplus": "off",
+    "no-restricted-globals": "off",
+    "no-shadow": "off",
+    "no-unused-vars": "off",
+    "no-use-before-define": "off",
+    "no-void": "off",
+    "object-curly-newline": [
+      "error",
+      {
+        "multiline": true,
+        "consistent": true
+      }
+    ],
+    "padded-blocks": [
+      "error",
+      "never"
+    ],
+    "prefer-destructuring": "off",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".tsx",
+          ".jsx",
+          ".js"
+        ]
+      }
+    ],
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-array-index-key": "off",
+    "react/no-danger": "off",
+    "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off"
+  },
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [
@@ -49,113 +182,5 @@
     "react": {
       "version": "detect"
     }
-  },
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "camelcase": "off",
-    "@typescript-eslint/camelcase": [
-      "error",
-      {
-        "allow": [
-          "site_name"
-        ]
-      }
-    ],
-    "indent": "off",
-    "@typescript-eslint/indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ],
-    "import/extensions": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [
-          ".tsx",
-          ".jsx",
-          ".js"
-        ]
-      }
-    ],
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
-    "object-curly-newline": [
-      "error",
-      {
-        "multiline": true,
-        "consistent": true
-      }
-    ],
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
-    "import/no-dynamic-require": "off",
-    "global-require": "off",
-    "react/jsx-props-no-spreading": "off",
-    "quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
-      }
-    ],
-    "jsx-a11y/anchor-is-valid": "off",
-    "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/unbound-method": "off",
-    "import/prefer-default-export": "off",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": [
-          "state"
-        ]
-      }
-    ],
-    "no-restricted-globals": "off",
-    "implicit-arrow-linebreak": "off",
-    "no-console": [
-      "warn",
-      {
-        "allow": [
-          "warn",
-          "error"
-        ]
-      }
-    ],
-    "prefer-destructuring": "off",
-    "no-nested-ternary": "off",
-    "no-void": "off",
-    "react/prop-types": "off",
-    "@typescript-eslint/no-unnecessary-type-assertion": "off",
-    "react/no-array-index-key": "off",
-    "consistent-return": "off",
-    "max-len": [
-      "error",
-      140
-    ],
-    "import-newlines/enforce": [
-      "error",
-      4,
-      140
-    ],
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "react/no-danger": "off",
-    "no-plusplus": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "react/no-unescaped-entities": "off"
   }
 }

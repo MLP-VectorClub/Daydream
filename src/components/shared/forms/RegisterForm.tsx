@@ -30,6 +30,7 @@ import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages
 import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
+import { registerThunk } from 'src/store/thunks';
 
 enum INPUT_NAMES {
   NAME = 'name',
@@ -38,9 +39,9 @@ enum INPUT_NAMES {
   PRIVACY = 'privacy_policy',
 }
 
-export const AcceptPrivacyPolicy = (() => (
+export const AcceptPrivacyPolicy: React.FC = () => (
   <>I accept the <ExternalLink href={PATHS.PRIVACY_POLICY} icon>Privacy Policy</ExternalLink></>
-));
+);
 
 type FormFields = {
   [INPUT_NAMES.NAME]: string;
@@ -63,7 +64,7 @@ const RegisterForm: React.FC = () => {
   }, [reset, authModal.open]);
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = data => {
-    dispatch(authActions.register({
+    dispatch(registerThunk({
       name: data[INPUT_NAMES.NAME],
       email: data[INPUT_NAMES.EMAIL],
       password: data[INPUT_NAMES.PASSWORD],

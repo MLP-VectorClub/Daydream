@@ -1,4 +1,4 @@
-import Axios from 'axios-observable';
+import Axios from 'axios';
 import { ENDPOINTS } from 'src/utils';
 import { GetAboutConnectionResult } from 'src/types';
 

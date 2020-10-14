@@ -1,7 +1,7 @@
 import { Status } from 'src/types';
-import { AxiosObservable } from 'axios-observable/lib/axios-observable.interface';
 import { QueryStatus } from 'react-query';
 import { httpResponseMapper } from 'src/utils/common';
+import { AxiosResponse } from 'axios';
 
 export function mapQueryStatus(status: QueryStatus) {
   switch (status) {
@@ -18,6 +18,6 @@ export function mapQueryStatus(status: QueryStatus) {
   }
 }
 
-export function requestObservableToPromise<T>(obs: AxiosObservable<T>) {
-  return obs.toPromise().then(r => r.data).catch(res => Promise.reject(httpResponseMapper(res)));
+export function requestPromiseMapper<T>(promise: Promise<AxiosResponse<T>>) {
+  return promise.then(r => r.data).catch(res => Promise.reject(httpResponseMapper(res)));
 }

@@ -4,7 +4,13 @@ import { GetServerSideProps } from 'next';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
-import { SocialProvider, Status, UnifiedErrorResponseTypes, User } from 'src/types';
+import {
+  OAuthErrorTypes,
+  SocialProvider,
+  Status,
+  UnifiedErrorResponseTypes,
+  User,
+} from 'src/types';
 import { useLayout, useOAuth } from 'src/hooks';
 import { ENDPOINTS, PATHS, setResponseStatus } from 'src/utils';
 import { SOCIAL_PROVIDERS } from 'src/fancy-config';
@@ -20,14 +26,16 @@ const OAuthPage: React.FC = () => {
   const closeFnRef = useRef<VoidFunction | null>(null);
   const { status, error, user } = useOAuth(query);
 
-  const provider = query.provider in SOCIAL_PROVIDERS ? SOCIAL_PROVIDERS[query.provider as SocialProvider].name : '';
+  const provider = typeof query.provider === 'string' && query.provider in SOCIAL_PROVIDERS
+    ? SOCIAL_PROVIDERS[query.provider as SocialProvider].name
+    : '';
   const success = status === Status.SUCCESS;
   const authorized = user.name !== null;
 
   useEffect(() => {
     setLayoutDisabled(true);
     try {
-      closeFnRef.current = parent.close ? () => parent.close() : (opener.close ? () => opener.close() : null);
+      closeFnRef.current = parent.close ? () => parent.close() : ('close' in opener ? () => (opener as Window).close() : null);
     } catch (e) {
       /* ignored */
     }
@@ -38,14 +46,14 @@ const OAuthPage: React.FC = () => {
   useEffect(() => {
     if (!success) return;
 
-    queryCache.invalidateQueries(ENDPOINTS.USERS_ME);
+    void queryCache.invalidateQueries(ENDPOINTS.USERS_ME);
   }, [success]);
 
   useEffect(() => {
     if (!authorized) return;
 
     if (closeFnRef.current) closeFnRef.current();
-    else replace(PATHS.USER_LONG(user as User));
+    else void replace(PATHS.USER_LONG(user as User));
   }, [authorized]);
 
   const header = `${provider} OAuth 2.0 Authentication`;
@@ -54,7 +62,6 @@ const OAuthPage: React.FC = () => {
     if (status === Status.FAILURE) {
       query.error = 'server_error';
       if (error && error.type === UnifiedErrorResponseTypes.MESSAGE_ONLY) {
-        // eslint-disable-next-line @typescript-eslint/camelcase
         query.error_description = error.message;
       }
     } else {
@@ -79,10 +86,14 @@ const OAuthPage: React.FC = () => {
 
   const { errorTypes } = oauth;
 
+  const heading = typeof query.error === 'string' && query.error in errorTypes
+    ? errorTypes[query.error as OAuthErrorTypes]
+    : errorTypes[OAuthErrorTypes.UnknownError];
+
   return (
     <Center color="danger" header={header} className="text-center">
       <StandardHeading
-        heading={query.error in errorTypes ? errorTypes[query.error as keyof typeof errorTypes] : errorTypes.unknown_error}
+        heading={heading}
         lead={query.error_description || 'There was an unknown error while authenticating, please try again later.'}
       />
       {closeFnRef.current !== null && (

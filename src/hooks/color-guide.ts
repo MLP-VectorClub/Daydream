@@ -6,7 +6,7 @@ import {
   NullableProps,
   Status,
 } from 'src/types';
-import { ENDPOINTS, mapQueryStatus, requestObservableToPromise } from 'src/utils';
+import { ENDPOINTS, mapQueryStatus, requestPromiseMapper } from 'src/utils';
 import { colorGuideService } from 'src/services';
 
 interface GuideHookValue extends Partial<GetAppearancesResult> {
@@ -18,7 +18,7 @@ type Params = NullableProps<GetAppearancesRequestOptionals, 'guide'>;
 export const guideFetcher = (params: Params) => () => {
   if (!params.guide) return Promise.resolve(undefined);
 
-  return requestObservableToPromise(colorGuideService.getAppearances(params as GetAppearancesRequestOptionals));
+  return requestPromiseMapper(colorGuideService.getAppearances(params as GetAppearancesRequestOptionals));
 };
 
 export function useGuide(params: Params, initialData?: GetAppearancesResult): GuideHookValue {
@@ -35,7 +35,7 @@ export function useGuide(params: Params, initialData?: GetAppearancesResult): Gu
 }
 
 export const guideIndexDataFetcher = () =>
-  requestObservableToPromise(colorGuideService.getIndexData());
+  requestPromiseMapper(colorGuideService.getIndexData());
 
 export function useGuideIndexData(initialData?: GetColorGuidesResult) {
   const { data } = useQuery(

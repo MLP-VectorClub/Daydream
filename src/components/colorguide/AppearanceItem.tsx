@@ -10,8 +10,10 @@ export interface AppearanceItemProps {
   scrollPosition: ScrollPosition;
 }
 
-const AppearanceItem = ({ appearance, scrollPosition }: AppearanceItemProps) => {
+const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, scrollPosition }) => {
   const sprite = (appearance.sprite as Nullable<typeof appearance.sprite>);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const notes = appearance.notes && <span dangerouslySetInnerHTML={{ __html: appearance.notes }} />;
   return (
     <Card key={appearance.id} className="appearance-item mb-3">
       <CardBody className="p-2">
@@ -33,7 +35,7 @@ const AppearanceItem = ({ appearance, scrollPosition }: AppearanceItemProps) => 
             <h5>{appearance.label}</h5>
             <div className="notes">
               {/* TODO Parse notes and convert links */}
-              {appearance.notes && <span dangerouslySetInnerHTML={{ __html: appearance.notes }} />}
+              {notes}
               {appearance.hasCutieMarks && (
                 <span className={classNames({ 'ml-2 pl-2 border-left': appearance.notes })}>
                   {colorGuide.appearances.cmAvailable}

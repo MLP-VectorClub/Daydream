@@ -4,7 +4,7 @@ export const privacyPolicy = {
   title: 'Privacy Policy',
   lead: 'Last updated: May 13, 2018',
   tldr: "We don't want to invade on anyone's privacy and believe that information we do not directly need for the safe operation of the website should not be stored, and no information should be shared with or sold to 3rd parties. Don't deliberately give us any personally identifiable information, and your privacy is safe with us.",
-  p1: (host: JSX.Element) => <>The MLP Vector Club ("us", "we", or "our") operates {host} (the "Site"). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</>,
+  p1: (host: JSX.Element): JSX.Element => <>The MLP Vector Club ("us", "we", or "our") operates {host} (the "Site"). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</>,
   p2: 'We use your Personal Information only for providing and improving the Site. By using the Site, you agree to the collection and use of information in accordance with this policy.',
   h1: 'Information Collection And Use',
   p3: 'While using our Site we do not ask nor encourage you to provide us with any Personally Identifiable Information ("PII", "Personal Information") that can be used to identify you as an individual. PII may include, but is not limited to: your name, birth date, national identification numbers, e-mail address, location, phone number.',

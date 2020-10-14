@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { ParsedUrlQuery } from 'querystring';
-import { ENDPOINTS, isClientSide, mapQueryStatus, requestObservableToPromise } from 'src/utils';
+import { ENDPOINTS, isClientSide, mapQueryStatus, requestPromiseMapper } from 'src/utils';
 import {
   PostUsersOauthSigninProviderResult,
   RegisterOauthRequest,
@@ -11,7 +11,7 @@ import {
 import { signInOauth } from 'src/services/user';
 import { useAuth } from 'src/hooks/auth';
 
-const oauthRegistrationFetcher = (data: RegisterOauthRequest) => () => requestObservableToPromise(signInOauth(data));
+const oauthRegistrationFetcher = (data: RegisterOauthRequest) => () => requestPromiseMapper(signInOauth(data));
 
 export function useOAuth(query: ParsedUrlQuery) {
   const { authCheck, user } = useAuth();

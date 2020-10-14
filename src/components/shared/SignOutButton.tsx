@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { Status } from 'src/types';
 import { RootState } from 'src/store/rootReducer';
-import { authActions } from 'src/store/slices';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
+import { signOutThunk } from 'src/store/thunks';
 
 const BUTTON_ID = 'signout';
 
@@ -15,7 +15,7 @@ const SignOutButton: React.FC = () => {
   const [signOutConfirm, setSignOutConfirm] = useState(false);
 
   const handleSignOut = () => {
-    dispatch(authActions.signOut());
+    dispatch(signOutThunk());
     setSignOutConfirm(false);
   };
 

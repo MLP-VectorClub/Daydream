@@ -31,8 +31,7 @@ const LoadingRing: React.FC<LoadingRingProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
-      className={classNames({
-        [`text-${color}`]: color,
+      className={classNames(color && `text-${color}`, {
         'mr-2': inline && spaceRight,
         'ml-2': inline && spaceLeft,
         'svg-inline--fa custom-icon': inline,

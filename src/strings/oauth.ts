@@ -1,3 +1,5 @@
+import { OAuthErrorTypes } from 'src/types';
+
 export const oauth = {
   authTitle: '{{provider}} OAuth 2.0 Authentication',
   creatingSession: 'Creating session',
@@ -5,11 +7,9 @@ export const oauth = {
   welcome: 'Welcome {{name}}!',
   close: 'Dismiss',
   unknownError: 'There was an unknown error while authenticating, please try again later.',
-  /* eslint-disable @typescript-eslint/camelcase */
   errorTypes: {
-    access_denied: 'Access Denied',
-    unknown_error: 'Unknown Error',
-    server_error: 'Server Error',
+    [OAuthErrorTypes.AccessDenied]: 'Access Denied',
+    [OAuthErrorTypes.UnknownError]: 'Unknown Error',
+    [OAuthErrorTypes.ServerError]: 'Server Error',
   },
-  /* eslint-enable @typescript-eslint/camelcase */
 };

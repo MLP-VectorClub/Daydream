@@ -10,3 +10,9 @@ export interface SocialProviderConfig {
   name: string;
   renderIcon: (props: Omit<InlineIconProps, 'icon'>) => JSX.Element;
 }
+
+export enum OAuthErrorTypes {
+  AccessDenied = 'access_denied',
+  UnknownError = 'unknown_error',
+  ServerError = 'server_error',
+}

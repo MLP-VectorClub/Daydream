@@ -1,7 +1,6 @@
-import { ParsedUrlQuery } from 'querystring';
 import { useQuery } from 'react-query';
 import { GetUsersDaUsernameRequest, GetUsersIdRequest, Optional, PublicUser } from 'src/types';
-import { ENDPOINTS, requestObservableToPromise } from 'src/utils';
+import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
 import { userService } from 'src/services';
 import { useCsrf } from 'src/hooks/core';
 
@@ -30,7 +29,7 @@ export const transformProfileParams = (query: { user?: string }): FetchUserParam
   throw new Error(`${transformProfileParams.name}: Invalid query parameter: ${JSON.stringify(query, null, 2)}`);
 };
 
-export const getUserFetcherKey = (params: object | FetchUserParams) => {
+export const getUserFetcherKey = (params: FetchUserParams) => {
   if ('id' in params) return ENDPOINTS.USERS_BY_ID(params);
 
   if ('username' in params) return ENDPOINTS.USERS_BY_USERNAME(params);
@@ -38,15 +37,15 @@ export const getUserFetcherKey = (params: object | FetchUserParams) => {
   throw new Error(`${getUserFetcherKey.name}: Invalid params parameter: ${JSON.stringify(params, null, 2)}`);
 };
 
-export const userFetcher = (params: object | FetchUserParams) => () => {
-  if ('id' in params) return requestObservableToPromise(userService.getById(params));
+export const userFetcher = (params: FetchUserParams) => () => {
+  if ('id' in params) return requestPromiseMapper(userService.getById(params));
 
-  if ('username' in params) return requestObservableToPromise(userService.getByDaName(params));
+  if ('username' in params) return requestPromiseMapper(userService.getByDaName(params));
 
   throw new Error(`${userFetcher.name}: Invalid params parameter: ${JSON.stringify(params, null, 2)}`);
 };
 
-export function useUser(params: ParsedUrlQuery | FetchUserParams, initialData?: PublicUser): UserHookValue {
+export function useUser(params: FetchUserParams, initialData?: PublicUser): UserHookValue {
   const csrf = useCsrf();
   const key = getUserFetcherKey(params);
   const { data, error: userError } = useQuery(

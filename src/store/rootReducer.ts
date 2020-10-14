@@ -1,8 +1,14 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import coreReducer, { CoreActions, CoreState } from 'src/store/slices/coreSlice';
-import authReducer, { AuthActions, AuthState } from 'src/store/slices/authSlice';
-import profileReducer, { ProfileActions, ProfileState } from 'src/store/slices/profileSlice';
+import coreReducer, { CoreState } from 'src/store/slices/coreSlice';
+import authReducer, { AuthState } from 'src/store/slices/authSlice';
+import profileReducer, { ProfileState } from 'src/store/slices/profileSlice';
+
+export interface RootState {
+  core: CoreState;
+  auth: AuthState;
+  profile: ProfileState;
+}
 
 const appReducer = combineReducers({
   core: coreReducer,
@@ -15,14 +21,3 @@ export const rootReducer = (...args: Parameters<typeof appReducer>): ReturnType<
 
   return appReducer(...args);
 };
-
-export interface RootState {
-  core: CoreState;
-  auth: AuthState;
-  profile: ProfileState;
-}
-
-export type ActionsType =
-  CoreActions
-  | AuthActions
-  | ProfileActions;

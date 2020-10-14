@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
-import { AppContextType, AppInitialProps, AppPropsType, NextComponentType } from 'next/dist/next-server/lib/utils';
-import { Router } from 'next/router';
+import { AppType } from 'next/dist/next-server/lib/utils';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ReactQueryConfigProvider } from 'react-query';
 import { ENDPOINTS } from 'src/utils';
@@ -16,7 +15,8 @@ import ProgressIndicator from 'src/components/ProgressIndicator';
 import Layout from 'src/components/Layout';
 import { LayoutContext } from 'src/hooks';
 
-const Celestia: NextComponentType<AppContextType<Router>, AppInitialProps, AppPropsType> = props => {
+const Celestia: AppType = props => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { Component, pageProps } = props;
   const [disabled, setLayoutDisabled] = useState(false);
 

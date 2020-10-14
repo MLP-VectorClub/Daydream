@@ -22,9 +22,7 @@ const AvatarWrap: React.FC<PropTypes> = memo(({
   vectorApp = null,
 }) => (
   <div
-    className={classNames(`avatar-wrap provider-${avatarProvider}`, className, {
-      [`app-${vectorApp}`]: vectorApp !== null,
-    })}
+    className={classNames(`avatar-wrap provider-${avatarProvider}`, className, vectorApp && `app-${vectorApp}`)}
   >
     <LazyLoadImage
       src={avatarUrl || GUEST_AVATAR}

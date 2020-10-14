@@ -1,3 +1,4 @@
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Alert,
@@ -14,7 +15,6 @@ import {
   UncontrolledTooltip,
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { map } from 'lodash';
 import { fromEvent } from 'rxjs';
@@ -41,6 +41,7 @@ import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages
 import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
+import { signInThunk } from 'src/store/thunks';
 
 enum INPUT_NAMES {
   EMAIL = 'email',
@@ -126,7 +127,7 @@ const SingInForm: React.FC = () => {
             clearInterval(socialAuthPopup.current.timer);
             socialAuthPopup.current.timer = null;
           }
-          queryCache.invalidateQueries(ENDPOINTS.USERS_ME);
+          void queryCache.invalidateQueries(ENDPOINTS.USERS_ME);
         }
       } catch (err) {
         /* ignore */
@@ -135,7 +136,7 @@ const SingInForm: React.FC = () => {
   };
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = data => {
-    dispatch(authActions.signIn({
+    dispatch(signInThunk({
       email: data[INPUT_NAMES.EMAIL],
       password: data[INPUT_NAMES.PASSWORD],
       remember: Boolean(data[INPUT_NAMES.REMEMBER]),

@@ -1,9 +1,15 @@
-import { Nullable, Numeric, PageTitle, PublicUser } from 'src/types';
+import {
+  Nullable,
+  Numeric,
+  Optional,
+  PageTitle,
+  PublicUser,
+} from 'src/types';
 import { PATHS } from 'src/utils/url';
 import { common } from 'src/strings';
 
 export const getProfileTitle = (
-  user?: PublicUser,
+  user: Optional<PublicUser>,
   authUserId: Nullable<number> = null,
 ): PageTitle => {
   if (user) {

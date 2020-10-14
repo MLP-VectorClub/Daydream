@@ -4,13 +4,12 @@ import {
   AuthModalSide,
   FailsafeUser,
   Nullable,
-  PostUsersRequest,
-  PostUsersSigninRequest,
   Status,
   UnifiedErrorResponse,
   User,
   ValuesOf,
 } from 'src/types';
+import { registerThunk, signInThunk, signOutThunk } from 'src/store/thunks';
 
 export interface AuthState {
   signIn: {
@@ -33,7 +32,7 @@ export interface AuthState {
     open: boolean;
     side: AuthModalSide;
   };
-  notifications: object[];
+  notifications: Record<string, unknown>[];
 }
 
 const initialState: AuthState = {
@@ -80,39 +79,6 @@ const authSlice = createSlice({
     [HYDRATE](state, action: PayloadAction<{ auth: AuthState }>) {
       return { ...state, ...action.payload.auth };
     },
-    signIn(state, _action: PayloadAction<PostUsersSigninRequest>) {
-      state.signIn.status = Status.LOAD;
-    },
-    signInSuccess(state, action: PayloadAction<User>) {
-      state.signIn.status = Status.SUCCESS;
-      afterAuthChange(state, action.payload);
-    },
-    signInFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
-      state.signIn.status = Status.FAILURE;
-      state.signIn.error = action.payload;
-    },
-    signOut(state, _action: PayloadAction) {
-      state.signOut.status = Status.LOAD;
-    },
-    signOutSuccess(state, _action: PayloadAction) {
-      state.signOut.status = Status.SUCCESS;
-      afterAuthChange(state);
-    },
-    signOutFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
-      state.signOut.status = Status.FAILURE;
-      state.signOut.error = action.payload;
-    },
-    register(state, _action: PayloadAction<PostUsersRequest>) {
-      state.register.status = Status.LOAD;
-    },
-    registerSuccess(state, action: PayloadAction<User>) {
-      state.register.status = Status.SUCCESS;
-      afterAuthChange(state, action.payload);
-    },
-    registerFailure(state, action: PayloadAction<UnifiedErrorResponse>) {
-      state.register.status = Status.FAILURE;
-      state.register.error = action.payload;
-    },
     openAuthModal(state, action: PayloadAction<Nullable<AuthModalSide>>) {
       state.authModal.open = true;
       state.authModal.side = action.payload || AuthModalSide.SIGN_IN;
@@ -121,10 +87,45 @@ const authSlice = createSlice({
       clearModalState(state);
     },
   },
+  extraReducers: {
+    [signInThunk.pending.type](state, _action: PayloadAction) {
+      state.signIn.status = Status.LOAD;
+    },
+    [signInThunk.fulfilled.type](state, action: PayloadAction<User>) {
+      state.signIn.status = Status.SUCCESS;
+      afterAuthChange(state, action.payload);
+    },
+    [signInThunk.rejected.type](state, action: PayloadAction<UnifiedErrorResponse>) {
+      state.signIn.status = Status.FAILURE;
+      state.signIn.error = action.payload;
+    },
+    [signOutThunk.pending.type](state, _action: PayloadAction) {
+      state.signOut.status = Status.LOAD;
+    },
+    [signOutThunk.fulfilled.type](state, _action: PayloadAction) {
+      state.signOut.status = Status.SUCCESS;
+      afterAuthChange(state);
+    },
+    [signOutThunk.rejected.type](state, action: PayloadAction<UnifiedErrorResponse>) {
+      state.signOut.status = Status.FAILURE;
+      state.signOut.error = action.payload;
+    },
+    [registerThunk.pending.type](state, _action: PayloadAction) {
+      state.register.status = Status.LOAD;
+    },
+    [registerThunk.fulfilled.type](state, action: PayloadAction<User>) {
+      state.register.status = Status.SUCCESS;
+      afterAuthChange(state, action.payload);
+    },
+    [registerThunk.rejected.type](state, action: PayloadAction<UnifiedErrorResponse>) {
+      state.register.status = Status.FAILURE;
+      state.register.error = action.payload;
+    },
+  },
 });
 
 export const authActions = authSlice.actions;
 
-export type AuthActions = ValuesOf<typeof authActions>;
+export type AuthActions = ValuesOf<typeof authActions>['type'];
 
 export default authSlice.reducer;

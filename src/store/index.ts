@@ -1,21 +1,11 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { createEpicMiddleware } from 'redux-observable';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
-import { ActionsType, RootState, rootReducer } from 'src/store/rootReducer';
-import { rootEpic } from 'src/store/rootEpic';
+import { rootReducer, RootState } from 'src/store/rootReducer';
 
-const createStore = () => {
-  const epicMiddleware = createEpicMiddleware<ActionsType, ActionsType, RootState>();
-
-  const store = configureStore({
-    reducer: rootReducer,
-    middleware: [epicMiddleware, ...getDefaultMiddleware()],
-  });
-
-  epicMiddleware.run(rootEpic);
-
-  return store;
-};
+const createStore = () => configureStore({
+  reducer: rootReducer,
+  middleware: [...getDefaultMiddleware()],
+});
 
 export type AppStore = ReturnType<typeof createStore>;
 export type AppDispatch = AppStore['dispatch'];

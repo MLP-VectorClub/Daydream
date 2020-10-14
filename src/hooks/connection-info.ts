@@ -6,18 +6,18 @@ import {
   UnifiedErrorResponse,
   UnifiedErrorResponseTypes,
 } from 'src/types';
-import { ENDPOINTS, isClientSide, requestObservableToPromise } from 'src/utils';
+import { ENDPOINTS, isClientSide, requestPromiseMapper } from 'src/utils';
 import { aboutService } from 'src/services';
 
 interface ServerInfoHookValue {
-  serverInfo?: MappedAboutConnectionResult;
+  serverInfo: Optional<MappedAboutConnectionResult>;
   backendDown: boolean;
   loading: boolean;
   fetching: boolean;
   makeStale: VoidFunction;
 }
 
-export const connectionFetcher = () => requestObservableToPromise(aboutService.getConnection());
+export const connectionFetcher = () => requestPromiseMapper(aboutService.getConnection());
 
 export function useConnectionInfo(initialData?: GetAboutConnectionResult): ServerInfoHookValue {
   const key = ENDPOINTS.CONNECTION_INFO;
@@ -42,7 +42,7 @@ export function useConnectionInfo(initialData?: GetAboutConnectionResult): Serve
     serverInfo,
     backendDown: !loading && error?.type === UnifiedErrorResponseTypes.BACKEND_DOWN,
     makeStale: () => {
-      queryCache.invalidateQueries(key);
+      void queryCache.invalidateQueries(key);
     },
   };
 }
