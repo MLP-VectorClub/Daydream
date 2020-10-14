@@ -9,10 +9,18 @@ module.exports = withPlugins(
   {
     useFileSystemPublicRoutes: false,
     generateBuildId: async () => {
-      const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);
-      const buildId = stdout.trim();
-      console.log(`Generated build ID: ${buildId}`);
-      return buildId;
+      try {
+        const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);
+        const buildId = stdout.trim();
+        console.log(`Generated build ID: ${buildId}`);
+        return buildId;
+      }
+      catch (e) {
+        const buildId = `;${Math.floor(Date.now())}`;
+        console.log(`Failed to generate build id, falling back to dummy value: ${buildId}`);
+        console.error(e);
+        return buildId;
+      }
     },
     async redirects() {
       return [
