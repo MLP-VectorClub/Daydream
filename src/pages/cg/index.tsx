@@ -12,7 +12,7 @@ import { Card, CardBody } from 'reactstrap';
 import React from 'react';
 import { NextPage } from 'next';
 import { plural } from 'src/utils/plural';
-import { colorGuide } from 'src/strings';
+import { colorGuide, common } from 'src/strings';
 
 interface PropTypes {
   initialData: GetColorGuidesResult;
@@ -30,7 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     /* ignore */
   }
 
-  store.dispatch(coreActions.setTitle('colorGuideList'));
+  store.dispatch(coreActions.setTitle(common.titles.colorGuideList));
   store.dispatch(coreActions.setBreadcrumbs([
     { label: colorGuide.index.breadcrumb, active: true },
   ]));

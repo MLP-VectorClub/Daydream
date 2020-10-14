@@ -7,7 +7,7 @@ import Content from 'src/components/shared/Content';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import ContactLink from 'src/components/shared/ContactLink';
 import StandardHeading from 'src/components/shared/StandardHeading';
-import { privacyPolicy } from 'src/strings';
+import { common, privacyPolicy } from 'src/strings';
 
 const PrivacyPolicy: React.FC = () => (
   <>
@@ -62,7 +62,7 @@ const PrivacyPolicy: React.FC = () => (
 
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx;
-  store.dispatch(coreActions.setTitle('privacyPolicy'));
+  store.dispatch(coreActions.setTitle(common.titles.privacyPolicy));
 
   return {
     props: {},

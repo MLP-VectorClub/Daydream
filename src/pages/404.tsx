@@ -6,7 +6,7 @@ import { wrapper } from 'src/store';
 import { common } from 'src/strings';
 
 export const getStaticProps = wrapper.getStaticProps(({ store }) => {
-  store.dispatch(coreActions.setTitle('404'));
+  store.dispatch(coreActions.setTitle(common.titles['404']));
 });
 
 const NotFound: React.FC = () => (

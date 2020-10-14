@@ -13,7 +13,7 @@ import { about, common } from 'src/strings';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx;
-  store.dispatch(coreActions.setTitle('about'));
+  store.dispatch(coreActions.setTitle(common.titles.about));
   return {
     props: {},
   };
