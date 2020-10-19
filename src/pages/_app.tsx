@@ -42,7 +42,7 @@ const Celestia: AppType = props => {
       </LayoutContext.Provider>
       <AuthModal />
       {DEV_ENV && (
-        <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
+        <ReactQueryDevtools position="top-right" initialIsOpen={false} />
       )}
     </ReactQueryConfigProvider>
   );

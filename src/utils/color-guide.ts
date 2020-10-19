@@ -37,3 +37,35 @@ export const getGuideTitle = (
 
   return `Page ${page} - ${guideName} Color Guide`;
 };
+
+export function scaleResize(w: number, h: number, property: 'scale' | 'width' | 'height', desiredValue: number): {
+  scale: number;
+  width: number;
+  height: number;
+} {
+  let div: number;
+  switch (property) {
+    case 'scale':
+      return {
+        scale: desiredValue,
+        height: Math.round(h * desiredValue),
+        width: Math.round(w * desiredValue),
+      };
+    case 'height':
+      div = desiredValue / h;
+      return {
+        height: desiredValue,
+        width: Math.round(w * div),
+        scale: div,
+      };
+    case 'width':
+      div = desiredValue / w;
+      return {
+        height: Math.round(h * div),
+        width: desiredValue,
+        scale: div,
+      };
+    default:
+      throw new Error('Invalid arguments passed to scaleResize');
+  }
+}

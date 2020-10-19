@@ -28,7 +28,7 @@ interface PropTypes {
 }
 
 const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData, scrollPosition }) => {
-  const data = useGuide({ guide, page, previews: true }, initialData || undefined);
+  const data = useGuide({ guide, page }, initialData || undefined);
   const title = getGuideTitle(guide);
 
   return (
@@ -37,11 +37,11 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData, scrollP
       {guide === null && (
         <Alert color="danger" className="mt-3 mb-0">There is no guide by the specified name</Alert>
       )}
-      {data.pagination && <Pagination {...data.pagination} tooltipPos="bottom" className="mb-3" />}
+      {data.pagination && <Pagination {...data.pagination} tooltipPos="bottom" />}
       {data.appearances && data.appearances.map(el => (
         <AppearanceItem key={el.id} appearance={el} scrollPosition={scrollPosition} />
       ))}
-      {data.pagination && <Pagination {...data.pagination} tooltipPos="top" className="mb-3" />}
+      {data.pagination && <Pagination {...data.pagination} tooltipPos="top" listClassName="mb-0" />}
     </Content>
   );
 };

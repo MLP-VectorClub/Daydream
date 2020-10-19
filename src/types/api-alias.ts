@@ -8,7 +8,7 @@ import {
 import { Nullable, OptionalProps } from 'src/types/common';
 
 // TODO Attempt to fix optional properties being required in the generator package sometime
-export type GetAppearancesRequestOptionals = OptionalProps<GetAppearancesRequest, 'page' | 'size' | 'q' | 'previews'>;
+export type GetAppearancesRequestOptionals = OptionalProps<GetAppearancesRequest, 'page' | 'size' | 'q'>;
 export type GetAppearancesIdSpriteRequestOptionals = OptionalProps<GetAppearancesIdSpriteRequest, 'size' | 'token'>;
 
 export type RegisterOauthRequest = PostUsersOauthSigninProviderRequest & { provider: SocialProvider };

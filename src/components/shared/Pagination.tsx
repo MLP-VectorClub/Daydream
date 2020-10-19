@@ -21,6 +21,7 @@ import { calculatePaginationItems, GO_TO_ITEM, PaginationProps } from 'src/utils
 import { ParsedUrlQuery } from 'querystring';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
+import classNames from 'classnames';
 
 type PageLinkProps = PropsWithChildren<{
   number: number;
@@ -82,7 +83,7 @@ const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, t
 
   useEffect(() => {
     if (focusInput && inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus({ preventScroll: true });
       setFocusInput(false);
     }
   }, [focusInput]);
@@ -130,6 +131,7 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   relevantProps,
   className,
+  listClassName,
   pageParam = 'page',
   size,
   tooltipPos,
@@ -137,7 +139,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const pageItems = useMemo(() => calculatePaginationItems({ currentPage, totalPages }), [currentPage, totalPages]);
 
   return (
-    <RSPagination size={size} className={className} listClassName="justify-content-center">
+    <RSPagination size={size} className={className} listClassName={classNames('justify-content-center', listClassName)}>
       {pageItems.map((el, i) => {
         if (el === GO_TO_ITEM) {
           const defaultValue = (

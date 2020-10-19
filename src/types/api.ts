@@ -258,9 +258,9 @@ export interface Sprite {
    */
   path: string;
   /**
-   * Data URI for a small preview image with matching proportions to the actual image, suitable for displaying as a preview while the full image loads. May not be sent based on the request parameters.
+   * The width and height of the sprite expressed in the smallest numbers possible while retaining the same aspect ratio. Useful for calculating placeholder element sizes.
    */
-  preview?: string;
+  aspectRatio: number[];
 }
 
 /**
@@ -453,11 +453,9 @@ export interface GetAppearancesRequest {
   page: PageNumber
   size: GuidePageSize
   q: QueryString
-  previews: PreviewsIndicator
 }
 export interface GetAppearancesAllRequest {
   guide: GuideName
-  previews: PreviewsIndicator
 }
 export interface GetAppearancesIdColorGroupsRequest {
   id: ZeroBasedId

@@ -1,9 +1,9 @@
 import { Card, CardBody, Col, Row } from 'reactstrap';
 import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component';
-import classNames from 'classnames';
-import React from 'react';
-import { Appearance, Nullable } from 'src/types';
-import { colorGuide } from 'src/strings';
+import React, { useMemo } from 'react';
+import { Appearance, Sprite } from 'src/types';
+import { scaleResize } from 'src/utils';
+import AppearanceNotes from 'src/components/colorguide/AppearanceNotes';
 
 export interface AppearanceItemProps {
   appearance: Appearance;
@@ -11,37 +11,41 @@ export interface AppearanceItemProps {
 }
 
 const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, scrollPosition }) => {
-  const sprite = (appearance.sprite as Nullable<typeof appearance.sprite>);
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const notes = appearance.notes && <span dangerouslySetInnerHTML={{ __html: appearance.notes }} />;
+  const sprite = appearance.sprite as Sprite | null;
+
+  // Precalculate image width to avoid layout shift
+  const spriteStyle = useMemo(() => {
+    if (!sprite || !sprite.aspectRatio) {
+      return undefined;
+    }
+
+    const [aspectWidth, aspectHeight] = sprite.aspectRatio;
+
+    const { width } = scaleResize(aspectWidth, aspectHeight, 'height', 150);
+
+    return { width: `${width}px` };
+  }, [sprite]);
+
   return (
     <Card key={appearance.id} className="appearance-item mb-3">
       <CardBody className="p-2">
         <Row noGutters>
           {sprite !== null && (
             <Col xs="auto">
-              <div className="pr-3">
+              <div className="pr-3 sprite-image-wrapper">
                 <LazyLoadImage
                   className="sprite-image"
                   src={sprite.path}
-                  placeholderSrc={sprite.preview}
-                  effect="blur"
+                  effect="opacity"
                   scrollPosition={scrollPosition}
+                  style={spriteStyle}
                 />
               </div>
             </Col>
           )}
           <Col>
             <h5>{appearance.label}</h5>
-            <div className="notes">
-              {/* TODO Parse notes and convert links */}
-              {notes}
-              {appearance.hasCutieMarks && (
-                <span className={classNames({ 'ml-2 pl-2 border-left': appearance.notes })}>
-                  {colorGuide.appearances.cmAvailable}
-                </span>
-              )}
-            </div>
+            <AppearanceNotes appearance={appearance} />
           </Col>
         </Row>
       </CardBody>

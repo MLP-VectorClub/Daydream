@@ -10,6 +10,7 @@ type PageDataRelevantProps = Pick<PageData['pagination'], 'currentPage' | 'total
 export interface PaginationProps extends PageDataRelevantProps {
   relevantProps?: string[];
   className?: string;
+  listClassName?: string;
   pageParam?: string;
   size?: string;
   tooltipPos: 'top' | 'bottom';
