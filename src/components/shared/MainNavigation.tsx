@@ -7,32 +7,23 @@ import { CLUB_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { LinkProps } from 'next/dist/client/link';
 import { common } from 'src/strings';
 
 const MainNavigation = () => {
   const { signedIn, user } = useAuth();
   const prefs = usePrefs(signedIn);
-  const defaultGuideLinkProps = useMemo<LinkProps>(() => {
-    if (prefs?.cgDefaultguide) {
-      return { href: PATHS.GUIDE(), as: PATHS.GUIDE(prefs.cgDefaultguide) };
-    }
-
-    return { href: PATHS.GUIDE_INDEX, as: PATHS.GUIDE_INDEX };
-  }, [prefs]);
-  const homeLinkProps = useMemo<LinkProps>(() => {
-    if (prefs?.pHomelastep === true) {
-      return { href: PATHS.LATEST_EPISODE };
-    }
-
-    return defaultGuideLinkProps;
-  }, [prefs, defaultGuideLinkProps]);
+  const defaultGuideLink = useMemo<string>(() => (
+    prefs?.cgDefaultguide ? PATHS.GUIDE(prefs.cgDefaultguide) : PATHS.GUIDE_INDEX
+  ), [prefs]);
+  const homeLink = useMemo<string>(() => (
+    prefs?.pHomelastep === true ? PATHS.LATEST_EPISODE : defaultGuideLink
+  ), [prefs, defaultGuideLink]);
 
   return (
     <Nav navbar>
       <NavItem>
         {signedIn && (
-          <Link {...homeLinkProps} passHref>
+          <Link href={homeLink} passHref>
             <NavLink>
               <InlineIcon first icon="home" />
               {common.titles.home}
@@ -51,7 +42,7 @@ const MainNavigation = () => {
         </Link>
       </NavItem>
       <NavItem>
-        <Link {...defaultGuideLinkProps} passHref>
+        <Link href={defaultGuideLink} passHref>
           <NavLink>{common.titles.colorGuide}</NavLink>
         </Link>
       </NavItem>
@@ -62,7 +53,7 @@ const MainNavigation = () => {
       </NavItem>
       {signedIn && (
         <NavItem>
-          <Link href={PATHS.USER()} as={getProfileLink(user)} passHref>
+          <Link href={getProfileLink(user)} passHref>
             <NavLink>{common.titles.account}</NavLink>
           </Link>
         </NavItem>

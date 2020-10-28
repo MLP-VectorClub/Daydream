@@ -10,10 +10,14 @@ import DeviantLink from 'src/components/shared/DeviantLink';
 import FavMe from 'src/components/shared/FavMe';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { about, common } from 'src/strings';
+import Image from 'next/image';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx;
   store.dispatch(coreActions.setTitle(common.titles.about));
+  store.dispatch(coreActions.setBreadcrumbs([
+    { label: common.titles.about, active: true },
+  ]));
   return {
     props: {},
   };
@@ -21,9 +25,11 @@ export const getStaticProps = wrapper.getServerSideProps(async ctx => {
 
 const AboutPage: React.FC = () => (
   <Content>
-    <img src="/img/logo.svg" alt="MLP Vector Club Website Logo" id="about-logo" />
+    <div className="d-flex justify-content-center">
+      <Image src="/img/logo.svg" alt="MLP Vector Club Website Logo" id="about-logo" width={200} height={200} />
+    </div>
     <StandardHeading
-      heading={about.website(<ExternalLink href={CLUB_URL}>0</ExternalLink>)}
+      heading={about.website(<ExternalLink href={CLUB_URL}>MLP-VectorClub</ExternalLink>)}
       lead={about.tagline}
     />
     <section className="what-s-this-site-">

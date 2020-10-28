@@ -39,7 +39,7 @@ const SidebarUsefulLinks: React.FC = () => {
               link = <a href={el.url} onClick={dispatchActionByAnchor(el.url)} title={el.title}>{el.label}</a>;
             } else {
               link = (
-                <Link href={el.url} as={el.url}>
+                <Link href={el.url}>
                   <a title={el.title}>{el.label}</a>
                 </Link>
               );

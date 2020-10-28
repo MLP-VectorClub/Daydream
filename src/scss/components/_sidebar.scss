@@ -81,7 +81,7 @@
     display: inline-block;
     margin: 0 2px;
 
-    @extend %navbar-li;
+    @include navbar-li;
   }
 
   > .logged-in {

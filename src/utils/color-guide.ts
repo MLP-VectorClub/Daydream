@@ -38,11 +38,13 @@ export const getGuideTitle = (
   return `Page ${page} - ${guideName} Color Guide`;
 };
 
-export function scaleResize(w: number, h: number, property: 'scale' | 'width' | 'height', desiredValue: number): {
+export interface ScaleResizeResult {
   scale: number;
   width: number;
   height: number;
-} {
+}
+
+export function scaleResize(w: number, h: number, property: 'scale' | 'width' | 'height', desiredValue: number): ScaleResizeResult {
   let div: number;
   switch (property) {
     case 'scale':

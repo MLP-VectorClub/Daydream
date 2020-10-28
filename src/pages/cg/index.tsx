@@ -13,6 +13,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import { plural } from 'src/utils/plural';
 import { colorGuide, common } from 'src/strings';
+import styles from 'modules/GuideIndexPage.module.scss';
 
 interface PropTypes {
   initialData: GetColorGuidesResult;
@@ -58,24 +59,24 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
         (WIP)
       </p>
 
-      <div id="guide-list">
+      <div className={styles.guideList}>
         {GUIDE_NAMES.map(code => {
           const logoPath = `/img/logos/${code}.svg`;
           const guideName = getGuideLabel(code);
           const entryCount = data?.entryCounts[code];
           return (
-            <Link key={code} href={PATHS.GUIDE()} as={PATHS.GUIDE(code)}>
+            <Link key={code} href={PATHS.GUIDE(code)}>
               <Card tag="a">
                 <CardBody tag="figure">
                   <img
                     src="/img/blank-pixel.png"
-                    className="guide-icon"
+                    className={styles.guideIcon}
                     alt={`${guideName} logo`}
                     style={{ backgroundImage: `url(${logoPath})` }}
                   />
                   <figcaption>
-                    <span className="guide-name">{guideName}</span>
-                    <span className="guide-count">{plural(entryCount, 'entry', 'entries')}</span>
+                    <span className={styles.guideName}>{guideName}</span>
+                    <span className={styles.guideCount}>{plural(entryCount, 'entry', 'entries')}</span>
                   </figcaption>
                 </CardBody>
               </Card>

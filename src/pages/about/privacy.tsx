@@ -8,13 +8,15 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import ContactLink from 'src/components/shared/ContactLink';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { common, privacyPolicy } from 'src/strings';
+import styles from 'modules/PrivacyPolicy.module.scss';
+import { PATHS } from 'src/utils';
 
 const PrivacyPolicy: React.FC = () => (
   <>
     <Alert color="warning" className="p-2 mb-2" fade={false}>
       {privacyPolicy.notYetUpdated}
     </Alert>
-    <Content className="privacy-policy">
+    <Content className={styles.privacyPolicy}>
       <StandardHeading heading={privacyPolicy.title} lead={privacyPolicy.lead} />
 
       <blockquote>
@@ -60,9 +62,21 @@ const PrivacyPolicy: React.FC = () => (
   </>
 );
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
+export const getStaticProps = wrapper.getStaticProps(async ctx => {
   const { store } = ctx;
   store.dispatch(coreActions.setTitle(common.titles.privacyPolicy));
+  store.dispatch(coreActions.setBreadcrumbs([
+    {
+      label: common.titles.about,
+      linkProps: {
+        href: PATHS.ABOUT,
+      },
+    },
+    {
+      label: common.titles.privacyPolicy,
+      active: true,
+    },
+  ]));
 
   return {
     props: {},

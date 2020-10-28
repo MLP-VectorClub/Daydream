@@ -9,7 +9,7 @@
     $size: 8px;
     left: 0;
     bottom: -$size;
-    z-index: 5;
+    z-index: 3;
     width: $size;
     height: $size;
     background: url('/img/sidebar-corner.svg') no-repeat top left;
@@ -27,6 +27,10 @@
 
   .breadcrumb-item-divider + .breadcrumb-item {
     padding-left: 0;
+
+    &:before {
+      font-weight: normal;
+    }
   }
 
   .breadcrumb-item {

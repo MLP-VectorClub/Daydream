@@ -1,6 +1,5 @@
 import { Alert } from 'reactstrap';
 import React from 'react';
-import { ScrollPosition, trackWindowScroll } from 'react-lazy-load-image-component';
 import { AxiosError } from 'axios';
 import { GetAppearancesResult, GuideName, Nullable, Optional } from 'src/types';
 import {
@@ -24,10 +23,9 @@ interface PropTypes {
   guide: Nullable<GuideName>;
   page: number;
   initialData: Nullable<GetAppearancesResult>;
-  scrollPosition: ScrollPosition;
 }
 
-const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData, scrollPosition }) => {
+const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
   const data = useGuide({ guide, page }, initialData || undefined);
   const title = getGuideTitle(guide);
 
@@ -39,7 +37,7 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData, scrollP
       )}
       {data.pagination && <Pagination {...data.pagination} tooltipPos="bottom" />}
       {data.appearances && data.appearances.map(el => (
-        <AppearanceItem key={el.id} appearance={el} scrollPosition={scrollPosition} />
+        <AppearanceItem key={el.id} appearance={el} />
       ))}
       {data.pagination && <Pagination {...data.pagination} tooltipPos="top" listClassName="mb-0" />}
     </Content>
@@ -79,14 +77,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     }
   }
 
-  // TODO Figure out why this causes a redirect loop
-  /* if (initialData) {
-    const expectedPath = PATHS.GUIDE(guide!, { page: String(initialData.pagination.currentPage) });
-    if (fixPath(ctx, expectedPath, ['guide'])) {
-      return;
-    }
-  } */
-
   const title = getGuideTitle(guide, page);
   store.dispatch(coreActions.setTitle(title));
   store.dispatch(coreActions.setBreadcrumbs([
@@ -102,4 +92,4 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   };
 });
 
-export default trackWindowScroll<PropTypes>(ColorGuidePage);
+export default ColorGuidePage;

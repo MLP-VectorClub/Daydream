@@ -1,10 +1,13 @@
+const { CDN_DOMAIN, BACKEND_HOST } = process.env;
 const withPlugins = require('next-compose-plugins');
 const withESLint = require('./utils/next-eslint');
+const withCamelCaseCSSModules = require('./utils/next-css-modules');
 const { promisify } = require('util');
 const execFile = promisify(require('child_process').execFile);
 module.exports = withPlugins(
   [
     [withESLint],
+    [withCamelCaseCSSModules],
   ],
   {
     useFileSystemPublicRoutes: false,
@@ -14,13 +17,15 @@ module.exports = withPlugins(
         const buildId = stdout.trim();
         console.log(`Generated build ID: ${buildId}`);
         return buildId;
-      }
-      catch (e) {
+      } catch (e) {
         const buildId = `;${Math.floor(Date.now())}`;
         console.log(`Failed to generate build id, falling back to dummy value: ${buildId}`);
         console.error(e);
         return buildId;
       }
+    },
+    images: {
+      domains: [CDN_DOMAIN],
     },
     async redirects() {
       return [
@@ -51,7 +56,7 @@ module.exports = withPlugins(
         },
         {
           source: '/api/:path*',
-          destination: `${process.env.BACKEND_HOST}/:path*`,
+          destination: `${BACKEND_HOST}/:path*`,
         },
       ];
     },

@@ -1,0 +1,17 @@
+@mixin sidebar-open {
+  body.sidebar-open {
+    @content;
+  }
+  @include media-breakpoint-up($sidebar-breakpoint-up) {
+    @content;
+  }
+}
+
+@mixin sidebar-closed {
+  body:not(.sidebar-open) {
+    @content;
+  }
+  @include media-breakpoint-down($sidebar-breakpoint-down) {
+    @content;
+  }
+}

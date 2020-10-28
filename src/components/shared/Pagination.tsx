@@ -31,7 +31,6 @@ type PageLinkProps = PropsWithChildren<{
 
 const PageLink: React.FC<PageLinkProps> = ({ number, children, relevantProps, pageParam }) => {
   const router = useRouter();
-  const pathname = router.route;
   const linkParams = useMemo(() => (
     relevantProps
       ? pickBy(router.query, el => typeof el === 'string' && relevantProps.includes(el))
@@ -43,8 +42,7 @@ const PageLink: React.FC<PageLinkProps> = ({ number, children, relevantProps, pa
 
   return (
     <Link
-      href={{ pathname, query }}
-      as={{ pathname: pathWithoutQueryString, query }}
+      href={{ pathname: pathWithoutQueryString, query }}
       passHref
     >
       {children}

@@ -1,11 +1,16 @@
-:root #content.privacy-policy {
-  background: #fff;
-  border-radius: 0;
-  border: 0;
-  box-shadow: 0 2px 3px black;
-  padding: 2em 4em;
-  max-width: 21cm;
-  margin: 0 auto;
+.privacy-policy {
+  background: #fff !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: 0 .06rem .3rem rgba(black, .4);
+  padding: 2em 4em !important;
+  max-width: 21cm !important;
+  margin: 0 auto !important;
+  line-height: 1.2rem;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+  }
 
   h1, h2, p, blockquote {
     font-family: serif !important;
@@ -14,7 +19,7 @@
   a, a:hover {
     color: blue;
     text-decoration: underline !important;
-    font-weight: inherit;
+    font-weight: inherit !important;
     transition: none;
   }
 

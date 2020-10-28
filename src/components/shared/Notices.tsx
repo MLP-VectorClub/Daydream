@@ -10,7 +10,7 @@ const Notices: React.FC = () => {
   const router = useRouter();
   return (
     <div id="notices">
-      <Alert color="warning" className="p-2 mb-2" fade={false}>
+      <Alert color="warning" fade={false}>
         <InlineIcon icon="hard-hat" first />
         {`${common.wipNotice} `}
         <ExternalLink

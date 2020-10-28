@@ -1,4 +1,9 @@
-#guide-list {
+@import "../vars";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.guide-list {
   display: flex;
   flex-flow: row wrap;
   margin: 0;
