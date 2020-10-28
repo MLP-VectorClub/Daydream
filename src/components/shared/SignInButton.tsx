@@ -1,30 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, UncontrolledTooltip } from 'reactstrap';
 import { useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AuthModalSide, Status } from 'src/types';
 import { authActions } from 'src/store/slices';
 import { useAuth, useCsrf } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import { common } from 'src/strings';
-
-interface TooltipContentProps {
-  scheduleUpdate: () => void;
-  text: string;
-}
-
-const TooltipContent: React.FC<TooltipContentProps> = ({ scheduleUpdate, text }) => {
-  useEffect(() => {
-    scheduleUpdate();
-  }, [text]);
-
-  return (
-    <>
-      <LoadingRing inline spaceRight />
-      {text}
-    </>
-  );
-};
+import TooltipContent from 'src/components/shared/TooltipContent';
 
 const BUTTON_ID = 'signin';
 
@@ -47,10 +30,10 @@ const SignInButton: React.FC = () => {
       {disabled && (
         <UncontrolledTooltip target={BUTTON_ID} container="sidebar" placement="bottom">
           {({ scheduleUpdate }) => (
-            <TooltipContent
-              scheduleUpdate={scheduleUpdate}
-              text={csrfLoading ? common.sidebar.csrfInitializing : common.sidebar.authInitializing}
-            />
+            <TooltipContent scheduleUpdate={scheduleUpdate}>
+              <LoadingRing inline spaceRight />
+              {csrfLoading ? common.sidebar.csrfInitializing : common.sidebar.authInitializing}
+            </TooltipContent>
           )}
         </UncontrolledTooltip>
       )}

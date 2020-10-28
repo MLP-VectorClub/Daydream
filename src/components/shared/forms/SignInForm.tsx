@@ -1,4 +1,10 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import React, {
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Alert,
@@ -89,7 +95,7 @@ const SingInForm: React.FC = () => {
     }
 
     setRateLimitTimeout(setTimeout(clearRateLimitTimeout, signIn.error.retryAfter * 1e3));
-  }, [signIn.error]);
+  }, [rateLimitTimeout, signIn.error]);
 
   useEffect(() => {
     const subscription = fromEvent(window, 'beforeunload').subscribe(() => {
@@ -100,13 +106,14 @@ const SingInForm: React.FC = () => {
 
     return () => {
       if (socialAuthPopup.current.timer) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         clearInterval(socialAuthPopup.current.timer);
       }
       subscription.unsubscribe();
     };
   }, []);
 
-  const signInWith = (provider: SocialProvider, popupTitle: string): MouseEventHandler => e => {
+  const signInWith = useCallback((provider: SocialProvider, popupTitle: string): MouseEventHandler => e => {
     e.preventDefault();
 
     socialAuthPopup.current.window = popupOpenCenter(
@@ -133,15 +140,15 @@ const SingInForm: React.FC = () => {
         /* ignore */
       }
     }, 500);
-  };
+  }, []);
 
-  const onSubmit: Parameters<typeof handleSubmit>[0] = data => {
+  const onSubmit: Parameters<typeof handleSubmit>[0] = useCallback(data => {
     dispatch(signInThunk({
       email: data[INPUT_NAMES.EMAIL],
       password: data[INPUT_NAMES.PASSWORD],
       remember: Boolean(data[INPUT_NAMES.REMEMBER]),
     }));
-  };
+  }, [dispatch]);
   const isLoading = signIn.status === Status.LOAD;
   const errors = combineErrors(clientErrors, signIn.error);
 

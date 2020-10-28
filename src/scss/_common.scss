@@ -92,7 +92,7 @@ body {
   }
 }
 
-abbr[aria-label] {
+abbr[aria-label],  time[id] {
   @extend abbr, [title];
 }
 
@@ -113,4 +113,9 @@ abbr[aria-label] {
     font-weight: bold;
     text-decoration: none;
   }
+}
+
+// Prevent RQDt from blocking the entire right edge of the page
+.ReactQueryDevtools button[style*="top:0"] {
+  bottom: initial !important;
 }

@@ -1,20 +1,8 @@
 import { Button, UncontrolledTooltip } from 'reactstrap';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
-
-interface TooltipContentProps {
-  scheduleUpdate: () => void;
-  text: string;
-}
-
-const TooltipContent: React.FC<TooltipContentProps> = ({ scheduleUpdate, text }) => {
-  useEffect(() => {
-    scheduleUpdate();
-  }, [text]);
-
-  return <>{text}</>;
-};
+import TooltipContent from 'src/components/shared/TooltipContent';
 
 interface RevealPasswordButtonProps {
   setPasswordRevealed: (value: boolean) => void;
@@ -35,10 +23,9 @@ const RevealPasswordButton: React.FC<RevealPasswordButtonProps> = ({ setPassword
       </Button>
       <UncontrolledTooltip target={revealBtnRef} fade={false}>
         {({ scheduleUpdate }) => (
-          <TooltipContent
-            text={passwordRevealed ? common.auth.hidePassword : common.auth.showPassword}
-            scheduleUpdate={scheduleUpdate}
-          />
+          <TooltipContent scheduleUpdate={scheduleUpdate}>
+            {passwordRevealed ? common.auth.hidePassword : common.auth.showPassword}
+          </TooltipContent>
         )}
       </UncontrolledTooltip>
     </>

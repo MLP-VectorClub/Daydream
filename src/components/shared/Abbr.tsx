@@ -13,7 +13,7 @@ interface PropTypes {
 const defaultTag = 'abbr';
 
 const Abbr: React.FC<PropTypes> = ({ id, title, children, tag: Tag = defaultTag }) => {
-  const realId: string = useMemo(() => id || `abbr-${md5(title)}`, [id]);
+  const realId: string = useMemo(() => id || `abbr-${md5(title)}`, [id, title]);
   // Only wrap
   const realChildren = typeof id !== 'string' || Tag !== defaultTag ? (
     <Tag id={realId} aria-label={title}>

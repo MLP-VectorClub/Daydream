@@ -9,7 +9,7 @@ import {
 import { ENDPOINTS, isClientSide, requestPromiseMapper } from 'src/utils';
 import { aboutService } from 'src/services';
 
-interface ServerInfoHookValue {
+export interface ServerInfoHookValue {
   serverInfo: Optional<MappedAboutConnectionResult>;
   backendDown: boolean;
   loading: boolean;

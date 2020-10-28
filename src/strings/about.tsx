@@ -27,8 +27,4 @@ export const about = {
     p1: "As you can probably tell we do not host a large majority of images you can see on episode pages, we make use of already established sites. Here's a full list of all providers we can recognize and that you can use to submit images:",
     asterisk: 'Using direct links from these providers is not supported due to the URLs lacking the identifiers necessary for adding both their preview and full size versions to posts.',
   },
-  atSign: {
-    title: "What's after the @ signs in the footer?",
-    p1: (gh: JSX.Element): JSX.Element => <>This website is open source and you can find the code {gh}. What you're seeing is the commit ID which refers to the most recent version of the code the site is currently operating on. Whenever a new update is deployed, the version number changes automatically. The code on the server mirrors the repository exactly with no hidden alterations.</>,
-  },
 };

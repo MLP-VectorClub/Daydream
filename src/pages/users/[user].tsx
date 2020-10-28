@@ -31,7 +31,7 @@ const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
 
   useEffect(() => {
     dispatch(coreActions.setTitle(getProfileTitle(user, authUser.id)));
-  }, [authUser, user]);
+  }, [authUser, dispatch, user]);
 
   return (
     <Content>

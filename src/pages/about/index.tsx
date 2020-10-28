@@ -1,6 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import { CLUB_URL, GITHUB_URL } from 'src/config';
+import {
+  BACKEND_GITHUB_URL,
+  BACKEND_PROJECT_NAME,
+  CLUB_URL,
+  GITHUB_URL,
+  PROJECT_NAME,
+} from 'src/config';
 import { coreActions } from 'src/store/slices';
 import { wrapper } from 'src/store';
 import { getGuideLabel, PATHS } from 'src/utils';
@@ -11,6 +17,7 @@ import FavMe from 'src/components/shared/FavMe';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { about, common } from 'src/strings';
 import Image from 'next/image';
+import InlineIcon from 'src/components/shared/InlineIcon';
 
 export const getStaticProps = wrapper.getServerSideProps(async ctx => {
   const { store } = ctx;
@@ -212,9 +219,17 @@ const AboutPage: React.FC = () => (
       </div>
     </section>
     <section>
-      <h2>{about.atSign.title}</h2>
+      <h2>Can I see the code behind the site?</h2>
       <div>
-        <p>{about.atSign.p1(<ExternalLink href={GITHUB_URL}>on GitHub</ExternalLink>)}</p>
+        <p>Absolutely! Both the front- and backend of this website is open source software, you can find each component on GitHub:</p>
+        <ul>
+          <li>Frontend: <ExternalLink href={GITHUB_URL}>{PROJECT_NAME}</ExternalLink></li>
+          <li>Backend: <ExternalLink href={BACKEND_GITHUB_URL}>{BACKEND_PROJECT_NAME}</ExternalLink></li>
+        </ul>
+        <p>
+          Additionally, the footer will always display the versions of each repository currently being used by the application.
+          To show this information, simply click the <InlineIcon icon="chevron-right" fixedWidth /> icon in front of the last update time.
+        </p>
       </div>
     </section>
   </Content>

@@ -41,7 +41,7 @@ const OAuthPage: React.FC = () => {
     }
 
     return () => setLayoutDisabled(false);
-  }, []);
+  }, [setLayoutDisabled]);
 
   useEffect(() => {
     if (!success) return;
@@ -54,7 +54,7 @@ const OAuthPage: React.FC = () => {
 
     if (closeFnRef.current) closeFnRef.current();
     else void replace(PATHS.USER_LONG(user as User));
-  }, [authorized]);
+  }, [authorized, replace, user]);
 
   const header = `${provider} OAuth 2.0 Authentication`;
 

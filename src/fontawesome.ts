@@ -22,6 +22,8 @@ import {
   faEllipsisH,
   faChevronUp,
   faChevronDown,
+  faChevronLeft,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
@@ -46,6 +48,8 @@ library.add(
   faEllipsisH,
   faChevronUp,
   faSignOutAlt,
+  faChevronLeft,
+  faChevronRight,
   faChevronDown,
   faCircleNotch,
   faCheckCircle,

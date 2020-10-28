@@ -19,7 +19,9 @@ interface PropTypes {
 export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forwardedFor, initialServerInfo }) => {
   const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
 
-  const getServerInfo = useCallback((key: keyof MappedAboutConnectionResult) => (!fetching && serverInfo ? serverInfo[key] : null), []);
+  const getServerInfo = useCallback((key: keyof MappedAboutConnectionResult) => (
+    !fetching && serverInfo ? serverInfo[key] : null
+  ), [fetching, serverInfo]);
 
   return (
     <Content>

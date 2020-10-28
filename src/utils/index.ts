@@ -1,6 +1,7 @@
 export * from 'src/utils/build-id-parser';
 export * from 'src/utils/color-guide';
 export * from 'src/utils/common';
+export * from 'src/utils/dates';
 export * from 'src/utils/endpoints';
 export * from 'src/utils/forms';
 export * from 'src/utils/guest-avatar';

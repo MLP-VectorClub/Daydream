@@ -74,7 +74,7 @@ const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, t
   }, [tooltipOpen, defaultValue]);
   const handleKeypress = useCallback((e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter' || e.key === ' ') toggleTooltip();
-  }, []);
+  }, [toggleTooltip]);
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setTarget(parseInt(e.target.value, 10));
   }, []);

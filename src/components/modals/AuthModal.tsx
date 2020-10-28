@@ -30,7 +30,7 @@ const AuthModal: React.FC = () => {
     if (signedIn && authModal.open) {
       dispatch(authActions.closeAuthModal());
     }
-  }, [signedIn]);
+  }, [authModal.open, dispatch, signedIn]);
 
   if (signedIn) return null;
 
