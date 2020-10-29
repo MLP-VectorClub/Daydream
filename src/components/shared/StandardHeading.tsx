@@ -5,7 +5,7 @@ interface PropTypes {
   lead?: ReactNode;
 }
 
-const StandardHeading: React.FC<PropTypes> = ({ heading, lead }) => (
+const StandardHeading: React.VFC<PropTypes> = ({ heading, lead }) => (
   <>
     <h1>{heading}</h1>
     <p className="lead">{lead}</p>

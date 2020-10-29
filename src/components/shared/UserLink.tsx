@@ -4,11 +4,12 @@ import React from 'react';
 
 interface PropTypes extends ProfileLinkOptions {
   text?: string;
+  userLinkClass?: string;
 }
 
-const UserLink: React.FC<PropTypes> = ({ text, ...rest }) => (
+const UserLink: React.FC<PropTypes> = ({ text, userLinkClass = 'user-link', ...rest }) => (
   <Link href={getProfileLink(rest)}>
-    <a className="user-link">{text || rest.name}</a>
+    <a className={userLinkClass}>{text || rest.name}</a>
   </Link>
 );
 

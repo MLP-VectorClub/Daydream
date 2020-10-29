@@ -7,7 +7,7 @@ import {
   UnifiedErrorResponseTypes,
 } from 'src/types';
 import { ENDPOINTS, isClientSide, requestPromiseMapper } from 'src/utils';
-import { aboutService } from 'src/services';
+import { AboutService } from 'src/services';
 
 export interface ServerInfoHookValue {
   serverInfo: Optional<MappedAboutConnectionResult>;
@@ -17,7 +17,7 @@ export interface ServerInfoHookValue {
   makeStale: VoidFunction;
 }
 
-export const connectionFetcher = () => requestPromiseMapper(aboutService.getConnection());
+export const connectionFetcher = () => requestPromiseMapper(AboutService.getConnection());
 
 export function useConnectionInfo(initialData?: GetAboutConnectionResult): ServerInfoHookValue {
   const key = ENDPOINTS.CONNECTION_INFO;

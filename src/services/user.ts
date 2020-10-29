@@ -6,7 +6,7 @@ import {
   GetUsersIdRequest,
   GetUsersIdResult,
   GetUsersMeResult,
-  GetUsersTokensRequest,
+  GetUsersResult,
   GetUsersTokensResult,
   PostUsersOauthSigninProviderResult,
   PostUsersRequest,
@@ -18,27 +18,29 @@ import {
 } from 'src/types';
 import { ENDPOINTS } from 'src/utils';
 
-export const getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
+export class UserService {
+  static getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
 
-export const getById = (data: GetUsersIdRequest) =>
-  Axios.get<GetUsersIdResult>(ENDPOINTS.USERS_BY_ID(data));
+  static getById = (data: GetUsersIdRequest) =>
+    Axios.get<GetUsersIdResult>(ENDPOINTS.USERS_BY_ID(data));
 
-export const getByDaName = (data: GetUsersDaUsernameRequest) =>
-  Axios.get<GetUsersDaUsernameResult>(ENDPOINTS.USERS_BY_USERNAME(data));
+  static getByDaName = (data: GetUsersDaUsernameRequest) =>
+    Axios.get<GetUsersDaUsernameResult>(ENDPOINTS.USERS_BY_USERNAME(data));
 
-export const signIn = (data: PostUsersSigninRequest) =>
-  Axios.post<PostUsersSigninResult>(ENDPOINTS.USERS_SIGNIN, data);
+  static signIn = (data: PostUsersSigninRequest) =>
+    Axios.post<PostUsersSigninResult>(ENDPOINTS.USERS_SIGNIN, data);
 
-export const signInOauth = (data: RegisterOauthRequest) =>
-  Axios.post<PostUsersOauthSigninProviderResult>(ENDPOINTS.USERS_OAUTH_SIGNIN_PROVIDER(data), data);
+  static signInOauth = (data: RegisterOauthRequest) =>
+    Axios.post<PostUsersOauthSigninProviderResult>(ENDPOINTS.USERS_OAUTH_SIGNIN_PROVIDER(data), data);
 
-export const signOut = () => Axios.post<PostUsersSignoutResult>(ENDPOINTS.USERS_SIGNOUT, null);
+  static signOut = () => Axios.post<PostUsersSignoutResult>(ENDPOINTS.USERS_SIGNOUT, null);
 
-export const register = (data: PostUsersRequest) =>
-  Axios.post<PostUsersResult>(ENDPOINTS.USERS, data);
+  static register = (data: PostUsersRequest) =>
+    Axios.post<PostUsersResult>(ENDPOINTS.USERS, data);
 
-export const getTokens = (data: GetUsersTokensRequest) =>
-  Axios.post<GetUsersTokensResult>(ENDPOINTS.USERS_TOKENS, data);
+  static getTokens = () => Axios.post<GetUsersTokensResult>(ENDPOINTS.USERS_TOKENS);
 
-export const getPrefs = () =>
-  Axios.get<GetUserPrefsMeResult>(ENDPOINTS.USER_PREFS_ME);
+  static getPrefs = () => Axios.get<GetUserPrefsMeResult>(ENDPOINTS.USER_PREFS_ME);
+
+  static getList = () => Axios.get<GetUsersResult>(ENDPOINTS.USERS);
+}

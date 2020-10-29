@@ -1,5 +1,9 @@
 import Axios from 'axios';
 import { ENDPOINTS } from 'src/utils';
-import { GetAboutConnectionResult } from 'src/types';
+import { GetAboutConnectionResult, GetAboutMembersResult } from 'src/types';
 
-export const getConnection = () => Axios.get<GetAboutConnectionResult>(ENDPOINTS.CONNECTION_INFO);
+export class AboutService {
+  static getConnection = () => Axios.get<GetAboutConnectionResult>(ENDPOINTS.CONNECTION_INFO);
+
+  static getMembers = () => Axios.get<GetAboutMembersResult>(ENDPOINTS.MEMBERS);
+}

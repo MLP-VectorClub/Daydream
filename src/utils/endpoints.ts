@@ -12,6 +12,7 @@ import { API_PREFIX } from 'src/config';
 export const ENDPOINTS = {
   SLEEP: `${API_PREFIX}/about/sleep`,
   CONNECTION_INFO: `${API_PREFIX}/about/connection`,
+  MEMBERS: `${API_PREFIX}/about/members`,
   CSRF_INIT: `${API_PREFIX}/sanctum/csrf-cookie`,
   USER_PREFS_ME: `${API_PREFIX}/user-prefs/me`,
   USERS: `${API_PREFIX}/users`,

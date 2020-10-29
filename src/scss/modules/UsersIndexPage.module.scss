@@ -1,0 +1,5 @@
+.users-page-content section {
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}

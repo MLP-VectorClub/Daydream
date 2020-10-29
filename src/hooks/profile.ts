@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { GetUsersDaUsernameRequest, GetUsersIdRequest, Optional, PublicUser } from 'src/types';
 import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
-import { userService } from 'src/services';
+import { UserService } from 'src/services';
 import { useCsrf } from 'src/hooks/core';
 
 interface UserHookValue {
@@ -38,9 +38,9 @@ export const getUserFetcherKey = (params: FetchUserParams) => {
 };
 
 export const userFetcher = (params: FetchUserParams) => () => {
-  if ('id' in params) return requestPromiseMapper(userService.getById(params));
+  if ('id' in params) return requestPromiseMapper(UserService.getById(params));
 
-  if ('username' in params) return requestPromiseMapper(userService.getByDaName(params));
+  if ('username' in params) return requestPromiseMapper(UserService.getByDaName(params));
 
   throw new Error(`${userFetcher.name}: Invalid params parameter: ${JSON.stringify(params, null, 2)}`);
 };

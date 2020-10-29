@@ -39,6 +39,8 @@ export const common = {
     latestEpisode: 'Latest Episode',
     privacyPolicy: 'Privacy Policy',
     users: 'Users',
+    members: 'Members',
+    clubMembers: 'Club Members',
     account: 'Account',
     home: 'Home',
   },

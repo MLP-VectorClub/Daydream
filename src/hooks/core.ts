@@ -1,8 +1,8 @@
 import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
 import { useQuery } from 'react-query';
-import { coreService } from 'src/services';
+import { CoreService } from 'src/services';
 
-const csrfFetcher = () => coreService.initCsrf().then(r => r.status === 204);
+const csrfFetcher = () => CoreService.initCsrf().then(r => r.status === 204);
 
 export function useCsrf() {
   const { data } = useQuery(ENDPOINTS.CSRF_INIT, csrfFetcher, {
@@ -13,7 +13,7 @@ export function useCsrf() {
   return data;
 }
 
-const usefulLinksFetcher = () => requestPromiseMapper(coreService.getSidebarUsefulLinks());
+const usefulLinksFetcher = () => requestPromiseMapper(CoreService.getSidebarUsefulLinks());
 
 export function useSidebarUsefulLinks(enabled: boolean) {
   const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, usefulLinksFetcher, { enabled });

@@ -1,0 +1,42 @@
+@import "../vars";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "../mixins/reserve-button";
+
+.user-link-with-avatar {
+  $image-height: 1.5em;
+
+  @include reserve-button;
+
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  font-style: normal;
+  font-size: $image-height;
+  line-height: 1em;
+  height: 1em;
+  vertical-align: middle;
+  border: none;
+
+  &.local {
+    background: lighten($primary, 47);
+  }
+
+  > * {
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  .avatar {
+    height: 1em;
+    width: 1em;
+    border-radius: inherit;
+  }
+
+  .name {
+    display: inline-block;
+    margin: 0 .3em;
+    font-size: .5em;
+    line-height: 2em;
+  }
+}

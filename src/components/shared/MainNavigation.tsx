@@ -2,7 +2,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useMemo } from 'react';
 import Link from 'next/link';
-import { getProfileLink, PATHS, permission } from 'src/utils';
+import { getProfileLink, PATHS } from 'src/utils';
 import { CLUB_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -10,7 +10,7 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
 
 const MainNavigation = () => {
-  const { signedIn, user } = useAuth();
+  const { signedIn, user, isStaff } = useAuth();
   const prefs = usePrefs(signedIn);
   const defaultGuideLink = useMemo<string>(() => (
     prefs?.cgDefaultguide ? PATHS.GUIDE(prefs.cgDefaultguide) : PATHS.GUIDE_INDEX
@@ -58,7 +58,7 @@ const MainNavigation = () => {
           </Link>
         </NavItem>
       )}
-      {permission(user.role, 'staff') && (
+      {isStaff ? (
         <>
           <NavItem>
             <Link href={PATHS.USERS} passHref>
@@ -71,6 +71,12 @@ const MainNavigation = () => {
             </Link>
           </NavItem>
         </>
+      ) : (
+        <NavItem>
+          <Link href={PATHS.USERS} passHref>
+            <NavLink>{common.titles.members}</NavLink>
+          </Link>
+        </NavItem>
       )}
       <NavItem>
         <Link href={PATHS.ABOUT} passHref>

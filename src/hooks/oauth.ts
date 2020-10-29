@@ -8,10 +8,10 @@ import {
   Status,
   UnifiedErrorResponse,
 } from 'src/types';
-import { signInOauth } from 'src/services/user';
+import { UserService } from 'src/services/user';
 import { useAuth } from 'src/hooks/auth';
 
-const oauthRegistrationFetcher = (data: RegisterOauthRequest) => () => requestPromiseMapper(signInOauth(data));
+const oauthRegistrationFetcher = (data: RegisterOauthRequest) => () => requestPromiseMapper(UserService.signInOauth(data));
 
 export function useOAuth(query: ParsedUrlQuery) {
   const { authCheck, user } = useAuth();

@@ -166,7 +166,13 @@
     "react/no-danger": "off",
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-key": [
+      "error",
+      {
+        "checkFragmentShorthand": true
+      }
+    ]
   },
   "settings": {
     "import/parsers": {

@@ -393,15 +393,18 @@ export type UsefulLink = PublicUsefulLink & {
 };
 
 /**
- * Represents a publicly accessible representation of a user
+ * Represents the absolute minimum info necessary to get a user profile URL
  */
-export interface PublicUser {
+export interface BarePublicUser {
   id: number;
   name: string;
   role: Role;
+}
+
+export type PublicUser = BarePublicUser & {
   avatarUrl: string;
   avatarProvider: AvatarProvider;
-}
+};
 
 export type User = PublicUser & {
   email: string;
@@ -446,8 +449,6 @@ export interface CommitData {
  */
 export type AppSettings = "dev_role_label";
 
-export interface GetAboutConnectionRequest {
-}
 export interface GetAppearancesRequest {
   guide: GuideName
   page: PageNumber
@@ -475,30 +476,18 @@ export interface GetUsersOauthSigninProviderRequest {
 }
 export type PostUsersOauthSigninProviderRequest = OauthCode
 export type PostUsersRequest = RegistrationRequest
-export interface GetColorGuidesRequest {
-}
-export interface GetSanctumCsrfCookieRequest {
-}
-export interface GetUsefulLinksSidebarRequest {
-}
-export interface GetUserPrefsMeRequest {
-}
-export interface GetUsersMeRequest {
-}
 export interface GetUsersDaUsernameRequest {
   username: string
 }
 export interface GetUsersIdRequest {
   id: OneBasedId
 }
-export interface PostUsersSignoutRequest {
-}
-export interface GetUsersTokensRequest {
-}
 export interface DeleteUsersTokensIdRequest {
   id: number
 }
 export type GetAboutConnectionResult = ConnectionInfo & CommitData;
+
+export type GetAboutMembersResult = PublicUser[];
 
 export type GetAppearancesResult = AppearanceList & PageData;
 
@@ -520,6 +509,8 @@ export interface PostUsersOauthSigninProviderResult {
 }
 
 export type PostUsersOauthSigninProvider204 = any
+export type GetUsersResult = BarePublicUser[];
+
 export interface PostUsersResult {
   token?: string;
 }

@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
-import { getMe } from 'src/services/user';
 import { FailsafeUser, Status, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
-import { ENDPOINTS, mapQueryStatus, requestPromiseMapper } from 'src/utils';
+import { ENDPOINTS, mapQueryStatus, permission, requestPromiseMapper } from 'src/utils';
 import { useCsrf } from 'src/hooks/core';
+import { UserService } from 'src/services';
 
 const guestUser: FailsafeUser = {
   id: null,
@@ -16,12 +16,13 @@ const guestUser: FailsafeUser = {
 interface CurrentUserHookValue {
   signedIn: boolean;
   user: FailsafeUser;
+  isStaff: boolean;
   authCheck: {
     status: Status;
   };
 }
 
-const currentUserFetcher = () => requestPromiseMapper(getMe());
+const currentUserFetcher = () => requestPromiseMapper(UserService.getMe());
 
 export function useAuth(): CurrentUserHookValue {
   const csrf = useCsrf();
@@ -36,6 +37,7 @@ export function useAuth(): CurrentUserHookValue {
   return {
     signedIn,
     user: signedIn ? user! : guestUser,
+    isStaff: signedIn && permission(user!.role, 'staff'),
     authCheck: {
       status: mapQueryStatus(status),
     },
