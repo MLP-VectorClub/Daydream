@@ -33,7 +33,7 @@ export const getStaticProps = wrapper.getServerSideProps(async ctx => {
 const AboutPage: React.FC = () => (
   <Content>
     <div className="d-flex justify-content-center">
-      <Image src="/img/logo.svg" alt="MLP Vector Club Website Logo" id="about-logo" width={200} height={200} />
+      <Image src="/img/logo.svg" alt="MLP Vector Club Website Logo" id="about-logo" width={200} height={200} priority unoptimized />
     </div>
     <StandardHeading
       heading={about.website(<ExternalLink href={CLUB_URL}>MLP-VectorClub</ExternalLink>)}
