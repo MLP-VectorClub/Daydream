@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, NextPageContext } from 'next';
-import { isEmpty, mapValues, omit, omitBy } from 'lodash';
+import { mapValues, omit, omitBy } from 'lodash';
 import { parseRelativeUrl } from 'next/dist/next-server/lib/router/utils/parse-relative-url';
-import buildUrl from 'build-url';
+import { buildUrl } from 'src/utils/url';
 
 export const redirect = <T extends NextPageContext = NextPageContext>(ctx: T, path: string) => {
   const { res } = ctx;
@@ -39,11 +39,7 @@ export const fixPath = (
     ),
     el => typeof el === 'undefined',
   ), String);
-  const requestUrl = buildUrl('', {
-    path: requestUrlParts.pathname,
-    hash: requestUrlParts.hash,
-    queryParams: isEmpty(strippedParams) ? undefined : strippedParams,
-  });
+  const requestUrl = buildUrl(requestUrlParts.pathname, strippedParams) + requestUrlParts.hash;
 
   if (requestUrl === expectedPath) return false;
 

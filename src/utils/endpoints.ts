@@ -1,6 +1,6 @@
-import buildUrl from 'build-url';
 import { mapValues, omitBy } from 'lodash';
 import {
+  GetAppearancesAllRequest,
   GetAppearancesIdSpriteRequestOptionals,
   GetAppearancesRequestOptionals,
   GetUsersDaUsernameRequest,
@@ -8,6 +8,7 @@ import {
   GetUsersOauthSigninProviderRequest,
 } from 'src/types';
 import { API_PREFIX } from 'src/config';
+import { buildUrl } from 'src/utils/url';
 
 export const ENDPOINTS = {
   SLEEP: `${API_PREFIX}/about/sleep`,
@@ -30,15 +31,10 @@ export const ENDPOINTS = {
     `${API_PREFIX}/users/da/${encodeURI(params.username)}`,
   GUIDE_INDEX: `${API_PREFIX}/color-guides`,
   APPEARANCES: (params: GetAppearancesRequestOptionals) =>
-    buildUrl('', {
-      path: `${API_PREFIX}/appearances`,
-      queryParams: mapValues(omitBy(params, value => typeof value === 'undefined' || value === null), String),
-    }),
+    buildUrl(`${API_PREFIX}/appearances`, mapValues(omitBy(params, value => typeof value === 'undefined' || value === null), String)),
+  APPEARANCES_FULL: (params: GetAppearancesAllRequest) => buildUrl(`${API_PREFIX}/appearances/full`, params),
   APPEARANCE_SPRITE: (appearanceId: number, params: GetAppearancesIdSpriteRequestOptionals) =>
-    buildUrl('', {
-      path: `${API_PREFIX}/appearances/${appearanceId}/sprite`,
-      queryParams: mapValues(omitBy(params, value => typeof value === 'undefined'), String),
-    }),
+    buildUrl(`${API_PREFIX}/appearances/${appearanceId}/sprite`, mapValues(omitBy(params, value => typeof value === 'undefined'), String)),
   /*
   APPEARANCE_PALETTE: (appearanceId: number) =>
     buildUrl('', {

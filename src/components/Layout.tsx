@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { PROD_APP_URL } from 'src/config';
-import { Nullable } from 'src/types';
-import { assembleSeoUrl } from 'src/utils';
+import { assembleSeoUrl, isClientSide } from 'src/utils';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Sidebar from 'src/components/Sidebar';
@@ -15,11 +12,7 @@ import { useLayout } from 'src/hooks';
 import Breadcrumbs from 'src/components/shared/Breadcrumbs';
 import Notices from 'src/components/shared/Notices';
 
-type PropTypes = {
-  url?: Nullable<string>;
-}
-
-const Layout = (({ children }) => {
+const Layout: FC = ({ children }) => {
   const { disabled } = useLayout();
   const router = useRouter();
 
@@ -31,11 +24,13 @@ const Layout = (({ children }) => {
     return <>{children}</>;
   }
 
+  const host = isClientSide ? location.host : undefined;
+
   return (
     <div>
       <NextSeo
         openGraph={{
-          url: router.asPath || PROD_APP_URL,
+          url: assembleSeoUrl(host, router.asPath),
           locale: 'en-US',
         }}
       />
@@ -46,23 +41,16 @@ const Layout = (({ children }) => {
       </Head>
       <Header />
       <Sidebar />
-      <div id="above-content">
+      <aside id="above-content">
         <Breadcrumbs />
         <Notices />
-      </div>
-      <div id="main">
+      </aside>
+      <main id="main">
         {children}
-      </div>
+      </main>
       <Footer />
     </div>
   );
-}) as NextPage<PropTypes>;
-
-Layout.getInitialProps = async ctx => {
-  const url = ctx.req ? assembleSeoUrl(ctx.req.headers.host, ctx.pathname) : PROD_APP_URL;
-  return {
-    url,
-  };
 };
 
 export default Layout;

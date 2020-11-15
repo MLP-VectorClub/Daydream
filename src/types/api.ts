@@ -44,6 +44,11 @@
 export type AvatarProvider = "deviantart" | "discord" | "gravatar";
 
 /**
+ * List of possible sorting options for the full guide page
+ */
+export type FullGuideSortField = "label" | "added" | "relevance";
+
+/**
  * List of available color guides
  */
 export type GuideName = "pony" | "eqg" | "pl";
@@ -164,9 +169,12 @@ export interface ConnectionInfo {
   proxiedIps: string;
 }
 
-export type SlimAppearanceList = ErrorResponse & {
+/**
+ * An array of less resource intensive appearances under the appearances key
+ */
+export interface SlimAppearanceList {
   appearances: SlimAppearance[];
-};
+}
 
 /**
  * An array of appearances under the appearances key
@@ -175,10 +183,7 @@ export interface AppearanceList {
   appearances: Appearance[];
 }
 
-/**
- * Optional parameter that indicates whether you would like to get preview image data with the request. Typically unnecessary unless you want to display a temporary image while the larger image loads.
- */
-export type PreviewsIndicator = true;
+export type PreviewsIndicator = ErrorResponse;
 
 /**
  * Used for displaying items in a specific order. The API guarantees that array return values are sorted in ascending order based on this property.
@@ -218,7 +223,9 @@ export interface CommonAppearance {
 /**
  * Represents properties that belong to the slim appearance object only
  */
-export type SlimAppearanceOnly = CommonAppearance;
+export interface SlimAppearanceOnly {
+  characterTagNames: string[];
+}
 
 /**
  * A less heavy version of the regular Appearance schema
@@ -421,6 +428,15 @@ export interface Token {
   createdAt: IsoStandardDate;
 }
 
+export interface GuideFullListGroupItem {
+  name?: string;
+  appearanceIds: OneBasedId[];
+}
+
+export interface GuideFullListGroups {
+  groups: GuideFullListGroupItem[];
+}
+
 export interface PageData {
   pagination: {
     currentPage: number;
@@ -457,6 +473,7 @@ export interface GetAppearancesRequest {
 }
 export interface GetAppearancesAllRequest {
   guide: GuideName
+  sort: FullGuideSortField
 }
 export interface GetAppearancesIdColorGroupsRequest {
   id: ZeroBasedId
@@ -491,7 +508,7 @@ export type GetAboutMembersResult = PublicUser[];
 
 export type GetAppearancesResult = AppearanceList & PageData;
 
-export type GetAppearancesAllResult = SlimAppearanceList;
+export type GetAppearancesAllResult = SlimAppearanceList & GuideFullListGroups;
 
 export type GetAppearancesIdColorGroupsResult = ListOfColorGroups;
 

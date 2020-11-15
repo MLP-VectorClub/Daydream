@@ -1,11 +1,18 @@
 import { config, library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
+  faArrowCircleLeft,
   faArrowUp,
   faBars,
+  faCaretDown,
   faCheck,
   faCheckCircle,
+  faChevronDown,
+  faChevronLeft,
+  faChevronRight,
+  faChevronUp,
   faCircleNotch,
+  faEllipsisH,
   faExclamationTriangle,
   faExternalLinkAlt,
   faEye,
@@ -14,16 +21,13 @@ import {
   faHardHat,
   faHome,
   faInfo,
+  faPlus,
   faSignInAlt,
   faSignOutAlt,
+  faSort,
   faSync,
   faTimes,
   faUserPlus,
-  faEllipsisH,
-  faChevronUp,
-  faChevronDown,
-  faChevronLeft,
-  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
@@ -37,6 +41,8 @@ library.add(
   faBars,
   faSync,
   faHome,
+  faPlus,
+  faSort,
   faCheck,
   faGlobe,
   faTimes,
@@ -47,6 +53,7 @@ library.add(
   faSignInAlt,
   faEllipsisH,
   faChevronUp,
+  faCaretDown,
   faSignOutAlt,
   faChevronLeft,
   faChevronRight,
@@ -54,5 +61,6 @@ library.add(
   faCircleNotch,
   faCheckCircle,
   faExternalLinkAlt,
+  faArrowCircleLeft,
   faExclamationTriangle,
 );

@@ -4,12 +4,7 @@ export const colorGuide = {
     lead: 'Here you can find all color guides maintained by the club staff',
     breadcrumb: 'Color Guides',
   },
-  guideName: {
-    unknown: 'Unknown',
-    pony: 'Friendship is Magic',
-    pl: 'Pony Life',
-    eqg: 'Equestria Girls',
-  },
+  unknownGuide: 'Unknown',
   appearances: {
     cmAvailable: 'Cutie mark available',
   },

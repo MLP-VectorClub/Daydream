@@ -1,7 +1,7 @@
-import BuildUrl from 'build-url';
 import md5 from 'md5';
 import { Nullable, Numeric } from 'src/types';
 import { GUEST_AVATAR } from 'src/config';
+import { buildUrl } from 'src/utils/url';
 
 interface GetAvatarOptions {
   email: Nullable<string>;
@@ -17,9 +17,7 @@ export const getAvatar = ({ email, emailHash, size }: GetAvatarOptions) => {
     hash = md5(email);
   }
 
-  return BuildUrl(`https://s.gravatar.com/avatar/${hash}`, {
-    queryParams: {
-      s: String(size),
-    },
+  return buildUrl(`https://s.gravatar.com/avatar/${hash}`, {
+    s: String(size),
   });
 };

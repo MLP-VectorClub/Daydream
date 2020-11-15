@@ -5,7 +5,7 @@ import { GuideName } from 'src/types';
 
 export const APP_NAME = 'MLP Vector Club';
 export const OLD_SITE_URL = 'https://mlpvector.club';
-export const PROD_APP_URL = 'https://new.mlpvector.club';
+export const PROD_APP_URL = 'https://next.mlpvector.club';
 export const PROD_API_URL = 'https://api.mlpvector.club';
 export const DEV_API_URL = 'https://api.mlpvector.lc';
 

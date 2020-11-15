@@ -13,7 +13,7 @@ body {
   }
 
   @include media-breakpoint-up(lg) {
-    @include white-grid;
+    @include gray-grid;
   }
 
   @include media-breakpoint-down(md) {
@@ -47,6 +47,11 @@ body {
 
 #content > :last-child {
   margin-bottom: 0 !important;
+}
+
+// Bootstrap dropdown overrides
+.dropdown-header {
+  font-family: $font-family-base !important;
 }
 
 // Bootstrap modal overrides
@@ -109,7 +114,7 @@ abbr[aria-label],  time[id] {
 }
 
 #content, .modal-content, .notice {
-  a:not(.btn) {
+  a:not(.btn):not(.dropdown-item) {
     font-weight: bold;
     text-decoration: none;
   }

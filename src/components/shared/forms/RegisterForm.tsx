@@ -179,7 +179,7 @@ const RegisterForm: React.FC = () => {
           label={<AcceptPrivacyPolicy />}
           invalid={INPUT_NAMES.PRIVACY in errors}
           disabled={isLoading}
-          innerRef={r(validateRequired('acceptPrivacyPolicy'))}
+          innerRef={r<HTMLInputElement>(validateRequired('acceptPrivacyPolicy'))}
         />
         <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.PRIVACY} />
       </FormGroup>

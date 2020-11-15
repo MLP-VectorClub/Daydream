@@ -16,7 +16,7 @@
 
   @include media-breakpoint-down(md) {
     padding: 5px;
-    @include white-grid;
+    @include gray-grid;
   }
 
   @include media-breakpoint-up(lg){

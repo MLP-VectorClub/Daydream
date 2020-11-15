@@ -7,8 +7,8 @@ interface PropTypes {
 
 const StandardHeading: React.VFC<PropTypes> = ({ heading, lead }) => (
   <>
-    <h1>{heading}</h1>
-    <p className="lead">{lead}</p>
+    <h1 className="page-heading">{heading}</h1>
+    <div className="lead page-lead">{lead}</div>
   </>
 );
 export default StandardHeading;

@@ -1,5 +1,11 @@
 import Axios from 'axios';
-import { GetAppearancesRequestOptionals, GetAppearancesResult, GetColorGuidesResult } from 'src/types';
+import {
+  GetAppearancesAllRequest,
+  GetAppearancesAllResult,
+  GetAppearancesRequestOptionals,
+  GetAppearancesResult,
+  GetColorGuidesResult,
+} from 'src/types';
 import { ENDPOINTS } from 'src/utils';
 
 export class ColorGuideService {
@@ -8,4 +14,7 @@ export class ColorGuideService {
 
   static getIndexData = () =>
     Axios.get<GetColorGuidesResult>(ENDPOINTS.GUIDE_INDEX);
+
+  static getFullList = (data: GetAppearancesAllRequest) =>
+    Axios.get<GetAppearancesAllResult>(ENDPOINTS.APPEARANCES_FULL(data));
 }

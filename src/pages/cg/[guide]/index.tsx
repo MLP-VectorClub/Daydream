@@ -1,4 +1,4 @@
-import { Alert } from 'reactstrap';
+import { Button } from 'reactstrap';
 import React from 'react';
 import { AxiosError } from 'axios';
 import { GetAppearancesResult, GuideName, Nullable, Optional } from 'src/types';
@@ -12,12 +12,21 @@ import {
 } from 'src/utils';
 import { coreActions } from 'src/store/slices';
 import { wrapper } from 'src/store';
-import { guideFetcher, useGuide } from 'src/hooks';
+import { guideFetcher, useAuth, useGuide } from 'src/hooks';
 import AppearanceItem from 'src/components/colorguide/AppearanceItem';
 import Pagination from 'src/components/shared/Pagination';
 import Content from 'src/components/shared/Content';
 import { NextPage } from 'next';
 import { colorGuide } from 'src/strings';
+import StandardHeading from 'src/components/shared/StandardHeading';
+import ContactLink from 'src/components/shared/ContactLink';
+import ExternalLink from 'src/components/shared/ExternalLink';
+import Link from 'next/link';
+import GuideNotFound from 'src/components/colorguide/GuideNotFound';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import ButtonCollection from 'src/components/shared/ButtonCollection';
+import MajorChangesButton from 'src/components/colorguide/MajorChangesButton';
+import StatusAlert from 'src/components/shared/StatusAlert';
 
 interface PropTypes {
   guide: Nullable<GuideName>;
@@ -26,15 +35,46 @@ interface PropTypes {
 }
 
 const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
+  const { isStaff } = useAuth();
   const data = useGuide({ guide, page }, initialData || undefined);
-  const title = getGuideTitle(guide);
+  const heading = getGuideTitle(guide);
+  if (guide === null) {
+    return <GuideNotFound heading={heading} />;
+  }
+
+  const lead = `A searchable list of character colors from the ${guide === 'eqg' ? 'movies' : 'series'}`;
 
   return (
     <Content>
-      <h1>{title}</h1>
-      {guide === null && (
-        <Alert color="danger" className="mt-3 mb-0">There is no guide by the specified name</Alert>
-      )}
+      <StandardHeading heading={heading} lead={lead} />
+      <p className="text-center">
+        We add characters based on demand, please <ContactLink>let us know</ContactLink> if you'd like us to make a guide for a character.
+        <br />
+        <small>
+          Alternatively, use the old color guides:{' '}
+          <ExternalLink href="https://sta.sh/0kic0ngp3fy">Pony</ExternalLink>
+          {' / '}
+          <ExternalLink href="http://fav.me/d7120l1">EQG</ExternalLink>
+        </small>
+        <br />
+        Can't find links that were here previously? Some links were moved to the <Link href={PATHS.GUIDE_INDEX}><a>guide list</a></Link>.
+      </p>
+      <ButtonCollection>
+        {isStaff && (
+          <Button color="success" size="sm" disabled>
+            <InlineIcon icon="plus" first />
+            Add new {guide === 'eqg' ? 'Character' : 'Pony'}
+          </Button>
+        )}
+        <Link href={PATHS.GUIDE_FULL(guide)} passHref>
+          <Button color="link" size="sm">
+            <InlineIcon icon="bars" first />
+            Full List
+          </Button>
+        </Link>
+        <MajorChangesButton guide={guide} />
+      </ButtonCollection>
+      <StatusAlert status={data.status} noun="color guide entries" />
       {data.pagination && <Pagination {...data.pagination} tooltipPos="bottom" />}
       {data.appearances && data.appearances.map(el => (
         <AppearanceItem key={el.id} appearance={el} />

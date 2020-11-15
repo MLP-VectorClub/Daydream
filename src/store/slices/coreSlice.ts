@@ -25,6 +25,7 @@ const coreSlice = createSlice({
   initialState,
   reducers: {
     [HYDRATE](state, action: PayloadAction<{ core: CoreState }>) {
+      // TODO Handle breadcrumbs that can change on client side
       return { ...state, ...action.payload.core };
     },
     toggleSidebar(state, action: PayloadAction<boolean | undefined>) {

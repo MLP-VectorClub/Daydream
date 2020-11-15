@@ -37,10 +37,10 @@ import { authActions } from 'src/store/slices';
 import {
   combineErrors,
   ENDPOINTS,
+  popupOpenCenter,
   validateEmail,
   validatePassword,
   validateRequired,
-  popupOpenCenter,
 } from 'src/utils';
 import { SOCIAL_PROVIDERS } from 'src/fancy-config';
 import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages';
@@ -219,7 +219,13 @@ const SingInForm: React.FC = () => {
       </FormGroup>
 
       <FormGroup>
-        <CustomInput type="checkbox" name={INPUT_NAMES.REMEMBER} label={common.auth.rememberMe} id="remember-me" innerRef={r()} />
+        <CustomInput
+          type="checkbox"
+          name={INPUT_NAMES.REMEMBER}
+          label={common.auth.rememberMe}
+          id="remember-me"
+          innerRef={r<HTMLInputElement>()}
+        />
       </FormGroup>
 
       {signIn.error?.type === UnifiedErrorResponseTypes.AUTHENTICATION_ERROR && (

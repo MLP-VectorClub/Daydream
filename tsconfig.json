@@ -22,8 +22,8 @@
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
-      "src/*": ["./src/*"],
-      "modules/*": ["./src/scss/modules/*"]
+      "src/*": ["src/*"],
+      "modules/*": ["src/scss/modules/*"]
     },
     "typeRoots": [
       "node_modules/@types",

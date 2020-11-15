@@ -5,7 +5,7 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import { getGuideLabel, PATHS } from 'src/utils';
 import Link from 'next/link';
 import { GetColorGuidesResult, GuideName } from 'src/types';
-import { guideIndexDataFetcher, useGuideIndexData } from 'src/hooks';
+import { guideIndexFetcher, useGuideIndex } from 'src/hooks';
 import { coreActions } from 'src/store/slices';
 import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
@@ -26,7 +26,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   };
 
   try {
-    initialData = await guideIndexDataFetcher();
+    initialData = await guideIndexFetcher();
   } catch (e) {
     /* ignore */
   }
@@ -46,7 +46,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 });
 
 const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
-  const data = useGuideIndexData(initialData);
+  const data = useGuideIndex(initialData);
 
   return (
     <Content>
