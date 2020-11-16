@@ -36,7 +36,7 @@ const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appea
               {nonObviousCharacterTags.length > 0 && (
                 <small className={classNames('mt-2', styles.aka)}>
                   <Abbr title="Also known as">AKA</Abbr>
-                  {` ${nonObviousCharacterTags.join(',')}`}
+                  {` ${nonObviousCharacterTags.join(', ')}`}
                 </small>
               )}
             </CardBody>
