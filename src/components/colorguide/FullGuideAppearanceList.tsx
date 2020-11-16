@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { PATHS, scaleResize } from 'src/utils';
 import Abbr from 'src/components/shared/Abbr';
 import Link from 'next/link';
+import styles from 'modules/FullGuideAppearanceList.module.scss';
+import classNames from 'classnames';
 
 const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appearances }) => (
-  <div className="d-flex flex-wrap align-items-sm-stretch justify-content-start">
+  <div className={styles.list}>
     {appearances.map(a => {
       let sprite = null;
 
@@ -15,7 +17,11 @@ const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appea
       if (a.sprite) {
         const [aspectWidth, aspectHeight] = a.sprite.aspectRatio;
         const spriteStyle = scaleResize(aspectWidth, aspectHeight, 'height', 100);
-        sprite = <Image src={a.sprite.path} width={spriteStyle.width} height={spriteStyle.height} unoptimized layout="fixed" />;
+        sprite = (
+          <div className={classNames('mb-2', styles.spriteWrap)}>
+            <Image src={a.sprite.path} width={spriteStyle.width} height={spriteStyle.height} unoptimized layout="fixed" />
+          </div>
+        );
       }
 
       const lowerCaseLabel = a.label.toLowerCase();
@@ -24,13 +30,11 @@ const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appea
       return (
         <Link key={a.id} href={PATHS.APPEARANCE(a)} passHref>
           <Card color="link" tag="a" className="mr-2 mb-2">
-            <CardBody className="p-2 d-flex flex-column align-items-center justify-content-end text-center">
-              <div className="d-flex justify-content-center">
-                {sprite}
-              </div>
-              <h3 className="h5 mb-0">{a.label}</h3>
+            <CardBody className={classNames('p-2', styles.cardBody)}>
+              {sprite}
+              <h3 className={classNames('h5 mb-0', styles.label)}>{a.label}</h3>
               {nonObviousCharacterTags.length > 0 && (
-                <small className="d-block text-dark mt-2">
+                <small className={classNames('mt-2', styles.aka)}>
                   <Abbr title="Also known as">AKA</Abbr>
                   {` ${nonObviousCharacterTags.join(',')}`}
                 </small>

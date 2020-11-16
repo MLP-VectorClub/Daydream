@@ -1,0 +1,33 @@
+@import "../vars";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.sprite-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.card-body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+.label {
+  font-family: $font-family-base !important;
+  font-weight: bold;
+}
+
+.aka {
+  display: block;
+  color: $black;
+}
