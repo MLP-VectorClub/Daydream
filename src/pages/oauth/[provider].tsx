@@ -1,34 +1,39 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
-import {
-  OAuthErrorTypes,
-  SocialProvider,
-  Status,
-  UnifiedErrorResponseTypes,
-  User,
-} from 'src/types';
-import { useLayout, useOAuth } from 'src/hooks';
+import { OAuthErrorTypes, Status, UnifiedErrorResponseTypes, User } from 'src/types';
+import { useLayout, useOAuth, useTitleSetter } from 'src/hooks';
 import { ENDPOINTS, PATHS, setResponseStatus } from 'src/utils';
-import { SOCIAL_PROVIDERS } from 'src/fancy-config';
 import Center from 'src/components/shared/Center';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import { oauth } from 'src/strings';
+import { TitleFactory } from 'src/types/title';
+import { getOAuthProvider } from 'src/utils/auth';
+import { useDispatch } from 'react-redux';
+import { titleSetter } from 'src/utils/core';
+import { wrapper } from 'src/store';
 
-const OAuthPage: React.FC = () => {
+const titleFactory: TitleFactory<{ provider?: string }> = query => {
+  const provider = getOAuthProvider(query.provider);
+  const title = `${provider} OAuth 2.0 Authentication`;
+  return {
+    title,
+    breadcrumbs: [],
+  };
+};
+
+const OAuthPage: NextPage = () => {
+  const dispatch = useDispatch();
   const { setLayoutDisabled } = useLayout();
   const { query, replace } = useRouter();
   const closeFnRef = useRef<VoidFunction | null>(null);
   const { status, error, user } = useOAuth(query);
 
-  const provider = typeof query.provider === 'string' && query.provider in SOCIAL_PROVIDERS
-    ? SOCIAL_PROVIDERS[query.provider as SocialProvider].name
-    : '';
   const success = status === Status.SUCCESS;
   const authorized = user.name !== null;
 
@@ -56,7 +61,10 @@ const OAuthPage: React.FC = () => {
     else void replace(PATHS.USER_LONG(user as User));
   }, [authorized, replace, user]);
 
-  const header = `${provider} OAuth 2.0 Authentication`;
+  const titleData = useMemo(() => titleFactory(query), [query]);
+  useTitleSetter(dispatch, titleData);
+
+  const header = titleData.title;
 
   if (query.code) {
     if (status === Status.FAILURE) {
@@ -106,13 +114,14 @@ const OAuthPage: React.FC = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { query } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
+  const { query, store } = ctx;
   if (query.error || query.error_description) setResponseStatus(ctx, 500);
 
+  titleSetter(store, titleFactory(query));
   return {
     props: {},
   };
-};
+});
 
 export default OAuthPage;

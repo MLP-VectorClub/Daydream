@@ -1,14 +1,19 @@
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
-import React, { useCallback } from 'react';
+import { NextPage } from 'next';
+import React, { useCallback, useMemo } from 'react';
 import { Button } from 'reactstrap';
 import { GetAboutConnectionResult, MappedAboutConnectionResult, Nullable } from 'src/types';
-import { connectionFetcher, useConnectionInfo } from 'src/hooks';
+import { useConnectionInfo, useTitleSetter } from 'src/hooks';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import Content from 'src/components/shared/Content';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Abbr from 'src/components/shared/Abbr';
 import { common, connection } from 'src/strings';
+import { connectionFetcher } from 'src/fetchers';
+import { TitleFactoryVoid } from 'src/types/title';
+import { wrapper } from 'src/store';
+import { titleSetter } from 'src/utils/core';
+import { useDispatch } from 'react-redux';
 
 interface PropTypes {
   connectingAddress: Nullable<string>;
@@ -16,8 +21,17 @@ interface PropTypes {
   initialServerInfo?: GetAboutConnectionResult;
 }
 
-export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forwardedFor, initialServerInfo }) => {
+const titleFactory: TitleFactoryVoid = () => ({
+  title: common.titles.connectionInfo,
+  breadcrumbs: [],
+});
+
+export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forwardedFor, initialServerInfo }) => {
+  const dispatch = useDispatch();
   const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
+
+  const titleData = useMemo(() => titleFactory(), []);
+  useTitleSetter(dispatch, titleData);
 
   const getServerInfo = useCallback((key: keyof MappedAboutConnectionResult) => (
     !fetching && serverInfo ? serverInfo[key] : null
@@ -56,24 +70,26 @@ export const ConnectionPage: React.FC<PropTypes> = ({ connectingAddress, forward
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
+export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
+  const { store, req } = ctx;
   const props: PropTypes = {
-    connectingAddress: ctx.req.connection.remoteAddress || null,
+    connectingAddress: req.connection.remoteAddress || null,
     forwardedFor: null,
     initialServerInfo: await connectionFetcher(),
   };
 
-  const connAddr = ctx.req.connection.address();
+  const connAddr = req.connection.address();
   if (connAddr) {
     props.connectingAddress = typeof connAddr === 'string' ? connAddr : connAddr.address;
   }
 
-  const forwardedHeader = ctx.req.headers['x-forwarded-for'];
+  const forwardedHeader = req.headers['x-forwarded-for'];
   if (forwardedHeader) {
     props.forwardedFor = forwardedHeader;
   }
 
+  titleSetter(store, titleFactory());
   return { props };
-};
+});
 
 export default ConnectionPage;

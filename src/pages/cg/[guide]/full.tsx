@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Content from 'src/components/shared/Content';
-import React from 'react';
+import React, { useMemo } from 'react';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import {
   fullListSortOptionsMap,
@@ -21,9 +21,8 @@ import {
   Optional,
 } from 'src/types';
 import { wrapper } from 'src/store';
-import { fullGuideFetcher, useAuth, useFullGuide } from 'src/hooks';
+import { useAuth, useFullGuide, useTitleSetter } from 'src/hooks';
 import { AxiosError } from 'axios';
-import { coreActions } from 'src/store/slices';
 import { colorGuide } from 'src/strings';
 import GuideNotFound from 'src/components/colorguide/GuideNotFound';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
@@ -39,6 +38,10 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import MajorChangesButton from 'src/components/colorguide/MajorChangesButton';
 import StatusAlert from 'src/components/shared/StatusAlert';
 import FullGuideGroups from 'src/components/colorguide/FullGuideGroups';
+import { fullGuideFetcher } from 'src/fetchers';
+import { TitleFactory } from 'src/types/title';
+import { titleSetter } from 'src/utils/core';
+import { useDispatch } from 'react-redux';
 
 interface PropTypes {
   guide: Nullable<GuideName>;
@@ -46,10 +49,28 @@ interface PropTypes {
   initialData: Nullable<GetAppearancesAllResult>;
 }
 
+const titleFactory: TitleFactory<Pick<PropTypes, 'guide'>> = ({ guide }) => {
+  const title = getFullGuideTitle(guide);
+  const guideLinkProps = guide ? { href: PATHS.GUIDE(guide) } : undefined;
+  return {
+    title,
+    breadcrumbs: [
+      { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
+      { linkProps: guideLinkProps, label: getGuideLabel(guide) },
+      { label: getGuideLabel(guide), active: true },
+    ],
+  };
+};
+
 const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
+  const dispatch = useDispatch();
   const { isStaff } = useAuth();
   const data = useFullGuide({ guide, sort }, initialData || undefined);
   const heading = getFullGuideHeading(guide);
+
+  const titleData = useMemo(() => titleFactory({ guide }), [guide]);
+  useTitleSetter(dispatch, titleData);
+
   if (guide === null) {
     return <GuideNotFound heading={heading} />;
   }
@@ -128,21 +149,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     }
   }
 
-  const title = getFullGuideTitle(guide);
-  store.dispatch(coreActions.setTitle(title));
-  const guideLinkProps = guide ? { href: PATHS.GUIDE(guide) } : undefined;
-  store.dispatch(coreActions.setBreadcrumbs([
-    { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
-    { linkProps: guideLinkProps, label: getGuideLabel(guide) },
-    { label: getGuideLabel(guide), active: true },
-  ]));
-  return {
-    props: {
-      guide,
-      sort,
-      initialData: initialData || null,
-    },
+  const props: PropTypes = {
+    guide,
+    sort,
+    initialData: initialData || null,
   };
+  titleSetter(store, titleFactory(props));
+  return { props };
 });
 
 export default FullGuidePage;

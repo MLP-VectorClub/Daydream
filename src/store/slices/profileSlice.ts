@@ -11,7 +11,8 @@ const initialState: ProfileState = {};
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {
+  reducers: {},
+  extraReducers: {
     [HYDRATE](state, action: PayloadAction<{ profile: ProfileState }>) {
       return { ...state, ...action.payload.profile };
     },

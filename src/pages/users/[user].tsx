@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -11,27 +11,52 @@ import {
   PATHS,
   setResponseStatus,
 } from 'src/utils';
-import { transformProfileParams, useAuth, userFetcher, useUser } from 'src/hooks';
-import { GetUsersIdResult, Nullable, Optional, PublicUser } from 'src/types';
+import { transformProfileParams, useAuth, useTitleSetter, useUser } from 'src/hooks';
+import {
+  BreadcrumbEntry,
+  GetUsersIdResult,
+  Nullable,
+  Optional,
+  PublicUser,
+} from 'src/types';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import Content from 'src/components/shared/Content';
 import { profile } from 'src/strings';
+import { userFetcher } from 'src/fetchers';
+import { TitleFactory } from 'src/types/title';
+import { titleSetter } from 'src/utils/core';
+import { NextPage } from 'next';
 
 interface PropTypes {
   initialUser: Nullable<PublicUser>;
 }
 
-const ProfilePage: React.FC<PropTypes> = ({ initialUser }) => {
+const titleFactory: TitleFactory<Pick<PropTypes, 'initialUser'> & { isStaff?: boolean }> = ({ initialUser, isStaff = false }) => {
+  const firstBreadcrumb: BreadcrumbEntry = { label: profile.breadcrumb };
+  if (isStaff) firstBreadcrumb.linkProps = { href: PATHS.USERS };
+  return ({
+    title: getProfileTitle(initialUser),
+    breadcrumbs: [
+      firstBreadcrumb,
+      { label: initialUser ? initialUser.name : profile.unknownUser, active: true },
+    ],
+  });
+};
+
+const ProfilePage: NextPage<PropTypes> = ({ initialUser }) => {
   const dispatch = useDispatch();
   const { query } = useRouter();
   const { user } = useUser(transformProfileParams(query), initialUser || undefined);
-  const { user: authUser } = useAuth();
-  // TODO Return limited user prefs
+  const { user: authUser, isStaff } = useAuth();
+  // TODO Return limited set of user prefs
 
   useEffect(() => {
     dispatch(coreActions.setTitle(getProfileTitle(user, authUser.id)));
   }, [authUser, dispatch, user]);
+
+  const titleData = useMemo(() => titleFactory({ initialUser: user || null, isStaff }), [user, isStaff]);
+  useTitleSetter(dispatch, titleData);
 
   return (
     <Content>
@@ -85,16 +110,11 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     }
   }
 
-  store.dispatch(coreActions.setTitle(getProfileTitle(initialUser)));
-  store.dispatch(coreActions.setBreadcrumbs([
-    { label: profile.breadcrumb },
-    { label: initialUser ? initialUser.name : profile.unknownUser, active: true },
-  ]));
-  return {
-    props: {
-      initialUser: initialUser || null,
-    },
+  const props: PropTypes = {
+    initialUser: initialUser || null,
   };
+  titleSetter(store, titleFactory(props));
+  return { props };
 });
 
 export default ProfilePage;

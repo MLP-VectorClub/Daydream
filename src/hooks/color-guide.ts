@@ -5,23 +5,15 @@ import {
   GetAppearancesRequestOptionals,
   GetAppearancesResult,
   GetColorGuidesResult,
-  NullableProps,
   Status,
 } from 'src/types';
 import { ENDPOINTS, mapQueryStatus, requestPromiseMapper } from 'src/utils';
 import { ColorGuideService } from 'src/services';
+import { fullGuideFetcher, FullGuideFetcherParams, guideFetcher, GuideFetcherParams } from 'src/fetchers';
 
 interface GuideHookValue extends Partial<GetAppearancesResult> {
   status: Status;
 }
-
-type GuideFetcherParams = NullableProps<GetAppearancesRequestOptionals, 'guide'>;
-
-export const guideFetcher = (params: GuideFetcherParams) => () => {
-  if (!params.guide) return Promise.resolve(undefined);
-
-  return requestPromiseMapper(ColorGuideService.getAppearances(params as GetAppearancesRequestOptionals));
-};
 
 export function useGuide(params: GuideFetcherParams, initialData?: GetAppearancesResult): GuideHookValue {
   const { status, data } = useQuery(
@@ -48,14 +40,6 @@ export function useGuideIndex(initialData?: GetColorGuidesResult) {
 
   return data;
 }
-
-type FullGuideFetcherParams = NullableProps<GetAppearancesAllRequest, 'guide'>;
-
-export const fullGuideFetcher = (params: FullGuideFetcherParams) => () => {
-  if (!params.guide) return Promise.resolve(undefined);
-
-  return requestPromiseMapper(ColorGuideService.getFullList(params as GetAppearancesAllRequest));
-};
 
 export function useFullGuide(params: FullGuideFetcherParams, initialData?: GetAppearancesAllResult) {
   const { data, status } = useQuery(

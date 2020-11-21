@@ -5,48 +5,35 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import { getGuideLabel, PATHS } from 'src/utils';
 import Link from 'next/link';
 import { GetColorGuidesResult, GuideName } from 'src/types';
-import { guideIndexFetcher, useGuideIndex } from 'src/hooks';
-import { coreActions } from 'src/store/slices';
+import { guideIndexFetcher, useGuideIndex, useTitleSetter } from 'src/hooks';
 import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { NextPage } from 'next';
 import { plural } from 'src/utils/plural';
 import { colorGuide, common } from 'src/strings';
 import styles from 'modules/GuideIndexPage.module.scss';
+import { useDispatch } from 'react-redux';
+import { TitleFactoryVoid } from 'src/types/title';
+import { titleSetter } from 'src/utils/core';
 
 interface PropTypes {
   initialData: GetColorGuidesResult;
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { store } = ctx as typeof ctx;
-  let initialData: GetColorGuidesResult = {
-    entryCounts: GUIDE_NAMES.reduce((acc, c) => ({ ...acc, [c]: 0 }), {} as Record<GuideName, number>),
-  };
-
-  try {
-    initialData = await guideIndexFetcher();
-  } catch (e) {
-    /* ignore */
-  }
-
-  store.dispatch(coreActions.setTitle(common.titles.colorGuideList));
-  store.dispatch(coreActions.setBreadcrumbs([
+const titleFactory: TitleFactoryVoid = () => ({
+  title: common.titles.colorGuideList,
+  breadcrumbs: [
     { label: colorGuide.index.breadcrumb, active: true },
-  ]));
-
-  const props: PropTypes = {
-    initialData,
-  };
-
-  return {
-    props,
-  };
+  ],
 });
 
 const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
+  const dispatch = useDispatch();
   const data = useGuideIndex(initialData);
+
+  const titleData = useMemo(() => titleFactory(), []);
+  useTitleSetter(dispatch, titleData);
 
   return (
     <Content>
@@ -87,5 +74,24 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
     </Content>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
+  const { store } = ctx as typeof ctx;
+  let initialData: GetColorGuidesResult = {
+    entryCounts: GUIDE_NAMES.reduce((acc, c) => ({ ...acc, [c]: 0 }), {} as Record<GuideName, number>),
+  };
+
+  try {
+    initialData = await guideIndexFetcher();
+  } catch (e) {
+    /* ignore */
+  }
+
+  const props: PropTypes = {
+    initialData,
+  };
+  titleSetter(store, titleFactory());
+  return { props };
+});
 
 export default GuideIndexPage;

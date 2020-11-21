@@ -2,9 +2,11 @@ import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { RootState } from 'src/store/rootReducer';
 import { APP_NAME } from 'src/config';
+import { VFC } from 'react';
+import { renderingStateSlice } from 'src/utils/store';
 
-const TitleManager: React.FC = () => {
-  const { title } = useSelector((store: RootState) => store.core);
+const TitleManager: VFC = () => {
+  const { title } = useSelector((store: RootState) => renderingStateSlice(store.core));
 
   return (
     <Head>

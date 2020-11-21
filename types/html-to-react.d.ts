@@ -8,7 +8,7 @@ declare module 'html-to-react' {
     type: string;
   }
 
-  type NodeProcessor = (node: HtmlToReactNode, children: HtmlToReactNode[]) => ReactNode;
+  type NodeProcessor = (node: HtmlToReactNode, children: HtmlToReactNode[], index: number) => ReactNode;
 
   export interface ProcessingInstruction {
     shouldProcessNode(node: HtmlToReactNode): boolean;

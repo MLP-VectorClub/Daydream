@@ -7,8 +7,9 @@ import {
   GetColorGuidesResult,
 } from 'src/types';
 import { ENDPOINTS } from 'src/utils';
+import { Service } from 'src/services/service-class';
 
-export class ColorGuideService {
+export class ColorGuideService extends Service {
   static getAppearances = (data: GetAppearancesRequestOptionals) =>
     Axios.get<GetAppearancesResult>(ENDPOINTS.APPEARANCES(data));
 

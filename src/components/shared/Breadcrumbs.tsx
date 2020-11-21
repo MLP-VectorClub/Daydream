@@ -2,11 +2,12 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
 import Link from 'next/link';
+import { renderingStateSlice } from 'src/utils/store';
 
 const ELEMENT_ID = 'breadcrumbs';
 
 const Breadcrumbs: React.FC = () => {
-  const breadcrumbs = useSelector((state: RootState) => state.core.breadcrumbs);
+  const { breadcrumbs } = useSelector((state: RootState) => renderingStateSlice(state.core));
 
   // TODO Rich JSON+LD data for SEO
 

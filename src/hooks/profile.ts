@@ -1,14 +1,12 @@
 import { useQuery } from 'react-query';
-import { GetUsersDaUsernameRequest, GetUsersIdRequest, Optional, PublicUser } from 'src/types';
-import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
-import { UserService } from 'src/services';
+import { Optional, PublicUser } from 'src/types';
+import { ENDPOINTS } from 'src/utils';
 import { useCsrf } from 'src/hooks/core';
+import { FetchUserParams, userFetcher } from 'src/fetchers';
 
 interface UserHookValue {
   user?: PublicUser;
 }
-
-export type FetchUserParams = GetUsersDaUsernameRequest | GetUsersIdRequest;
 
 export const transformProfileParams = (query: { user?: string }): FetchUserParams => {
   let id: Optional<string>;
@@ -35,14 +33,6 @@ export const getUserFetcherKey = (params: FetchUserParams) => {
   if ('username' in params) return ENDPOINTS.USERS_BY_USERNAME(params);
 
   throw new Error(`${getUserFetcherKey.name}: Invalid params parameter: ${JSON.stringify(params, null, 2)}`);
-};
-
-export const userFetcher = (params: FetchUserParams) => () => {
-  if ('id' in params) return requestPromiseMapper(UserService.getById(params));
-
-  if ('username' in params) return requestPromiseMapper(UserService.getByDaName(params));
-
-  throw new Error(`${userFetcher.name}: Invalid params parameter: ${JSON.stringify(params, null, 2)}`);
 };
 
 export function useUser(params: FetchUserParams, initialData?: PublicUser): UserHookValue {

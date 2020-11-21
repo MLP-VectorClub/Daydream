@@ -1,42 +1,49 @@
 import Content from 'src/components/shared/Content';
-import React, { useEffect } from 'react';
-import { GetAboutMembersResult, Optional } from 'src/types';
+import React, { useMemo } from 'react';
+import { GetAboutMembersResult, Nullable, Optional } from 'src/types';
 import { wrapper } from 'src/store';
-import { coreActions } from 'src/store/slices';
 import { common } from 'src/strings';
-import { useAuth } from 'src/hooks';
+import { useAuth, useTitleSetter } from 'src/hooks';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import MemberList from 'src/components/users/MemberList';
 import UserList from 'src/components/users/UserList';
 import { AxiosError } from 'axios';
 import { setResponseStatus } from 'src/utils';
-import { membersFetcher } from 'src/hooks/users';
 import { useDispatch } from 'react-redux';
 import styles from 'modules/UsersIndexPage.module.scss';
+import { membersFetcher } from 'src/fetchers';
+import { TitleFactory } from 'src/types/title';
+import { titleSetter } from 'src/utils/core';
+import { NextPage } from 'next';
+
+const titleFactory: TitleFactory<{ isStaff?: boolean }> = ({ isStaff = false }) => {
+  const title = isStaff ? common.titles.users : common.titles.clubMembers;
+  return {
+    title,
+    breadcrumbs: [{
+      label: title,
+      active: true,
+    }],
+  };
+};
 
 interface PropTypes {
-  initialMembers: GetAboutMembersResult;
+  initialMembers: Nullable<GetAboutMembersResult>;
 }
 
-const UsersIndexPage: React.VFC<PropTypes> = ({ initialMembers }) => {
+const UsersIndexPage: NextPage<PropTypes> = ({ initialMembers }) => {
   const dispatch = useDispatch();
   const { isStaff } = useAuth();
 
-  useEffect(() => {
-    const title = isStaff ? common.titles.users : common.titles.clubMembers;
-    dispatch(coreActions.setTitle(title));
-    dispatch(coreActions.setBreadcrumbs([{
-      label: title,
-      active: true,
-    }]));
-  }, [dispatch, isStaff]);
+  const titleData = useMemo(() => titleFactory({ isStaff }), [isStaff]);
+  useTitleSetter(dispatch, titleData);
 
   return (
     <Content className={styles.usersPageContent}>
       {isStaff
         ? <StandardHeading heading="Users" lead="List of all users in the database" />
         : <StandardHeading heading="Club Members" lead="The people in our community" />}
-      <MemberList initialMembers={initialMembers} />
+      <MemberList initialMembers={initialMembers || undefined} />
       <UserList enabled={isStaff} />
     </Content>
   );
@@ -63,16 +70,11 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     }
   }
 
-  store.dispatch(coreActions.setTitle(common.titles.clubMembers));
-  store.dispatch(coreActions.setBreadcrumbs([{
-    label: common.titles.clubMembers,
-    active: true,
-  }]));
-  return {
-    props: {
-      initialMembers,
-    },
+  const props: PropTypes = {
+    initialMembers: initialMembers || null,
   };
+  titleSetter(store, titleFactory({}));
+  return { props };
 });
 
 export default UsersIndexPage;

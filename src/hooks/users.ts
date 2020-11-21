@@ -1,9 +1,7 @@
 import { GetAboutMembersResult } from 'src/types';
 import { useQuery } from 'react-query';
-import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
-import { AboutService, UserService } from 'src/services';
-
-export const membersFetcher = () => requestPromiseMapper(AboutService.getMembers());
+import { ENDPOINTS } from 'src/utils';
+import { membersFetcher, usersFetcher } from 'src/fetchers';
 
 export function useMembers(initialData?: GetAboutMembersResult) {
   const { data } = useQuery(
@@ -14,8 +12,6 @@ export function useMembers(initialData?: GetAboutMembersResult) {
 
   return data;
 }
-
-export const usersFetcher = () => requestPromiseMapper(UserService.getList());
 
 export function useUsers(enabled: boolean) {
   const { data: users, error, isLoading } = useQuery(

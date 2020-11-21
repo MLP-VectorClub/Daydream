@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
 import { FailsafeUser, Status, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
-import { ENDPOINTS, mapQueryStatus, permission, requestPromiseMapper } from 'src/utils';
+import { ENDPOINTS, mapQueryStatus, permission } from 'src/utils';
 import { useCsrf } from 'src/hooks/core';
-import { UserService } from 'src/services';
+import { currentUserFetcher } from 'src/fetchers';
 
 const guestUser: FailsafeUser = {
   id: null,
@@ -21,8 +21,6 @@ interface CurrentUserHookValue {
     status: Status;
   };
 }
-
-const currentUserFetcher = () => requestPromiseMapper(UserService.getMe());
 
 export function useAuth(): CurrentUserHookValue {
   const csrf = useCsrf();

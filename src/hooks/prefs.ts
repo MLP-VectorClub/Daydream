@@ -1,8 +1,6 @@
-import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
+import { ENDPOINTS } from 'src/utils';
 import { useQuery } from 'react-query';
-import { UserService } from 'src/services/user';
-
-const prefsFetcher = () => requestPromiseMapper(UserService.getPrefs());
+import { prefsFetcher } from 'src/fetchers';
 
 export function usePrefs(enabled: boolean) {
   const { data } = useQuery(ENDPOINTS.USER_PREFS_ME, prefsFetcher, {

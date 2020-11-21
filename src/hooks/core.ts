@@ -1,8 +1,10 @@
-import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
+import { ENDPOINTS } from 'src/utils';
 import { useQuery } from 'react-query';
-import { CoreService } from 'src/services';
-
-const csrfFetcher = () => CoreService.initCsrf().then(r => r.status === 204);
+import { csrfFetcher, usefulLinksFetcher } from 'src/fetchers';
+import { useEffect } from 'react';
+import { CoreSliceMirroredState } from 'src/store/slices';
+import { titleSetter } from 'src/utils/core';
+import { AppDispatch } from 'src/store';
 
 export function useCsrf() {
   const { data } = useQuery(ENDPOINTS.CSRF_INIT, csrfFetcher, {
@@ -13,10 +15,18 @@ export function useCsrf() {
   return data;
 }
 
-const usefulLinksFetcher = () => requestPromiseMapper(CoreService.getSidebarUsefulLinks());
-
 export function useSidebarUsefulLinks(enabled: boolean) {
   const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, usefulLinksFetcher, { enabled });
 
   return enabled ? data : undefined;
 }
+
+export const useTitleSetter = (dispatch: AppDispatch, { title, breadcrumbs }: CoreSliceMirroredState): void => {
+  useEffect(() => {
+    titleSetter({ dispatch }, { title });
+  }, [title, dispatch]);
+
+  useEffect(() => {
+    titleSetter({ dispatch }, { breadcrumbs });
+  }, [breadcrumbs, dispatch]);
+};

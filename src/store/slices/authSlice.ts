@@ -76,9 +76,6 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    [HYDRATE](state, action: PayloadAction<{ auth: AuthState }>) {
-      return { ...state, ...action.payload.auth };
-    },
     openAuthModal(state, action: PayloadAction<Nullable<AuthModalSide>>) {
       state.authModal.open = true;
       state.authModal.side = action.payload || AuthModalSide.SIGN_IN;
@@ -88,6 +85,9 @@ const authSlice = createSlice({
     },
   },
   extraReducers: {
+    [HYDRATE](state, action: PayloadAction<{ auth: AuthState }>) {
+      return { ...state, ...action.payload.auth };
+    },
     [signInThunk.pending.type](state, _action: PayloadAction) {
       state.signIn.status = Status.LOAD;
     },

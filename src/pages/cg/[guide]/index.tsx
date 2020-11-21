@@ -1,5 +1,5 @@
 import { Button } from 'reactstrap';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { AxiosError } from 'axios';
 import { GetAppearancesResult, GuideName, Nullable, Optional } from 'src/types';
 import {
@@ -10,9 +10,8 @@ import {
   resolveGuideName,
   setResponseStatus,
 } from 'src/utils';
-import { coreActions } from 'src/store/slices';
-import { wrapper } from 'src/store';
-import { guideFetcher, useAuth, useGuide } from 'src/hooks';
+import { AppDispatch, wrapper } from 'src/store';
+import { useAuth, useGuide, useTitleSetter } from 'src/hooks';
 import AppearanceItem from 'src/components/colorguide/AppearanceItem';
 import Pagination from 'src/components/shared/Pagination';
 import Content from 'src/components/shared/Content';
@@ -27,6 +26,21 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import MajorChangesButton from 'src/components/colorguide/MajorChangesButton';
 import StatusAlert from 'src/components/shared/StatusAlert';
+import { guideFetcher } from 'src/fetchers';
+import { useDispatch } from 'react-redux';
+import { TitleFactory } from 'src/types/title';
+import { titleSetter } from 'src/utils/core';
+
+const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, page }) => {
+  const title = getGuideTitle(guide, page);
+  return {
+    title,
+    breadcrumbs: [
+      { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
+      { label: getGuideLabel(guide), active: true },
+    ],
+  };
+};
 
 interface PropTypes {
   guide: Nullable<GuideName>;
@@ -35,9 +49,14 @@ interface PropTypes {
 }
 
 const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const { isStaff } = useAuth();
   const data = useGuide({ guide, page }, initialData || undefined);
   const heading = getGuideTitle(guide);
+
+  const titleData = useMemo(() => titleFactory({ guide, page }), [guide, page]);
+  useTitleSetter(dispatch, titleData);
+
   if (guide === null) {
     return <GuideNotFound heading={heading} />;
   }
@@ -117,19 +136,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     }
   }
 
-  const title = getGuideTitle(guide, page);
-  store.dispatch(coreActions.setTitle(title));
-  store.dispatch(coreActions.setBreadcrumbs([
-    { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
-    { label: getGuideLabel(guide), active: true },
-  ]));
-  return {
-    props: {
-      guide,
-      page,
-      initialData: initialData || null,
-    },
+  const props: PropTypes = {
+    guide,
+    page,
+    initialData: initialData || null,
   };
+  titleSetter(store, titleFactory(props));
+  return { props };
 });
 
 export default ColorGuidePage;

@@ -8,7 +8,7 @@ import GroupedUserList from 'src/components/users/GroupedUserList';
 import StaffMembersList from 'src/components/users/StaffMembersList';
 
 interface PropTypes {
-  initialMembers: GetAboutMembersResult;
+  initialMembers?: GetAboutMembersResult;
 }
 
 type UsersByRole = Record<Role, PublicUser[]>;
@@ -16,6 +16,7 @@ type UsersByRole = Record<Role, PublicUser[]>;
 const ROLE_SECTIONS: Role[] = ['admin', 'staff', 'assistant', 'member'];
 
 const MemberList: React.VFC<PropTypes> = ({ initialMembers }) => {
+  // TODO Handle errors
   const allMembers = useMembers(initialMembers);
   const membersByRole = useMemo(() => groupBy(allMembers, m => m.role) as UsersByRole, [allMembers]);
 

@@ -29,6 +29,7 @@ export const common = {
     colorGuideByNameAndPage: 'Page {{page}} - {{guideName}} Color Guide',
     colorGuideList: 'Color Guide List',
     profile: 'Profile',
+    connectionInfo: 'Connection Info',
     profileByName: (name: string): string => `${name} - Profile`,
     yourProfile: 'Your Profile',
     show: 'Show',

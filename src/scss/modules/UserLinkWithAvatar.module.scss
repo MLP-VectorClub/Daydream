@@ -5,6 +5,7 @@
 
 .user-link-with-avatar {
   $image-height: 1.5em;
+  $border-size: 1px;
 
   @include reserve-button;
 
@@ -14,12 +15,13 @@
   font-style: normal;
   font-size: $image-height;
   line-height: 1em;
-  height: 1em;
+  height: calc(1em + #{$border-size * 2});
   vertical-align: middle;
-  border: none;
+  border-width: $border-size;
 
   &.local {
     background: lighten($primary, 47);
+    border-color: $primary;
   }
 
   > * {

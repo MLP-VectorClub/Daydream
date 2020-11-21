@@ -17,8 +17,9 @@ import {
   RegisterOauthRequest,
 } from 'src/types';
 import { ENDPOINTS } from 'src/utils';
+import { Service } from 'src/services/service-class';
 
-export class UserService {
+export class UserService extends Service {
   static getMe = () => Axios.get<GetUsersMeResult>(ENDPOINTS.USERS_ME);
 
   static getById = (data: GetUsersIdRequest) =>

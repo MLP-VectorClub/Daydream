@@ -11,18 +11,16 @@ const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 const processingInstructions: ProcessingInstruction[] = [
   {
     // Custom link processing
-    shouldProcessNode(node) {
-      return node.name === 'a';
-    },
-    processNode(node, children) {
-      return <Link href={node.attribs.href}><a>{children}</a></Link>;
-    },
+    shouldProcessNode: node => node.name === 'a',
+    processNode: (node, children, index) => (
+      <Link key={index} href={node.attribs.href}>
+        <a>{children}</a>
+      </Link>
+    ),
   },
   {
     // Anything else
-    shouldProcessNode(node) {
-      return node.name in allowedTags || node.type === 'text';
-    },
+    shouldProcessNode: node => node.name in allowedTags || node.type === 'text',
     processNode: processNodeDefinitions.processDefaultNode,
   },
 ];
