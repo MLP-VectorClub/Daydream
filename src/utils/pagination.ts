@@ -27,8 +27,7 @@ export const calculatePaginationItems = ({
 }: CalculatePaginationItemsOptions): PaginationItems => {
   let invalid = false;
   let current = currentPage;
-  const
-    total = totalPages;
+  const total = totalPages;
   if (current < 1) {
     current = 1;
     invalid = true;

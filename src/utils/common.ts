@@ -1,7 +1,8 @@
 import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
-import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
-import { PROD_APP_URL } from 'src/config';
+import { UnifiedErrorResponse, UnifiedErrorResponseTypes, UserPrefs, ValidationErrorResponse } from 'src/types';
+import { APP_URL } from 'src/config';
+import { PATHS } from 'src/utils/url';
 
 export const sanitizePageParam = (value: string): number => {
   const page = parseInt(value, 10);
@@ -69,6 +70,12 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
 };
 
 export const assembleSeoUrl = (host?: string, pathname?: string): string =>
-  `${host ? `https://${host}` : PROD_APP_URL}${pathname || ''}`;
+  `${host ? `https://${host}` : APP_URL}${pathname || ''}`;
 
 export const isClientSide = typeof window !== 'undefined';
+
+export const getDefaultGuideLink = (prefs?: Pick<UserPrefs, 'cg_defaultguide'>): string =>
+  (prefs?.cg_defaultguide ? PATHS.GUIDE(prefs.cg_defaultguide) : PATHS.GUIDE_INDEX);
+
+export const getHomeLink = (prefs?: Pick<UserPrefs, 'p_homelastep' | 'cg_defaultguide'>): string =>
+  (prefs?.p_homelastep === true ? PATHS.LATEST_EPISODE : getDefaultGuideLink(prefs));

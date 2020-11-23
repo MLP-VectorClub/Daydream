@@ -43,6 +43,7 @@ library.add(
   faHome,
   faPlus,
   faSort,
+  faInfo,
   faCheck,
   faGlobe,
   faTimes,

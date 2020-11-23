@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React, { memo } from 'react';
+import React, { memo, VFC } from 'react';
 import { getInlineIconClasses } from 'src/utils';
 import { InlineIconProps } from 'src/types/component-props';
 import LoadingRing from 'src/components/shared/LoadingRing';
 
-const InlineIcon: React.FC<InlineIconProps> = (({
+const InlineIcon: VFC<InlineIconProps> = ({
   icon,
   loading = false,
   last = false,
@@ -29,6 +29,6 @@ const InlineIcon: React.FC<InlineIconProps> = (({
       {...faProps}
     />
   );
-});
+};
 
 export default memo(InlineIcon);

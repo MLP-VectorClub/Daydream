@@ -3,20 +3,22 @@ import { ParsedUrlQuery } from 'querystring';
 import { ENDPOINTS, isClientSide, mapQueryStatus } from 'src/utils';
 import {
   PostUsersOauthSigninProviderResult,
-  RegisterOauthRequest,
+  PostUsersOauthSigninProviderRequest,
   SocialProvider,
   Status,
   UnifiedErrorResponse,
 } from 'src/types';
 import { useAuth } from 'src/hooks/auth';
 import { oauthRegistrationFetcher } from 'src/fetchers';
+import { useCallback } from 'react';
 
 export function useOAuth(query: ParsedUrlQuery) {
   const { authCheck, user } = useAuth();
   const key = ENDPOINTS.USERS_OAUTH_SIGNIN_PROVIDER({ provider: query.provider as SocialProvider });
+  const fetcher = useCallback(() => oauthRegistrationFetcher(query as unknown as PostUsersOauthSigninProviderRequest)(), [query]);
   const { status, data, error } = useQuery<PostUsersOauthSigninProviderResult, UnifiedErrorResponse>(
     key,
-    oauthRegistrationFetcher(query as unknown as RegisterOauthRequest),
+    fetcher,
     {
       enabled: authCheck.status === Status.FAILURE && 'provider' in query && 'code' in query && isClientSide,
       retry: false,

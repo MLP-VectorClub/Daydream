@@ -2,7 +2,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useMemo } from 'react';
 import Link from 'next/link';
-import { getProfileLink, PATHS } from 'src/utils';
+import { getDefaultGuideLink, getHomeLink, getProfileLink, PATHS } from 'src/utils';
 import { CLUB_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -12,12 +12,8 @@ import { common } from 'src/strings';
 const MainNavigation = () => {
   const { signedIn, user, isStaff } = useAuth();
   const prefs = usePrefs(signedIn);
-  const defaultGuideLink = useMemo<string>(() => (
-    prefs?.cgDefaultguide ? PATHS.GUIDE(prefs.cgDefaultguide) : PATHS.GUIDE_INDEX
-  ), [prefs]);
-  const homeLink = useMemo<string>(() => (
-    prefs?.pHomelastep === true ? PATHS.LATEST_EPISODE : defaultGuideLink
-  ), [prefs, defaultGuideLink]);
+  const defaultGuideLink = useMemo<string>(() => getDefaultGuideLink(prefs), [prefs]);
+  const homeLink = useMemo<string>(() => getHomeLink(prefs), [prefs]);
 
   return (
     <Nav navbar>

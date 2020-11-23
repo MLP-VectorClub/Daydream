@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Nullable } from 'src/types';
-import Layout from 'src/components/Layout';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { common } from 'src/strings';
@@ -30,11 +29,9 @@ const Error: NextPage<PropTypes> = () => {
   useTitleSetter(dispatch, titleData);
 
   return (
-    <Layout>
-      <Content>
-        <StandardHeading heading={common.error.withoutStatus} />
-      </Content>
-    </Layout>
+    <Content>
+      <StandardHeading heading={common.error.withoutStatus} />
+    </Content>
   );
 };
 

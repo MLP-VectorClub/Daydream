@@ -6,7 +6,6 @@ import { useAuth, usePrefs } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import ProfileLink from 'src/components/shared/ProfileLink';
-import { get } from 'lodash';
 import { common } from 'src/strings';
 
 const SidebarUserInfo: React.FC = () => {
@@ -29,7 +28,7 @@ const SidebarUserInfo: React.FC = () => {
       <AvatarWrap
         avatarProvider={user.avatarProvider}
         avatarUrl={user.avatarUrl}
-        vectorApp={get(prefs, 'pVectorapp', null)}
+        vectorApp={prefs?.p_vectorapp || null}
         size={50}
       />
       <div className="user-data">

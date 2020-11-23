@@ -1,14 +1,14 @@
 import { ENDPOINTS } from 'src/utils';
 import { useQuery } from 'react-query';
 import { csrfFetcher, usefulLinksFetcher } from 'src/fetchers';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { CoreSliceMirroredState } from 'src/store/slices';
 import { titleSetter } from 'src/utils/core';
 import { AppDispatch } from 'src/store';
 
 export function useCsrf() {
   const { data } = useQuery(ENDPOINTS.CSRF_INIT, csrfFetcher, {
-    refetchInterval: 3600e3,
+    staleTime: 3600e3,
     refetchOnWindowFocus: false,
   });
 
@@ -16,7 +16,8 @@ export function useCsrf() {
 }
 
 export function useSidebarUsefulLinks(enabled: boolean) {
-  const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, usefulLinksFetcher, { enabled });
+  const fetcher = useCallback(() => usefulLinksFetcher()(), []);
+  const { data } = useQuery(ENDPOINTS.USEFUL_LINKS_SIDEBAR, fetcher, { enabled });
 
   return enabled ? data : undefined;
 }

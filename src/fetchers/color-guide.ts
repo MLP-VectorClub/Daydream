@@ -1,19 +1,30 @@
-import { GetAppearancesAllRequest, GetAppearancesRequestOptionals, NullableProps } from 'src/types';
+import { GetAppearancesAllRequest, GetAppearancesRequest, NullableProps } from 'src/types';
 import { requestPromiseMapper } from 'src/utils';
-import { ColorGuideService } from 'src/services';
+import { ColorGuideService, defaultServices } from 'src/services';
+import { IncomingMessage } from 'http';
 
-export type GuideFetcherParams = NullableProps<GetAppearancesRequestOptionals, 'guide'>;
+export type GuideFetcherParams = NullableProps<GetAppearancesRequest, 'guide'>;
 
-export const guideFetcher = (params: GuideFetcherParams) => () => {
+export const guideFetcher = (params: GuideFetcherParams, req?: IncomingMessage) => () => {
   if (!params.guide) return Promise.resolve(undefined);
 
-  return requestPromiseMapper(ColorGuideService.getAppearances(params as GetAppearancesRequestOptionals));
+  const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
+
+  return requestPromiseMapper(service.getAppearances(params as GetAppearancesRequest));
 };
 
 export type FullGuideFetcherParams = NullableProps<GetAppearancesAllRequest, 'guide'>;
 
-export const fullGuideFetcher = (params: FullGuideFetcherParams) => () => {
+export const fullGuideFetcher = (params: FullGuideFetcherParams, req?: IncomingMessage) => () => {
   if (!params.guide) return Promise.resolve(undefined);
 
-  return requestPromiseMapper(ColorGuideService.getFullList(params as GetAppearancesAllRequest));
+  const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
+
+  return requestPromiseMapper(service.getFullList(params as GetAppearancesAllRequest));
+};
+
+export const guideIndexFetcher = (req?: IncomingMessage) => () => {
+  const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
+
+  return requestPromiseMapper(service.getIndexData());
 };

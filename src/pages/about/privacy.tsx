@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Alert } from 'reactstrap';
-import { PROD_APP_URL } from 'src/config';
+import { APP_URL } from 'src/config';
 import { wrapper } from 'src/store';
 import Content from 'src/components/shared/Content';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -48,7 +48,7 @@ const PrivacyPolicy: NextPage = () => {
           <strong>TL;DR:</strong> {privacyPolicy.tldr}
         </blockquote>
 
-        <p>{privacyPolicy.p1(<a href={PROD_APP_URL}>{PROD_APP_URL}</a>)}</p>
+        <p>{privacyPolicy.p1(<a href={APP_URL}>{APP_URL}</a>)}</p>
         <p>{privacyPolicy.p2}</p>
 
         <h2>{privacyPolicy.h1}</h2>

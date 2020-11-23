@@ -5,7 +5,7 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import { getGuideLabel, PATHS } from 'src/utils';
 import Link from 'next/link';
 import { GetColorGuidesResult, GuideName } from 'src/types';
-import { guideIndexFetcher, useGuideIndex, useTitleSetter } from 'src/hooks';
+import { useGuideIndex, useTitleSetter } from 'src/hooks';
 import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
 import React, { useMemo } from 'react';
@@ -16,6 +16,7 @@ import styles from 'modules/GuideIndexPage.module.scss';
 import { useDispatch } from 'react-redux';
 import { TitleFactoryVoid } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
+import { guideIndexFetcher } from 'src/fetchers';
 
 interface PropTypes {
   initialData: GetColorGuidesResult;
@@ -76,13 +77,13 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { store } = ctx as typeof ctx;
+  const { store, req } = ctx as typeof ctx;
   let initialData: GetColorGuidesResult = {
     entryCounts: GUIDE_NAMES.reduce((acc, c) => ({ ...acc, [c]: 0 }), {} as Record<GuideName, number>),
   };
 
   try {
-    initialData = await guideIndexFetcher();
+    initialData = await guideIndexFetcher(req)();
   } catch (e) {
     /* ignore */
   }

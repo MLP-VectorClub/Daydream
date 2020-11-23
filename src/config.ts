@@ -4,10 +4,9 @@ import { ReactQueryConfig } from 'react-query/types/core/types';
 import { GuideName } from 'src/types';
 
 export const APP_NAME = 'MLP Vector Club';
+export const APP_URL = process.env.FRONTEND_HOST as string;
+export const API_URL = process.env.BACKEND_HOST as string;
 export const OLD_SITE_URL = 'https://mlpvector.club';
-export const PROD_APP_URL = 'https://next.mlpvector.club';
-export const PROD_API_URL = 'https://api.mlpvector.club';
-export const DEV_API_URL = 'https://api.mlpvector.lc';
 
 export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Celestia';
 export const PROJECT_NAME = GITHUB_URL.split('/').pop();
@@ -18,7 +17,7 @@ export const DISCORD_INVITE_LINK = 'https://discord.gg/hrffb8k';
 export const DEV_EMAIL = 'david@seinopsys.dev';
 
 export const DEV_ENV = process.env.NODE_ENV !== 'production';
-export const API_DOCS_URL = DEV_ENV ? DEV_API_URL : PROD_API_URL;
+export const API_DOCS_URL = API_URL as string;
 
 /**
  * Global prefix for all api calls, no trailing slash

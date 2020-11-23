@@ -2,23 +2,30 @@ import { useQuery } from 'react-query';
 import {
   GetAppearancesAllRequest,
   GetAppearancesAllResult,
-  GetAppearancesRequestOptionals,
+  GetAppearancesRequest,
   GetAppearancesResult,
   GetColorGuidesResult,
   Status,
 } from 'src/types';
-import { ENDPOINTS, mapQueryStatus, requestPromiseMapper } from 'src/utils';
-import { ColorGuideService } from 'src/services';
-import { fullGuideFetcher, FullGuideFetcherParams, guideFetcher, GuideFetcherParams } from 'src/fetchers';
+import { ENDPOINTS, mapQueryStatus } from 'src/utils';
+import {
+  fullGuideFetcher,
+  FullGuideFetcherParams,
+  guideFetcher,
+  GuideFetcherParams,
+  guideIndexFetcher,
+} from 'src/fetchers';
+import { useCallback } from 'react';
 
 interface GuideHookValue extends Partial<GetAppearancesResult> {
   status: Status;
 }
 
 export function useGuide(params: GuideFetcherParams, initialData?: GetAppearancesResult): GuideHookValue {
+  const fetcher = useCallback(() => guideFetcher(params)(), [params]);
   const { status, data } = useQuery(
-    ENDPOINTS.APPEARANCES(params as GetAppearancesRequestOptionals),
-    guideFetcher(params),
+    ENDPOINTS.APPEARANCES(params as GetAppearancesRequest),
+    fetcher,
     { enabled: params.guide, initialData },
   );
 
@@ -28,13 +35,11 @@ export function useGuide(params: GuideFetcherParams, initialData?: GetAppearance
   };
 }
 
-export const guideIndexFetcher = () =>
-  requestPromiseMapper(ColorGuideService.getIndexData());
-
 export function useGuideIndex(initialData?: GetColorGuidesResult) {
+  const fetcher = useCallback(() => guideIndexFetcher()(), []);
   const { data } = useQuery(
     ENDPOINTS.GUIDE_INDEX,
-    guideIndexFetcher,
+    fetcher,
     { initialData },
   );
 
@@ -42,9 +47,10 @@ export function useGuideIndex(initialData?: GetColorGuidesResult) {
 }
 
 export function useFullGuide(params: FullGuideFetcherParams, initialData?: GetAppearancesAllResult) {
+  const fetcher = useCallback(() => fullGuideFetcher(params)(), [params]);
   const { data, status } = useQuery(
     ENDPOINTS.APPEARANCES_FULL(params as GetAppearancesAllRequest),
-    fullGuideFetcher(params),
+    fetcher,
     { enabled: params.guide, initialData },
   );
 

@@ -1,5 +1,7 @@
 import { IncomingMessage } from 'http';
 import { AxiosRequestConfig } from 'axios';
+import { pick } from 'lodash';
+import { APP_URL } from 'src/config';
 
 export class Service {
   protected request?: IncomingMessage;
@@ -10,10 +12,14 @@ export class Service {
 
   protected getRequestOptions(): undefined | AxiosRequestConfig {
     if (this.request) {
+      if (!this.request?.headers?.referer) {
+        if (!this.request.headers) {
+          this.request.headers = {};
+        }
+        this.request.headers.referer = APP_URL;
+      }
       return {
-        headers: {
-          cookie: this.request.headers.cookie,
-        },
+        headers: pick(this.request?.headers, ['authorization', 'referer', 'origin', 'cookie']),
       };
     }
   }

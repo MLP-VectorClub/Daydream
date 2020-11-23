@@ -11,7 +11,7 @@ import {
   setResponseStatus,
 } from 'src/utils';
 import { AppDispatch, wrapper } from 'src/store';
-import { useAuth, useGuide, useTitleSetter } from 'src/hooks';
+import { useAuth, useGuide, usePrefs, useTitleSetter } from 'src/hooks';
 import AppearanceItem from 'src/components/colorguide/AppearanceItem';
 import Pagination from 'src/components/shared/Pagination';
 import Content from 'src/components/shared/Content';
@@ -30,6 +30,7 @@ import { guideFetcher } from 'src/fetchers';
 import { useDispatch } from 'react-redux';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
+import NoResultsAlert from 'src/components/shared/NoResultsAlert';
 
 const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, page }) => {
   const title = getGuideTitle(guide, page);
@@ -50,8 +51,10 @@ interface PropTypes {
 
 const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { isStaff } = useAuth();
-  const data = useGuide({ guide, page }, initialData || undefined);
+  const { isStaff, signedIn } = useAuth();
+  const prefs = usePrefs(signedIn);
+  const size = prefs?.cg_itemsperpage || initialData?.pagination.itemsPerPage;
+  const data = useGuide({ guide, page, size }, initialData || undefined);
   const heading = getGuideTitle(guide);
 
   const titleData = useMemo(() => titleFactory({ guide, page }), [guide, page]);
@@ -94,6 +97,9 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
         <MajorChangesButton guide={guide} />
       </ButtonCollection>
       <StatusAlert status={data.status} noun="color guide entries" />
+      {data.appearances?.length === 0 && (
+        <NoResultsAlert message="There are no entries in this guide yet" />
+      )}
       {data.pagination && <Pagination {...data.pagination} tooltipPos="bottom" />}
       {data.appearances && data.appearances.map(el => (
         <AppearanceItem key={el.id} appearance={el} />
@@ -104,7 +110,7 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store } = ctx;
+  const { query, store, req } = ctx;
 
   const guide = resolveGuideName(query.guide) || null;
   if (!guide) {
@@ -119,7 +125,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   let initialData: Optional<GetAppearancesResult>;
   if (guide) {
     try {
-      initialData = await guideFetcher({ ...query, guide, page })();
+      initialData = await guideFetcher({ ...query, guide, page }, req)();
     } catch (e) {
       if ('response' in e) {
         const { response } = e as AxiosError;

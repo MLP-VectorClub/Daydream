@@ -5,7 +5,7 @@ import { AppType } from 'next/dist/next-server/lib/utils';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ReactQueryConfigProvider } from 'react-query';
 import { ENDPOINTS } from 'src/utils';
-import { APP_NAME, DEV_ENV, PROD_APP_URL, REACT_QUERY_CONFIG } from 'src/config';
+import { APP_NAME, DEV_ENV, APP_URL, REACT_QUERY_CONFIG } from 'src/config';
 import { wrapper } from 'src/store';
 import TitleManager from 'src/components/TitleManager';
 import '../fontawesome';
@@ -26,7 +26,7 @@ const Celestia: AppType = props => {
       <DefaultSeo
         openGraph={{
           type: 'website',
-          url: PROD_APP_URL,
+          url: APP_URL,
           site_name: APP_NAME,
         }}
       />

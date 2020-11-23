@@ -1,16 +1,4 @@
-import {
-  GetAboutConnectionResult,
-  GetAppearancesIdSpriteRequest,
-  GetAppearancesRequest,
-  PostUsersOauthSigninProviderRequest,
-  SocialProvider,
-} from 'src/types/api';
-import { Nullable, OptionalProps } from 'src/types/common';
-
-// TODO Attempt to fix optional properties being required in the generator package sometime
-export type GetAppearancesRequestOptionals = OptionalProps<GetAppearancesRequest, 'page' | 'size' | 'q'>;
-export type GetAppearancesIdSpriteRequestOptionals = OptionalProps<GetAppearancesIdSpriteRequest, 'size' | 'token'>;
-
-export type RegisterOauthRequest = PostUsersOauthSigninProviderRequest & { provider: SocialProvider };
+import { GetAboutConnectionResult } from 'src/types/api';
+import { Nullable } from 'src/types/common';
 
 export type MappedAboutConnectionResult = GetAboutConnectionResult & { commitDate: Nullable<Date> };

@@ -6,5 +6,5 @@ import { Service } from 'src/services/service-class';
 export class CoreService extends Service {
   static initCsrf = () => Axios.get<void>(ENDPOINTS.CSRF_INIT);
 
-  static getSidebarUsefulLinks = () => Axios.get<GetUsefulLinksSidebarResult>(ENDPOINTS.USEFUL_LINKS_SIDEBAR);
+  getSidebarUsefulLinks = () => Axios.get<GetUsefulLinksSidebarResult>(ENDPOINTS.USEFUL_LINKS_SIDEBAR, this.getRequestOptions());
 }

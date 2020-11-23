@@ -3,10 +3,10 @@ import { mapValues, omit, omitBy } from 'lodash';
 import { parseRelativeUrl } from 'next/dist/next-server/lib/router/utils/parse-relative-url';
 import { buildUrl } from 'src/utils/url';
 
-export const redirect = <T extends NextPageContext = NextPageContext>(ctx: T, path: string) => {
+export const redirect = (ctx: NextPageContext | GetServerSidePropsContext, path: string, status = 301) => {
   const { res } = ctx;
   if (res) {
-    res.writeHead(301, { Location: path });
+    res.writeHead(status, { Location: path });
     res.end();
   }
 };

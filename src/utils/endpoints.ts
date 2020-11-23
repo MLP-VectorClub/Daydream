@@ -1,8 +1,9 @@
 import { mapValues, omitBy } from 'lodash';
 import {
   GetAppearancesAllRequest,
-  GetAppearancesIdSpriteRequestOptionals,
-  GetAppearancesRequestOptionals,
+  GetAppearancesIdSpriteRequest,
+  GetAppearancesRequest,
+  GetUserPrefsMeRequest,
   GetUsersDaUsernameRequest,
   GetUsersIdRequest,
   GetUsersOauthSigninProviderRequest,
@@ -15,7 +16,7 @@ export const ENDPOINTS = {
   CONNECTION_INFO: `${API_PREFIX}/about/connection`,
   MEMBERS: `${API_PREFIX}/about/members`,
   CSRF_INIT: `${API_PREFIX}/sanctum/csrf-cookie`,
-  USER_PREFS_ME: `${API_PREFIX}/user-prefs/me`,
+  USER_PREFS_ME: (data?: GetUserPrefsMeRequest) => buildUrl(`${API_PREFIX}/user-prefs/me`, data),
   USERS: `${API_PREFIX}/users`,
   USERS_SIGNIN: `${API_PREFIX}/users/signin`,
   USERS_SIGNOUT: `${API_PREFIX}/users/signout`,
@@ -30,10 +31,10 @@ export const ENDPOINTS = {
   USERS_BY_USERNAME: (params: GetUsersDaUsernameRequest) =>
     `${API_PREFIX}/users/da/${encodeURI(params.username)}`,
   GUIDE_INDEX: `${API_PREFIX}/color-guides`,
-  APPEARANCES: (params: GetAppearancesRequestOptionals) =>
+  APPEARANCES: (params: GetAppearancesRequest) =>
     buildUrl(`${API_PREFIX}/appearances`, mapValues(omitBy(params, value => typeof value === 'undefined' || value === null), String)),
   APPEARANCES_FULL: (params: GetAppearancesAllRequest) => buildUrl(`${API_PREFIX}/appearances/full`, params),
-  APPEARANCE_SPRITE: (appearanceId: number, params: GetAppearancesIdSpriteRequestOptionals) =>
+  APPEARANCE_SPRITE: (appearanceId: number, params: GetAppearancesIdSpriteRequest) =>
     buildUrl(`${API_PREFIX}/appearances/${appearanceId}/sprite`, mapValues(omitBy(params, value => typeof value === 'undefined'), String)),
   /*
   APPEARANCE_PALETTE: (appearanceId: number) =>

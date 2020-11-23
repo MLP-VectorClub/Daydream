@@ -13,6 +13,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  VFC,
 } from 'react';
 import { useRouter } from 'next/router';
 import { pickBy } from 'lodash';
@@ -124,7 +125,7 @@ const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, t
   );
 };
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: VFC<PaginationProps> = ({
   currentPage,
   totalPages,
   relevantProps,
@@ -135,6 +136,8 @@ const Pagination: React.FC<PaginationProps> = ({
   tooltipPos,
 }) => {
   const pageItems = useMemo(() => calculatePaginationItems({ currentPage, totalPages }), [currentPage, totalPages]);
+
+  if (totalPages === 1) return null;
 
   return (
     <RSPagination size={size} className={className} listClassName={classNames('justify-content-center', listClassName)}>

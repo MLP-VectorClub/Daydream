@@ -92,27 +92,27 @@ export type TagType = "app" | "cat" | "gen" | "spec" | "char" | "warn";
  * List of available user preferences
  */
 export type UserPrefKeys =
-  | "cgItemsperpage"
-  | "cgHidesynon"
-  | "cgHideclrinfo"
-  | "cgFulllstprev"
-  | "cgNutshell"
-  | "cgDefaultguide"
-  | "pAvatarprov"
-  | "pVectorapp"
-  | "pHidediscord"
-  | "pHidepcg"
-  | "pHomelastep"
-  | "epHidesynopses"
-  | "epNoappprev"
-  | "epRevstepbtn"
-  | "aPcgearn"
-  | "aPcgmake"
-  | "aPcgsprite"
-  | "aPostreq"
-  | "aPostres"
-  | "aReserve"
-  | "pcgSlots";
+  | "cg_itemsperpage"
+  | "cg_hidesynon"
+  | "cg_hideclrinfo"
+  | "cg_fulllstprev"
+  | "cg_nutshell"
+  | "cg_defaultguide"
+  | "p_avatarprov"
+  | "p_vectorapp"
+  | "p_hidediscord"
+  | "p_hidepcg"
+  | "p_homelastep"
+  | "ep_hidesynopses"
+  | "ep_noappprev"
+  | "ep_revstepbtn"
+  | "a_pcgearn"
+  | "a_pcgmake"
+  | "a_pcgsprite"
+  | "a_postreq"
+  | "a_postres"
+  | "a_reserve"
+  | "pcg_slots";
 
 /**
  * List of available vector apps
@@ -132,27 +132,27 @@ export interface GuideEntryCounts {
  * A list of preferences for the current user (or defaults if not signed in)
  */
 export interface UserPrefs {
-  cgItemsperpage: number;
-  cgHidesynon: boolean;
-  cgHideclrinfo: boolean;
-  cgFulllstprev: boolean;
-  cgNutshell: boolean;
-  cgDefaultguide: GuideName;
-  pAvatarprov: AvatarProvider;
-  pVectorapp: VectorApp;
-  pHidediscord: boolean;
-  pHidepcg: boolean;
-  pHomelastep: boolean;
-  epHidesynopses: boolean;
-  epNoappprev: boolean;
-  epRevstepbtn: boolean;
-  aPcgearn: boolean;
-  aPcgmake: boolean;
-  aPcgsprite: boolean;
-  aPostreq: boolean;
-  aPostres: boolean;
-  aReserve: boolean;
-  pcgSlots: number;
+  cg_itemsperpage: number;
+  cg_hidesynon: boolean;
+  cg_hideclrinfo: boolean;
+  cg_fulllstprev: boolean;
+  cg_nutshell: boolean;
+  cg_defaultguide: GuideName;
+  p_avatarprov: AvatarProvider;
+  p_vectorapp: VectorApp;
+  p_hidediscord: boolean;
+  p_hidepcg: boolean;
+  p_homelastep: boolean;
+  ep_hidesynopses: boolean;
+  ep_noappprev: boolean;
+  ep_revstepbtn: boolean;
+  a_pcgearn: boolean;
+  a_pcgmake: boolean;
+  a_pcgsprite: boolean;
+  a_postreq: boolean;
+  a_postres: boolean;
+  a_reserve: boolean;
+  pcg_slots: number;
 }
 
 /**
@@ -253,7 +253,6 @@ export interface SlimGuideTag {
    */
   name?: string;
   type?: TagType;
-  [k: string]: any;
 }
 
 /**
@@ -267,7 +266,7 @@ export interface Sprite {
   /**
    * The width and height of the sprite expressed in the smallest numbers possible while retaining the same aspect ratio. Useful for calculating placeholder element sizes.
    */
-  aspectRatio: number[];
+  aspectRatio: [number, number];
 }
 
 /**
@@ -283,7 +282,7 @@ export interface ColorGroup {
   /**
    * The list of colors inside this group
    */
-  colors: Color[];
+  colors: [Color, ...Color[]];
 }
 
 /**
@@ -302,6 +301,9 @@ export interface Color {
   hex: string;
 }
 
+/**
+ * The number of results to return per page
+ */
 export type GuidePageSize = number;
 
 export type AppearanceToken = string;
@@ -350,7 +352,7 @@ export type ValidationErrorResponse = {
    * A map containing error messages for each field that did not pass validation
    */
   errors: {
-    [k: string]: string[];
+    [k: string]: [string, ...string[]];
   };
 } & ErrorResponse;
 
@@ -465,11 +467,15 @@ export interface CommitData {
  */
 export type AppSettings = "dev_role_label";
 
+export interface GetAboutConnectionRequest {
+}
+export interface GetAboutMembersRequest {
+}
 export interface GetAppearancesRequest {
   guide: GuideName
-  page: PageNumber
-  size: GuidePageSize
-  q: QueryString
+  page?: PageNumber
+  size?: GuidePageSize
+  q?: QueryString
 }
 export interface GetAppearancesAllRequest {
   guide: GuideName
@@ -480,8 +486,8 @@ export interface GetAppearancesIdColorGroupsRequest {
 }
 export interface GetAppearancesIdSpriteRequest {
   id: ZeroBasedId
-  size: SpriteSize
-  token: AppearanceToken
+  size?: SpriteSize
+  token?: AppearanceToken
 }
 export interface GetAppearancesIdPreviewRequest {
   id: ZeroBasedId
@@ -491,13 +497,32 @@ export type PostUsersSigninRequest = SigninRequest
 export interface GetUsersOauthSigninProviderRequest {
   provider: SocialProvider
 }
-export type PostUsersOauthSigninProviderRequest = OauthCode
+export type PostUsersOauthSigninProviderRequest = OauthCode & {
+  provider: SocialProvider
+}
+export interface GetUsersRequest {
+}
 export type PostUsersRequest = RegistrationRequest
+export interface GetColorGuidesRequest {
+}
+export interface GetSanctumCsrfCookieRequest {
+}
+export interface GetUsefulLinksSidebarRequest {
+}
+export interface GetUserPrefsMeRequest {
+  keys?: UserPrefKeys[]
+}
+export interface GetUsersMeRequest {
+}
 export interface GetUsersDaUsernameRequest {
   username: string
 }
 export interface GetUsersIdRequest {
   id: OneBasedId
+}
+export interface PostUsersSignoutRequest {
+}
+export interface GetUsersTokensRequest {
 }
 export interface DeleteUsersTokensIdRequest {
   id: number
@@ -557,7 +582,7 @@ export interface GetUsersTokensResult {
   /**
    * A list of tokens that belong to the user
    */
-  tokens: Token[];
+  tokens: [Token, ...Token[]];
 }
 
 export type DeleteUsersTokensIdResult = any
