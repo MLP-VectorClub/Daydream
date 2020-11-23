@@ -1,6 +1,6 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useMemo } from 'react';
+import React, { VFC } from 'react';
 import Link from 'next/link';
 import { getDefaultGuideLink, getHomeLink, getProfileLink, PATHS } from 'src/utils';
 import { CLUB_URL } from 'src/config';
@@ -9,11 +9,11 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
 
-const MainNavigation = () => {
+const MainNavigation: VFC = () => {
   const { signedIn, user, isStaff } = useAuth();
   const prefs = usePrefs(signedIn);
-  const defaultGuideLink = useMemo<string>(() => getDefaultGuideLink(prefs), [prefs]);
-  const homeLink = useMemo<string>(() => getHomeLink(prefs), [prefs]);
+  const defaultGuideLink = getDefaultGuideLink(prefs);
+  const homeLink = getHomeLink(prefs);
 
   return (
     <Nav navbar>
