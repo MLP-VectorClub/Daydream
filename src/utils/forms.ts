@@ -11,14 +11,14 @@ export const combineErrors = <FormValues extends FieldValues = FieldValues>(
   Object.entries(clientErrors).forEach(([key, value]) => {
     const types = (value as FieldError)?.types;
     if (types) {
-      copy[key] = Object.values(types) as string[];
+      copy[key] = Object.values(types) as ValidationErrorResponse['errors'][string];
     }
   });
   if (serverErrors && serverErrors.type === UnifiedErrorResponseTypes.VALIDATION_ERROR) {
     Object.keys(serverErrors.errors).forEach(key => {
       const newStartingValue = copy[key] || [];
       if (Array.isArray(serverErrors.errors[key])) {
-        copy[key] = newStartingValue.concat(serverErrors.errors[key]);
+        copy[key] = newStartingValue.concat(serverErrors.errors[key]) as ValidationErrorResponse['errors'][string];
       }
     });
   }
