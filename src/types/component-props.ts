@@ -12,4 +12,5 @@ export type InlineIconProps = {
   last?: boolean;
   first?: boolean;
   color?: string;
+  children?: never;
 } & Omit<FontAwesomeIconProps, 'icon'>;

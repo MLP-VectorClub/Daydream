@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux';
 interface PropTypes {
   connectingAddress: Nullable<string>;
   forwardedFor: Nullable<string | string[]>;
+  userAgent: Nullable<string>;
   initialServerInfo?: GetAboutConnectionResult;
 }
 
@@ -26,7 +27,7 @@ const titleFactory: TitleFactoryVoid = () => ({
   breadcrumbs: [],
 });
 
-export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forwardedFor, initialServerInfo }) => {
+export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forwardedFor, userAgent, initialServerInfo }) => {
   const dispatch = useDispatch();
   const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
 
@@ -44,12 +45,13 @@ export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forward
       </Head>
       <StandardHeading heading={connection.heading} />
 
-      <h3>Frontend: (<Abbr title={connection.ssrMeaning}>{connection.ssr}</Abbr>)</h3>
+      <h3>Frontend: (<Abbr title="Server-Side Rendering">SSR</Abbr>)</h3>
       <p><strong>{connection.connectingAddress}:</strong> <code>{JSON.stringify(connectingAddress)}</code></p>
       <p><strong>{connection.forwardedFor}:</strong> <code>{JSON.stringify(forwardedFor)}</code></p>
+      <p><strong>{connection.userAgent}:</strong> <code>{JSON.stringify(userAgent)}</code></p>
 
       <h3>
-        Backend (<Abbr title={common.footer.apiMeaning}>{common.footer.api}</Abbr>)
+        Backend (<Abbr title={common.footer.apiMeaning}>API</Abbr>)
         {backendDown && (
           <InlineIcon color="danger" icon="server" />
         )}
@@ -61,6 +63,15 @@ export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forward
       <p><strong>{connection.commitTime}:</strong> <code>{JSON.stringify(getServerInfo('commitTime'))}</code></p>
       <p><strong>{connection.connectingAddress}:</strong> <code>{JSON.stringify(getServerInfo('ip'))}</code></p>
       <p><strong>{connection.forwardedFor}:</strong> <code>{JSON.stringify(getServerInfo('proxiedIps'))}</code></p>
+      <p><strong>{connection.userAgent}:</strong> <code>{JSON.stringify(getServerInfo('userAgent'))}</code></p>
+      <p>
+        <strong>{connection.deviceIdentifier}:</strong> <code>{JSON.stringify(getServerInfo('deviceIdentifier'))}</code>
+        <br />
+        <span className="text-info">
+          <InlineIcon icon="info" first />
+          This is the name given to your new access tokens by default; this information is gathered from the {connection.userAgent} string
+        </span>
+      </p>
 
       <Button onClick={makeStale} disabled={fetching}>
         <InlineIcon icon="sync" first loading={fetching} />
@@ -74,18 +85,14 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const { store, req } = ctx;
   const props: PropTypes = {
     connectingAddress: req.connection.remoteAddress || null,
-    forwardedFor: null,
+    forwardedFor: req.headers['x-forwarded-for'] || null,
+    userAgent: req.headers['user-agent'] || null,
     initialServerInfo: await connectionFetcher(),
   };
 
   const connAddr = req.connection.address();
   if (connAddr) {
     props.connectingAddress = typeof connAddr === 'string' ? connAddr : connAddr.address;
-  }
-
-  const forwardedHeader = req.headers['x-forwarded-for'];
-  if (forwardedHeader) {
-    props.forwardedFor = forwardedHeader;
   }
 
   titleSetter(store, titleFactory());

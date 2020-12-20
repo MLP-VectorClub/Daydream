@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React, { memo, VFC } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, memo } from 'react';
 import { getInlineIconClasses } from 'src/utils';
 import { InlineIconProps } from 'src/types/component-props';
 import LoadingRing from 'src/components/shared/LoadingRing';
 
-const InlineIcon: VFC<InlineIconProps> = ({
+const InlineIcon: ForwardRefRenderFunction<HTMLElement, InlineIconProps> = ({
   icon,
   loading = false,
   last = false,
@@ -13,7 +13,7 @@ const InlineIcon: VFC<InlineIconProps> = ({
   color,
   className,
   ...faProps
-}) => {
+}, ref) => {
   if (loading) {
     return (
       <LoadingRing inline spaceLeft={last} spaceRight={first} color={color} className={className} />
@@ -26,9 +26,10 @@ const InlineIcon: VFC<InlineIconProps> = ({
     <FontAwesomeIcon
       icon={icon}
       className={classNames(className, getInlineIconClasses(color, first, last))}
+      forwardedRef={ref}
       {...faProps}
     />
   );
 };
 
-export default memo(InlineIcon);
+export default memo(forwardRef(InlineIcon));

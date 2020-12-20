@@ -26,6 +26,7 @@ import {
   faSignOutAlt,
   faSort,
   faSync,
+  faThumbtack,
   faTimes,
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
@@ -55,6 +56,7 @@ library.add(
   faEllipsisH,
   faChevronUp,
   faCaretDown,
+  faThumbtack,
   faSignOutAlt,
   faChevronLeft,
   faChevronRight,

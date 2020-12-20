@@ -10,7 +10,10 @@ const outputPath = 'src/types/api.ts';
   let schema;
   if (/^https?:\/\//.test(filePath)){
     const fetch = require('node-fetch');
-    schema = await fetch(filePath).then(r => r.json());
+    schema = await fetch(filePath).then(r => {
+      if (r.status !== 200) throw new Error(r.json());
+      return r.json();
+    });
   } else {
     if (!fs.existsSync(filePath)){
       console.error('Missing API schema file (or API_JSON_PATH not set)');

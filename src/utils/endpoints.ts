@@ -1,7 +1,9 @@
 import { mapValues, omitBy } from 'lodash';
 import {
   GetAppearancesAllRequest,
+  GetAppearancesAutocompleteRequest,
   GetAppearancesIdSpriteRequest,
+  GetAppearancesPinnedRequest,
   GetAppearancesRequest,
   GetUserPrefsMeRequest,
   GetUsersDaUsernameRequest,
@@ -10,6 +12,14 @@ import {
 } from 'src/types';
 import { API_PREFIX } from 'src/config';
 import { buildUrl } from 'src/utils/url';
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+const omitUndefined = <T extends object>(params: T): Record<string, string> =>
+  mapValues(omitBy(params, value => typeof value === 'undefined'), String);
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+const omitUndefinedOrNull = <T extends object>(params: T): Record<string, string> =>
+  mapValues(omitBy(params, value => typeof value === 'undefined' || value === null), String);
 
 export const ENDPOINTS = {
   SLEEP: `${API_PREFIX}/about/sleep`,
@@ -32,10 +42,14 @@ export const ENDPOINTS = {
     `${API_PREFIX}/users/da/${encodeURI(params.username)}`,
   GUIDE_INDEX: `${API_PREFIX}/color-guides`,
   APPEARANCES: (params: GetAppearancesRequest) =>
-    buildUrl(`${API_PREFIX}/appearances`, mapValues(omitBy(params, value => typeof value === 'undefined' || value === null), String)),
+    buildUrl(`${API_PREFIX}/appearances`, omitUndefinedOrNull(params)),
   APPEARANCES_FULL: (params: GetAppearancesAllRequest) => buildUrl(`${API_PREFIX}/appearances/full`, params),
   APPEARANCE_SPRITE: (appearanceId: number, params: GetAppearancesIdSpriteRequest) =>
-    buildUrl(`${API_PREFIX}/appearances/${appearanceId}/sprite`, mapValues(omitBy(params, value => typeof value === 'undefined'), String)),
+    buildUrl(`${API_PREFIX}/appearances/${appearanceId}/sprite`, omitUndefined(params)),
+  APPEARANCES_PINNED: (params: GetAppearancesPinnedRequest) =>
+    buildUrl(`${API_PREFIX}/appearances/pinned`, omitUndefinedOrNull(params)),
+  APPEARANCES_AUTOCOMPLETE: (params: GetAppearancesAutocompleteRequest) =>
+    buildUrl(`${API_PREFIX}/appearances/autocomplete`, omitUndefinedOrNull(params)),
   /*
   APPEARANCE_PALETTE: (appearanceId: number) =>
     buildUrl('', {

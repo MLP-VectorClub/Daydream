@@ -167,6 +167,14 @@ export interface ConnectionInfo {
    * The value of the X-Forwarded-For HTTP header as received by the server
    */
   proxiedIps: string;
+  /**
+   * The value of the User-Agent HTTP header as received by the server
+   */
+  userAgent?: string;
+  /**
+   * Short string representing the current browser and OS used to make the request (based on user agent)
+   */
+  deviceIdentifier?: string;
 }
 
 /**
@@ -183,12 +191,7 @@ export interface AppearanceList {
   appearances: Appearance[];
 }
 
-export type PreviewsIndicator = ErrorResponse;
-
-/**
- * Used for displaying items in a specific order. The API guarantees that array return values are sorted in ascending order based on this property.
- */
-export type Order = number;
+export type Order = ErrorResponse;
 
 /**
  * Array of color groups under the `colorGroups` key
@@ -201,24 +204,30 @@ export interface ListOfColorGroups {
 }
 
 /**
- * Common properties of the two Appearance schemas
+ * The barest of properties for an appearance intended for use in autocompletion results
  */
-export interface CommonAppearance {
+export interface AutocompleteAppearance {
   id: ZeroBasedId;
   /**
    * The name of the appearance
    */
   label: string;
-  order: Order;
   /**
    * The sprite that belongs to this appearance, or null if there is none
    */
   sprite: Sprite;
+}
+
+/**
+ * Common properties of the two main Appearance schemas
+ */
+export type CommonAppearance = AutocompleteAppearance & {
+  order: Order;
   /**
    * Indicates whether there are any cutie marks tied to this appearance
    */
   hasCutieMarks: boolean;
-}
+};
 
 /**
  * Represents properties that belong to the slim appearance object only
@@ -493,6 +502,13 @@ export interface GetAppearancesIdPreviewRequest {
   id: ZeroBasedId
   token: AppearanceToken
 }
+export interface GetAppearancesPinnedRequest {
+  guide: GuideName
+}
+export interface GetAppearancesAutocompleteRequest {
+  guide: GuideName
+  q: QueryString
+}
 export type PostUsersSigninRequest = SigninRequest
 export interface GetUsersOauthSigninProviderRequest {
   provider: SocialProvider
@@ -540,6 +556,10 @@ export type GetAppearancesIdColorGroupsResult = ListOfColorGroups;
 export type GetAppearancesIdSpriteResult = any
 export type GetAppearancesIdSprite302 = any
 export type GetAppearancesIdPreviewResult = any
+export type GetAppearancesPinnedResult = Appearance[];
+
+export type GetAppearancesAutocompleteResult = AutocompleteAppearance[];
+
 export interface PostUsersSigninResult {
   token?: string;
 }

@@ -1,7 +1,13 @@
 import { Button } from 'reactstrap';
 import React, { useMemo } from 'react';
 import { AxiosError } from 'axios';
-import { GetAppearancesResult, GuideName, Nullable, Optional } from 'src/types';
+import {
+  GetAppearancesPinnedResult,
+  GetAppearancesResult,
+  GuideName,
+  Nullable,
+  Optional,
+} from 'src/types';
 import {
   getGuideLabel,
   getGuideTitle,
@@ -26,11 +32,12 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import MajorChangesButton from 'src/components/colorguide/MajorChangesButton';
 import StatusAlert from 'src/components/shared/StatusAlert';
-import { guideFetcher } from 'src/fetchers';
+import { guideFetcher, pinnedAppearancesFetcher } from 'src/fetchers';
 import { useDispatch } from 'react-redux';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import NoResultsAlert from 'src/components/shared/NoResultsAlert';
+import PinnedAppearances from 'src/components/colorguide/PinnedAppearances';
 
 const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, page }) => {
   const title = getGuideTitle(guide, page);
@@ -46,15 +53,18 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, 
 interface PropTypes {
   guide: Nullable<GuideName>;
   page: number;
-  initialData: Nullable<GetAppearancesResult>;
+  initialData: {
+    appearances: Nullable<GetAppearancesResult>,
+    pinnedAppearances: Nullable<GetAppearancesPinnedResult>
+  };
 }
 
 const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { isStaff, signedIn } = useAuth();
   const prefs = usePrefs(signedIn);
-  const size = prefs?.cg_itemsperpage || initialData?.pagination.itemsPerPage;
-  const data = useGuide({ guide, page, size }, initialData || undefined);
+  const size = prefs?.cg_itemsperpage || initialData.appearances?.pagination.itemsPerPage;
+  const data = useGuide({ guide, page, size }, initialData.appearances || undefined);
   const heading = getGuideTitle(guide);
 
   const titleData = useMemo(() => titleFactory({ guide, page }), [guide, page]);
@@ -96,6 +106,9 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
         </Link>
         <MajorChangesButton guide={guide} />
       </ButtonCollection>
+
+      <PinnedAppearances initialData={initialData.pinnedAppearances} guide={guide} />
+
       <StatusAlert status={data.status} noun="color guide entries" />
       {data.appearances?.length === 0 && (
         <NoResultsAlert message="There are no entries in this guide yet" />
@@ -122,10 +135,28 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     page = parseInt(query.page, 10);
   }
 
-  let initialData: Optional<GetAppearancesResult>;
+  let appearances: Optional<GetAppearancesResult>;
+  let pinnedAppearances: Optional<GetAppearancesPinnedResult>;
   if (guide) {
     try {
-      initialData = await guideFetcher({ ...query, guide, page }, req)();
+      appearances = await guideFetcher({ ...query, guide, page }, req)();
+    } catch (e) {
+      if ('response' in e) {
+        const { response } = e as AxiosError;
+        const status = response?.status;
+        if (status) {
+          setResponseStatus(ctx, status);
+        }
+        if (status !== 404) {
+          console.error(response);
+        }
+      } else {
+        console.error(e);
+      }
+    }
+
+    try {
+      pinnedAppearances = await pinnedAppearancesFetcher({ ...query, guide }, req)();
     } catch (e) {
       if ('response' in e) {
         const { response } = e as AxiosError;
@@ -145,7 +176,10 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const props: PropTypes = {
     guide,
     page,
-    initialData: initialData || null,
+    initialData: {
+      appearances: appearances || null,
+      pinnedAppearances: pinnedAppearances || null,
+    },
   };
   titleSetter(store, titleFactory(props));
   return { props };

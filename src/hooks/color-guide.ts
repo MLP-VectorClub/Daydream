@@ -2,6 +2,10 @@ import { useQuery } from 'react-query';
 import {
   GetAppearancesAllRequest,
   GetAppearancesAllResult,
+  GetAppearancesAutocompleteRequest,
+  GetAppearancesAutocompleteResult,
+  GetAppearancesPinnedRequest,
+  GetAppearancesPinnedResult,
   GetAppearancesRequest,
   GetAppearancesResult,
   GetColorGuidesResult,
@@ -11,9 +15,13 @@ import { ENDPOINTS, mapQueryStatus } from 'src/utils';
 import {
   fullGuideFetcher,
   FullGuideFetcherParams,
+  guideAutocompleteFetcher,
+  GuideAutocompleteFetcherParams,
   guideFetcher,
   GuideFetcherParams,
   guideIndexFetcher,
+  pinnedAppearancesFetcher,
+  PinnedAppearancesFetcherParams,
 } from 'src/fetchers';
 import { useCallback } from 'react';
 
@@ -31,6 +39,25 @@ export function useGuide(params: GuideFetcherParams, initialData?: GetAppearance
 
   return {
     ...data,
+    status: mapQueryStatus(status),
+  };
+}
+
+interface GuideAutocompleteHookValue {
+  results?: GetAppearancesAutocompleteResult,
+  status: Status;
+}
+
+export function useGuideAutocomplete(params: GuideAutocompleteFetcherParams): GuideAutocompleteHookValue {
+  const fetcher = useCallback(() => guideAutocompleteFetcher(params)(), [params]);
+  const { status, data } = useQuery(
+    ENDPOINTS.APPEARANCES_AUTOCOMPLETE(params as GetAppearancesAutocompleteRequest),
+    fetcher,
+    { enabled: params.guide && params.q },
+  );
+
+  return {
+    results: data,
     status: mapQueryStatus(status),
   };
 }
@@ -59,4 +86,15 @@ export function useFullGuide(params: FullGuideFetcherParams, initialData?: GetAp
     groups: data?.groups,
     status: mapQueryStatus(status),
   };
+}
+
+export function usePinnedAppearances(params: PinnedAppearancesFetcherParams, initialData?: GetAppearancesPinnedResult) {
+  const fetcher = useCallback(() => pinnedAppearancesFetcher(params)(), [params]);
+  const { data } = useQuery(
+    ENDPOINTS.APPEARANCES_PINNED(params as GetAppearancesPinnedRequest),
+    fetcher,
+    { initialData },
+  );
+
+  return data;
 }

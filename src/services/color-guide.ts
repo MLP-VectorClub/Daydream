@@ -2,6 +2,10 @@ import Axios from 'axios';
 import {
   GetAppearancesAllRequest,
   GetAppearancesAllResult,
+  GetAppearancesAutocompleteRequest,
+  GetAppearancesAutocompleteResult,
+  GetAppearancesPinnedRequest,
+  GetAppearancesPinnedResult,
   GetAppearancesRequest,
   GetAppearancesResult,
   GetColorGuidesResult,
@@ -18,4 +22,10 @@ export class ColorGuideService extends Service {
 
   getFullList = (data: GetAppearancesAllRequest) =>
     Axios.get<GetAppearancesAllResult>(ENDPOINTS.APPEARANCES_FULL(data), this.getRequestOptions());
+
+  getPinnedAppearances = (data: GetAppearancesPinnedRequest) =>
+    Axios.get<GetAppearancesPinnedResult>(ENDPOINTS.APPEARANCES_PINNED(data), this.getRequestOptions());
+
+  getAutocompleteAppearances = (data: GetAppearancesAutocompleteRequest) =>
+    Axios.get<GetAppearancesAutocompleteResult>(ENDPOINTS.APPEARANCES_AUTOCOMPLETE(data), this.getRequestOptions());
 }

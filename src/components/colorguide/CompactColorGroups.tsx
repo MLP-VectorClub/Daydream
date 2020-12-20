@@ -1,13 +1,14 @@
 import { ColorGroup } from 'src/types';
 import styles from 'modules/CompactColorGroups.module.scss';
 import ColorSquare from 'src/components/colorguide/ColorSquare';
+import { VFC } from 'react';
 
 interface PropTypes {
-  colorGroups: ColorGroup[];
+  colorGroups?: ColorGroup[];
 }
 
-const CompactColorGroups: React.VFC<PropTypes> = ({ colorGroups }) => (
-  colorGroups.length > 0
+const CompactColorGroups: VFC<PropTypes> = ({ colorGroups }) => (
+  colorGroups && colorGroups.length > 0
     ? (
       <div className={styles.compactColorGroups}>
         {colorGroups.map(cg => (
