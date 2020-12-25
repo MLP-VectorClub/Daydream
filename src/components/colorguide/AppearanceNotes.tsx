@@ -13,14 +13,14 @@ const AppearanceNotes: React.FC<AppearanceNotesProps> = ({ appearance }) => {
   const notes = useMemo(() => (appearance.notes ? processAppearanceNotes(appearance.notes) : null), [appearance.notes]);
 
   return (
-    <div className={styles.appearanceNotes}>
+    <section className={styles.appearanceNotes} aria-label="Notes">
       {notes}
       {appearance.hasCutieMarks && (
         <span className={classNames({ 'ml-2 pl-2 border-left': notes !== null })}>
           {colorGuide.appearances.cmAvailable}
         </span>
       )}
-    </div>
+    </section>
   );
 };
 

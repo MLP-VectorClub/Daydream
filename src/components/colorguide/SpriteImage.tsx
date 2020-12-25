@@ -25,6 +25,7 @@ const SpriteImage: React.FC<PropTypes> = ({ sprite, height = 150 }) => {
       width={spriteStyle.width}
       height={spriteStyle.height}
       unoptimized
+      alt="Sprite image"
     />
   );
 };

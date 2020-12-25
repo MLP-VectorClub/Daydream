@@ -1,14 +1,14 @@
 import {
+  each,
   isEmpty,
   map,
   mapValues,
   omit,
   omitBy,
-  each,
   trim,
 } from 'lodash';
 import {
-  CommonAppearance,
+  AutocompleteAppearance,
   FullGuideSortField,
   GuideName,
   Numeric,
@@ -45,16 +45,16 @@ export const PATHS = {
   ROOT: '/',
   ABOUT: '/about',
   ADMIN: '/admin',
-  APPEARANCE: ({ id, label }: CommonAppearance) => `/cg/v/${id}-${makeUrlSafe(label)}`,
+  APPEARANCE: ({ id, label }: AutocompleteAppearance) => `/cg/v/${id}-${makeUrlSafe(label)}`,
   BLENDING: '/blending',
   EVENTS: '/events',
   GUIDE_INDEX: '/cg',
-  GUIDE: (guide: GuideName, params?: { page?: string }) => {
+  GUIDE: (guide: GuideName, params?: { page?: string; q?: string }) => {
     let paramsCopy = params;
     if (params && params.page === '1') {
       paramsCopy = omit(params, 'page');
     }
-    const queryParams = mapValues(omitBy(paramsCopy, el => typeof el === 'undefined'), String);
+    const queryParams = mapValues(omitBy(paramsCopy, el => typeof el !== 'string' || el.length === 0), String);
     const path = `/cg/${guide}`;
     if (isEmpty(queryParams)) return path;
     return buildUrl(path, queryParams);

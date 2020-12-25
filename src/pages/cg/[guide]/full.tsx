@@ -57,7 +57,7 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'guide'>> = ({ guide }) => {
     breadcrumbs: [
       { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
       { linkProps: guideLinkProps, label: getGuideLabel(guide) },
-      { label: getGuideLabel(guide), active: true },
+      { label: 'Full List', active: true },
     ],
   };
 };

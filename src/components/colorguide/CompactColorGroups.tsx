@@ -10,7 +10,7 @@ interface PropTypes {
 const CompactColorGroups: VFC<PropTypes> = ({ colorGroups }) => (
   colorGroups && colorGroups.length > 0
     ? (
-      <div className={styles.compactColorGroups}>
+      <div className={styles.compactColorGroups} aria-label="Color Groups">
         {colorGroups.map(cg => (
           <div key={cg.id} className={styles.compactColorGroup}>
             <span className={styles.compactColorGroupLabel}>{cg.label}</span>

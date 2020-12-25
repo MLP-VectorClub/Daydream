@@ -2,6 +2,7 @@ import { config, library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowCircleLeft,
+  faArrowDown,
   faArrowUp,
   faBars,
   faCaretDown,
@@ -22,6 +23,7 @@ import {
   faHome,
   faInfo,
   faPlus,
+  faSearch,
   faSignInAlt,
   faSignOutAlt,
   faSort,
@@ -48,10 +50,12 @@ library.add(
   faCheck,
   faGlobe,
   faTimes,
+  faSearch,
   faHardHat,
   faArrowUp,
   faEyeSlash,
   faUserPlus,
+  faArrowDown,
   faSignInAlt,
   faEllipsisH,
   faChevronUp,

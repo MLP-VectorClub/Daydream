@@ -18,16 +18,23 @@ export interface AppearanceItemProps {
   pinned?: boolean;
 }
 
+const PINNED_TOOLTIP = 'Pinned';
+
 const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, pinned = false }) => {
   const pinRef = useRef<HTMLElement>(null);
 
   return (
-    <Card key={appearance.id} className={`${styles.appearanceItem} mb-3`}>
+    <Card
+      key={appearance.id}
+      className={`${styles.appearanceItem} mb-3`}
+      role="region"
+      aria-label={pinned ? 'Pinned Appearance' : 'Appearance'}
+    >
       <CardBody className="p-2">
         <Row noGutters>
           {appearance.sprite && (
             <Col xs="auto">
-              <div className="pr-3">
+              <div className="pr-3" role="presentation">
                 <SpriteImage sprite={appearance.sprite} />
               </div>
             </Col>
@@ -38,7 +45,7 @@ const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, pinned = fa
                 <>
                   <InlineIcon icon="thumbtack" color="primary" first size="sm" ref={pinRef} />
                   <UncontrolledTooltip target={pinRef} fade={false}>
-                    Pinned
+                    {PINNED_TOOLTIP}
                   </UncontrolledTooltip>
                 </>
               )}

@@ -11,7 +11,7 @@ import FooterVersionInfo from 'src/components/shared/FooterVersionInfo';
 
 const Footer: React.VFC = () => (
   <>
-    <footer id="footer">
+    <footer id="footer" role="contentinfo">
       <FooterVersionInfo />
       {` | `}
       <Link href={PATHS.PRIVACY_POLICY}>

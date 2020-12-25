@@ -53,7 +53,7 @@ export function useGuideAutocomplete(params: GuideAutocompleteFetcherParams): Gu
   const { status, data } = useQuery(
     ENDPOINTS.APPEARANCES_AUTOCOMPLETE(params as GetAppearancesAutocompleteRequest),
     fetcher,
-    { enabled: params.guide && params.q },
+    { enabled: params.guide && params.q, keepPreviousData: Boolean(params.q) },
   );
 
   return {

@@ -38,6 +38,7 @@ import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import NoResultsAlert from 'src/components/shared/NoResultsAlert';
 import PinnedAppearances from 'src/components/colorguide/PinnedAppearances';
+import SearchBar from 'src/components/colorguide/SearchBar';
 
 const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, page }) => {
   const title = getGuideTitle(guide, page);
@@ -53,18 +54,19 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, 
 interface PropTypes {
   guide: Nullable<GuideName>;
   page: number;
+  q: string;
   initialData: {
     appearances: Nullable<GetAppearancesResult>,
     pinnedAppearances: Nullable<GetAppearancesPinnedResult>
   };
 }
 
-const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
+const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { isStaff, signedIn } = useAuth();
   const prefs = usePrefs(signedIn);
   const size = prefs?.cg_itemsperpage || initialData.appearances?.pagination.itemsPerPage;
-  const data = useGuide({ guide, page, size }, initialData.appearances || undefined);
+  const data = useGuide({ guide, page, q, size }, initialData.appearances || undefined);
   const heading = getGuideTitle(guide);
 
   const titleData = useMemo(() => titleFactory({ guide, page }), [guide, page]);
@@ -109,6 +111,8 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, initialData }) => {
 
       <PinnedAppearances initialData={initialData.pinnedAppearances} guide={guide} />
 
+      <SearchBar guide={guide} initialQuery={q} />
+
       <StatusAlert status={data.status} noun="color guide entries" />
       {data.appearances?.length === 0 && (
         <NoResultsAlert message="There are no entries in this guide yet" />
@@ -133,6 +137,11 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   let page = 1;
   if (typeof query.page === 'string') {
     page = parseInt(query.page, 10);
+  }
+
+  let q = '';
+  if (typeof query.q === 'string') {
+    q = query.q.trim();
   }
 
   let appearances: Optional<GetAppearancesResult>;
@@ -176,6 +185,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const props: PropTypes = {
     guide,
     page,
+    q,
     initialData: {
       appearances: appearances || null,
       pinnedAppearances: pinnedAppearances || null,
