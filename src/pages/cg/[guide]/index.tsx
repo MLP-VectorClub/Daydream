@@ -40,8 +40,8 @@ import NoResultsAlert from 'src/components/shared/NoResultsAlert';
 import PinnedAppearances from 'src/components/colorguide/PinnedAppearances';
 import SearchBar from 'src/components/colorguide/SearchBar';
 
-const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'page'>> = ({ guide, page }) => {
-  const title = getGuideTitle(guide, page);
+const titleFactory: TitleFactory<Omit<PropTypes, 'initialData'>> = ({ guide, page, q }) => {
+  const title = getGuideTitle(guide, page, q);
   return {
     title,
     breadcrumbs: [
@@ -61,6 +61,8 @@ interface PropTypes {
   };
 }
 
+const PAGING_RELEVANT_PROPS = ['q'];
+
 const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { isStaff, signedIn } = useAuth();
@@ -69,7 +71,7 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) =>
   const data = useGuide({ guide, page, q, size }, initialData.appearances || undefined);
   const heading = getGuideTitle(guide);
 
-  const titleData = useMemo(() => titleFactory({ guide, page }), [guide, page]);
+  const titleData = useMemo(() => titleFactory({ guide, page, q }), [guide, page, q]);
   useTitleSetter(dispatch, titleData);
 
   if (guide === null) {
@@ -117,11 +119,11 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) =>
       {data.appearances?.length === 0 && (
         <NoResultsAlert message="There are no entries in this guide yet" />
       )}
-      {data.pagination && <Pagination {...data.pagination} tooltipPos="bottom" />}
+      {data.pagination && <Pagination {...data.pagination} relevantProps={PAGING_RELEVANT_PROPS} tooltipPos="bottom" />}
       {data.appearances && data.appearances.map(el => (
-        <AppearanceItem key={el.id} appearance={el} />
+        <AppearanceItem key={el.id} appearance={el} guide={guide} />
       ))}
-      {data.pagination && <Pagination {...data.pagination} tooltipPos="top" listClassName="mb-0" />}
+      {data.pagination && <Pagination {...data.pagination} relevantProps={PAGING_RELEVANT_PROPS} tooltipPos="top" listClassName="mb-0" />}
     </Content>
   );
 };

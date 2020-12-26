@@ -1,0 +1,53 @@
+@mixin tag-variant($color: $tag-color-default) {
+  $border: mix(white, $color, 10%);
+  $background: lighten($color, 50%);
+  $background-hover: desaturate(darken($background, 5%), 20%);
+
+  background-color: $background;
+
+  &, &:hover, &:active {
+    color: $border;
+  }
+
+  &:hover {
+    background-color: $background-hover;
+  }
+
+
+  &:focus {
+    @if $enable-shadows {
+      @include box-shadow($btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5));
+    } @else {
+      box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+    }
+  }
+}
+
+.tag {
+  border-radius: $btn-border-radius;
+  border: 1px solid;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: .05rem .3rem;
+  font-weight: bolder;
+  transition: background-color, opacity;
+  transition-duration: .15s;
+  transition-timing-function: linear;
+  @include tag-variant();
+
+  &.tag-synonym {
+    font-weight: normal !important;
+    letter-spacing: -.8px;
+
+    &:not(:hover):not(:focus) {
+      opacity: .6;
+    }
+  }
+
+  // Colors
+  @each $color, $value in $tag-colors {
+    &.tag-#{$color} {
+      @include tag-variant($value);
+    }
+  }
+}

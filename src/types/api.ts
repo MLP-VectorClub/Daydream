@@ -137,9 +137,9 @@ export interface UserPrefs {
   cg_hideclrinfo: boolean;
   cg_fulllstprev: boolean;
   cg_nutshell: boolean;
-  cg_defaultguide: GuideName;
+  cg_defaultguide: GuideName | null;
   p_avatarprov: AvatarProvider;
-  p_vectorapp: VectorApp;
+  p_vectorapp: VectorApp | null;
   p_hidediscord: boolean;
   p_hidepcg: boolean;
   p_homelastep: boolean;
@@ -152,7 +152,7 @@ export interface UserPrefs {
   a_postreq: boolean;
   a_postres: boolean;
   a_reserve: boolean;
-  pcg_slots: number;
+  pcg_slots: number | null;
 }
 
 /**
@@ -162,19 +162,19 @@ export interface ConnectionInfo {
   /**
    * The IP address the server believes this request originated from
    */
-  ip: string;
+  ip: string | null;
   /**
    * The value of the X-Forwarded-For HTTP header as received by the server
    */
-  proxiedIps: string;
+  proxiedIps: string | null;
   /**
    * The value of the User-Agent HTTP header as received by the server
    */
-  userAgent?: string;
+  userAgent?: string | null;
   /**
    * Short string representing the current browser and OS used to make the request (based on user agent)
    */
-  deviceIdentifier?: string;
+  deviceIdentifier?: string | null;
 }
 
 /**
@@ -215,7 +215,7 @@ export interface AutocompleteAppearance {
   /**
    * The sprite that belongs to this appearance, or null if there is none
    */
-  sprite: Sprite;
+  sprite: Sprite | null;
 }
 
 /**
@@ -246,7 +246,7 @@ export type SlimAppearance = CommonAppearance & SlimAppearanceOnly;
  */
 export interface AppearanceOnly {
   created_at: IsoStandardDate;
-  notes: string;
+  notes: string | null;
   tags: SlimGuideTag[];
 }
 
@@ -256,12 +256,13 @@ export interface AppearanceOnly {
 export type Appearance = CommonAppearance & AppearanceOnly & ListOfColorGroups;
 
 export interface SlimGuideTag {
-  id?: OneBasedId;
+  id: OneBasedId;
   /**
    * Tag name (all lowercase)
    */
-  name?: string;
+  name: string;
   type?: TagType;
+  synonymOf?: OneBasedId;
 }
 
 /**
@@ -420,12 +421,12 @@ export interface BarePublicUser {
 }
 
 export type PublicUser = BarePublicUser & {
-  avatarUrl: string;
+  avatarUrl: string | null;
   avatarProvider: AvatarProvider;
 };
 
 export type User = PublicUser & {
-  email: string;
+  email: string | null;
   role: DatabaseRole;
 };
 
@@ -464,11 +465,11 @@ export interface CommitData {
   /**
    * Abbreviated commit ID of the backend application, indicating the version currently deployed on the server (at least 7 characters long)
    */
-  commitId: string;
+  commitId: string | null;
   /**
    * Date at which the commit currently deployed on the server was authored
    */
-  commitTime: IsoStandardDate;
+  commitTime: IsoStandardDate | null;
 }
 
 /**
@@ -476,10 +477,8 @@ export interface CommitData {
  */
 export type AppSettings = "dev_role_label";
 
-export interface GetAboutConnectionRequest {
-}
-export interface GetAboutMembersRequest {
-}
+
+
 export interface GetAppearancesRequest {
   guide: GuideName
   page?: PageNumber
@@ -500,7 +499,7 @@ export interface GetAppearancesIdSpriteRequest {
 }
 export interface GetAppearancesIdPreviewRequest {
   id: ZeroBasedId
-  token: AppearanceToken
+  token?: AppearanceToken
 }
 export interface GetAppearancesPinnedRequest {
   guide: GuideName
@@ -516,30 +515,23 @@ export interface GetUsersOauthSigninProviderRequest {
 export type PostUsersOauthSigninProviderRequest = OauthCode & {
   provider: SocialProvider
 }
-export interface GetUsersRequest {
-}
+
 export type PostUsersRequest = RegistrationRequest
-export interface GetColorGuidesRequest {
-}
-export interface GetSanctumCsrfCookieRequest {
-}
-export interface GetUsefulLinksSidebarRequest {
-}
+
+
+
 export interface GetUserPrefsMeRequest {
   keys?: UserPrefKeys[]
 }
-export interface GetUsersMeRequest {
-}
+
 export interface GetUsersDaUsernameRequest {
   username: string
 }
 export interface GetUsersIdRequest {
   id: OneBasedId
 }
-export interface PostUsersSignoutRequest {
-}
-export interface GetUsersTokensRequest {
-}
+
+
 export interface DeleteUsersTokensIdRequest {
   id: number
 }
@@ -598,7 +590,7 @@ export interface GetUsersTokensResult {
   /**
    * ID of the token used to make this request. Will be null if the request is authenticated through CookieAuth
    */
-  currentTokenId: number;
+  currentTokenId: number | null;
   /**
    * A list of tokens that belong to the user
    */

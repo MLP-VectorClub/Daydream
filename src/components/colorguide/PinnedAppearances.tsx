@@ -13,7 +13,7 @@ const PinnedAppearance: VFC<PropTypes> = ({ initialData, guide }) => {
 
   if (!appearances) return null;
 
-  return <>{appearances.map(el => <AppearanceItem key={el.id} appearance={el} pinned />)}</>;
+  return <>{appearances.map(el => <AppearanceItem key={el.id} appearance={el} pinned guide={guide} />)}</>;
 };
 
 export default PinnedAppearance;

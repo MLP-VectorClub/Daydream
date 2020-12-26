@@ -34,7 +34,7 @@ const PageLink: React.FC<PageLinkProps> = ({ number, children, relevantProps, pa
   const router = useRouter();
   const linkParams = useMemo(() => (
     relevantProps
-      ? pickBy(router.query, el => typeof el === 'string' && relevantProps.includes(el))
+      ? pickBy(router.query, (value, key) => relevantProps.includes(key) && typeof value === 'string')
       : null
   ), [relevantProps, router.query]);
   const pageNumberProp = number === 1 ? null : { [pageParam]: String(number) };

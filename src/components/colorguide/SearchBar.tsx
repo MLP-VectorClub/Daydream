@@ -5,6 +5,7 @@ import {
   KeyboardEventHandler,
   MouseEventHandler,
   useCallback,
+  useEffect,
   useRef,
   useState,
   VFC,
@@ -144,21 +145,26 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
       }
     }
   };
-  const clearSearchState = useCallback(() => {
-    setSearchQuery('');
-    setAcQuery('');
+  const setSearchState = useCallback((query = '') => {
+    setSearchQuery(query);
+    setAcQuery(query);
   }, []);
   const handleClearSearch: FormEventHandler = useCallback(e => {
     e.preventDefault();
 
     if (!guide) return;
     if (initialQuery.length === 0) {
-      clearSearchState();
+      setSearchState();
       return;
     }
 
-    void router.push(PATHS.GUIDE(guide)).then(clearSearchState);
-  }, [clearSearchState, guide, initialQuery, router]);
+    void router.push(PATHS.GUIDE(guide)).then(() => setSearchState());
+  }, [setSearchState, guide, initialQuery, router]);
+
+  // Force update the search query if it changes in the URL
+  useEffect(() => {
+    setSearchState(initialQuery);
+  }, [initialQuery, setSearchState]);
 
   const acResultsLoading = status === Status.LOAD;
   const acResultsExist = results && results.length > 0;

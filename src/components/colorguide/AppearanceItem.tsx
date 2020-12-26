@@ -6,21 +6,23 @@ import {
   UncontrolledTooltip,
 } from 'reactstrap';
 import React, { useRef } from 'react';
-import { Appearance } from 'src/types';
+import { Appearance, GuideName, Nullable } from 'src/types';
 import AppearanceNotes from 'src/components/colorguide/AppearanceNotes';
 import SpriteImage from 'src/components/colorguide/SpriteImage';
 import CompactColorGroups from 'src/components/colorguide/CompactColorGroups';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import styles from 'modules/AppearanceItem.module.scss';
+import AppearanceTags from 'src/components/colorguide/AppearanceTags';
 
 export interface AppearanceItemProps {
   appearance: Appearance;
   pinned?: boolean;
+  guide?: Nullable<GuideName>;
 }
 
 const PINNED_TOOLTIP = 'Pinned';
 
-const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, pinned = false }) => {
+const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, pinned = false, guide }) => {
   const pinRef = useRef<HTMLElement>(null);
 
   return (
@@ -52,6 +54,7 @@ const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, pinned = fa
               {appearance.label}
             </h5>
             <AppearanceNotes appearance={appearance} />
+            <AppearanceTags tags={appearance.tags} guide={guide} />
             <CompactColorGroups colorGroups={appearance.colorGroups} />
           </Col>
         </Row>

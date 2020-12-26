@@ -66,3 +66,20 @@ $navbar-padding-y: .313rem;
 
 $code-color: adjust-hue($club-blue, -40);
 
+$tag-color-base: #0c70b1;
+$tag-color-default: gray;
+$tag-color-category: $tag-color-base;
+$tag-color-species: adjust_hue($tag-color-base, -80);
+$tag-color-gender: adjust_hue($tag-color-base, 60);
+$tag-color-clothing: adjust_hue($tag-color-base, 120);
+$tag-color-warning: adjust_hue($tag-color-base, 160);
+$tag-color-episode: adjust_hue($tag-color-base, 190);
+$tag-color-character: adjust_hue($tag-color-base, 240);
+$tag-colors: (
+  "cat": $tag-color-category,
+  "spec": $tag-color-species,
+  "gen": $tag-color-gender,
+  "app": $tag-color-clothing,
+  "warn": $tag-color-warning,
+  "char": $tag-color-character,
+);

@@ -4,6 +4,8 @@ import {
   Nullable,
   Numeric,
   Optional,
+  SlimGuideTag,
+  TagType,
 } from 'src/types';
 import { colorGuide } from 'src/strings';
 
@@ -31,13 +33,16 @@ export const getGuideLabel = (guide: string | null): string => {
 export const getGuideTitle = (
   guide: Nullable<string> = null,
   page: Nullable<Numeric> = null,
+  q = '',
 ): string => {
   const guideName = getGuideLabel(guide);
   if (page === null) {
     return `${guideName} Color Guide`;
   }
 
-  return `Page ${page} - ${guideName} Color Guide`;
+  const withPage = `Page ${page} - ${guideName} Color Guide`;
+
+  return q !== '' ? `${q} - ${withPage}` : withPage;
 };
 
 export interface ScaleResizeResult {
@@ -102,4 +107,19 @@ export const getFullGuideHeading = (
   const subject = isGuideName(guide) ? fullGuideNameMap[guide] : 'Character';
 
   return `Complete ${subject} List`;
+};
+
+const TAG_SORT_ORDER: Record<TagType, number> = {
+  app: 1,
+  cat: 2,
+  char: 3,
+  gen: 4,
+  spec: 5,
+  warn: 6,
+};
+
+export const sortTagsByType = <T extends SlimGuideTag>(tagA: T, tagB: T): number => {
+  const orderA = tagA.type ? TAG_SORT_ORDER[tagA.type] : Infinity;
+  const orderB = tagB.type ? TAG_SORT_ORDER[tagB.type] : Infinity;
+  return orderA > orderB ? 1 : (orderA < orderB ? -1 : 0);
 };

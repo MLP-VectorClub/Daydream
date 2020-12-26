@@ -39,7 +39,6 @@
     "next-seo": "^4.4.0",
     "pluralize": "^8.0.0",
     "react": "^17.0.1",
-    "react-bootstrap-typeahead": "^5.1.4",
     "react-dom": "^17.0.1",
     "react-hook-form": "^5.7.2",
     "react-indiana-drag-scroll": "^1.6.1",
@@ -54,7 +53,7 @@
     "urlcat": "^2.0.4"
   },
   "devDependencies": {
-    "@seinopsys-forks/openapi-to-typescript": "^0.0.6",
+    "@seinopsys-forks/openapi-to-typescript": "^0.0.9",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
     "@types/classnames": "^2.2.10",

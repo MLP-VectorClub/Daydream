@@ -50,10 +50,11 @@ interface GuideAutocompleteHookValue {
 
 export function useGuideAutocomplete(params: GuideAutocompleteFetcherParams): GuideAutocompleteHookValue {
   const fetcher = useCallback(() => guideAutocompleteFetcher(params)(), [params]);
+  const haveQuery = Boolean(params.q && params.q.length > 0);
   const { status, data } = useQuery(
     ENDPOINTS.APPEARANCES_AUTOCOMPLETE(params as GetAppearancesAutocompleteRequest),
     fetcher,
-    { enabled: params.guide && params.q, keepPreviousData: Boolean(params.q) },
+    { enabled: params.guide && haveQuery, keepPreviousData: haveQuery },
   );
 
   return {
