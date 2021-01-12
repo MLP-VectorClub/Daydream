@@ -18,7 +18,7 @@
     "@reduxjs/toolkit": "^1.4.0",
     "@types/pluralize": "^0.0.29",
     "@types/react-bootstrap-typeahead": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
     "console-stamp": "^3.0.0-rc4.2",
