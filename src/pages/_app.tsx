@@ -31,8 +31,8 @@ const Celestia: AppType = props => {
         }}
       />
       <Head>
-        <link rel="preload" href={ENDPOINTS.CSRF_INIT} as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href={ENDPOINTS.USERS_ME} as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href={`/api${ENDPOINTS.CSRF_INIT}`} as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href={`/api${ENDPOINTS.USERS_ME}`} as="fetch" crossOrigin="anonymous" />
       </Head>
       <ProgressIndicator />
       <LayoutContext.Provider value={{ disabled, setLayoutDisabled }}>
