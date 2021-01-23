@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { API_DOCS_URL } from 'src/config';
-import { PATHS } from 'src/utils';
+import { PATHS } from 'src/paths';
 import ContactLink from 'src/components/shared/ContactLink';
 import ContactModal from 'src/components/ContactModal';
 import ExternalLink from 'src/components/shared/ExternalLink';

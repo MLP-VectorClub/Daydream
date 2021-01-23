@@ -32,11 +32,15 @@ type PageLinkProps = PropsWithChildren<{
 
 const PageLink: React.FC<PageLinkProps> = ({ number, children, relevantProps, pageParam }) => {
   const router = useRouter();
-  const linkParams = useMemo(() => (
-    relevantProps
+  const linkParams = useMemo(() => {
+    const params = relevantProps
       ? pickBy(router.query, (value, key) => relevantProps.includes(key) && typeof value === 'string')
-      : null
-  ), [relevantProps, router.query]);
+      : pickBy(router.query, value => typeof value === 'string');
+
+    delete params[pageParam];
+
+    return params;
+  }, [pageParam, relevantProps, router.query]);
   const pageNumberProp = number === 1 ? null : { [pageParam]: String(number) };
   const pathWithoutQueryString = router.asPath.replace(/[?#].*$/, '');
   const query: ParsedUrlQuery = { ...linkParams, ...pageNumberProp };

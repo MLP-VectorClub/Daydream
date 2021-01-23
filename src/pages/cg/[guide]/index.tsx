@@ -12,7 +12,6 @@ import {
   getGuideLabel,
   getGuideTitle,
   notFound,
-  PATHS,
   resolveGuideName,
   setResponseStatus,
 } from 'src/utils';
@@ -32,13 +31,15 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import MajorChangesButton from 'src/components/colorguide/MajorChangesButton';
 import StatusAlert from 'src/components/shared/StatusAlert';
-import { guideFetcher, pinnedAppearancesFetcher } from 'src/fetchers';
+import { guideFetcher, pinnedAppearancesFetcher } from 'src/fetchers/color-guide';
 import { useDispatch } from 'react-redux';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import NoResultsAlert from 'src/components/shared/NoResultsAlert';
 import PinnedAppearances from 'src/components/colorguide/PinnedAppearances';
 import SearchBar from 'src/components/colorguide/SearchBar';
+import { PATHS } from 'src/paths';
+import { validatePageParam } from 'src/utils/validate-page-param';
 
 const titleFactory: TitleFactory<Omit<PropTypes, 'initialData'>> = ({ guide, page, q }) => {
   const title = getGuideTitle(guide, page, q);
@@ -136,10 +137,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     notFound(ctx);
   }
 
-  let page = 1;
-  if (typeof query.page === 'string') {
-    page = parseInt(query.page, 10);
-  }
+  const page = validatePageParam(query.page);
 
   let q = '';
   if (typeof query.q === 'string') {

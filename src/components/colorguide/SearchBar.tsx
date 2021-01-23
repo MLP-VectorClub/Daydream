@@ -26,7 +26,7 @@ import {
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Link from 'next/link';
 import styles from 'modules/SearchBar.module.scss';
-import { PATHS } from 'src/utils';
+import { PATHS } from 'src/paths';
 import SpriteImage from 'src/components/colorguide/SpriteImage';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
@@ -75,7 +75,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
   const handleResultFocusChange = useCallback((isFocused: boolean, index: number) => (e: FocusEvent<HTMLElement>) => {
     if (e.relatedTarget) {
       const target = e.relatedTarget as HTMLElement;
-      if (target === searchInputRef.current === target.classList.contains(RESULT_ITEM_CLASS)) {
+      if (target === searchInputRef.current && target.classList.contains(RESULT_ITEM_CLASS)) {
         return;
       }
     }
@@ -83,7 +83,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
       setActiveResult(index);
     }
   }, []);
-  const handleResultMouseChange = useCallback((index: number): MouseEventHandler<HTMLElement> => e => {
+  const handleResultMouseEnter = useCallback((index: number): MouseEventHandler<HTMLElement> => e => {
     setActiveResult(index);
     (e.target as HTMLElement).focus();
   }, []);
@@ -160,6 +160,9 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
 
     void router.push(PATHS.GUIDE(guide)).then(() => setSearchState());
   }, [setSearchState, guide, initialQuery, router]);
+  const deactivateSuggestion = useCallback(() => {
+    setActiveResult(null);
+  }, []);
 
   // Force update the search query if it changes in the URL
   useEffect(() => {
@@ -189,6 +192,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
               onFocus={handleInputFocusChange(true)}
               onBlur={handleInputFocusChange(false)}
               onKeyDown={handleInputKeyDown}
+              onClick={deactivateSuggestion}
               autoComplete="off"
               role="searchbox"
               aria-haspopup={autocompleteOpen}
@@ -209,7 +213,14 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
             Clear search
           </UncontrolledTooltip>
           {autocompleteOpen && (
-            <div className={`${styles.acResults} list-group shadow`} ref={resultsListRef} role="listbox" aria-expanded="true">
+            <div
+              className={`${styles.acResults} list-group shadow`}
+              ref={resultsListRef}
+              tabIndex={-1}
+              role="listbox"
+              aria-expanded="true"
+              onMouseLeave={deactivateSuggestion}
+            >
               {acResultsLoading ? (
                 <ListGroupItem>
                   <InlineIcon loading first />
@@ -233,7 +244,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
                           active={activeResult === i}
                           onFocus={handleResultFocusChange(true, i)}
                           onBlur={handleResultFocusChange(false, i)}
-                          onMouseEnter={handleResultMouseChange(i)}
+                          onMouseEnter={handleResultMouseEnter(i)}
                           onKeyDown={handleResultKeyDown(i)}
                           role="option"
                           aria-label={r.label}

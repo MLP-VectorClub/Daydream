@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
 import { GuideName } from 'src/types';
 import Link from 'next/link';
-import { PATHS } from 'src/utils';
+import { PATHS } from 'src/paths';
 import { Button } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 

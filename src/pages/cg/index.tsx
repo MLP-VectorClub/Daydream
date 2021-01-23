@@ -2,7 +2,7 @@ import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { API_DOCS_URL, GUIDE_NAMES } from 'src/config';
 import ExternalLink from 'src/components/shared/ExternalLink';
-import { getGuideLabel, PATHS } from 'src/utils';
+import { getGuideLabel } from 'src/utils';
 import Link from 'next/link';
 import { GetColorGuidesResult, GuideName } from 'src/types';
 import { useGuideIndex, useTitleSetter } from 'src/hooks';
@@ -17,6 +17,8 @@ import { useDispatch } from 'react-redux';
 import { TitleFactoryVoid } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { guideIndexFetcher } from 'src/fetchers';
+import { PATHS } from 'src/paths';
+import { GuideImage } from 'src/components/shared/GuideImage';
 
 interface PropTypes {
   initialData: GetColorGuidesResult;
@@ -49,19 +51,13 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
 
       <div className={styles.guideList}>
         {GUIDE_NAMES.map(code => {
-          const logoPath = `/img/logos/${code}.svg`;
           const guideName = getGuideLabel(code);
           const entryCount = data?.entryCounts[code];
           return (
             <Link key={code} href={PATHS.GUIDE(code)}>
               <Card tag="a">
                 <CardBody tag="figure">
-                  <img
-                    src="/img/blank-pixel.png"
-                    className={styles.guideIcon}
-                    alt={`${guideName} logo`}
-                    style={{ backgroundImage: `url(${logoPath})` }}
-                  />
+                  <GuideImage className={styles.guideIcon} guide={code} />
                   <figcaption>
                     <span className={styles.guideName}>{guideName}</span>
                     <span className={styles.guideCount}>{plural(entryCount, 'entry', 'entries')}</span>

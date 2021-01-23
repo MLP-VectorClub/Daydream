@@ -1,4 +1,4 @@
-const { CDN_DOMAIN, BACKEND_HOST } = process.env;
+const { NEXT_PUBLIC_CDN_DOMAIN, NEXT_PUBLIC_BACKEND_HOST } = process.env;
 const withPlugins = require('next-compose-plugins');
 const withESLint = require('./utils/next-eslint');
 const withCamelCaseCSSModules = require('./utils/next-css-modules');
@@ -25,7 +25,7 @@ module.exports = withPlugins(
       }
     },
     images: {
-      domains: [CDN_DOMAIN],
+      domains: [NEXT_PUBLIC_CDN_DOMAIN],
     },
     async redirects() {
       return [
@@ -55,7 +55,7 @@ module.exports = withPlugins(
         },
         {
           source: '/api/:path*',
-          destination: `${BACKEND_HOST}/:path*`,
+          destination: `${NEXT_PUBLIC_BACKEND_HOST}/:path*`,
         },
       ];
     },

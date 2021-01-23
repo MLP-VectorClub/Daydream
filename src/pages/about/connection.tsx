@@ -2,18 +2,21 @@ import Head from 'next/head';
 import { NextPage } from 'next';
 import React, { useCallback, useMemo } from 'react';
 import { Button } from 'reactstrap';
-import { GetAboutConnectionResult, MappedAboutConnectionResult, Nullable } from 'src/types';
-import { useConnectionInfo, useTitleSetter } from 'src/hooks';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import Content from 'src/components/shared/Content';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Abbr from 'src/components/shared/Abbr';
 import { common, connection } from 'src/strings';
-import { connectionFetcher } from 'src/fetchers';
 import { TitleFactoryVoid } from 'src/types/title';
 import { wrapper } from 'src/store';
 import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
+import { Nullable } from 'src/types/common';
+import { GetAboutConnectionResult } from 'src/types/api';
+import { useConnectionInfo } from 'src/hooks/connection-info';
+import { MappedAboutConnectionResult } from 'src/types/api-alias';
+import { useTitleSetter } from 'src/hooks/core';
+import { connectionFetcher } from 'src/fetchers/connection-info';
 
 interface PropTypes {
   connectingAddress: Nullable<string>;

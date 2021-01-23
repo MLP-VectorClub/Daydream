@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { FailsafeUser, Status, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
 import { ENDPOINTS, mapQueryStatus, permission } from 'src/utils';
 import { useCsrf } from 'src/hooks/core';
-import { currentUserFetcher } from 'src/fetchers';
+import { currentUserFetcher } from 'src/fetchers/auth';
 
 const guestUser: FailsafeUser = {
   id: null,

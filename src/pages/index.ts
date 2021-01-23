@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { getHomeLink } from 'src/utils';
+import { getHomeLink } from 'src/utils/path-utils';
 import { prefsFetcher } from 'src/fetchers';
 
 /**

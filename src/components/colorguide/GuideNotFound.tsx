@@ -2,7 +2,7 @@ import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { Alert } from 'reactstrap';
 import Link from 'next/link';
-import { PATHS } from 'src/utils';
+import { PATHS } from 'src/paths';
 import React, { VFC } from 'react';
 
 interface PropTypes {

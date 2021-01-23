@@ -69,6 +69,11 @@ export type DatabaseRole = "user" | "member" | "assistant" | "staff" | "admin" |
 export type Role = "user" | "member" | "assistant" | "staff" | "admin";
 
 /**
+ * List of ordering options that can be used for show entries
+ */
+export type ShowOrdering = "series" | "overall";
+
+/**
  * List of types that can be used for show entries
  */
 export type ShowType = "episode" | "movie" | "short" | "special";
@@ -382,6 +387,48 @@ export type OneBasedId = number;
 export type ZeroBasedId = number;
 
 /**
+ * Represents a show entry for showing in paginated lists, only containing the essential properties
+ */
+export interface ShowListItem {
+  id: OneBasedId;
+  type: ShowType;
+  /**
+   * Title of the entry, optionally including prefixes denoting the franchise (e.g. Equestria Girls)
+   */
+  title: string;
+  /**
+   * Season number, `null` for any types other than `episode`
+   */
+  season: number | null;
+  /**
+   * Episode number of the first episode this entry represents, `null` for any types other than `episode`. See `parts` for more information.
+   */
+  episode: number | null;
+  /**
+   * Indicates how many parts this entry represents, used for displaying rangesfor two part entries, e.g. the episodes S1E1-2 would be represented as one entry with `{ season: 1, episode: 1, parts: 2, ... }`, while `null` or `1` indicates the entry represents a single episode.
+   */
+  parts: number | null;
+  /**
+   * Overall number placing entries in a coherent order relative to each other (not a fixed value)\n\nFor episodes this is the overall episode number, for all other entry types this is mostly a sequential value incremented for each new entry.
+   */
+  no: number | null;
+  generation: MlpGeneration;
+  airs: IsoStandardDate;
+}
+
+/**
+ * An array of public show entries under the show key
+ */
+export interface ShowList {
+  show: ShowListItem[];
+}
+
+/**
+ * The number of results to return per page
+ */
+export type ShowListPageSize = number;
+
+/**
  * Contains publicly accessible properties of useful links
  */
 export interface PublicUsefulLink {
@@ -519,6 +566,12 @@ export type PostUsersOauthSigninProviderRequest = OauthCode & {
 export type PostUsersRequest = RegistrationRequest
 
 
+export interface GetShowRequest {
+  types: ShowType[]
+  order: ShowOrdering
+  page?: PageNumber
+  size?: ShowListPageSize
+}
 
 export interface GetUserPrefsMeRequest {
   keys?: UserPrefKeys[]
@@ -575,6 +628,8 @@ export interface GetColorGuidesResult {
 }
 
 export type GetSanctumCsrfCookieResult = any
+export type GetShowResult = ShowList & PageData;
+
 export type GetUsefulLinksSidebarResult = PublicUsefulLink[];
 
 export type GetUserPrefsMeResult = UserPrefs;

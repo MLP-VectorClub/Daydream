@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { DefaultSeo } from 'next-seo';
-import Head from 'next/head';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ReactQueryConfigProvider } from 'react-query';
-import { ENDPOINTS } from 'src/utils';
-import { APP_NAME, DEV_ENV, APP_URL, REACT_QUERY_CONFIG } from 'src/config';
+import { APP_NAME, APP_URL, DEV_ENV, REACT_QUERY_CONFIG } from 'src/config';
 import { wrapper } from 'src/store';
 import TitleManager from 'src/components/TitleManager';
 import '../fontawesome';
@@ -30,10 +28,6 @@ const Celestia: AppType = props => {
           site_name: APP_NAME,
         }}
       />
-      <Head>
-        <link rel="preload" href={`/api${ENDPOINTS.CSRF_INIT}`} as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href={`/api${ENDPOINTS.USERS_ME}`} as="fetch" crossOrigin="anonymous" />
-      </Head>
       <ProgressIndicator />
       <LayoutContext.Provider value={{ disabled, setLayoutDisabled }}>
         <Layout>

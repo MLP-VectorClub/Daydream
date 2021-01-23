@@ -2,11 +2,12 @@ import { VFC } from 'react';
 import { SlimAppearance } from 'src/types';
 import { Card, CardBody } from 'reactstrap';
 import Image from 'next/image';
-import { PATHS, scaleResize } from 'src/utils';
+import { scaleResize } from 'src/utils';
 import Abbr from 'src/components/shared/Abbr';
 import Link from 'next/link';
 import styles from 'modules/FullGuideAppearanceList.module.scss';
 import classNames from 'classnames';
+import { PATHS } from 'src/paths';
 
 const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appearances }) => (
   <div className={styles.list}>

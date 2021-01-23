@@ -1,4 +1,3 @@
-export * from './auth';
 export * from './color-guide';
 export * from './connection-info';
 export * from './core';

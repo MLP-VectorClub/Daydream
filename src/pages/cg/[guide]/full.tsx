@@ -9,7 +9,6 @@ import {
   getGuideLabel,
   isValidFullListSortOption,
   notFound,
-  PATHS,
   resolveGuideName,
   setResponseStatus,
 } from 'src/utils';
@@ -42,6 +41,7 @@ import { fullGuideFetcher } from 'src/fetchers';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
+import { PATHS } from 'src/paths';
 
 interface PropTypes {
   guide: Nullable<GuideName>;

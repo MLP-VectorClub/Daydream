@@ -4,7 +4,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classNames from 'classnames';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Link from 'next/link';
-import { PATHS } from 'src/utils';
+import { PATHS } from 'src/paths';
 
 const TAG_ICON_MAP: Record<TagType, IconProp> = {
   app: 'folder',

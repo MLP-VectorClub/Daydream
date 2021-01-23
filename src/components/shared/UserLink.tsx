@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { getProfileLink, ProfileLinkOptions } from 'src/utils';
+import { ProfileLinkOptions } from 'src/utils';
 import React from 'react';
+import { getProfileLink } from 'src/utils/path-utils';
 
 interface PropTypes extends ProfileLinkOptions {
   text?: string;

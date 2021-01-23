@@ -8,12 +8,12 @@ import ContactLink from 'src/components/shared/ContactLink';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { common, privacyPolicy } from 'src/strings';
 import styles from 'modules/PrivacyPolicy.module.scss';
-import { PATHS } from 'src/utils';
 import { TitleFactoryVoid } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
-import { useTitleSetter } from 'src/hooks';
 import { NextPage } from 'next';
+import { PATHS } from 'src/paths';
+import { useTitleSetter } from 'src/hooks/core';
 
 const titleFactory: TitleFactoryVoid = () => ({
   title: common.titles.privacyPolicy,

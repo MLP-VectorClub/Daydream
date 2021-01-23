@@ -4,8 +4,8 @@ import { ReactQueryConfig } from 'react-query/types/core/types';
 import { GuideName } from 'src/types';
 
 export const APP_NAME = 'MLP Vector Club';
-export const APP_URL = process.env.FRONTEND_HOST as string;
-export const API_URL = process.env.BACKEND_HOST as string;
+export const APP_URL = process.env.NEXT_PUBLIC_FRONTEND_HOST as string;
+export const API_URL = process.env.NEXT_PUBLIC_BACKEND_HOST as string;
 export const OLD_SITE_URL = 'https://mlpvector.club';
 
 export const GITHUB_URL = 'https://github.com/MLP-VectorClub/Celestia';
@@ -22,10 +22,8 @@ export const API_DOCS_URL = API_URL as string;
 /**
  * Global prefix for all api calls, no trailing slash
  */
-export const API_PREFIX = process.env.BACKEND_HOST ? '' : '/api';
-if (process.env.BACKEND_HOST) {
-  Axios.defaults.baseURL = process.env.BACKEND_HOST;
-}
+export const API_PREFIX = '/api';
+Axios.defaults.baseURL = typeof window === 'undefined' ? process.env.NEXT_PUBLIC_BACKEND_HOST : API_PREFIX;
 
 export const GUEST_AVATAR = '/img/guest.svg';
 

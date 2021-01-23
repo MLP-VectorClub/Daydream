@@ -15,22 +15,24 @@ import {
 import { useForm } from 'react-hook-form';
 import React, { useEffect, useState } from 'react';
 import { RootState } from 'src/store/rootReducer';
-import { AuthModalSide, Status, UnifiedErrorResponseTypes } from 'src/types';
 import { authActions } from 'src/store/slices';
-import {
-  combineErrors,
-  PATHS,
-  validateEmail,
-  validatePassword,
-  validateRequired,
-  validateUserName,
-} from 'src/utils';
+
 import ExternalLink from 'src/components/shared/ExternalLink';
 import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages';
 import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
 import { registerThunk } from 'src/store/thunks';
+import {
+  combineErrors,
+  validateEmail,
+  validatePassword,
+  validateRequired,
+  validateUserName,
+} from 'src/utils/forms';
+import { Status, UnifiedErrorResponseTypes } from 'src/types/common';
+import { PATHS } from 'src/paths';
+import { AuthModalSide } from 'src/types/auth';
 
 enum INPUT_NAMES {
   NAME = 'name',

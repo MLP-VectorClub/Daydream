@@ -2,12 +2,13 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { VFC } from 'react';
 import Link from 'next/link';
-import { getDefaultGuideLink, getHomeLink, getProfileLink, PATHS } from 'src/utils';
 import { CLUB_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
+import { getDefaultGuideLink, getHomeLink, getProfileLink } from 'src/utils/path-utils';
+import { PATHS } from 'src/paths';
 
 const MainNavigation: VFC = () => {
   const { signedIn, user, isStaff } = useAuth();
@@ -29,7 +30,7 @@ const MainNavigation: VFC = () => {
       </NavItem>
       <NavItem>
         <Link href={PATHS.LATEST_EPISODE} passHref>
-          <NavLink>{common.titles.latestEpisode}</NavLink>
+          <NavLink disabled>{common.titles.latestEpisode}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
@@ -44,7 +45,7 @@ const MainNavigation: VFC = () => {
       </NavItem>
       <NavItem>
         <Link href={PATHS.EVENTS} passHref>
-          <NavLink>{common.titles.events}</NavLink>
+          <NavLink disabled>{common.titles.events}</NavLink>
         </Link>
       </NavItem>
       {signedIn && (
@@ -63,7 +64,7 @@ const MainNavigation: VFC = () => {
           </NavItem>
           <NavItem>
             <Link href={PATHS.ADMIN} passHref>
-              <NavLink>{common.titles.admin}</NavLink>
+              <NavLink disabled>{common.titles.admin}</NavLink>
             </Link>
           </NavItem>
         </>

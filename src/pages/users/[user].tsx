@@ -4,13 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { coreActions } from 'src/store/slices';
 import { wrapper } from 'src/store';
-import {
-  fixPath,
-  getProfileTitle,
-  mapRoleLabel,
-  PATHS,
-  setResponseStatus,
-} from 'src/utils';
+import { fixPath, getProfileTitle, mapRoleLabel, setResponseStatus } from 'src/utils';
 import { transformProfileParams, useAuth, useTitleSetter, useUser } from 'src/hooks';
 import {
   BreadcrumbEntry,
@@ -27,6 +21,7 @@ import { userFetcher } from 'src/fetchers';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { NextPage } from 'next';
+import { PATHS } from 'src/paths';
 
 interface PropTypes {
   initialUser: Nullable<PublicUser>;

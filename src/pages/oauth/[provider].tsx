@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
 import { OAuthErrorTypes, Status, UnifiedErrorResponseTypes, User } from 'src/types';
 import { useLayout, useOAuth, useTitleSetter } from 'src/hooks';
-import { ENDPOINTS, PATHS, setResponseStatus } from 'src/utils';
+import { ENDPOINTS, setResponseStatus } from 'src/utils';
 import Center from 'src/components/shared/Center';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import InlineIcon from 'src/components/shared/InlineIcon';
@@ -17,6 +17,7 @@ import { getOAuthProvider } from 'src/utils/auth';
 import { useDispatch } from 'react-redux';
 import { titleSetter } from 'src/utils/core';
 import { wrapper } from 'src/store';
+import { PATHS } from 'src/paths';
 
 const titleFactory: TitleFactory<{ provider?: string }> = query => {
   const provider = getOAuthProvider(query.provider);

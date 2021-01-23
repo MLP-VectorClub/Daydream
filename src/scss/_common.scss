@@ -45,6 +45,10 @@ body {
   font-weight: bold;
 }
 
+.faded {
+  opacity: $btn-disabled-opacity;
+}
+
 #content > :last-child {
   margin-bottom: 0 !important;
 }

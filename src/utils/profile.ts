@@ -1,5 +1,4 @@
 import { Nullable, Numeric, PageTitle, PublicUser } from 'src/types';
-import { PATHS } from 'src/utils/url';
 import { common } from 'src/strings';
 
 export const getProfileTitle = (
@@ -21,6 +20,3 @@ export type ProfileLinkOptions = {
   id: Nullable<Numeric>;
   name?: Nullable<string>;
 };
-
-export const getProfileLink = (props: ProfileLinkOptions) =>
-  (props.name ? PATHS.USER_LONG(props as PublicUser) : PATHS.USER(props.id!));

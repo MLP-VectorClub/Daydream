@@ -5,3 +5,4 @@ export { connection } from './connection';
 export { oauth } from './oauth';
 export { privacyPolicy } from './privacy-policy';
 export { profile } from './profile';
+export { show } from './show';
