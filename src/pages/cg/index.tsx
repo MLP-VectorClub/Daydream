@@ -4,7 +4,7 @@ import { API_DOCS_URL, GUIDE_NAMES } from 'src/config';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { getGuideLabel } from 'src/utils';
 import Link from 'next/link';
-import { GetColorGuidesResult, GuideName } from 'src/types';
+import { GetColorGuideResult, GuideName } from 'src/types';
 import { useGuideIndex, useTitleSetter } from 'src/hooks';
 import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
@@ -21,7 +21,7 @@ import { PATHS } from 'src/paths';
 import { GuideImage } from 'src/components/shared/GuideImage';
 
 interface PropTypes {
-  initialData: GetColorGuidesResult;
+  initialData: GetColorGuideResult;
 }
 
 const titleFactory: TitleFactoryVoid = () => ({
@@ -74,7 +74,7 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   const { store, req } = ctx as typeof ctx;
-  let initialData: GetColorGuidesResult = {
+  let initialData: GetColorGuideResult = {
     entryCounts: GUIDE_NAMES.reduce((acc, c) => ({ ...acc, [c]: 0 }), {} as Record<GuideName, number>),
   };
 

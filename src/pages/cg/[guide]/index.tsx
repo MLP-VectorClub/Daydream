@@ -148,7 +148,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   let pinnedAppearances: Optional<GetAppearancesPinnedResult>;
   if (guide) {
     try {
-      appearances = await guideFetcher({ ...query, guide, page }, req)();
+      appearances = await guideFetcher({ q, guide, page }, req)();
     } catch (e) {
       if ('response' in e) {
         const { response } = e as AxiosError;

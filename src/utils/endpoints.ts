@@ -4,6 +4,7 @@ import {
   GetAppearancesIdSpriteRequest,
   GetAppearancesPinnedRequest,
   GetAppearancesRequest,
+  GetColorGuideMajorChangesRequest,
   GetShowRequest,
   GetUserPrefsMeRequest,
   GetUsersDaUsernameRequest,
@@ -31,7 +32,9 @@ export const ENDPOINTS = {
   //   `/users/oauth/signup/${params.provider}`,
   USERS_BY_USERNAME: (params: GetUsersDaUsernameRequest) =>
     `/users/da/${encodeURI(params.username)}`,
-  GUIDE_INDEX: `/color-guides`,
+  GUIDE_INDEX: `/color-guide`,
+  GUIDE_MAJOR_CHANGES: (params: GetColorGuideMajorChangesRequest) =>
+    buildUrl(`/color-guide/major-changes`, params),
   APPEARANCES: (params: GetAppearancesRequest) =>
     buildUrl(`/appearances`, params),
   APPEARANCES_FULL: (params: GetAppearancesAllRequest) => buildUrl(`/appearances/full`, params),

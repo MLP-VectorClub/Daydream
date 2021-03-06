@@ -1,6 +1,6 @@
-import React, { TimeHTMLAttributes, useEffect, useState } from 'react';
+import React, { TimeHTMLAttributes, useEffect, useMemo, useState } from 'react';
 import { timer } from 'rxjs';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, isValid } from 'date-fns';
 import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { UncontrolledTooltip } from 'reactstrap';
 import { formatLongDate } from 'src/utils';
@@ -8,13 +8,24 @@ import { UncontrolledTooltipProps } from 'reactstrap/lib/Tooltip';
 import TooltipContent from 'src/components/shared/TooltipContent';
 
 interface PropTypes extends Omit<TimeHTMLAttributes<unknown>, 'datetime'> {
-  date: Date;
+  date: Date | string;
   tooltip?: boolean;
   tooltipPlacement?: UncontrolledTooltipProps['placement'];
 }
 
-const TimeAgo: React.VFC<PropTypes> = ({ date, tooltip = true, tooltipPlacement = 'top', ...rest }) => {
+const TimeAgo: React.VFC<PropTypes> = ({ date: inputDate, tooltip = true, tooltipPlacement = 'top', ...rest }) => {
   const [text, setText] = useState('');
+  const date = useMemo(() => {
+    if (inputDate instanceof Date) return inputDate;
+    try {
+      const value = new Date(inputDate);
+      if (!isValid(value)) throw new Error(`Invalid date: ${inputDate}`);
+      return value;
+    } catch (err) {
+      console.error(err);
+      return new Date(0);
+    }
+  }, [inputDate]);
 
   useEffect(() => {
     const sub = timer(0, 10e3).pipe(

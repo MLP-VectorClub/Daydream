@@ -123,3 +123,10 @@ export const sortTagsByType = <T extends SlimGuideTag>(tagA: T, tagB: T): number
   const orderB = tagB.type ? TAG_SORT_ORDER[tagB.type] : Infinity;
   return orderA > orderB ? 1 : (orderA < orderB ? -1 : 0);
 };
+
+export const getGuideChangesHeading = (
+  guide: Nullable<string> = null,
+): string => {
+  const guideName = getGuideLabel(guide);
+  return `Major ${guideName} Color Changes`;
+};

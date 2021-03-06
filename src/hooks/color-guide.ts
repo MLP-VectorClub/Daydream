@@ -8,7 +8,9 @@ import {
   GetAppearancesPinnedResult,
   GetAppearancesRequest,
   GetAppearancesResult,
-  GetColorGuidesResult,
+  GetColorGuideMajorChangesRequest,
+  GetColorGuideMajorChangesResult,
+  GetColorGuideResult,
   Status,
 } from 'src/types';
 import { ENDPOINTS, mapQueryStatus } from 'src/utils';
@@ -20,6 +22,8 @@ import {
   guideFetcher,
   GuideFetcherParams,
   guideIndexFetcher,
+  majorChangesFetcher,
+  MajorChangesFetcherParams,
   pinnedAppearancesFetcher,
   PinnedAppearancesFetcherParams,
 } from 'src/fetchers';
@@ -63,7 +67,7 @@ export function useGuideAutocomplete(params: GuideAutocompleteFetcherParams): Gu
   };
 }
 
-export function useGuideIndex(initialData?: GetColorGuidesResult) {
+export function useGuideIndex(initialData?: GetColorGuideResult) {
   const fetcher = useCallback(() => guideIndexFetcher()(), []);
   const { data } = useQuery(
     ENDPOINTS.GUIDE_INDEX,
@@ -98,4 +102,22 @@ export function usePinnedAppearances(params: PinnedAppearancesFetcherParams, ini
   );
 
   return data;
+}
+
+interface MajorChangesHookValue extends Partial<GetColorGuideMajorChangesResult> {
+  status: Status;
+}
+
+export function useMajorChanges(params: MajorChangesFetcherParams, initialData?: GetColorGuideMajorChangesResult): MajorChangesHookValue {
+  const fetcher = useCallback(() => majorChangesFetcher(params)(), [params]);
+  const { data, status } = useQuery(
+    ENDPOINTS.GUIDE_MAJOR_CHANGES(params as GetColorGuideMajorChangesRequest),
+    fetcher,
+    { initialData },
+  );
+
+  return {
+    ...data,
+    status: mapQueryStatus(status),
+  };
 }

@@ -200,7 +200,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
               aria-activedescendant={acOptionId(activeResult)}
             />
             <InputGroupAddon addonType="append">
-              <Button type="reset" disabled={clearButtonDisabled} innerRef={clearButtonRef}>
+              <Button outline type="reset" disabled={clearButtonDisabled} innerRef={clearButtonRef}>
                 <InlineIcon icon="times" />
               </Button>
               <Button color="ui">

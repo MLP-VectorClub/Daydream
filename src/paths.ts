@@ -17,7 +17,7 @@ export const PATHS = {
   ROOT: '/',
   ABOUT: '/about',
   ADMIN: '/admin',
-  APPEARANCE: ({ id, label }: AutocompleteAppearance) => `/cg/v/${pathSegmentWithId(id, label)}`,
+  APPEARANCE: ({ id, label }: Pick<AutocompleteAppearance, 'id' | 'label'>) => `/cg/v/${pathSegmentWithId(id, label)}`,
   BLENDING: '/blending',
   EVENTS: '/events',
   GUIDE_INDEX: '/cg',

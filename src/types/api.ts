@@ -211,17 +211,12 @@ export interface ListOfColorGroups {
 /**
  * The barest of properties for an appearance intended for use in autocompletion results
  */
-export interface AutocompleteAppearance {
-  id: ZeroBasedId;
-  /**
-   * The name of the appearance
-   */
-  label: string;
+export type AutocompleteAppearance = PreviewAppearance & {
   /**
    * The sprite that belongs to this appearance, or null if there is none
    */
   sprite: Sprite | null;
-}
+};
 
 /**
  * Common properties of the two main Appearance schemas
@@ -349,6 +344,38 @@ export interface RegistrationRequest {
   email: string;
   password: string;
 }
+
+/**
+ * An array of major change items under the changes key
+ */
+export interface MajorChangeList {
+  changes: MajorChange[];
+}
+
+/**
+ * The details for the major change entry
+ */
+export interface MajorChange {
+  id: OneBasedId;
+  /**
+   * The reason for the change
+   */
+  reason: string;
+  /**
+   * The appearance the change was made on
+   */
+  appearance: PreviewAppearance;
+  /**
+   * The identifier for the user who created the appearance
+   */
+  user: BarePublicUser | null;
+  createdAt: IsoStandardDate;
+}
+
+/**
+ * The number of results to return per page
+ */
+export type GuideMajorChangesPageSize = number;
 
 export interface ErrorResponse {
   /**
@@ -496,6 +523,24 @@ export interface GuideFullListGroups {
   groups: GuideFullListGroupItem[];
 }
 
+export type AppearancePreviewData =
+  | [string]
+  | [string, string]
+  | [string, string, string]
+  | [string, string, string, string];
+
+/**
+ * Minimal set of properties to display an appearance link, optinally with a colored preview
+ */
+export interface PreviewAppearance {
+  id: ZeroBasedId;
+  /**
+   * The name of the appearance
+   */
+  label: string;
+  previewData?: AppearancePreviewData;
+}
+
 export interface PageData {
   pagination: {
     currentPage: number;
@@ -565,10 +610,15 @@ export type PostUsersOauthSigninProviderRequest = OauthCode & {
 
 export type PostUsersRequest = RegistrationRequest
 
+export interface GetColorGuideMajorChangesRequest {
+  guide: GuideName
+  page?: PageNumber
+  size?: GuideMajorChangesPageSize
+}
 
 export interface GetShowRequest {
   types: ShowType[]
-  order: ShowOrdering
+  order?: ShowOrdering
   page?: PageNumber
   size?: ShowListPageSize
 }
@@ -623,9 +673,11 @@ export interface PostUsersResult {
 }
 
 export type PostUsers204 = any
-export interface GetColorGuidesResult {
+export interface GetColorGuideResult {
   entryCounts: GuideEntryCounts;
 }
+
+export type GetColorGuideMajorChangesResult = MajorChangeList & PageData;
 
 export type GetSanctumCsrfCookieResult = any
 export type GetShowResult = ShowList & PageData;

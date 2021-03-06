@@ -42,6 +42,7 @@ import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
 import { PATHS } from 'src/paths';
+import ReturnToGuideButton from 'src/components/colorguide/ReturnToGuideButton';
 
 interface PropTypes {
   guide: Nullable<GuideName>;
@@ -96,12 +97,7 @@ const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
         )}
       />
       <ButtonCollection>
-        <Link href={PATHS.GUIDE(guide)} passHref>
-          <Button color="link" size="sm">
-            <InlineIcon icon="arrow-circle-left" first />
-            Return to Guide
-          </Button>
-        </Link>
+        <ReturnToGuideButton guide={guide} />
         {isStaff && (
           <Button color="ui" size="sm" disabled>
             <InlineIcon icon="sort" first />

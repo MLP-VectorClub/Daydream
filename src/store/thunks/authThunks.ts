@@ -6,7 +6,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const invalidateUserSpecificQueries = () => {
   // TODO Potentially introduce more granular query filtering to only invalidate ones that use auth data
-  void queryCache.removeQueries();
+  void queryCache.refetchQueries();
 };
 
 export const signInThunk = createAsyncThunk(

@@ -5,13 +5,13 @@ import { PATHS } from 'src/paths';
 import { Button } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 
-const MajorChangesButton: VFC<{ guide: GuideName }> = ({ guide }) => (
-  <Link href={PATHS.GUIDE_CHANGES(guide)} passHref>
+const ReturnToGuideButton: VFC<{ guide: GuideName }> = ({ guide }) => (
+  <Link href={PATHS.GUIDE(guide)} passHref>
     <Button color="link" size="sm">
-      <InlineIcon icon="exclamation-triangle" first />
-      Major Changes
+      <InlineIcon icon="arrow-circle-left" first />
+      Return to Guide
     </Button>
   </Link>
 );
 
-export default MajorChangesButton;
+export default ReturnToGuideButton;

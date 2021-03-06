@@ -3,6 +3,7 @@ import {
   GetAppearancesAutocompleteRequest,
   GetAppearancesPinnedRequest,
   GetAppearancesRequest,
+  GetColorGuideMajorChangesRequest,
   NullableProps,
 } from 'src/types';
 import { requestPromiseMapper } from 'src/utils';
@@ -53,4 +54,14 @@ export const pinnedAppearancesFetcher = (params: PinnedAppearancesFetcherParams,
   const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
 
   return requestPromiseMapper(service.getPinnedAppearances(params as GetAppearancesPinnedRequest));
+};
+
+export type MajorChangesFetcherParams = NullableProps<GetColorGuideMajorChangesRequest, 'guide'>;
+
+export const majorChangesFetcher = (params: MajorChangesFetcherParams, req?: IncomingMessage) => () => {
+  if (!params.guide) return Promise.resolve(undefined);
+
+  const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
+
+  return requestPromiseMapper(service.getMajorChanges(params as GetColorGuideMajorChangesRequest));
 };

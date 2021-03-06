@@ -8,7 +8,9 @@ import {
   GetAppearancesPinnedResult,
   GetAppearancesRequest,
   GetAppearancesResult,
-  GetColorGuidesResult,
+  GetColorGuideMajorChangesRequest,
+  GetColorGuideMajorChangesResult,
+  GetColorGuideResult,
 } from 'src/types';
 import { ENDPOINTS } from 'src/utils';
 import { Service } from 'src/services/service-class';
@@ -18,7 +20,7 @@ export class ColorGuideService extends Service {
     Axios.get<GetAppearancesResult>(ENDPOINTS.APPEARANCES(data), this.getRequestOptions());
 
   getIndexData = () =>
-    Axios.get<GetColorGuidesResult>(ENDPOINTS.GUIDE_INDEX, this.getRequestOptions());
+    Axios.get<GetColorGuideResult>(ENDPOINTS.GUIDE_INDEX, this.getRequestOptions());
 
   getFullList = (data: GetAppearancesAllRequest) =>
     Axios.get<GetAppearancesAllResult>(ENDPOINTS.APPEARANCES_FULL(data), this.getRequestOptions());
@@ -28,4 +30,7 @@ export class ColorGuideService extends Service {
 
   getAutocompleteAppearances = (data: GetAppearancesAutocompleteRequest) =>
     Axios.get<GetAppearancesAutocompleteResult>(ENDPOINTS.APPEARANCES_AUTOCOMPLETE(data), this.getRequestOptions());
+
+  getMajorChanges = (data: GetColorGuideMajorChangesRequest) =>
+    Axios.get<GetColorGuideMajorChangesResult>(ENDPOINTS.GUIDE_MAJOR_CHANGES(data), this.getRequestOptions());
 }
