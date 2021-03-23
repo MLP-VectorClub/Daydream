@@ -10,7 +10,6 @@ module.exports = withPlugins(
     [withCamelCaseCSSModules],
   ],
   {
-    useFileSystemPublicRoutes: false,
     generateBuildId: async () => {
       try {
         const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);
@@ -43,16 +42,6 @@ module.exports = withPlugins(
     },
     async rewrites() {
       return [
-        {
-          source: '/',
-          destination: '/',
-        },
-        // we need to define a no-op rewrite to trigger checking
-        // all pages/static files before we attempt proxying
-        {
-          source: '/:path*',
-          destination: '/:path*',
-        },
         {
           source: '/api/:path*',
           destination: `${NEXT_PUBLIC_BACKEND_HOST}/:path*`,
