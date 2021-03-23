@@ -1,8 +1,14 @@
 import { memo, VFC } from 'react';
 import { AppearancePreviewData } from 'src/types';
 import styles from 'modules/AppearancePreview.module.scss';
+import classNames from 'classnames';
 
-const AppearancePreviewComponent: VFC<{ data?: AppearancePreviewData }> = ({ data }) => {
+interface PropTypes {
+  data?: AppearancePreviewData;
+  className: string
+}
+
+const AppearancePreviewComponent: VFC<PropTypes> = ({ data, className }) => {
   const colorCount = data?.length || 0;
 
   let svgContents;
@@ -75,7 +81,7 @@ const AppearancePreviewComponent: VFC<{ data?: AppearancePreviewData }> = ({ dat
       enableBackground="new 0 0 2 2"
       xmlSpace="preserve"
       preserveAspectRatio="xMidYMid slice"
-      className={styles.appearancePreview}
+      className={classNames(styles.previewSvg, className)}
     >
       {svgContents}
     </svg>

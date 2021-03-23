@@ -8,13 +8,13 @@ import Link from 'next/link';
 import styles from 'modules/FullGuideAppearanceList.module.scss';
 import classNames from 'classnames';
 import { PATHS } from 'src/paths';
+import { AppearancePreview } from 'src/components/colorguide/AppearancePreview';
 
 const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appearances }) => (
   <div className={styles.list}>
     {appearances.map(a => {
-      let sprite = null;
+      let sprite: JSX.Element;
 
-      // TODO Implement preview squares
       if (a.sprite) {
         const [aspectWidth, aspectHeight] = a.sprite.aspectRatio;
         const spriteStyle = scaleResize(aspectWidth, aspectHeight, 'height', 100);
@@ -23,6 +23,8 @@ const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appea
             <Image src={a.sprite.path} width={spriteStyle.width} height={spriteStyle.height} unoptimized layout="fixed" />
           </div>
         );
+      } else {
+        sprite = <AppearancePreview data={a.previewData} className={classNames('mb-2', styles.appearancePreview)} />;
       }
 
       const lowerCaseLabel = a.label.toLowerCase();
@@ -35,7 +37,7 @@ const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appea
               {sprite}
               <h3 className={classNames('h5 mb-0', styles.label)}>{a.label}</h3>
               {nonObviousCharacterTags.length > 0 && (
-                <small className={classNames('mt-2', styles.aka)}>
+                <small className={classNames('mt-1', styles.aka)}>
                   <Abbr title="Also known as">AKA</Abbr>
                   {` ${nonObviousCharacterTags.join(', ')}`}
                 </small>

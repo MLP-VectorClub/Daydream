@@ -8,7 +8,7 @@ import styles from 'modules/AppearanceLink.module.scss';
 export const AppearanceLink: VFC<PreviewAppearance> = ({ id, label, previewData }) => (
   <Link href={PATHS.APPEARANCE({ id, label })}>
     <a className={styles.appearanceLink}>
-      <AppearancePreview data={previewData} />
+      <AppearancePreview data={previewData} className={styles.appearancePreview} />
       <span className="appearance-name">{label}</span>
     </a>
   </Link>

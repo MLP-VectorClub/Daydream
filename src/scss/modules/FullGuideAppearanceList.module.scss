@@ -14,11 +14,16 @@
   justify-content: center;
 }
 
+.appearance-preview {
+  width: 100px;
+  height: 100px;
+}
+
 .card-body {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
   text-align: center;
 }
 
@@ -30,4 +35,6 @@
 .aka {
   display: block;
   color: $black;
+  font-size: .7rem;
+  font-weight: bold;
 }
