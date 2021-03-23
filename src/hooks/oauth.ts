@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 import { ParsedUrlQuery } from 'querystring';
-import { ENDPOINTS, isClientSide, mapQueryStatus } from 'src/utils';
+import { ENDPOINTS, mapQueryStatus } from 'src/utils';
 import {
-  PostUsersOauthSigninProviderResult,
   PostUsersOauthSigninProviderRequest,
+  PostUsersOauthSigninProviderResult,
   SocialProvider,
   Status,
   UnifiedErrorResponse,
@@ -11,6 +11,7 @@ import {
 import { useAuth } from 'src/hooks/auth';
 import { oauthRegistrationFetcher } from 'src/fetchers';
 import { useCallback } from 'react';
+import { IS_CLIENT_SIDE } from 'src/config';
 
 export function useOAuth(query: ParsedUrlQuery) {
   const { authCheck, user } = useAuth();
@@ -20,7 +21,7 @@ export function useOAuth(query: ParsedUrlQuery) {
     key,
     fetcher,
     {
-      enabled: authCheck.status === Status.FAILURE && 'provider' in query && 'code' in query && isClientSide,
+      enabled: authCheck.status === Status.FAILURE && 'provider' in query && 'code' in query && IS_CLIENT_SIDE,
       retry: false,
       refetchOnWindowFocus: false,
       refetchIntervalInBackground: false,

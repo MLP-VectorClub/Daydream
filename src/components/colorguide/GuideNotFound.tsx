@@ -3,7 +3,7 @@ import StandardHeading from 'src/components/shared/StandardHeading';
 import { Alert } from 'reactstrap';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 
 interface PropTypes {
   heading: string;

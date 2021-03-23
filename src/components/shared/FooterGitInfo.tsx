@@ -1,18 +1,24 @@
 import { common } from 'src/strings';
-import { BACKEND_GITHUB_URL, BACKEND_PROJECT_NAME, GITHUB_URL, PROJECT_NAME } from 'src/config';
+import {
+  BACKEND_GITHUB_URL,
+  BACKEND_PROJECT_NAME,
+  GITHUB_URL,
+  IS_CLIENT_SIDE,
+  PROJECT_NAME,
+} from 'src/config';
 import { UncontrolledTooltip } from 'reactstrap';
-import React from 'react';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import { ServerInfoHookValue } from 'src/hooks';
-import { getBuildData, isClientSide } from 'src/utils';
+import { getBuildData } from 'src/utils';
+import { ReactNode, VFC } from 'react';
 
-const buildData = isClientSide ? getBuildData() : null;
+const buildData = IS_CLIENT_SIDE ? getBuildData() : null;
 
 type PropTypes = Pick<ServerInfoHookValue, 'serverInfo' | 'loading' | 'backendDown'>;
 
-const FooterGitInfo: React.VFC<PropTypes> = ({ serverInfo, loading, backendDown }) => {
-  let commitHash: React.ReactNode = null;
-  let commitTime: React.ReactNode = null;
+const FooterGitInfo: VFC<PropTypes> = ({ serverInfo, loading, backendDown }) => {
+  let commitHash: ReactNode = null;
+  let commitTime: ReactNode = null;
   if (buildData && typeof buildData !== 'string') {
     commitHash = (
       <>
@@ -35,9 +41,9 @@ const FooterGitInfo: React.VFC<PropTypes> = ({ serverInfo, loading, backendDown 
       </>
     );
   }
-  let backendCommitHash: React.ReactNode = null;
-  let backendCommitTime: React.ReactNode = null;
-  if (!loading && !backendDown && serverInfo) {
+  let backendCommitHash: ReactNode = null;
+  let backendCommitTime: ReactNode = null;
+  if (!loading && !backendDown && serverInfo && serverInfo.commitId) {
     backendCommitHash = (
       <>
         @

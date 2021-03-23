@@ -1,7 +1,9 @@
 import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
 import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
-import { APP_URL } from 'src/config';
+import { APP_URL, IS_CLIENT_SIDE } from 'src/config';
+import { setResponseStatus } from 'src/utils/initial-prop-helpers';
+import { GetServerSidePropsContext } from 'next';
 
 export const sanitizePageParam = (value: string): number => {
   const page = parseInt(value, 10);
@@ -68,7 +70,22 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
   }
 };
 
-export const assembleSeoUrl = (host?: string, pathname?: string): string =>
-  `${host ? `https://${host}` : APP_URL}${pathname || ''}`;
+export const assembleSeoUrl = (pathname?: string): string => {
+  const host = IS_CLIENT_SIDE ? location.host : undefined;
+  return `${host ? `https://${host}` : APP_URL}${pathname || ''}`;
+};
 
-export const isClientSide = typeof window !== 'undefined';
+export const handleDataFetchingError = (ctx: Pick<GetServerSidePropsContext, 'res'>, e: Error) => {
+  if ('response' in e) {
+    const { response } = e as AxiosError;
+    const status = response?.status;
+    if (status) {
+      setResponseStatus(ctx, status);
+    }
+    if (status !== 404) {
+      console.error(response);
+    }
+  } else {
+    console.error(e);
+  }
+};

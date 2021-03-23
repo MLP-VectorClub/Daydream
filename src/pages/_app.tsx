@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { DefaultSeo } from 'next-seo';
+import { useState } from 'react';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ReactQueryConfigProvider } from 'react-query';
-import { APP_NAME, APP_URL, DEV_ENV, REACT_QUERY_CONFIG } from 'src/config';
+import { DEV_ENV, REACT_QUERY_CONFIG } from 'src/config';
 import { wrapper } from 'src/store';
 import TitleManager from 'src/components/TitleManager';
 import '../fontawesome';
@@ -21,13 +20,6 @@ const Celestia: AppType = props => {
   return (
     <ReactQueryConfigProvider config={REACT_QUERY_CONFIG}>
       <TitleManager />
-      <DefaultSeo
-        openGraph={{
-          type: 'website',
-          url: APP_URL,
-          site_name: APP_NAME,
-        }}
-      />
       <ProgressIndicator />
       <LayoutContext.Provider value={{ disabled, setLayoutDisabled }}>
         <Layout>

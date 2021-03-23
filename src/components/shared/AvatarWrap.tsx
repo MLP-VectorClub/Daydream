@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo, VFC } from 'react';
 import classNames from 'classnames';
 import { AvatarProvider, Nullable, VectorApp } from 'src/types';
 import { GUEST_AVATAR } from 'src/config';
@@ -14,7 +14,7 @@ interface PropTypes {
   vectorApp?: VectorApp | null;
 }
 
-const AvatarWrap: React.FC<PropTypes> = memo(({
+const AvatarWrap: VFC<PropTypes> = memo(({
   avatarProvider,
   avatarUrl,
   size,

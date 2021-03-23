@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import { GuideName } from 'src/types';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';

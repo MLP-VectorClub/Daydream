@@ -6,8 +6,9 @@ import {
   UnifiedErrorResponse,
   UnifiedErrorResponseTypes,
 } from 'src/types';
-import { ENDPOINTS, isClientSide } from 'src/utils';
+import { ENDPOINTS } from 'src/utils';
 import { connectionFetcher } from 'src/fetchers';
+import { IS_CLIENT_SIDE } from 'src/config';
 
 export interface ServerInfoHookValue {
   serverInfo: Optional<MappedAboutConnectionResult>;
@@ -27,7 +28,7 @@ export function useConnectionInfo(initialData?: GetAboutConnectionResult): Serve
   } = useQuery<GetAboutConnectionResult, UnifiedErrorResponse>(
     key,
     connectionFetcher,
-    { enabled: isClientSide, initialData, refetchInterval: 60e3 },
+    { enabled: IS_CLIENT_SIDE, initialData, refetchInterval: 60e3 },
   );
 
   const serverInfo: Optional<MappedAboutConnectionResult> = data

@@ -1,6 +1,5 @@
 import { Button } from 'reactstrap';
-import React, { useMemo } from 'react';
-import { AxiosError } from 'axios';
+import { useMemo } from 'react';
 import {
   GetAppearancesPinnedResult,
   GetAppearancesResult,
@@ -11,9 +10,9 @@ import {
 import {
   getGuideLabel,
   getGuideTitle,
+  handleDataFetchingError,
   notFound,
   resolveGuideName,
-  setResponseStatus,
 } from 'src/utils';
 import { AppDispatch, wrapper } from 'src/store';
 import { useAuth, useGuide, usePrefs, useTitleSetter } from 'src/hooks';
@@ -150,35 +149,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     try {
       appearances = await guideFetcher({ q, guide, page }, req)();
     } catch (e) {
-      if ('response' in e) {
-        const { response } = e as AxiosError;
-        const status = response?.status;
-        if (status) {
-          setResponseStatus(ctx, status);
-        }
-        if (status !== 404) {
-          console.error(response);
-        }
-      } else {
-        console.error(e);
-      }
+      handleDataFetchingError(ctx, e);
     }
 
     try {
       pinnedAppearances = await pinnedAppearancesFetcher({ ...query, guide }, req)();
     } catch (e) {
-      if ('response' in e) {
-        const { response } = e as AxiosError;
-        const status = response?.status;
-        if (status) {
-          setResponseStatus(ctx, status);
-        }
-        if (status !== 404) {
-          console.error(response);
-        }
-      } else {
-        console.error(e);
-      }
+      handleDataFetchingError(ctx, e);
     }
   }
 

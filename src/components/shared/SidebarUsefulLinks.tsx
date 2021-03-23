@@ -1,16 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { useAuth, useSidebarUsefulLinks } from 'src/hooks';
-import React, { useCallback } from 'react';
+import { MouseEventHandler, useCallback, VFC } from 'react';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Link from 'next/link';
 import { common } from 'src/strings';
 
-const SidebarUsefulLinks: React.FC = () => {
+const SidebarUsefulLinks: VFC = () => {
   const dispatch = useDispatch();
   const { signedIn } = useAuth();
   const usefulLinks = useSidebarUsefulLinks(signedIn);
-  const dispatchActionByAnchor = useCallback((anchor: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const dispatchActionByAnchor = useCallback((anchor: string): MouseEventHandler<HTMLAnchorElement> => e => {
     e.preventDefault();
 
     switch (anchor) {

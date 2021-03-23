@@ -20,7 +20,7 @@ export interface CoreState {
   contactOpen: boolean;
   colorAvgOpen: boolean;
   upcomingEvents: Record<string, unknown>[];
-  client: CoreSliceMirroredState;
+  client?: CoreSliceMirroredState;
   server: CoreSliceMirroredState;
 }
 
@@ -29,7 +29,6 @@ const initialState: CoreState = {
   contactOpen: false,
   colorAvgOpen: false,
   upcomingEvents: [],
-  client: initialMirroredState,
   server: initialMirroredState,
 };
 
@@ -61,8 +60,8 @@ const coreSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE](state: CoreState, action: PayloadAction<{ core: CoreState }>) {
-      // Do not overwrite client side properties
-      return { ...state, ...omit(action.payload.core, 'client') };
+      // Copy server properties to client
+      return { ...omit(action.payload.core, 'client'), client: (state.client || action.payload.core.server) };
     },
   },
 });

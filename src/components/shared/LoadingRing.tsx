@@ -1,4 +1,4 @@
-import React, { CSSProperties, memo } from 'react';
+import { CSSProperties, memo, VFC } from 'react';
 import classNames from 'classnames';
 import { Nullable } from 'src/types';
 
@@ -13,7 +13,7 @@ export interface LoadingRingProps {
   style?: CSSProperties;
 }
 
-const LoadingRing: React.FC<LoadingRingProps> = ({
+const LoadingRing: VFC<LoadingRingProps> = ({
   color = null,
   className,
   strokeWidth = 6,

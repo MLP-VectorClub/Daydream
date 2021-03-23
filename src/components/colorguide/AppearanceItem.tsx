@@ -5,7 +5,7 @@ import {
   Row,
   UncontrolledTooltip,
 } from 'reactstrap';
-import React, { useRef } from 'react';
+import { useRef, VFC } from 'react';
 import { Appearance, GuideName, Nullable } from 'src/types';
 import AppearanceNotes from 'src/components/colorguide/AppearanceNotes';
 import SpriteImage from 'src/components/colorguide/SpriteImage';
@@ -22,7 +22,7 @@ export interface AppearanceItemProps {
 
 const PINNED_TOOLTIP = 'Pinned';
 
-const AppearanceItem: React.FC<AppearanceItemProps> = ({ appearance, pinned = false, guide }) => {
+const AppearanceItem: VFC<AppearanceItemProps> = ({ appearance, pinned = false, guide }) => {
   const pinRef = useRef<HTMLElement>(null);
 
   return (

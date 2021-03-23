@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { common, show } from 'src/strings';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Col, Row } from 'reactstrap';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import { useAuth } from 'src/hooks';
@@ -17,8 +17,7 @@ import { useTitleSetter } from 'src/hooks/core';
 import { ShowTableColumnDefinition } from 'src/types/show';
 import { episodeToString, seasonEpisodeToString } from 'src/utils/show';
 import styles from 'modules/ShowPage.module.scss';
-import { AxiosError } from 'axios';
-import { setResponseStatus } from 'src/utils';
+import { handleDataFetchingError } from 'src/utils';
 import { showListFetcher } from 'src/fetchers/show';
 import { validatePageParam } from 'src/utils/validate-page-param';
 import { GuideImage } from 'src/components/shared/GuideImage';
@@ -130,41 +129,19 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     initialEpisodes: null,
   };
 
-  const eppage = validatePageParam(query.eppage);
+  const epPage = validatePageParam(query.eppage);
 
   try {
-    props.initialEpisodes = await showListFetcher({ ...EPISODE_TABLE_PARAMS, page: eppage })();
+    props.initialEpisodes = await showListFetcher({ ...EPISODE_TABLE_PARAMS, page: epPage })();
   } catch (e) {
-    if ('response' in e) {
-      const { response } = e as AxiosError;
-      const status = response?.status;
-      if (status) {
-        setResponseStatus(ctx, status);
-      }
-      if (status !== 404) {
-        console.error(response);
-      }
-    } else {
-      console.error(e);
-    }
+    handleDataFetchingError(ctx, e);
   }
 
   const page = validatePageParam(query.page);
   try {
     props.initialOthers = await showListFetcher({ ...OTHERS_TABLE_PARAMS, page })();
   } catch (e) {
-    if ('response' in e) {
-      const { response } = e as AxiosError;
-      const status = response?.status;
-      if (status) {
-        setResponseStatus(ctx, status);
-      }
-      if (status !== 404) {
-        console.error(response);
-      }
-    } else {
-      console.error(e);
-    }
+    handleDataFetchingError(ctx, e);
   }
 
   titleSetter(store, titleFactory());

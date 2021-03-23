@@ -1,5 +1,5 @@
 import { GuideName } from 'src/types';
-import React, { useRef, VFC } from 'react';
+import { useRef, VFC } from 'react';
 import { getGuideLabel } from 'src/utils';
 import { UncontrolledTooltip } from 'reactstrap';
 

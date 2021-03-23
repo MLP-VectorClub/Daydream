@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React, { forwardRef, ForwardRefRenderFunction, memo } from 'react';
+import { forwardRef, ForwardRefRenderFunction, memo } from 'react';
 import { getInlineIconClasses } from 'src/utils';
 import { InlineIconProps } from 'src/types/component-props';
 import LoadingRing from 'src/components/shared/LoadingRing';

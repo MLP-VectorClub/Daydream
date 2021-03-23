@@ -11,8 +11,9 @@ import SignInButton from 'src/components/shared/SignInButton';
 import SignOutButton from 'src/components/shared/SignOutButton';
 import { useAuth, useConnectionInfo } from 'src/hooks';
 import { common } from 'src/strings';
+import { VFC } from 'react';
 
-const Sidebar: React.FC = () => {
+const Sidebar: VFC = () => {
   const { signedIn } = useAuth();
   const { backendDown } = useConnectionInfo();
 

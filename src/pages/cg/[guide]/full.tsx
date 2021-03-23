@@ -1,16 +1,16 @@
 import { NextPage } from 'next';
 import Content from 'src/components/shared/Content';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import {
   fullListSortOptionsMap,
   getFullGuideHeading,
   getFullGuideTitle,
   getGuideLabel,
+  handleDataFetchingError,
   isValidFullListSortOption,
   notFound,
   resolveGuideName,
-  setResponseStatus,
 } from 'src/utils';
 import {
   FullGuideSortField,
@@ -21,7 +21,6 @@ import {
 } from 'src/types';
 import { wrapper } from 'src/store';
 import { useAuth, useFullGuide, useTitleSetter } from 'src/hooks';
-import { AxiosError } from 'axios';
 import { colorGuide } from 'src/strings';
 import GuideNotFound from 'src/components/colorguide/GuideNotFound';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
@@ -130,18 +129,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     try {
       initialData = await fullGuideFetcher({ guide, sort })();
     } catch (e) {
-      if ('response' in e) {
-        const { response } = e as AxiosError;
-        const status = response?.status;
-        if (status) {
-          setResponseStatus(ctx, status);
-        }
-        if (status !== 404) {
-          console.error(response);
-        }
-      } else {
-        console.error(e);
-      }
+      handleDataFetchingError(ctx, e);
     }
   }
 

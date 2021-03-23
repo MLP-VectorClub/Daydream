@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { Button } from 'reactstrap';

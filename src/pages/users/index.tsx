@@ -1,5 +1,5 @@
 import Content from 'src/components/shared/Content';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { GetAboutMembersResult, Nullable, Optional } from 'src/types';
 import { wrapper } from 'src/store';
 import { common } from 'src/strings';
@@ -7,8 +7,7 @@ import { useAuth, useTitleSetter } from 'src/hooks';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import MemberList from 'src/components/users/MemberList';
 import UserList from 'src/components/users/UserList';
-import { AxiosError } from 'axios';
-import { setResponseStatus } from 'src/utils';
+import { handleDataFetchingError } from 'src/utils';
 import { useDispatch } from 'react-redux';
 import styles from 'modules/UsersIndexPage.module.scss';
 import { membersFetcher } from 'src/fetchers';
@@ -56,18 +55,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   try {
     initialMembers = await membersFetcher();
   } catch (e) {
-    if ('response' in e) {
-      const { response } = e as AxiosError;
-      const status = response?.status;
-      if (status) {
-        setResponseStatus(ctx, status);
-      }
-      if (status !== 404) {
-        console.error(response);
-      }
-    } else {
-      console.error(e);
-    }
+    handleDataFetchingError(ctx, e);
   }
 
   const props: PropTypes = {

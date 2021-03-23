@@ -25,9 +25,6 @@ declare module 'html-to-react' {
   }
 
   class ProcessNodeDefinitions {
-    constructor(_engine: any) {
-    }
-
     processDefaultNode: NodeProcessor;
   }
 

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { NextPage } from 'next';
-import React, { useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Button } from 'reactstrap';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import Content from 'src/components/shared/Content';

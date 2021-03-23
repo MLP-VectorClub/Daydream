@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import { mapRoleLabel } from 'src/utils';
 import { Status } from 'src/types';
 import { useAuth, usePrefs } from 'src/hooks';
@@ -7,8 +6,9 @@ import LoadingRing from 'src/components/shared/LoadingRing';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import ProfileLink from 'src/components/shared/ProfileLink';
 import { common } from 'src/strings';
+import { VFC } from 'react';
 
-const SidebarUserInfo: React.FC = () => {
+const SidebarUserInfo: VFC = () => {
   const { authCheck, user, signedIn } = useAuth();
   const prefs = usePrefs(signedIn);
 

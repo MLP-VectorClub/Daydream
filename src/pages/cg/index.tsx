@@ -8,7 +8,7 @@ import { GetColorGuideResult, GuideName } from 'src/types';
 import { useGuideIndex, useTitleSetter } from 'src/hooks';
 import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { NextPage } from 'next';
 import { plural } from 'src/utils/plural';
 import { colorGuide, common } from 'src/strings';

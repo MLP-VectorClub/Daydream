@@ -1,6 +1,6 @@
 import { Button, Tooltip } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import { useState, VFC } from 'react';
 import { Status } from 'src/types';
 import { RootState } from 'src/store/rootReducer';
 import InlineIcon from 'src/components/shared/InlineIcon';
@@ -9,7 +9,7 @@ import { signOutThunk } from 'src/store/thunks';
 
 const BUTTON_ID = 'signout';
 
-const SignOutButton: React.FC = () => {
+const SignOutButton: VFC = () => {
   const dispatch = useDispatch();
   const { signOut } = useSelector((state: RootState) => state.auth);
   const [signOutConfirm, setSignOutConfirm] = useState(false);

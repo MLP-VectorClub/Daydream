@@ -172,6 +172,19 @@
       {
         "checkFragmentShorthand": true
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react",
+            "importNames": [
+              "default"
+            ]
+          }
+        ]
+      }
     ]
   },
   "settings": {

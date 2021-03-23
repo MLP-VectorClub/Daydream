@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
-import { AxiosError } from 'axios';
+import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { coreActions } from 'src/store/slices';
 import { wrapper } from 'src/store';
-import { fixPath, getProfileTitle, mapRoleLabel, setResponseStatus } from 'src/utils';
+import { fixPath, getProfileTitle, handleDataFetchingError, mapRoleLabel } from 'src/utils';
 import { transformProfileParams, useAuth, useTitleSetter, useUser } from 'src/hooks';
 import {
   BreadcrumbEntry,
@@ -83,18 +82,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     try {
       initialUser = await userFetcher(params)();
     } catch (e) {
-      if ('response' in e) {
-        const { response } = e as AxiosError;
-        const status = response?.status;
-        if (status) {
-          setResponseStatus(ctx, status);
-        }
-        if (status !== 404) {
-          console.error(response);
-        }
-      } else {
-        console.error(e);
-      }
+      handleDataFetchingError(ctx, e);
     }
   }
 

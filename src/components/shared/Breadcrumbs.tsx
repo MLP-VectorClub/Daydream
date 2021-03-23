@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
 import Link from 'next/link';
 import { renderingStateSlice } from 'src/utils/store';
+import { VFC } from 'react';
 
 const ELEMENT_ID = 'breadcrumbs';
 
-const Breadcrumbs: React.FC = () => {
+const Breadcrumbs: VFC = () => {
   const { breadcrumbs } = useSelector((state: RootState) => renderingStateSlice(state.core));
 
   // TODO Rich JSON+LD data for SEO

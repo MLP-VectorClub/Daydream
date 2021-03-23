@@ -1,14 +1,15 @@
 import { common } from 'src/strings';
-import React, { useMemo } from 'react';
+import { useMemo, VFC } from 'react';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import { ServerInfoHookValue } from 'src/hooks';
-import { getBuildData, isClientSide } from 'src/utils';
+import { getBuildData } from 'src/utils';
+import { IS_CLIENT_SIDE } from 'src/config';
 
-const buildData = isClientSide ? getBuildData() : null;
+const buildData = IS_CLIENT_SIDE ? getBuildData() : null;
 
 type PropTypes = Pick<ServerInfoHookValue, 'serverInfo'>;
 
-const FooterLastUpdateInfo: React.VFC<PropTypes> = ({ serverInfo }) => {
+const FooterLastUpdateInfo: VFC<PropTypes> = ({ serverInfo }) => {
   const latestDate = useMemo<Date | undefined>(() => {
     const dates: Date[] = [];
     if (buildData && typeof buildData !== 'string') dates.push(buildData.commitTime);

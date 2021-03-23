@@ -1,6 +1,6 @@
 import { GetAboutMembersResult, PublicUser, Role } from 'src/types';
 import { useMembers } from 'src/hooks/users';
-import React, { useMemo } from 'react';
+import { useMemo, VFC } from 'react';
 import { groupBy } from 'lodash';
 import { mapRoleLabel, permission } from 'src/utils';
 import pluralize from 'pluralize';
@@ -15,7 +15,7 @@ type UsersByRole = Record<Role, PublicUser[]>;
 
 const ROLE_SECTIONS: Role[] = ['admin', 'staff', 'assistant', 'member'];
 
-const MemberList: React.VFC<PropTypes> = ({ initialMembers }) => {
+const MemberList: VFC<PropTypes> = ({ initialMembers }) => {
   // TODO Handle errors
   const allMembers = useMembers(initialMembers);
   const membersByRole = useMemo(() => groupBy(allMembers, m => m.role) as UsersByRole, [allMembers]);

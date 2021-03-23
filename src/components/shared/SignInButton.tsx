@@ -1,17 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, UncontrolledTooltip } from 'reactstrap';
 import { useDispatch } from 'react-redux';
-import React from 'react';
 import { AuthModalSide, Status } from 'src/types';
 import { authActions } from 'src/store/slices';
 import { useAuth, useCsrf } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import { common } from 'src/strings';
 import TooltipContent from 'src/components/shared/TooltipContent';
+import { VFC } from 'react';
 
 const BUTTON_ID = 'signin';
 
-const SignInButton: React.FC = () => {
+const SignInButton: VFC = () => {
   const dispatch = useDispatch();
   const { authCheck } = useAuth();
   const csrf = useCsrf();

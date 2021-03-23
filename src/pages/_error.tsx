@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Nullable } from 'src/types';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';

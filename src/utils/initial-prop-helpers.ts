@@ -1,9 +1,10 @@
-import { GetServerSidePropsContext, NextPageContext } from 'next';
+import { GetServerSidePropsContext as NextGSSPC, NextPageContext } from 'next';
+import { GetServerSidePropsContext as ReduxWrapperGSSPC } from 'next-redux-wrapper';
 import { mapValues, omit, omitBy } from 'lodash';
 import { parseRelativeUrl } from 'next/dist/next-server/lib/router/utils/parse-relative-url';
 import { buildUrl } from 'src/utils/url';
 
-export const redirect = (ctx: NextPageContext | GetServerSidePropsContext, path: string, status = 301) => {
+export const redirect = (ctx: NextPageContext | NextGSSPC, path: string, status = 301) => {
   const { res } = ctx;
   if (res) {
     res.writeHead(status, { Location: path });
@@ -11,20 +12,20 @@ export const redirect = (ctx: NextPageContext | GetServerSidePropsContext, path:
   }
 };
 
-export const setResponseStatus = (ctx: Pick<GetServerSidePropsContext, 'res'>, statusCode: number) => {
+export const setResponseStatus = (ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>, statusCode: number) => {
   const { res } = ctx;
   if (res) {
     res.statusCode = statusCode;
   }
 };
 
-export const notFound = (ctx: Pick<GetServerSidePropsContext, 'res'>) => setResponseStatus(ctx, 404);
+export const notFound = (ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>) => setResponseStatus(ctx, 404);
 
 /**
  * @returns true if caller should halt execution
  */
 export const fixPath = (
-  ctx: Pick<GetServerSidePropsContext, 'req' | 'res'>,
+  ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'req' | 'res'>,
   expectedPath: string,
   stripParams: string[] = [],
 ): boolean => {

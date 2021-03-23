@@ -1,12 +1,12 @@
-import React from 'react';
 import pluralize from 'pluralize';
 import { common } from 'src/strings';
 import { useUsers } from 'src/hooks/users';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { Alert } from 'reactstrap';
 import GroupedUserList from 'src/components/users/GroupedUserList';
+import { VFC } from 'react';
 
-const UserList: React.VFC<{ enabled: boolean }> = ({ enabled }) => {
+const UserList: VFC<{ enabled: boolean }> = ({ enabled }) => {
   const { users, error, isLoading } = useUsers(enabled);
 
   if (isLoading) {

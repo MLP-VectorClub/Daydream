@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Alert } from 'reactstrap';
 import { APP_URL } from 'src/config';
 import { wrapper } from 'src/store';

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { AppDispatch, wrapper } from 'src/store';

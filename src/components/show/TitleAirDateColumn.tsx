@@ -1,4 +1,4 @@
-import React, { useRef, VFC } from 'react';
+import { useRef, VFC } from 'react';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';
 import { UncontrolledTooltip } from 'reactstrap';

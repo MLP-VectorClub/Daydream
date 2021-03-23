@@ -1,12 +1,12 @@
-import React from 'react';
 import { Alert } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { OLD_SITE_URL } from 'src/config';
 import { useRouter } from 'next/router';
 import { common } from 'src/strings';
+import { VFC } from 'react';
 
-const Notices: React.FC = () => {
+const Notices: VFC = () => {
   const router = useRouter();
   return (
     <div id="notices">

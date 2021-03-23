@@ -4,10 +4,10 @@ import { RootState } from 'src/store/rootReducer';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { CLUB_URL, DEV_EMAIL, DISCORD_INVITE_LINK } from 'src/config';
-import React from 'react';
 import { common } from 'src/strings';
+import { VFC } from 'react';
 
-const ContactModal: React.FC = () => {
+const ContactModal: VFC = () => {
   const dispatch = useDispatch();
   const { contactOpen } = useSelector((state: RootState) => state.core);
   const toggle = () => dispatch(coreActions.toggleContact());

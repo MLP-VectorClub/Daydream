@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { VFC } from 'react';
 
 export interface CustomIconProps {
   src: string;
@@ -7,7 +7,7 @@ export interface CustomIconProps {
   className?: string;
 }
 
-const CustomIcon: React.FC<CustomIconProps> = ({ src, alt = '', className }) => (
+const CustomIcon: VFC<CustomIconProps> = ({ src, alt = '', className }) => (
   <img src={src} className={classNames(className, 'svg-inline--fa custom-icon')} alt={alt} />
 );
 

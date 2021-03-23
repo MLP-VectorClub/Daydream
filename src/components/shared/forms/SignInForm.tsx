@@ -1,9 +1,10 @@
-import React, {
+import {
   MouseEventHandler,
   useCallback,
   useEffect,
   useRef,
   useState,
+  VFC,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -66,7 +67,7 @@ interface SocialPopupRef {
   timer: Nullable<ReturnType<typeof setInterval>>;
 }
 
-const SingInForm: React.FC = () => {
+const SingInForm: VFC = () => {
   const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
   const { authModal, signIn } = useSelector((store: RootState) => store.auth);

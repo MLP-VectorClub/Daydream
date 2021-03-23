@@ -3,14 +3,14 @@ import { UncontrolledTooltip } from 'reactstrap';
 import { common } from 'src/strings';
 import FooterGitInfo from 'src/components/shared/FooterGitInfo';
 import FooterLastUpdateInfo from 'src/components/shared/FooterLastUpdateInfo';
-import React, { useCallback, useState } from 'react';
+import { MouseEventHandler, useCallback, useState, VFC } from 'react';
 import { useConnectionInfo } from 'src/hooks';
 
-const FooterVersionInfo: React.VFC = () => {
+const FooterVersionInfo: VFC = () => {
   const connectionInfo = useConnectionInfo();
 
   const [gitInfoOpen, setGitInfoOpen] = useState(false);
-  const toggleGitInfo = useCallback((e: React.MouseEvent) => {
+  const toggleGitInfo: MouseEventHandler = useCallback(e => {
     e.preventDefault();
     setGitInfoOpen(!gitInfoOpen);
   }, [gitInfoOpen]);

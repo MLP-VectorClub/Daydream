@@ -1,5 +1,5 @@
 import { UncontrolledTooltip } from 'reactstrap';
-import React, { ReactNode, useMemo } from 'react';
+import { ElementType, ReactNode, useMemo, VFC } from 'react';
 import md5 from 'md5';
 import { Nullable } from 'src/types';
 
@@ -7,12 +7,12 @@ interface PropTypes {
   id?: Nullable<string>;
   title: string;
   children: ReactNode;
-  tag?: React.ElementType<{ id: string }>;
+  tag?: ElementType<{ id: string }>;
 }
 
 const defaultTag = 'abbr';
 
-const Abbr: React.FC<PropTypes> = ({ id, title, children, tag: Tag = defaultTag }) => {
+const Abbr: VFC<PropTypes> = ({ id, title, children, tag: Tag = defaultTag }) => {
   const realId: string = useMemo(() => id || `abbr-${md5(title)}`, [id, title]);
   // Only wrap
   const realChildren = typeof id !== 'string' || Tag !== defaultTag ? (

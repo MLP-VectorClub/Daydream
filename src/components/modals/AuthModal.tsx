@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import React, { MouseEventHandler, useEffect } from 'react';
+import { MouseEventHandler, useEffect, VFC } from 'react';
 import { RootState } from 'src/store/rootReducer';
 import { AuthModalSide } from 'src/types';
 import { authActions } from 'src/store/slices';
@@ -14,7 +14,7 @@ export interface AuthModalFormProps {
   switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
 }
 
-const AuthModal: React.FC = () => {
+const AuthModal: VFC = () => {
   const { reset } = useForm({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
   const { signedIn } = useAuth();

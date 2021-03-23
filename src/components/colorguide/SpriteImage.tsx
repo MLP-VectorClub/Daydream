@@ -1,4 +1,4 @@
-import React from 'react';
+import { VFC } from 'react';
 import { scaleResize } from 'src/utils';
 import Image from 'next/image';
 import { Sprite } from 'src/types';
@@ -9,7 +9,7 @@ interface PropTypes {
   height?: number;
 }
 
-const SpriteImage: React.FC<PropTypes> = ({ sprite, height = 150 }) => {
+const SpriteImage: VFC<PropTypes> = ({ sprite, height = 150 }) => {
   if (!sprite) {
     return null;
   }

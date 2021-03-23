@@ -5,11 +5,11 @@ import { PATHS } from 'src/paths';
 import {
   getGuideChangesHeading,
   getGuideLabel,
+  handleDataFetchingError,
   notFound,
   resolveGuideName,
-  setResponseStatus,
 } from 'src/utils';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { GetColorGuideMajorChangesResult, GuideName, Nullable, Optional } from 'src/types';
 import { TitleFactory } from 'src/types/title';
 import { colorGuide } from 'src/strings';
@@ -18,7 +18,6 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, wrapper } from 'src/store';
 import { validatePageParam } from 'src/utils/validate-page-param';
 import { majorChangesFetcher } from 'src/fetchers';
-import { AxiosError } from 'axios';
 import { titleSetter } from 'src/utils/core';
 import Pagination from 'src/components/shared/Pagination';
 import { AppearanceLink } from 'src/components/colorguide/AppearanceLink';
@@ -133,18 +132,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     try {
       majorChanges = await majorChangesFetcher({ guide, page }, req)();
     } catch (e) {
-      if ('response' in e) {
-        const { response } = e as AxiosError;
-        const status = response?.status;
-        if (status) {
-          setResponseStatus(ctx, status);
-        }
-        if (status !== 404) {
-          console.error(response);
-        }
-      } else {
-        console.error(e);
-      }
+      handleDataFetchingError(ctx, e);
     }
   }
 

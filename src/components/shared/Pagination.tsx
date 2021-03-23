@@ -6,7 +6,10 @@ import {
   PaginationLink,
   Tooltip,
 } from 'reactstrap';
-import React, {
+import {
+  ChangeEventHandler,
+  FC,
+  KeyboardEventHandler,
   PropsWithChildren,
   useCallback,
   useEffect,
@@ -30,7 +33,7 @@ type PageLinkProps = PropsWithChildren<{
   pageParam: string;
 }>;
 
-const PageLink: React.FC<PageLinkProps> = ({ number, children, relevantProps, pageParam }) => {
+const PageLink: FC<PageLinkProps> = ({ number, children, relevantProps, pageParam }) => {
   const router = useRouter();
   const linkParams = useMemo(() => {
     const params = relevantProps
@@ -62,7 +65,7 @@ interface GotoPaginationItemProps {
   tooltipPos: PaginationProps['tooltipPos'];
 }
 
-const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, totalPages, pageParam, tooltipPos }) => {
+const GotoPaginationItem: VFC<GotoPaginationItemProps> = ({ defaultValue, totalPages, pageParam, tooltipPos }) => {
   const linkRef = useRef<HTMLButtonElement>(null);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [target, setTarget] = useState(defaultValue);
@@ -77,10 +80,10 @@ const GotoPaginationItem: React.FC<GotoPaginationItemProps> = ({ defaultValue, t
       setFocusInput(true);
     }
   }, [tooltipOpen, defaultValue]);
-  const handleKeypress = useCallback((e: React.KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeypress: KeyboardEventHandler<HTMLButtonElement> = useCallback(e => {
     if (e.key === 'Enter' || e.key === ' ') toggleTooltip();
   }, [toggleTooltip]);
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     setTarget(parseInt(e.target.value, 10));
   }, []);
 

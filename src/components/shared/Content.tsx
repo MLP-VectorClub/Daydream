@@ -1,6 +1,7 @@
 import classNames from 'classnames';
+import { FC } from 'react';
 
-const Content: React.FC<{ className?: string }> = ({ children, className = '' }) => (
+const Content: FC<{ className?: string }> = ({ children, className = '' }) => (
   <div id="content" className={classNames('section-container', className)}>
     {children}
   </div>

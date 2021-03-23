@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import { ProfileLinkOptions } from 'src/utils';
 import { getProfileLink } from 'src/utils/path-utils';
 
-const ProfileLink: React.FC<ProfileLinkOptions> = ({ children = null, ...rest }) => {
+const ProfileLink: FC<ProfileLinkOptions> = ({ children = null, ...rest }) => {
   const content = children === null ? <a>{rest.name}</a> : <>{children}</>;
 
   if (rest.id === null) {

@@ -1,5 +1,4 @@
 import HtmlToReact, { Parser as HtmlToReactParser, ProcessingInstruction } from 'html-to-react';
-import React from 'react';
 import Link from 'next/link';
 
 const allowedTags: { [k in keyof HTMLElementTagNameMap]?: true } = {
@@ -7,12 +6,13 @@ const allowedTags: { [k in keyof HTMLElementTagNameMap]?: true } = {
   em: true,
 };
 
-const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions();
 const processingInstructions: ProcessingInstruction[] = [
   {
     // Custom link processing
     shouldProcessNode: node => node.name === 'a',
     processNode: (node, children, index) => (
+      // eslint-disable-next-line react/destructuring-assignment
       <Link key={index} href={node.attribs.href}>
         <a>{children}</a>
       </Link>

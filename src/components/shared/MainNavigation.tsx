@@ -1,6 +1,6 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 import { CLUB_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
