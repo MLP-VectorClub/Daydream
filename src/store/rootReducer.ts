@@ -9,7 +9,7 @@ export interface RootState {
   profile: ProfileState;
 }
 
-export const rootReducer = combineReducers({
+export const rootReducer = combineReducers<RootState>({
   core: coreReducer,
   auth: authReducer,
   profile: profileReducer,
