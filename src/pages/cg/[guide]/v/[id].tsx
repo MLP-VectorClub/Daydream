@@ -40,6 +40,8 @@ import AppearanceTags from 'src/components/colorguide/AppearanceTags';
 import pluralize from 'pluralize';
 import { CutieMarks } from 'src/components/colorguide/CutieMarks';
 import { useDispatch } from 'react-redux';
+import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
+import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';
 
 interface PropTypes {
   guide: GuideName;
@@ -88,6 +90,7 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
     } : undefined,
   } : null), [appearance]);
   const shortUrl = useMemo(() => appearance && assembleSeoUrl(PATHS.SHORT_APPEARANCE(appearance)), [appearance]);
+  const notes = useMemo(() => (appearance && appearance.notes ? processAppearanceNotes(appearance.notes) : null), [appearance?.notes]);
 
   if (!appearance) {
     return <GuideNotFound heading="Unknown appearance" noun="appearance" />;
@@ -137,14 +140,31 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
           <AppearanceTags tags={appearance.tags} guide={appearance.guide} />
         </>
       )}
-      <h2>Featured in</h2>
+      <h2>
+        <InlineIcon icon="video" first size="xs" />
+        Featured in
+      </h2>
       <Alert color="info" fade={false}>
         <InlineIcon icon="hard-hat" first />
         This feature is not available yet
       </Alert>
+      {notes && (
+        <>
+          <h2>
+            <InlineIcon icon="info" first size="xs" fixedWidth />
+            Additional notes
+          </h2>
+          <div className={styles.notes}>
+            <AppearanceNotesText>{notes}</AppearanceNotesText>
+          </div>
+        </>
+      )}
       {appearance.cutieMarks && (
         <>
           <h2>{pluralize('Cutie mark', appearance.cutieMarks.length)}</h2>
+          <p className={styles.aside}>
+            These are just illustrations, the body shape & colors are <strong>not</strong> guaranteed to reflect the actual design.
+          </p>
           <CutieMarks label={appearance.label} cutieMarks={appearance.cutieMarks} colorGroups={appearance.colorGroups} />
         </>
       )}

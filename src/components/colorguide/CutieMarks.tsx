@@ -22,48 +22,55 @@ export const CutieMarks: VFC<PropTypes> = ({ label, cutieMarks, colorGroups }) =
   const isDeveloper = user.role && permission('developer', user.role);
   return (
     <div className={styles.cutieMarks}>
-      {cutieMarks.map(cm => (
-        <Card key={cm.id} className={styles.cutieMarkCard}>
-          <CardBody className="p-2">
-            <p className={styles.cardHeader}>
-              {isDeveloper && <span className="text-muted mr-2">#{cm.id}</span>}
-              {cm.label && <span>Facing {cm.label}</span>}
-              <span>{cm.facing ? `Facing ${capitalize(cm.facing)}` : 'Symmetrical'}</span>
-            </p>
-            <div className={styles.preview}>
-              <CutieMarkPreview {...cm} colorGroups={colorGroups} />
-              <div className={styles.previewImageContainer}>
-                <div className={styles.previewImageWrap} style={{ transform: `rotate(${cm.rotation}deg)` }}>
-                  <Image src={cm.viewUrl} unoptimized layout="fill" />
+      {cutieMarks.map(cm => {
+        const facingText = cm.facing ? `Facing ${capitalize(cm.facing)}` : 'Symmetrical';
+        return (
+          <Card key={cm.id} className={styles.cutieMarkCard}>
+            <CardBody className="p-2">
+              <span className={styles.title}>
+                {isDeveloper && <span className="text-muted mr-2">#{cm.id}</span>}
+                {cm.label || facingText}
+              </span>
+              {cm.label && (
+                <span className={styles.subtitle}>
+                  {facingText}
+                </span>
+              )}
+              <div className={styles.preview}>
+                <CutieMarkPreview {...cm} colorGroups={colorGroups} />
+                <div className={styles.previewImageContainer}>
+                  <div className={styles.previewImageWrap} style={{ transform: `rotate(${cm.rotation}deg)` }}>
+                    <Image src={cm.viewUrl} unoptimized layout="fill" />
+                  </div>
                 </div>
               </div>
-            </div>
-            <ButtonCollection className="mt-3">
-              <Button tag="a" size="sm" color="ui" href={cm.viewUrl} download={`${label} Cutie Mark.svg`}>
-                <InlineIcon icon="download" first />
-                SVG
-              </Button>
-              {cm.favMe && (
-                <Button tag="a" size="sm" color="deviantart" href={createFavMeUrl(cm.favMe)}>
-                  <InlineIcon icon={['fab', 'deviantart']} first />
-                  Source
+              <ButtonCollection className="mt-3">
+                <Button tag="a" size="sm" color="ui" href={cm.viewUrl} download={`${label} Cutie Mark.svg`}>
+                  <InlineIcon icon="download" first />
+                  SVG
                 </Button>
+                {cm.favMe && (
+                  <Button tag="a" size="sm" color="deviantart" href={createFavMeUrl(cm.favMe)}>
+                    <InlineIcon icon={['fab', 'deviantart']} first />
+                    Source
+                  </Button>
+                )}
+              </ButtonCollection>
+              {cm.contributor && (
+                <div className={styles.byLine}>
+                  <span className="mr-2">By</span>
+                  <UserLink {...cm.contributor} className="d-flex align-items-center border rounded pr-1 bg-light overflow-hidden">
+                    {cm.contributor.avatarUrl && (
+                      <Image src={cm.contributor.avatarUrl} layout="fixed" width={27} height={27} unoptimized />
+                    )}
+                    <span className="ml-2">{cm.contributor.name}</span>
+                  </UserLink>
+                </div>
               )}
-            </ButtonCollection>
-            {cm.contributor && (
-              <div className={styles.byLine}>
-                <span className="mr-2">By</span>
-                <UserLink {...cm.contributor} className="d-flex align-items-center border rounded pr-1 bg-light overflow-hidden">
-                  {cm.contributor.avatarUrl && (
-                    <Image src={cm.contributor.avatarUrl} layout="fixed" width={27} height={27} unoptimized />
-                  )}
-                  <span className="ml-2">{cm.contributor.name}</span>
-                </UserLink>
-              </div>
-            )}
-          </CardBody>
-        </Card>
-      ))}
+            </CardBody>
+          </Card>
+        );
+      })}
     </div>
   );
 };

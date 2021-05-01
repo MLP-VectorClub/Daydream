@@ -46,6 +46,7 @@ import {
   faUser,
   faUserPlus,
   faUsers,
+  faVideo,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
@@ -73,6 +74,7 @@ library.add(
   faTrash,
   faImage,
   faShare,
+  faVideo,
   faFolder,
   faSearch,
   faHardHat,
