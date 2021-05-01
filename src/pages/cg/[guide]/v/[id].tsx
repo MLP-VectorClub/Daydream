@@ -90,7 +90,7 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
     } : undefined,
   } : null), [appearance]);
   const shortUrl = useMemo(() => appearance && assembleSeoUrl(PATHS.SHORT_APPEARANCE(appearance)), [appearance]);
-  const notes = useMemo(() => (appearance && appearance.notes ? processAppearanceNotes(appearance.notes) : null), [appearance?.notes]);
+  const notes = useMemo(() => (appearance && appearance.notes ? processAppearanceNotes(appearance.notes) : null), [appearance]);
 
   if (!appearance) {
     return <GuideNotFound heading="Unknown appearance" noun="appearance" />;
@@ -159,7 +159,7 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
           </div>
         </>
       )}
-      {appearance.cutieMarks && (
+      {appearance.cutieMarks.length > 0 && (
         <>
           <h2>{pluralize('Cutie mark', appearance.cutieMarks.length)}</h2>
           <p className={styles.aside}>

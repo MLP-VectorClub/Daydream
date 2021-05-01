@@ -510,9 +510,9 @@ export type Appearance = CommonAppearance & AppearanceOnly & ListOfColorGroups;
  */
 export type DetailedAppearance = Appearance & {
   /**
-   * The list of cutie mark object associated iwth this appearance
+   * The list of cutie mark object associated with this appearance
    */
-  cutieMarks?: CutieMark[];
+  cutieMarks: CutieMark[];
 };
 
 /**
