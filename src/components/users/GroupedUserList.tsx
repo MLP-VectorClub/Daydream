@@ -16,7 +16,7 @@ const GroupedUserList: VFC<{ users: BarePublicUser[] }> = ({ users }) => {
       {groupKeys.map(key => (
         <span key={key} className={styles.letterGroup}>
           <strong>{key}</strong>
-          {groupedUsers[key] && groupedUsers[key].map(u => <UserLink key={u.id} {...u} userLinkClass={styles.userLink} />)}
+          {groupedUsers[key] && groupedUsers[key].map(u => <UserLink key={u.id} {...u} className={styles.userLink} />)}
         </span>
       ))}
     </div>

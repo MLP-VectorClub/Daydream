@@ -10,7 +10,6 @@ import { wrapper } from 'src/store';
 import { Card, CardBody } from 'reactstrap';
 import { useMemo } from 'react';
 import { NextPage } from 'next';
-import { plural } from 'src/utils/plural';
 import { colorGuide, common } from 'src/strings';
 import styles from 'modules/GuideIndexPage.module.scss';
 import { useDispatch } from 'react-redux';
@@ -19,6 +18,7 @@ import { titleSetter } from 'src/utils/core';
 import { guideIndexFetcher } from 'src/fetchers';
 import { PATHS } from 'src/paths';
 import { GuideImage } from 'src/components/shared/GuideImage';
+import pluralize from 'pluralize';
 
 interface PropTypes {
   initialData: GetColorGuideResult;
@@ -60,7 +60,7 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
                   <GuideImage className={styles.guideIcon} guide={code} />
                   <figcaption>
                     <span className={styles.guideName}>{guideName}</span>
-                    <span className={styles.guideCount}>{plural(entryCount, 'entry', 'entries')}</span>
+                    <span className={styles.guideCount}>{entryCount} {pluralize('entry', entryCount)}</span>
                   </figcaption>
                 </CardBody>
               </Card>

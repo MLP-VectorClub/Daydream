@@ -1,6 +1,8 @@
 import {
   GetAppearancesAllRequest,
   GetAppearancesAutocompleteRequest,
+  GetAppearancesIdLocateRequest,
+  GetAppearancesIdRequest,
   GetAppearancesPinnedRequest,
   GetAppearancesRequest,
   GetColorGuideMajorChangesRequest,
@@ -64,4 +66,22 @@ export const majorChangesFetcher = (params: MajorChangesFetcherParams, req?: Inc
   const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
 
   return requestPromiseMapper(service.getMajorChanges(params as GetColorGuideMajorChangesRequest));
+};
+
+export type AppearanceLocationFetcherParams = GetAppearancesIdLocateRequest;
+
+export const appearanceLocationFetcher = (params: AppearanceLocationFetcherParams, req?: IncomingMessage) => () => {
+  const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
+
+  return requestPromiseMapper(service.getAppearanceLocation(params));
+};
+
+export type AppearanceFetcherParams = NullableProps<GetAppearancesIdRequest, 'id'>;
+
+export const appearanceFetcher = (params: AppearanceFetcherParams, req?: IncomingMessage) => () => {
+  if (!params.id) return Promise.resolve(undefined);
+
+  const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
+
+  return requestPromiseMapper(service.getAppearance(params as GetAppearancesIdRequest));
 };

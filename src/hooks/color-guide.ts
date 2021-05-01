@@ -4,6 +4,10 @@ import {
   GetAppearancesAllResult,
   GetAppearancesAutocompleteRequest,
   GetAppearancesAutocompleteResult,
+  GetAppearancesIdLocateRequest,
+  GetAppearancesIdLocateResult,
+  GetAppearancesIdRequest,
+  GetAppearancesIdResult,
   GetAppearancesPinnedRequest,
   GetAppearancesPinnedResult,
   GetAppearancesRequest,
@@ -15,6 +19,10 @@ import {
 } from 'src/types';
 import { ENDPOINTS, mapQueryStatus } from 'src/utils';
 import {
+  appearanceFetcher,
+  AppearanceFetcherParams,
+  appearanceLocationFetcher,
+  AppearanceLocationFetcherParams,
   fullGuideFetcher,
   FullGuideFetcherParams,
   guideAutocompleteFetcher,
@@ -118,6 +126,47 @@ export function useMajorChanges(params: MajorChangesFetcherParams, initialData?:
 
   return {
     ...data,
+    status: mapQueryStatus(status),
+  };
+}
+
+interface AppearanceLocationHookValue {
+  status: Status;
+  appearance?: GetAppearancesIdLocateResult;
+}
+
+export function useAppearanceLocation(
+  params: AppearanceLocationFetcherParams,
+  initialData?: GetAppearancesIdLocateResult,
+): AppearanceLocationHookValue {
+  const fetcher = useCallback(() => appearanceLocationFetcher(params)(), [params]);
+  const { data, status } = useQuery(
+    ENDPOINTS.APPEARANCE_LOCATE(params as GetAppearancesIdLocateRequest),
+    fetcher,
+    { enabled: params.id, initialData },
+  );
+
+  return {
+    appearance: data,
+    status: mapQueryStatus(status),
+  };
+}
+
+interface DetailedAppearanceHookValue {
+  status: Status;
+  appearance?: GetAppearancesIdResult;
+}
+
+export function useDetailedAppearance(params: AppearanceFetcherParams, initialData?: GetAppearancesIdResult): DetailedAppearanceHookValue {
+  const fetcher = useCallback(() => appearanceFetcher(params)(), [params]);
+  const { data, status } = useQuery(
+    ENDPOINTS.APPEARANCE(params as GetAppearancesIdRequest),
+    fetcher,
+    { enabled: params.id, initialData },
+  );
+
+  return {
+    appearance: data,
     status: mapQueryStatus(status),
   };
 }

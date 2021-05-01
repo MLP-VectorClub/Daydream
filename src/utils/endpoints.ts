@@ -1,6 +1,8 @@
 import {
   GetAppearancesAllRequest,
   GetAppearancesAutocompleteRequest,
+  GetAppearancesIdLocateRequest,
+  GetAppearancesIdRequest,
   GetAppearancesIdSpriteRequest,
   GetAppearancesPinnedRequest,
   GetAppearancesRequest,
@@ -35,11 +37,12 @@ export const ENDPOINTS = {
   GUIDE_INDEX: `/color-guide`,
   GUIDE_MAJOR_CHANGES: (params: GetColorGuideMajorChangesRequest) =>
     buildUrl(`/color-guide/major-changes`, params),
-  APPEARANCES: (params: GetAppearancesRequest) =>
-    buildUrl(`/appearances`, params),
+  APPEARANCE: (params: GetAppearancesIdRequest) => buildUrl(`/appearances/${params.id}`),
+  APPEARANCES: (params: GetAppearancesRequest) => buildUrl(`/appearances`, params),
   APPEARANCES_FULL: (params: GetAppearancesAllRequest) => buildUrl(`/appearances/full`, params),
-  APPEARANCE_SPRITE: (appearanceId: number, params: GetAppearancesIdSpriteRequest) =>
-    buildUrl(`/appearances/${appearanceId}/sprite`, params),
+  APPEARANCE_SPRITE: (params: GetAppearancesIdSpriteRequest) =>
+    buildUrl(`/appearances/${params.id}/sprite`, params),
+  APPEARANCE_LOCATE: (data: GetAppearancesIdLocateRequest) => buildUrl(`/appearances/${data.id}/locate`),
   APPEARANCES_PINNED: (params: GetAppearancesPinnedRequest) =>
     buildUrl(`/appearances/pinned`, params),
   APPEARANCES_AUTOCOMPLETE: (params: GetAppearancesAutocompleteRequest) =>

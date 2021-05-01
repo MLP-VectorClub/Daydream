@@ -44,6 +44,11 @@
 export type AvatarProvider = "deviantart" | "discord" | "gravatar";
 
 /**
+ * The direction the character is facing when this cutie mark should be used
+ */
+export type CutieMarkFacing = "left" | "right";
+
+/**
  * List of possible sorting options for the full guide page
  */
 export type FullGuideSortField = "label" | "added" | "relevance";
@@ -209,109 +214,6 @@ export interface ListOfColorGroups {
 }
 
 /**
- * The barest of properties for an appearance intended for use in autocompletion results
- */
-export type AutocompleteAppearance = PreviewAppearance & {
-  /**
-   * The sprite that belongs to this appearance, or null if there is none
-   */
-  sprite: Sprite | null;
-};
-
-/**
- * Common properties of the two main Appearance schemas
- */
-export type CommonAppearance = AutocompleteAppearance & {
-  order: Order;
-  /**
-   * Indicates whether there are any cutie marks tied to this appearance
-   */
-  hasCutieMarks: boolean;
-};
-
-/**
- * Represents properties that belong to the slim appearance object only
- */
-export interface SlimAppearanceOnly {
-  characterTagNames: string[];
-}
-
-/**
- * A less heavy version of the regular Appearance schema
- */
-export type SlimAppearance = CommonAppearance & SlimAppearanceOnly;
-
-/**
- * Represents properties that belong to the full appearance object only
- */
-export interface AppearanceOnly {
-  created_at: IsoStandardDate;
-  notes: string | null;
-  tags: SlimGuideTag[];
-}
-
-/**
- * Represents an entry in the color guide
- */
-export type Appearance = CommonAppearance & AppearanceOnly & ListOfColorGroups;
-
-export interface SlimGuideTag {
-  id: OneBasedId;
-  /**
-   * Tag name (all lowercase)
-   */
-  name: string;
-  type?: TagType;
-  synonymOf?: OneBasedId;
-}
-
-/**
- * Data related to an appearance's sprite file. The actual file is available from a different endpoint.
- */
-export interface Sprite {
-  /**
-   * The full URL of the current sprite image
-   */
-  path: string;
-  /**
-   * The width and height of the sprite expressed in the smallest numbers possible while retaining the same aspect ratio. Useful for calculating placeholder element sizes.
-   */
-  aspectRatio: [number, number];
-}
-
-/**
- * Groups a list of colors
- */
-export interface ColorGroup {
-  id: OneBasedId;
-  /**
-   * The name of the color group
-   */
-  label: string;
-  order: Order;
-  /**
-   * The list of colors inside this group
-   */
-  colors: [Color, ...Color[]];
-}
-
-/**
- * A color entry
- */
-export interface Color {
-  id: OneBasedId;
-  /**
-   * The name of the color
-   */
-  label: string;
-  order: Order;
-  /**
-   * The color value in uppercase hexadecimal form, including a # prefix
-   */
-  hex: string;
-}
-
-/**
  * The number of results to return per page
  */
 export type GuidePageSize = number;
@@ -350,26 +252,6 @@ export interface RegistrationRequest {
  */
 export interface MajorChangeList {
   changes: MajorChange[];
-}
-
-/**
- * The details for the major change entry
- */
-export interface MajorChange {
-  id: OneBasedId;
-  /**
-   * The reason for the change
-   */
-  reason: string;
-  /**
-   * The appearance the change was made on
-   */
-  appearance: PreviewAppearance;
-  /**
-   * The identifier for the user who created the appearance
-   */
-  user: BarePublicUser | null;
-  createdAt: IsoStandardDate;
 }
 
 /**
@@ -530,7 +412,7 @@ export type AppearancePreviewData =
   | [string, string, string, string];
 
 /**
- * Minimal set of properties to display an appearance link, optinally with a colored preview
+ * Minimal set of properties to display an appearance link, optionally with a colored preview
  */
 export interface PreviewAppearance {
   id: ZeroBasedId;
@@ -538,7 +420,179 @@ export interface PreviewAppearance {
    * The name of the appearance
    */
   label: string;
+  guide: GuideName;
   previewData?: AppearancePreviewData;
+}
+
+/**
+ * The barest of properties for an appearance intended for use in autocompletion results
+ */
+export type AutocompleteAppearance = PreviewAppearance & {
+  /**
+   * The sprite that belongs to this appearance, or null if there is none
+   */
+  sprite: Sprite | null;
+};
+
+/**
+ * Data related to an appearance's sprite file. The actual file is available from a different endpoint.
+ */
+export interface Sprite {
+  /**
+   * The full URL of the current sprite image
+   */
+  path: string;
+  /**
+   * The width and height of the sprite expressed in the smallest numbers possible while retaining the same aspect ratio. Useful for calculating placeholder element sizes.
+   */
+  aspectRatio: [number, number];
+}
+
+/**
+ * The details for the major change entry
+ */
+export interface MajorChange {
+  id: OneBasedId;
+  /**
+   * The reason for the change
+   */
+  reason: string;
+  /**
+   * The appearance the change was made on
+   */
+  appearance: PreviewAppearance;
+  /**
+   * The identifier for the user who created the appearance
+   */
+  user: BarePublicUser | null;
+  createdAt: IsoStandardDate;
+}
+
+/**
+ * Common properties of the two main Appearance schemas
+ */
+export type CommonAppearance = AutocompleteAppearance & {
+  order: Order;
+  /**
+   * Indicates whether there are any cutie marks tied to this appearance
+   */
+  hasCutieMarks: boolean;
+};
+
+/**
+ * Represents properties that belong to the slim appearance object only
+ */
+export interface SlimAppearanceOnly {
+  characterTagNames: string[];
+}
+
+/**
+ * A less heavy version of the regular Appearance schema
+ */
+export type SlimAppearance = CommonAppearance & SlimAppearanceOnly;
+
+/**
+ * Represents properties that belong to the full appearance object only
+ */
+export interface AppearanceOnly {
+  created_at: IsoStandardDate;
+  notes: string | null;
+  tags: SlimGuideTag[];
+}
+
+/**
+ * Represents an entry in the color guide
+ */
+export type Appearance = CommonAppearance & AppearanceOnly & ListOfColorGroups;
+
+/**
+ * An appearance object containing the full range of information available
+ */
+export type DetailedAppearance = Appearance & {
+  /**
+   * The list of cutie mark object associated iwth this appearance
+   */
+  cutieMarks?: CutieMark[];
+};
+
+/**
+ * A color entry
+ */
+export interface Color {
+  id: OneBasedId;
+  /**
+   * The name of the color
+   */
+  label: string;
+  order: Order;
+  /**
+   * The color value in uppercase hexadecimal form, including a # prefix
+   */
+  hex: string;
+}
+
+/**
+ * DeviantArt's shorthand URL format, which typically takes the form of `http://fav.me/d######`, where `#` is the base-36 encoded version of the deviation's numerical ID, found at the end of the deviation URL. This value includes the leading `d`.
+ */
+export type FavMe = string;
+
+/**
+ * The number of degrees to rotate the cutie mark image on the UI to better reflect its potion in the preview. Purely for cosmetic use.
+ */
+export type CutieMarkRotation = number;
+
+/**
+ * A cutie mark entry
+ */
+export interface CutieMark {
+  id: OneBasedId;
+  /**
+   * The URL used for displaying the cutie mark SVG file.
+   */
+  viewUrl: string;
+  /**
+   * The direction the character is facing when this cutie mark should be used. `null` is used to indicate when the image is the same on both sides, meaning it's symmetrical.
+   */
+  facing: CutieMarkFacing | null;
+  /**
+   * Optional link to a deviation on DeviantArt that is the original source of this cutie mark vector, for the sake of giving credit.
+   */
+  favMe?: FavMe;
+  rotation: CutieMarkRotation;
+  /**
+   * Optional details of the DeviantArt user who contributed this cutie mark.
+   */
+  contributor?: PublicUser;
+  /**
+   * Optional label in case the cutie mark warrants additional information, e.g. only used for certain kind of characters. Should be given higher priority on the UI than the facing information.
+   */
+  label?: string;
+}
+
+export interface SlimGuideTag {
+  id: OneBasedId;
+  /**
+   * Tag name (all lowercase)
+   */
+  name: string;
+  type?: TagType;
+  synonymOf?: OneBasedId;
+}
+
+/**
+ * Groups a list of colors
+ */
+export interface ColorGroup {
+  id: OneBasedId;
+  /**
+   * The name of the color group
+   */
+  label: string;
+  order: Order;
+  /**
+   * The list of colors inside this group
+   */
+  colors: [Color, ...Color[]];
 }
 
 export interface PageData {
@@ -581,6 +635,9 @@ export interface GetAppearancesAllRequest {
   guide: GuideName
   sort: FullGuideSortField
 }
+export interface GetAppearancesIdRequest {
+  id: ZeroBasedId
+}
 export interface GetAppearancesIdColorGroupsRequest {
   id: ZeroBasedId
 }
@@ -599,6 +656,9 @@ export interface GetAppearancesPinnedRequest {
 export interface GetAppearancesAutocompleteRequest {
   guide: GuideName
   q: QueryString
+}
+export interface GetAppearancesIdLocateRequest {
+  id: ZeroBasedId
 }
 export type PostUsersSigninRequest = SigninRequest
 export interface GetUsersOauthSigninProviderRequest {
@@ -646,6 +706,8 @@ export type GetAppearancesResult = AppearanceList & PageData;
 
 export type GetAppearancesAllResult = SlimAppearanceList & GuideFullListGroups;
 
+export type GetAppearancesIdResult = DetailedAppearance;
+
 export type GetAppearancesIdColorGroupsResult = ListOfColorGroups;
 
 export type GetAppearancesIdSpriteResult = any
@@ -654,6 +716,8 @@ export type GetAppearancesIdPreviewResult = any
 export type GetAppearancesPinnedResult = Appearance[];
 
 export type GetAppearancesAutocompleteResult = AutocompleteAppearance[];
+
+export type GetAppearancesIdLocateResult = PreviewAppearance;
 
 export interface PostUsersSigninResult {
   token?: string;

@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext as NextGSSPC, NextPageContext } from 'next';
+import { GetServerSidePropsContext as NextGSSPC, GetServerSidePropsResult, NextPageContext } from 'next';
 import { GetServerSidePropsContext as ReduxWrapperGSSPC } from 'next-redux-wrapper';
 import { mapValues, omit, omitBy } from 'lodash';
 import { parseRelativeUrl } from 'next/dist/next-server/lib/router/utils/parse-relative-url';
@@ -19,7 +19,11 @@ export const setResponseStatus = (ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'
   }
 };
 
-export const notFound = (ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>) => setResponseStatus(ctx, 404);
+export const notFound = <P>(ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>): GetServerSidePropsResult<P> => {
+  setResponseStatus(ctx, 404);
+
+  return { notFound: true };
+};
 
 /**
  * @returns true if caller should halt execution

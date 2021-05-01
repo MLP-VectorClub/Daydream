@@ -27,7 +27,7 @@ import TimeAgo from 'src/components/shared/TimeAgo';
 import styles from 'modules/GuideChangesPage.module.scss';
 import NoResultsAlert from 'src/components/shared/NoResultsAlert';
 import { Table } from 'reactstrap';
-import GuideNotFound from 'src/components/colorguide/GuideNotFound';
+import { GuideNotFound } from 'src/components/colorguide/GuideNotFound';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import ReturnToGuideButton from 'src/components/colorguide/ReturnToGuideButton';
 import StatusAlert from 'src/components/shared/StatusAlert';
@@ -122,7 +122,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 
   const guide = resolveGuideName(query.guide) || null;
   if (!guide) {
-    notFound(ctx);
+    return notFound(ctx);
   }
 
   const page = validatePageParam(query.page);

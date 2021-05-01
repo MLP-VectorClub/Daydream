@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { ProfileLinkOptions } from 'src/utils';
 import { getProfileLink } from 'src/utils/path-utils';
-import { VFC } from 'react';
+import { FC } from 'react';
 
 interface PropTypes extends ProfileLinkOptions {
   text?: string;
-  userLinkClass?: string;
+  className?: string;
 }
 
-const UserLink: VFC<PropTypes> = ({ text, userLinkClass = 'user-link', ...rest }) => (
+const UserLink: FC<PropTypes> = ({ children, className = 'user-link', ...rest }) => (
   <Link href={getProfileLink(rest)}>
-    <a className={userLinkClass}>{text || rest.name}</a>
+    <a className={className}>{children || rest.name}</a>
   </Link>
 );
 

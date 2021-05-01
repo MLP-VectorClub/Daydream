@@ -1,5 +1,5 @@
 import { each, map, trim } from 'lodash';
-import { Numeric } from 'src/types';
+import { FavMe, Numeric } from 'src/types';
 import { ParamMap, query } from 'urlcat';
 
 export const makeUrlSafe = (input: string): string => trim(input.replace(/[^A-Za-z\d-]/g, '-').replace(/-+/g, '-'), '-');
@@ -31,3 +31,5 @@ export const pathSegmentWithId = (id: Numeric, str: string) => {
   const urlSafeString = makeUrlSafe(str);
   return urlSafeString.length === 0 ? `${id}` : `${id}-${urlSafeString}`;
 };
+
+export const createFavMeUrl = (favMe: FavMe) => `http://fav.me/${favMe}`;

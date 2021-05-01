@@ -4,6 +4,10 @@ import {
   GetAppearancesAllResult,
   GetAppearancesAutocompleteRequest,
   GetAppearancesAutocompleteResult,
+  GetAppearancesIdLocateRequest,
+  GetAppearancesIdLocateResult,
+  GetAppearancesIdRequest,
+  GetAppearancesIdResult,
   GetAppearancesPinnedRequest,
   GetAppearancesPinnedResult,
   GetAppearancesRequest,
@@ -16,6 +20,9 @@ import { ENDPOINTS } from 'src/utils';
 import { Service } from 'src/services/service-class';
 
 export class ColorGuideService extends Service {
+  getAppearance = (data: GetAppearancesIdRequest) =>
+    Axios.get<GetAppearancesIdResult>(ENDPOINTS.APPEARANCE(data), this.getRequestOptions());
+
   getAppearances = (data: GetAppearancesRequest) =>
     Axios.get<GetAppearancesResult>(ENDPOINTS.APPEARANCES(data), this.getRequestOptions());
 
@@ -33,4 +40,7 @@ export class ColorGuideService extends Service {
 
   getMajorChanges = (data: GetColorGuideMajorChangesRequest) =>
     Axios.get<GetColorGuideMajorChangesResult>(ENDPOINTS.GUIDE_MAJOR_CHANGES(data), this.getRequestOptions());
+
+  getAppearanceLocation = (data: GetAppearancesIdLocateRequest) =>
+    Axios.get<GetAppearancesIdLocateResult>(ENDPOINTS.APPEARANCE_LOCATE(data), this.getRequestOptions());
 }

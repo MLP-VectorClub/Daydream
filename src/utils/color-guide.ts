@@ -1,9 +1,11 @@
 import {
+  Appearance,
   FullGuideSortField,
   GuideName,
   Nullable,
   Numeric,
   Optional,
+  PreviewAppearance,
   SlimGuideTag,
   TagType,
 } from 'src/types';
@@ -44,6 +46,11 @@ export const getGuideTitle = (
 
   return q !== '' ? `${q} - ${withPage}` : withPage;
 };
+
+export const getAppearanceTitle = (
+  guide: Nullable<string> = null,
+  appearance: Pick<PreviewAppearance, 'label'> | null = null,
+): string => (!appearance ? getGuideTitle(guide) : `${appearance.label} - ${getGuideTitle(guide)}`);
 
 export interface ScaleResizeResult {
   scale: number;
@@ -129,4 +136,58 @@ export const getGuideChangesHeading = (
 ): string => {
   const guideName = getGuideLabel(guide);
   return `Major ${guideName} Color Changes`;
+};
+
+interface CutieMarkMappingColor {
+  groupLabel: string;
+  colorLabel: string;
+  hex: string;
+}
+
+export interface CutieMarkColorMapping {
+  'Coat Outline': string,
+  'Coat Shadow Outline': string,
+  'Coat Fill': string,
+  'Coat Shadow Fill': string,
+  'Mane & Tail Outline': string,
+  'Mane & Tail Fill': string,
+}
+
+export const getColorMapping = (
+  colorGroups: Appearance['colorGroups'],
+  defaultColorMapping: CutieMarkColorMapping,
+): CutieMarkColorMapping => {
+  const $colors: CutieMarkMappingColor[] = colorGroups.reduce((colors, cg) => {
+    cg.colors.forEach(c => {
+      colors.push({ groupLabel: cg.label, colorLabel: c.label, hex: c.hex });
+    });
+    return colors;
+  }, [] as CutieMarkMappingColor[]);
+
+  const colorMapping: Partial<CutieMarkColorMapping> = {};
+  $colors.forEach($row => {
+    let groupLabel: string = $row.groupLabel.replace(/^(Costume|Dress)$/, 'Coat');
+    groupLabel = groupLabel.replace(/^(Coat|Mane & Tail) \([^)]+\)$/, '$1');
+    const isEye = $row.groupLabel === 'Iris';
+    const eyeRegex = !isEye ? '|Gradient(?:\\s(?:Light|(?:\\d+\\s)?(?:Top|Botom)))?\\s' : '';
+    const colorLabel = $row.colorLabel.replace(
+      new RegExp(`^(?:(?:(?:Purple|Yellow|Red)\\s)?(?:Main|First|Normal${eyeRegex}))?(.+?)(?:\\s\\d+)?(?:/.*)?$`),
+      '$1',
+    );
+    const normalizedLabel = `${groupLabel} ${colorLabel}`;
+    if (normalizedLabel in defaultColorMapping && !(normalizedLabel in colorMapping)) {
+      colorMapping[normalizedLabel as keyof CutieMarkColorMapping] = $row.hex;
+    }
+  });
+  if (!('Coat Shadow Outline' in colorMapping) && 'Coat Outline' in colorMapping) {
+    colorMapping['Coat Shadow Outline'] = colorMapping['Coat Outline'];
+  }
+  if (!('Coat Shadow Fill' in colorMapping) && 'Coat Fill' in colorMapping) {
+    colorMapping['Coat Shadow Fill'] = colorMapping['Coat Fill'];
+  }
+
+  return {
+    ...defaultColorMapping,
+    ...colorMapping,
+  };
 };

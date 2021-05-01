@@ -5,7 +5,7 @@ import {
   Row,
   UncontrolledTooltip,
 } from 'reactstrap';
-import { useRef, VFC } from 'react';
+import { useMemo, useRef, VFC } from 'react';
 import { Appearance, GuideName, Nullable } from 'src/types';
 import AppearanceNotes from 'src/components/colorguide/AppearanceNotes';
 import SpriteImage from 'src/components/colorguide/SpriteImage';
@@ -13,6 +13,8 @@ import CompactColorGroups from 'src/components/colorguide/CompactColorGroups';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import styles from 'modules/AppearanceItem.module.scss';
 import AppearanceTags from 'src/components/colorguide/AppearanceTags';
+import Link from 'next/link';
+import { PATHS } from 'src/paths';
 
 export interface AppearanceItemProps {
   appearance: Appearance;
@@ -24,6 +26,8 @@ const PINNED_TOOLTIP = 'Pinned';
 
 const AppearanceItem: VFC<AppearanceItemProps> = ({ appearance, pinned = false, guide }) => {
   const pinRef = useRef<HTMLElement>(null);
+
+  const appearanceLink = useMemo(() => PATHS.APPEARANCE(appearance), [appearance]);
 
   return (
     <Card
@@ -51,7 +55,9 @@ const AppearanceItem: VFC<AppearanceItemProps> = ({ appearance, pinned = false, 
                   </UncontrolledTooltip>
                 </>
               )}
-              {appearance.label}
+              <Link href={appearanceLink}>
+                <a>{appearance.label}</a>
+              </Link>
             </h5>
             <AppearanceNotes appearance={appearance} />
             <AppearanceTags tags={appearance.tags} guide={guide} />

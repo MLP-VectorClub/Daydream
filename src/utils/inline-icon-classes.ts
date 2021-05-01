@@ -1,7 +1,7 @@
-import { ClassValue } from 'classnames/types';
+import { Argument, Mapping } from 'classnames';
 
-export const getInlineIconClasses = (color?: string, first?: boolean, last?: boolean): ClassValue => {
-  const classes: ClassValue = {
+export const getInlineIconClasses = (color?: string, first?: boolean, last?: boolean): Argument => {
+  const classes: Mapping = {
     'ml-2': last,
     'mr-2': first,
   };

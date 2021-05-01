@@ -25,7 +25,7 @@ import StandardHeading from 'src/components/shared/StandardHeading';
 import ContactLink from 'src/components/shared/ContactLink';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Link from 'next/link';
-import GuideNotFound from 'src/components/colorguide/GuideNotFound';
+import { GuideNotFound } from 'src/components/colorguide/GuideNotFound';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import MajorChangesButton from 'src/components/colorguide/MajorChangesButton';

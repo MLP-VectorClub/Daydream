@@ -71,8 +71,9 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
 };
 
 export const assembleSeoUrl = (pathname?: string): string => {
+  const protocol = IS_CLIENT_SIDE ? location.protocol : 'https:';
   const host = IS_CLIENT_SIDE ? location.host : undefined;
-  return `${host ? `https://${host}` : APP_URL}${pathname || ''}`;
+  return `${host ? `${protocol}//${host}` : APP_URL}${pathname || ''}`;
 };
 
 export const handleDataFetchingError = (ctx: Pick<GetServerSidePropsContext, 'res'>, e: Error) => {

@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { plural } from 'src/utils/plural';
+import pluralize from 'pluralize';
 
 export const common = {
   header: {
@@ -82,22 +82,26 @@ export const common = {
     developer: 'Site Developer',
   },
   auth: {
-    signInTitle: "Let's get you signed in",
+    signInTitle: 'Let\'s get you signed in',
     signUpTitle: 'Create an account',
     noAccountYet: 'No account yet? Create one here!',
     alreadyHaveAccount: 'Already have an account? Sign in here!',
-    accountBenefits: "An account allows you to customize the site's behavior, with many more features yet to come.",
+    accountBenefits: 'An account allows you to customize the site\'s behavior, with many more features yet to come.',
     name: 'Display Name',
     nameHelp: (min: number, max: number): string => `Only English letters, digits, dashes and underscores. Must be between ${min} and ${max} characters. Can be changed later.`,
     email: 'E-Mail Address',
-    emailHelp: (): JSX.Element => <>Use a valid e-mail address that can receive messages to ensure you do not lose access to your account. This address must be confirmed after signing up. <strong>We will not send you spam.</strong></>,
+    emailHelp: (): JSX.Element => (
+      <>Use a valid e-mail address that can receive messages to ensure you do not lose access to your account.
+        This address must be confirmed after signing up. <strong>We will not send you spam.</strong>
+      </>
+    ),
     password: 'Password',
     passwordHelp: (min: number): string => `Must be at least ${min} characters long and not commonly used.`,
     rememberMe: 'Keep me signed in',
     signInButton: 'Sign In',
     registerButton: 'Create Account',
     invalidCredentials: 'Incorrect e-mail address or password',
-    rateLimited: (count: number): string => `Too many signin attempts, please try again in ${count} ${plural(count, 'second', 'seconds')}`,
+    rateLimited: (count: number): string => `Too many signin attempts, please try again in ${count} ${pluralize('second', count)}`,
     hidePassword: 'Hide Password',
     showPassword: 'Show Password',
     forgotPassword: 'Forgot password?',

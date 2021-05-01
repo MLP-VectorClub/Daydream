@@ -1,0 +1,53 @@
+.cutie-marks {
+  display: flex;
+  flex-flow: row wrap;
+
+  .cutie-mark-card {
+    max-width: 250px;
+    text-align: center;
+
+    .card-header {
+      font-size: 1.25rem;
+      display: block;
+      font-weight: 700;
+      word-break: break-word;
+      overflow: hidden;
+    }
+
+    .preview {
+      position: relative;
+
+      svg {
+        pointer-events: none;
+        position: relative;
+        z-index: 1;
+      }
+
+      .preview-image-container {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .preview-image-wrap {
+          position: relative;
+          display: block;
+          width: 42%;
+          height: 42%;
+        }
+      }
+    }
+
+    .by-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+  }
+}

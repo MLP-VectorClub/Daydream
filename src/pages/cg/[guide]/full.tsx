@@ -22,7 +22,7 @@ import {
 import { wrapper } from 'src/store';
 import { useAuth, useFullGuide, useTitleSetter } from 'src/hooks';
 import { colorGuide } from 'src/strings';
-import GuideNotFound from 'src/components/colorguide/GuideNotFound';
+import { GuideNotFound } from 'src/components/colorguide/GuideNotFound';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import Link from 'next/link';
 import {
@@ -119,7 +119,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 
   const guide = resolveGuideName(query.guide) || null;
   if (!guide) {
-    notFound(ctx);
+    return notFound(ctx);
   }
 
   const sort: FullGuideSortField = isValidFullListSortOption(query.sort_by) ? query.sort_by : 'relevance';

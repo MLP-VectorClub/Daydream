@@ -7,12 +7,13 @@ import { VFC } from 'react';
 
 interface PropTypes {
   heading: string;
+  noun?: string
 }
 
-const GuideNotFound: VFC<PropTypes> = ({ heading }) => (
+export const GuideNotFound: VFC<PropTypes> = ({ heading, noun = 'color guide' }) => (
   <Content>
-    <StandardHeading heading={heading} lead="The requested color guide could not be found" />
-    <Alert color="info" fade={false}>
+    <StandardHeading heading={heading} lead={`The requested ${noun} could not be found`} />
+    <Alert color="info" fade={false} className="text-center">
       Check out the <Link href={PATHS.GUIDE_INDEX}><a>list of available guides</a></Link> to hopefully find what you were looking for.
     </Alert>
   </Content>

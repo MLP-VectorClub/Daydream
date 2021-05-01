@@ -2,9 +2,9 @@ import { isEmpty, mapValues, omit, omitBy } from 'lodash';
 import { buildUrl, makeUrlSafe, pathSegmentWithId } from 'src/utils/url';
 import { Numeric } from 'src/types/common';
 import {
-  AutocompleteAppearance,
   FullGuideSortField,
   GuideName,
+  PreviewAppearance,
   PublicUser,
   ShowListItem,
 } from 'src/types/api';
@@ -17,7 +17,8 @@ export const PATHS = {
   ROOT: '/',
   ABOUT: '/about',
   ADMIN: '/admin',
-  APPEARANCE: ({ id, label }: Pick<AutocompleteAppearance, 'id' | 'label'>) => `/cg/v/${pathSegmentWithId(id, label)}`,
+  APPEARANCE: ({ id, label, guide }: PreviewAppearance) => `/cg/${guide}/v/${pathSegmentWithId(id, label)}`,
+  SHORT_APPEARANCE: ({ id, label }: Pick<PreviewAppearance, 'id' | 'label'>) => `/cg/v/${pathSegmentWithId(id, label)}`,
   BLENDING: '/blending',
   EVENTS: '/events',
   GUIDE_INDEX: '/cg',
