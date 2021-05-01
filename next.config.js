@@ -17,6 +17,9 @@ module.exports = withPlugins(
     [withCamelCaseCSSModules],
   ],
   {
+    future: {
+      webpack5: true,
+    },
     generateBuildId: async () => {
       try {
         const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);
