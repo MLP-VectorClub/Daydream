@@ -82,7 +82,7 @@ const titleFactory: TitleFactoryVoid = () => ({
 
 const ShowPage: NextPage<ShowPageProps> = ({ initialEpisodes, initialOthers }) => {
   const dispatch = useDispatch();
-  const titleData = useMemo(() => titleFactory(), []);
+  const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
   const { isStaff } = useAuth();
   return (

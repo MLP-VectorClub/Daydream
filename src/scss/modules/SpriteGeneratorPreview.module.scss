@@ -1,0 +1,13 @@
+.preview {
+  background: url(/img/transparency.svg) repeat center;
+  background-size: 16px;
+  border: 1px solid #000;
+  display: block;
+  margin: 0 auto;
+  pointer-events: none;
+
+  &, & canvas {
+    height: 300px;
+    width: 300px;
+  }
+}

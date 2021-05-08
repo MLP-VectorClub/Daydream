@@ -33,7 +33,7 @@ const titleFactory: TitleFactoryVoid = () => ({
 
 const AboutPage: NextPage = () => {
   const dispatch = useDispatch();
-  const titleData = useMemo(() => titleFactory(), []);
+  const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
 
   return (

@@ -20,7 +20,7 @@ const titleFactory: TitleFactoryVoid = () => ({
 const NotFound: NextPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const titleData = useMemo(() => titleFactory(), []);
+  const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
 
   return (
