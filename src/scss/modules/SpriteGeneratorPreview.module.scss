@@ -1,3 +1,8 @@
+@import "../vars";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 .preview {
   background: url(/img/transparency.svg) repeat center;
   background-size: 16px;
@@ -9,5 +14,13 @@
   &, & canvas {
     height: 300px;
     width: 300px;
+
+    @supports (image-rendering: crisp-edges) {
+      @include media-breakpoint-up(xl) {
+        height: 600px;
+        width: 600px;
+        image-rendering: crisp-edges;
+      }
+    }
   }
 }

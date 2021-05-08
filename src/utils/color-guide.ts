@@ -10,6 +10,8 @@ import {
   TagType,
 } from 'src/types';
 import { colorGuide } from 'src/strings';
+import { RgbColors } from 'src/types/sprite-generator';
+import { pad } from 'lodash';
 
 const guideNameMap: Record<GuideName, string> = {
   pony: 'Friendship is Magic',
@@ -191,3 +193,26 @@ export const getColorMapping = (
     ...colorMapping,
   };
 };
+
+/**
+ * Converts a set of rgb values to a single number for any purpose
+ * @param r 0-255
+ * @param g 0-255
+ * @param b 0-255
+ */
+// eslint-disable-next-line no-bitwise
+export const convertRgbToNumber = (r: number, g: number, b: number): number => ((r << 16) + (g << 8) + b);
+
+export const stringifyRgbNumber = (hexNumber: number): string => `#${pad(hexNumber.toString(16), 6, '0')}`;
+
+export const stringifyRgbKey = (map: Record<number, RgbColors> | null, key: number): string => {
+  let hexNumber = key;
+  if (typeof map === 'object' && map !== null && key in map) {
+    const rgb = map[key];
+    hexNumber = convertRgbToNumber(rgb.red, rgb.green, rgb.blue);
+  }
+  return `#${stringifyRgbNumber(hexNumber)}`;
+};
+
+// language=JSRegexp
+export const validHexColorPattern = '^#?([a-fA-F\\d]{3}|[a-fA-F\\d]{6})$';

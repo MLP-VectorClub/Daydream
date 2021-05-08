@@ -1,64 +1,80 @@
-import { useEffect, useRef, useState, VFC } from 'react';
-import { Alert, Col, Progress, Row } from 'reactstrap';
+import {
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  VFC,
+} from 'react';
+import {
+  Alert,
+  Col,
+  Form,
+  Progress,
+  Row,
+} from 'reactstrap';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { SpriteGeneratorPreview } from 'src/components/colorguide/sprite-generator/SpriteGeneratorPreview';
 import InlineIcon from 'src/components/shared/InlineIcon';
+import {
+  SPRITE_GENERATOR_ASSETS,
+  SpriteGeneratorBodyOptions,
+  SpriteGeneratorColorMap,
+  SpriteGeneratorEyeOptions,
+  SpriteGeneratorImageMap,
+  SpriteGeneratorOptions,
+} from 'src/types/sprite-generator';
+import classNames from 'classnames';
+import { SpriteGeneratorCustomizer } from 'src/components/colorguide/sprite-generator/SpriteGeneratorCustomizer';
 
-const STATIC_ASSETS = [
-  'cm_square',
-  'eyes_male12',
-  'eyes_male3',
-  'eyes_male12_grad2',
-  'eyes_male12_grad3',
-  'eyes_male3_grad2',
-  'eyes_male3_grad3',
-  'eyes_female1',
-  'eyes_female2',
-  'eyes_female3',
-  'eyes_female12_grad2',
-  'eyes_female12_grad3',
-  'eyes_female3_grad2',
-  'eyes_female3_grad3',
-  'horn_female',
-  'horn_male',
-  'wing_female',
-  'wing_male',
-  'body_female',
-  'body_male',
-  'eye_grad2',
-  'eye_grad3',
-] as const;
+const DEFAULT_OPTIONS: SpriteGeneratorOptions = {
+  body: SpriteGeneratorBodyOptions.FEMALE,
+  cm: true,
+  wing: false,
+  horn: false,
+  eye: SpriteGeneratorEyeOptions.EYES_FEMALE_1,
+  gradientStops: 2,
+};
 
 export const SpriteGenerator: VFC = () => {
-  const imagePromises = useRef<Promise<void>[]>([]);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imageMap = useRef<SpriteGeneratorImageMap | undefined>();
+  const [colorMap, setColorMap] = useState<SpriteGeneratorColorMap>();
+  const loadingErrors = useRef<Array<keyof SpriteGeneratorImageMap>>([]);
   const [loadedImages, setLoadedImages] = useState(0);
+  const [options, setOptions] = useState<SpriteGeneratorOptions>(DEFAULT_OPTIONS);
 
   useEffect(() => {
     let localLoadedImages = 0;
     let mounted = true;
-    STATIC_ASSETS.forEach(imageName => {
-      imagePromises.current.push(new Promise((resolve, reject) => {
-        const imageEl = new Image();
-        imageEl.src = `/img/sprite_template/${imageName}.png`;
-        imageEl.onload = () => void resolve();
-        imageEl.onerror = e => void reject(e);
-      }));
-    });
-
-    imagePromises.current.forEach(promise => void promise.then(() => {
-      localLoadedImages++;
-      if (mounted) {
-        setLoadedImages(localLoadedImages);
-      }
-    }));
+    loadingErrors.current = [];
+    imageMap.current = SPRITE_GENERATOR_ASSETS.reduce((acc, imageName) => {
+      const imageEl = new Image();
+      const cacheBustVersion = 1;
+      imageEl.src = `/img/sprite_template/${imageName}.png?v=${cacheBustVersion}`;
+      imageEl.onload = () => {
+        localLoadedImages++;
+        if (mounted) {
+          setLoadedImages(localLoadedImages);
+        }
+      };
+      imageEl.onerror = () => {
+        loadingErrors.current.push(imageName);
+      };
+      return { ...acc, [imageName]: imageEl };
+    }, {} as SpriteGeneratorImageMap);
 
     return () => {
       mounted = false;
     };
   }, []);
 
-  const loading = imagePromises.current.length > 0 && loadedImages < STATIC_ASSETS.length;
+  const loading = imageMap.current !== null && loadedImages < SPRITE_GENERATOR_ASSETS.length;
+  const loadingFailed = loadingErrors.current.length > 0;
 
+  const handleSubmit: FormEventHandler = useCallback(e => {
+    e.preventDefault();
+  }, []);
   return (
     <>
       <h2>About this tool</h2>
@@ -74,22 +90,35 @@ export const SpriteGenerator: VFC = () => {
       <h2>Options & preview</h2>
       <Row className="flex-row-reverse flex-lg-row">
         <Col lg={6} xl="auto">
-          <SpriteGeneratorPreview loading={loading} />
+          <SpriteGeneratorPreview canvasRef={canvasRef} loading={loading} options={options} imageMap={imageMap.current} />
           {loading && (
             <div className="mt-2 text-center">
-              <p className="text-ui mb-2">
-                <InlineIcon icon="info" first />
-                Loading assets…
+              <p className={classNames('mb-2', loadingFailed ? 'text-danger' : 'text-ui')}>
+                <InlineIcon icon={loadingErrors ? 'exclamation-triangle' : 'info'} first />
+                {loadingErrors.current.length > 0
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                  ? (
+                    <>Failed to load assets:
+                      <ul>{loadingErrors.current.map((name, k) => <li key={k}>{name}</li>)}</ul>
+                    </>
+                  )
+                  : 'Loading assets…'}
               </p>
-              <Progress value={(loadedImages / STATIC_ASSETS.length) * 100} animated color="ui" />
+              <Progress
+                value={(loadedImages / SPRITE_GENERATOR_ASSETS.length) * 100}
+                animated={!loadingFailed}
+                color={loadingFailed ? 'danger' : 'ui'}
+              />
             </div>
           )}
         </Col>
         <Col lg={6} xl>
-          {/* <SpriteGeneratorOptions options={} /> */}
+          <Form onSubmit={handleSubmit}>
+            <SpriteGeneratorCustomizer options={options} setOptions={setOptions} colorMap={colorMap} setColorMap={setColorMap} />
+          </Form>
         </Col>
       </Row>
-      <h2>Download</h2>
+      <h2 className="mt-3">Download</h2>
       <Alert color="info" fade={false}>
         <InlineIcon icon="hard-hat" first />
         This feature is not available yet
