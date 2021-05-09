@@ -79,10 +79,10 @@ export const SpriteGeneratorColorsForm: VFC<SpriteGeneratorColorsFormProps> = ({
       <h3>Colors</h3>
       <Row>
         {inputNames.map(name => (
-          <Col key={name} xs={12} lg={6}>
+          <Col key={name} xs={12} md={6}>
             <FormGroup row>
-              <Label for={INPUT_NAMES[name]} lg={7}>{INPUT_LABELS[name]}</Label>
-              <Col lg={5}>
+              <Label for={INPUT_NAMES[name]} lg={5} xl={6} className="col-xxl-7">{INPUT_LABELS[name]}</Label>
+              <Col lg={7} xl={6} className="col-xxl-5">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText style={{ backgroundColor: inputValues[name] }}>&nbsp;&nbsp;</InputGroupText>

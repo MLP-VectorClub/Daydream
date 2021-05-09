@@ -6,7 +6,6 @@ import {
   Col,
   FormGroup,
   Label,
-  Row,
 } from 'reactstrap';
 import {
   SpriteGeneratorColorsForm,
@@ -43,8 +42,8 @@ export const SpriteGeneratorCustomizer: VFC<PropTypes> = ({ options, setOptions,
     gradientStops,
   }), [options, setOptions]);
   return (
-    <Row className="justify-content-around">
-      <Col xl={4}>
+    <>
+      <Col xl={6} className="col-xxl-3">
         <h3>Body Shape</h3>
         <FormGroup>
           <Label className="d-block">Species</Label>
@@ -121,7 +120,7 @@ export const SpriteGeneratorCustomizer: VFC<PropTypes> = ({ options, setOptions,
           </ButtonGroup>
         </FormGroup>
       </Col>
-      <Col xl={8}>
+      <Col lg={12} xl={12} className="col-xxl-5">
         <SpriteGeneratorColorsForm
           colorMap={colorMap}
           setColorMap={setColorMap}
@@ -129,6 +128,6 @@ export const SpriteGeneratorCustomizer: VFC<PropTypes> = ({ options, setOptions,
           middleIrisGradient={options.gradientStops === 3}
         />
       </Col>
-    </Row>
+    </>
   );
 };

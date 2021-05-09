@@ -16,7 +16,7 @@
     width: 300px;
 
     @supports (image-rendering: crisp-edges) {
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-up(xxl) {
         height: 600px;
         width: 600px;
         image-rendering: crisp-edges;

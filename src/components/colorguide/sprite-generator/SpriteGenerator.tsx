@@ -88,36 +88,34 @@ export const SpriteGenerator: VFC = () => {
         The coat-colored space on the top right is reserved for the cutie mark, if any.
       </p>
       <h2>Options & preview</h2>
-      <Row className="flex-row-reverse flex-lg-row">
-        <Col lg={6} xl="auto">
-          <SpriteGeneratorPreview canvasRef={canvasRef} loading={loading} options={options} imageMap={imageMap.current} />
-          {loading && (
-            <div className="mt-2 text-center">
-              <p className={classNames('mb-2', loadingFailed ? 'text-danger' : 'text-ui')}>
-                <InlineIcon icon={loadingErrors ? 'exclamation-triangle' : 'info'} first />
-                {loadingErrors.current.length > 0
+      <Form onSubmit={handleSubmit}>
+        <Row className="flex-row-reverse flex-lg-row">
+          <Col lg={12} xl={6} className="col-xxl-auto">
+            <SpriteGeneratorPreview canvasRef={canvasRef} loading={loading} options={options} imageMap={imageMap.current} />
+            {loading && (
+              <div className="mt-2 text-center">
+                <p className={classNames('mb-2', loadingFailed ? 'text-danger' : 'text-ui')}>
+                  <InlineIcon icon={loadingErrors ? 'exclamation-triangle' : 'info'} first />
+                  {loadingErrors.current.length > 0
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                  ? (
-                    <>Failed to load assets:
-                      <ul>{loadingErrors.current.map((name, k) => <li key={k}>{name}</li>)}</ul>
-                    </>
-                  )
-                  : 'Loading assets…'}
-              </p>
-              <Progress
-                value={(loadedImages / SPRITE_GENERATOR_ASSETS.length) * 100}
-                animated={!loadingFailed}
-                color={loadingFailed ? 'danger' : 'ui'}
-              />
-            </div>
-          )}
-        </Col>
-        <Col lg={6} xl>
-          <Form onSubmit={handleSubmit}>
-            <SpriteGeneratorCustomizer options={options} setOptions={setOptions} colorMap={colorMap} setColorMap={setColorMap} />
-          </Form>
-        </Col>
-      </Row>
+                    ? (
+                      <>Failed to load assets:
+                        <ul>{loadingErrors.current.map((name, k) => <li key={k}>{name}</li>)}</ul>
+                      </>
+                    )
+                    : 'Loading assets…'}
+                </p>
+                <Progress
+                  value={(loadedImages / SPRITE_GENERATOR_ASSETS.length) * 100}
+                  animated={!loadingFailed}
+                  color={loadingFailed ? 'danger' : 'ui'}
+                />
+              </div>
+            )}
+          </Col>
+          <SpriteGeneratorCustomizer options={options} setOptions={setOptions} colorMap={colorMap} setColorMap={setColorMap} />
+        </Row>
+      </Form>
       <h2 className="mt-3">Download</h2>
       <Alert color="info" fade={false}>
         <InlineIcon icon="hard-hat" first />
