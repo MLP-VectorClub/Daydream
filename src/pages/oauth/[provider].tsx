@@ -41,7 +41,9 @@ const OAuthPage: NextPage = () => {
   useEffect(() => {
     setLayoutDisabled(true);
     try {
-      closeFnRef.current = parent.close ? () => parent.close() : ('close' in opener ? () => (opener as Window).close() : null);
+      closeFnRef.current = parent.close
+        ? () => parent.close()
+        : (window.opener !== null && 'close' in window.opener ? () => (window.opener as Window).close() : null);
     } catch (e) {
       /* ignored */
     }
