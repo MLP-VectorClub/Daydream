@@ -1,5 +1,12 @@
 import { config, library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+import {
+  faDeviantart,
+  faDiscord,
+  faTelegram,
+  faTwitter,
+  faVk,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowCircleLeft,
   faArrowDown,
@@ -52,9 +59,18 @@ import {
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported
 config.autoAddCss = false;
 
+const brandIcons = [
+  faDeviantart,
+  faDiscord,
+  faTelegram,
+  faTwitter,
+  faVk,
+  faWhatsapp,
+];
+
 // List of used icons - amend if new icons are needed
 library.add(
-  fab,
+  ...brandIcons,
   faEye,
   faTag,
   faInfo,
