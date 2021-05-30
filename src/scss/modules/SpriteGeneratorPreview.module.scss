@@ -9,11 +9,11 @@
   border: 1px solid #000;
   display: block;
   margin: 0 auto;
-  pointer-events: none;
 
   &, & canvas {
     height: 300px;
     width: 300px;
+    pointer-events: none;
 
     @supports (image-rendering: crisp-edges) {
       @include media-breakpoint-up(xxl) {

@@ -1,5 +1,7 @@
 import {
+  ChangeEventHandler,
   FormEventHandler,
+  MouseEventHandler,
   useCallback,
   useEffect,
   useRef,
@@ -7,12 +9,14 @@ import {
   VFC,
 } from 'react';
 import {
-  Alert,
+  Button,
   Col,
+  CustomInput,
   Form,
   Progress,
   Row,
 } from 'reactstrap';
+import { saveAs } from 'file-saver';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { SpriteGeneratorPreview } from 'src/components/colorguide/sprite-generator/SpriteGeneratorPreview';
 import InlineIcon from 'src/components/shared/InlineIcon';
@@ -26,6 +30,9 @@ import {
 } from 'src/types/sprite-generator';
 import classNames from 'classnames';
 import { SpriteGeneratorCustomizer } from 'src/components/colorguide/sprite-generator/SpriteGeneratorCustomizer';
+import { assembleSeoUrl } from 'src/utils';
+import { PATHS } from 'src/paths';
+import { useCopyToClipboard } from 'src/hooks/copy';
 
 const DEFAULT_OPTIONS: SpriteGeneratorOptions = {
   body: SpriteGeneratorBodyOptions.FEMALE,
@@ -42,7 +49,10 @@ export const SpriteGenerator: VFC = () => {
   const [colorMap, setColorMap] = useState<SpriteGeneratorColorMap>();
   const loadingErrors = useRef<Array<keyof SpriteGeneratorImageMap>>([]);
   const [loadedImages, setLoadedImages] = useState(0);
+  const [licenseAccepted, setLicenseAccepted] = useState(false);
   const [options, setOptions] = useState<SpriteGeneratorOptions>(DEFAULT_OPTIONS);
+  const copyButtonRef = useRef<HTMLButtonElement>(null);
+  const attributionTextRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let localLoadedImages = 0;
@@ -69,12 +79,26 @@ export const SpriteGenerator: VFC = () => {
     };
   }, []);
 
+  const { tooltip, clearCopyStatus } = useCopyToClipboard({ copyButtonRef, targetRef: attributionTextRef });
+
   const loading = imageMap.current !== null && loadedImages < SPRITE_GENERATOR_ASSETS.length;
   const loadingFailed = loadingErrors.current.length > 0;
 
   const handleSubmit: FormEventHandler = useCallback(e => {
     e.preventDefault();
   }, []);
+  const handleLicenseChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
+    setLicenseAccepted(e.target.checked);
+  }, []);
+  const handleDownload: MouseEventHandler = useCallback(() => {
+    if (!canvasRef.current) return;
+
+    canvasRef.current.toBlob(blob => {
+      if (!blob) return;
+      saveAs(blob, 'sprite.png');
+    });
+  }, []);
+
   return (
     <>
       <h2>About this tool</h2>
@@ -97,7 +121,7 @@ export const SpriteGenerator: VFC = () => {
                 <p className={classNames('mb-2', loadingFailed ? 'text-danger' : 'text-ui')}>
                   <InlineIcon icon={loadingErrors ? 'exclamation-triangle' : 'info'} first />
                   {loadingErrors.current.length > 0
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                     ? (
                       <>Failed to load assets:
                         <ul>{loadingErrors.current.map((name, k) => <li key={k}>{name}</li>)}</ul>
@@ -117,10 +141,38 @@ export const SpriteGenerator: VFC = () => {
         </Row>
       </Form>
       <h2 className="mt-3">Download</h2>
-      <Alert color="info" fade={false}>
-        <InlineIcon icon="hard-hat" first />
-        This feature is not available yet
-      </Alert>
+      <CustomInput
+        type="checkbox"
+        id="accept-license"
+        label={(
+          <>
+            I accept that generated images are licensed under the{' '}
+            <ExternalLink href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+            </ExternalLink>
+            {' '}license
+          </>
+        )}
+        checked={licenseAccepted}
+        onChange={handleLicenseChange}
+        className="mb-3"
+      />
+      <p className="text-info">
+        <InlineIcon icon="info" first fixedWidth />
+        Attribution example:
+        <span className="user-select-all p-1 ml-2 border rounded" ref={attributionTextRef}>
+          Base generated on the MLP-VectorClub's website at {assembleSeoUrl(PATHS.GUIDE_SPRITE)}
+        </span>
+        <Button type="button" size="sm" color="link" innerRef={copyButtonRef} onMouseLeave={clearCopyStatus}>
+          <InlineIcon icon="clipboard" first />
+          Copy
+        </Button>
+        {tooltip}
+      </p>
+      <Button type="button" size="lg" color="primary" disabled={!licenseAccepted} onClick={handleDownload}>
+        <InlineIcon icon="download" first />
+        Download
+      </Button>
     </>
   );
 };

@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  VFC,
-} from 'react';
+import { useCallback, useRef, useState, VFC } from 'react';
 import {
   Button,
   FormGroup,
@@ -14,12 +8,11 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  Tooltip,
 } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import ClipboardJS from 'clipboard';
 import { SocialShareButtons } from 'src/components/colorguide/SocialShareButtons';
 import styles from 'modules/ShareAppearanceButton.module.scss';
+import { useCopyToClipboard } from 'src/hooks/copy';
 
 interface PropTypes {
   shortUrl?: string;
@@ -28,7 +21,6 @@ interface PropTypes {
 export const ShareAppearanceButton: VFC<PropTypes> = ({ shortUrl }) => {
   const [shareOpen, setShareOpen] = useState(false);
   const [shareVisible, setShareVisible] = useState(false);
-  const [copyStatus, setCopyStatus] = useState(false);
   const copyButtonRef = useRef<HTMLButtonElement>(null);
   const urlInputRef = useRef<HTMLElement>(null);
   const modalRef = useRef<HTMLElement>(null);
@@ -43,28 +35,13 @@ export const ShareAppearanceButton: VFC<PropTypes> = ({ shortUrl }) => {
   const closeModal = useCallback(() => setShareOpen(false), []);
   const handleModalVisible = useCallback(() => setShareVisible(true), []);
   const handleModalHidden = useCallback(() => setShareVisible(false), []);
-  const clearCopyStatus = useCallback(() => setCopyStatus(false), []);
 
-  useEffect(() => {
-    if (!shareVisible) return;
-
-    const copyButton = copyButtonRef.current;
-    const urlInput = urlInputRef.current;
-    const modal = modalRef.current;
-    if (!copyButton || !urlInput || !modal) return;
-
-    const clipboard = new ClipboardJS(copyButton, {
-      container: modal,
-      target: () => urlInput,
-    });
-
-    clipboard.on('success', e => {
-      setCopyStatus(true);
-      e.clearSelection();
-    });
-
-    return () => clipboard.destroy();
-  }, [shareVisible]);
+  const { tooltip, clearCopyStatus } = useCopyToClipboard({
+    enabled: shareVisible,
+    copyButtonRef,
+    targetRef: urlInputRef,
+    containerRef: modalRef,
+  });
 
   if (!shortUrl) return null;
 
@@ -113,11 +90,7 @@ export const ShareAppearanceButton: VFC<PropTypes> = ({ shortUrl }) => {
           <Button color="ui" onClick={closeModal}>Close</Button>
         </ModalFooter>
       </Modal>
-      {shareVisible && (
-        <Tooltip target={copyButtonRef} isOpen={copyStatus} fade={false}>
-          Copied to clipboard!
-        </Tooltip>
-      )}
+      {tooltip}
     </>
   );
 };

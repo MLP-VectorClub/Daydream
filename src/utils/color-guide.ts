@@ -203,7 +203,7 @@ export const getColorMapping = (
 // eslint-disable-next-line no-bitwise
 export const convertRgbToNumber = (r: number, g: number, b: number): number => ((r << 16) + (g << 8) + b);
 
-export const stringifyRgbNumber = (hexNumber: number): string => `#${pad(hexNumber.toString(16), 6, '0')}`;
+export const stringifyRgbNumber = (hexNumber: number): string => `#${pad(hexNumber.toString(16).toUpperCase(), 6, '0')}`;
 
 export const stringifyRgbKey = (map: Record<number, RgbColors> | null, key: number): string => {
   let hexNumber = key;

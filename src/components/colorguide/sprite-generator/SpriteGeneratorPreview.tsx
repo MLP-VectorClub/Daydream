@@ -1,4 +1,12 @@
-import { RefObject, useCallback, useEffect, VFC } from 'react';
+import {
+  EventHandler,
+  FocusEventHandler,
+  RefObject,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  VFC,
+} from 'react';
 import classNames from 'classnames';
 import styles from 'modules/SpriteGeneratorPreview.module.scss';
 import {
@@ -47,30 +55,31 @@ const mapGradientOptionToImage = (maleBody: boolean, options: SpriteGeneratorOpt
     : SpriteGeneratorEyeGradientOptions.EYES_FEMALE_12_GRAD_3;
 };
 
+const remapColors = (ctx: CanvasRenderingContext2D, colors: Required<PropTypes>['colorMap']) => {
+  // Apply color mappings
+  const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+  let change = false;
+  for (let i = 0; i < imageData.data.length; i += 4) {
+    const alpha = imageData.data[i + 3];
+    if (alpha > 0) {
+      const mapping = colors[convertRgbToNumber(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])];
+      if (mapping) {
+        if (!change) change = true;
+        imageData.data[i] = mapping.red;
+        imageData.data[i + 1] = mapping.green;
+        imageData.data[i + 2] = mapping.blue;
+      }
+    }
+  }
+  if (change) ctx.putImageData(imageData, 0, 0);
+};
+
 export const SpriteGeneratorPreview: VFC<PropTypes> = ({ loading, canvasRef, options, imageMap, colorMap }) => {
   const drawImage = useCallback((ctx: CanvasRenderingContext2D, img: keyof SpriteGeneratorImageMap) => {
     const imageElement: HTMLImageElement | undefined = imageMap && imageMap[img];
     if (typeof imageElement === 'undefined') throw new Error(`Missing template image`);
     ctx.drawImage(imageElement, 0, 0, 300, 300, 0, 0, 300, 300);
   }, [imageMap]);
-  const remapColors = (ctx: CanvasRenderingContext2D, colors: Required<PropTypes>['colorMap']) => {
-    // Apply color mappings
-    const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-    let change = false;
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      const alpha = imageData.data[i + 3];
-      if (alpha > 0) {
-        const mapping = colors[convertRgbToNumber(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])];
-        if (mapping) {
-          if (!change) change = true;
-          imageData.data[i] = mapping.red;
-          imageData.data[i + 1] = mapping.green;
-          imageData.data[i + 2] = mapping.blue;
-        }
-      }
-    }
-    if (change) ctx.putImageData(imageData, 0, 0);
-  };
   useEffect(() => {
     if (loading || !canvasRef.current || !imageMap) return;
 
@@ -100,9 +109,27 @@ export const SpriteGeneratorPreview: VFC<PropTypes> = ({ loading, canvasRef, opt
     }
   }, [canvasRef, colorMap, drawImage, imageMap, loading, options]);
 
+  const preventEvent: EventHandler<SyntheticEvent> = useCallback(e => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, []);
+  const handleFocus: FocusEventHandler<HTMLCanvasElement> = useCallback(e => {
+    e.target.blur();
+  }, []);
+
   return (
     <div className={styles.preview}>
-      <canvas ref={canvasRef} className={classNames({ hidden: loading })} width={300} height={300} />
+      <canvas
+        ref={canvasRef}
+        className={classNames({ hidden: loading })}
+        width={300}
+        height={300}
+        onContextMenu={preventEvent}
+        onMouseDown={preventEvent}
+        onDragStart={preventEvent}
+        onKeyDown={preventEvent}
+        onFocus={handleFocus}
+      />
     </div>
   );
 };

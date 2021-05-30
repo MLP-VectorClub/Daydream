@@ -1,6 +1,5 @@
 import { useMemo, VFC } from 'react';
 import {
-  Alert,
   Col,
   FormGroup,
   Input,
@@ -12,7 +11,7 @@ import {
 } from 'reactstrap';
 import { SpriteGeneratorBaseColor, SpriteGeneratorColorMap } from 'src/types/sprite-generator';
 import { stringifyRgbKey, stringifyRgbNumber, validHexColorPattern } from 'src/utils';
-import InlineIcon from 'src/components/shared/InlineIcon';
+import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
 
 const INPUT_NAMES: { [k in SpriteGeneratorBaseColor]: `color_${k}` } = {
   [SpriteGeneratorBaseColor.COAT_OUTLINE]: `color_${SpriteGeneratorBaseColor.COAT_OUTLINE}` as const,
@@ -92,6 +91,7 @@ export const SpriteGeneratorColorsForm: VFC<SpriteGeneratorColorsFormProps> = ({
                     value={inputValues[name]}
                     pattern={validHexColorPattern}
                     readOnly
+                    className="text-center"
                   />
                 </InputGroup>
               </Col>
@@ -99,10 +99,7 @@ export const SpriteGeneratorColorsForm: VFC<SpriteGeneratorColorsFormProps> = ({
           </Col>
         ))}
       </Row>
-      <Alert color="info" fade={false}>
-        <InlineIcon icon="hard-hat" first />
-        These fields will be editable once the form is fully developed
-      </Alert>
+      <FeaturePlaceholder>These fields will be editable once the form is fully developed</FeaturePlaceholder>
     </>
   );
 };

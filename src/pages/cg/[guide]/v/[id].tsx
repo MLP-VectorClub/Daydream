@@ -33,7 +33,7 @@ import { NextSeo } from 'next-seo';
 import { useMemo } from 'react';
 import { NextSeoProps } from 'next-seo/lib/types';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
-import { Alert, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { ShareAppearanceButton } from 'src/components/colorguide/ShareAppearanceButton';
 import AppearanceTags from 'src/components/colorguide/AppearanceTags';
@@ -42,6 +42,7 @@ import { CutieMarks } from 'src/components/colorguide/CutieMarks';
 import { useDispatch } from 'react-redux';
 import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
 import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';
+import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
 
 interface PropTypes {
   guide: GuideName;
@@ -144,10 +145,7 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
         <InlineIcon icon="video" first size="xs" />
         Featured in
       </h2>
-      <Alert color="info" fade={false}>
-        <InlineIcon icon="hard-hat" first />
-        This feature is not available yet
-      </Alert>
+      <FeaturePlaceholder />
       {notes && (
         <>
           <h2>
@@ -171,17 +169,11 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
       {appearance.colorGroups && (
         <>
           <h2>{pluralize('Color group', appearance.colorGroups.length)}</h2>
-          <Alert color="info" fade={false}>
-            <InlineIcon icon="hard-hat" first />
-            This feature is not available yet
-          </Alert>
+          <FeaturePlaceholder />
         </>
       )}
       <h2>{pluralize('Related appearances', appearance.colorGroups.length)}</h2>
-      <Alert color="info" fade={false}>
-        <InlineIcon icon="hard-hat" first />
-        This feature is not available yet
-      </Alert>
+      <FeaturePlaceholder />
     </Content>
   );
 };
