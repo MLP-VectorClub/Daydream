@@ -10,6 +10,8 @@ import {
   TagType,
 } from 'src/types';
 import { colorGuide } from 'src/strings';
+import { RgbColors } from 'src/types/sprite-generator';
+import { padStart } from 'lodash';
 
 const guideNameMap: Record<GuideName, string> = {
   pony: 'Friendship is Magic',
@@ -191,3 +193,48 @@ export const getColorMapping = (
     ...colorMapping,
   };
 };
+
+/* eslint-disable no-bitwise */
+/**
+ * Converts a set of rgb values to a single number for any purpose
+ * @param r 0-255
+ * @param g 0-255
+ * @param b 0-255
+ */
+export const convertRgbToNumber = (r: number, g: number, b: number): number => ((r << 16) + (g << 8) + b);
+
+export const convertNumberToRgb = (rgb: number): RgbColors => ({
+  red: (rgb & 0xff0000) >> 16,
+  green: (rgb & 0xff00) >> 8,
+  blue: rgb & 0xff,
+});
+/* eslint-enable no-bitwise */
+
+export const stringifyRgbNumber = (hexNumber: number): string => `#${padStart(hexNumber.toString(16).toUpperCase(), 6, '0')}`;
+
+export const stringifyRgbKey = (map: Record<number, RgbColors> | null, key: number): string => {
+  let hexNumber = key;
+  if (typeof map === 'object' && map !== null && key in map) {
+    const rgb = map[key];
+    hexNumber = convertRgbToNumber(rgb.red, rgb.green, rgb.blue);
+  }
+  return stringifyRgbNumber(hexNumber);
+};
+
+// language=JSRegexp
+export const validHexColorPattern = '^#?([a-fA-F\\d]{3}|[a-fA-F\\d]{6})$';
+
+export const hexToRgb = (hex: string): RgbColors | null => {
+  const partsMatch = hex.substring(1).match(/[a-f\d]{2}/ig);
+  if (partsMatch === null || partsMatch.length !== 3) return null;
+  const [red, green, blue] = partsMatch.map(s => parseInt(s, 16));
+  return { red, green, blue };
+};
+
+/**
+ * Return values range from 0 to 255 (inclusive)
+ *
+ * @see http://stackoverflow.com/questions/11867545#comment52204960_11868398
+ * @param rgb
+ */
+export const yiq = (rgb: RgbColors): number => ((rgb.red * 299) + (rgb.green * 587) + (rgb.blue * 114)) / 1000;

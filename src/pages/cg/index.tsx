@@ -35,7 +35,7 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
   const dispatch = useDispatch();
   const data = useGuideIndex(initialData);
 
-  const titleData = useMemo(() => titleFactory(), []);
+  const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
 
   return (

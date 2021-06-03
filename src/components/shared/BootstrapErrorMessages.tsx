@@ -2,7 +2,7 @@ import { ErrorMessage } from 'react-hook-form';
 import { FormFeedback } from 'reactstrap';
 import { VFC } from 'react';
 
-type PropTypes = Pick<Parameters<typeof ErrorMessage>[0], 'errors' | 'name'>;
+type PropTypes = Required<Pick<Parameters<typeof ErrorMessage>[0], 'errors' | 'name'>>;
 
 const BootstrapErrorMessages: VFC<PropTypes> = ({ errors, name }) => {
   const messages = errors && errors[name] as unknown;

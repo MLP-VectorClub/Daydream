@@ -7,7 +7,6 @@ import {
   Status,
   UnifiedErrorResponse,
   User,
-  ValuesOf,
 } from 'src/types';
 import { registerThunk, signInThunk, signOutThunk } from 'src/store/thunks';
 
@@ -125,7 +124,5 @@ const authSlice = createSlice({
 });
 
 export const authActions = authSlice.actions;
-
-export type AuthActions = ValuesOf<typeof authActions>['type'];
 
 export default authSlice.reducer;

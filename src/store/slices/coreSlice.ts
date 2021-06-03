@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import { omit } from 'lodash';
 import { renderingStateSlice } from 'src/utils/store';
-import { PageTitle, ValuesOf } from 'src/types/common';
+import { PageTitle } from 'src/types/common';
 import { BreadcrumbEntry } from 'src/types/core';
 
 export interface CoreSliceMirroredState {
@@ -67,7 +67,5 @@ const coreSlice = createSlice({
 });
 
 export const coreActions = coreSlice.actions;
-
-export type CoreActions = ValuesOf<typeof coreActions>;
 
 export default coreSlice.reducer;

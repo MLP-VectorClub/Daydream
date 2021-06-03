@@ -19,9 +19,9 @@ const Breadcrumbs: VFC = () => {
       <BreadcrumbItem className="breadcrumb-item-divider" />
       {breadcrumbs.map((el, i) => {
         const isActive = el.active === true;
-        const tag = isActive ? 'strong' : (el.linkProps ? 'a' : undefined);
+        const Tag = isActive ? 'strong' : (el.linkProps ? 'a' : 'span');
         const item = (
-          <BreadcrumbItem tag={tag} key={el.linkProps ? undefined : i}>{el.label}</BreadcrumbItem>
+          <Tag className="breadcrumb-item" key={el.linkProps ? undefined : i}>{el.label}</Tag>
         );
 
         if (!el.linkProps) {

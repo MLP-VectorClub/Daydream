@@ -52,6 +52,7 @@ export const PATHS = {
     if (isEmpty(queryParams)) return path;
     return buildUrl(path, queryParams);
   },
+  GUIDE_SPRITE: '/cg/sprite',
   LATEST_EPISODE: '/episode/latest',
   PRIVACY_POLICY: '/about/privacy',
   SHOW: '/show',

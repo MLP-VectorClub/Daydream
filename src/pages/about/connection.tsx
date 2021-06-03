@@ -34,7 +34,7 @@ export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forward
   const dispatch = useDispatch();
   const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
 
-  const titleData = useMemo(() => titleFactory(), []);
+  const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
 
   const getServerInfo = useCallback((key: keyof MappedAboutConnectionResult) => (

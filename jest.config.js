@@ -1,5 +1,3 @@
-const tsconfig = require('./tsconfig.json');
-
 module.exports = {
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
@@ -12,4 +10,9 @@ module.exports = {
   moduleNameMapper: {
     "src/(.*)": "<rootDir>/src/$1"
   },
+   globals: {
+      'ts-jest': {
+        tsconfig: 'tsconfig.test.json'
+      }
+    }
 };
