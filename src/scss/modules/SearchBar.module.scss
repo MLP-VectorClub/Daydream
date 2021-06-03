@@ -1,8 +1,8 @@
 @import "../vars";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/list-group";
+@import "~bootstrap-scss/functions";
+@import "~bootstrap-scss/variables";
+@import "~bootstrap-scss/mixins";
+@import "~bootstrap-scss/list-group";
 
 .search-bar-col {
   @include media-breakpoint-up(xl) {
