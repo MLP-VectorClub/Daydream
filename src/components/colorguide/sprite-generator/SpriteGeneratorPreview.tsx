@@ -28,7 +28,7 @@ interface PropTypes {
   options: SpriteGeneratorOptions;
   canvasRef: RefObject<HTMLCanvasElement>;
   imageMap?: SpriteGeneratorImageMap;
-  colorMap?: Record<number, RgbColors>;
+  colorMap: Record<number, RgbColors>;
 }
 
 const mapGradientOptionToImage = (maleBody: boolean, options: SpriteGeneratorOptions): SpriteGeneratorEyeGradientOptions => {
@@ -61,14 +61,15 @@ const remapColors = (ctx: CanvasRenderingContext2D, colors: Required<PropTypes>[
   let change = false;
   for (let i = 0; i < imageData.data.length; i += 4) {
     const alpha = imageData.data[i + 3];
-    if (alpha > 0) {
-      const mapping = colors[convertRgbToNumber(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])];
-      if (mapping) {
-        if (!change) change = true;
-        imageData.data[i] = mapping.red;
-        imageData.data[i + 1] = mapping.green;
-        imageData.data[i + 2] = mapping.blue;
-      }
+    // eslint-disable-next-line no-continue
+    if (alpha === 0) continue;
+
+    const mapping = colors[convertRgbToNumber(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])];
+    if (mapping) {
+      if (!change) change = true;
+      imageData.data[i] = mapping.red;
+      imageData.data[i + 1] = mapping.green;
+      imageData.data[i + 2] = mapping.blue;
     }
   }
   if (change) ctx.putImageData(imageData, 0, 0);

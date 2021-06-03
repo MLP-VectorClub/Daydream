@@ -22,6 +22,7 @@ import { SpriteGeneratorPreview } from 'src/components/colorguide/sprite-generat
 import InlineIcon from 'src/components/shared/InlineIcon';
 import {
   SPRITE_GENERATOR_ASSETS,
+  SpriteGeneratorBaseColor,
   SpriteGeneratorBodyOptions,
   SpriteGeneratorColorMap,
   SpriteGeneratorEyeOptions,
@@ -30,7 +31,7 @@ import {
 } from 'src/types/sprite-generator';
 import classNames from 'classnames';
 import { SpriteGeneratorCustomizer } from 'src/components/colorguide/sprite-generator/SpriteGeneratorCustomizer';
-import { assembleSeoUrl } from 'src/utils';
+import { assembleSeoUrl, convertNumberToRgb } from 'src/utils';
 import { PATHS } from 'src/paths';
 import { useCopyToClipboard } from 'src/hooks/copy';
 
@@ -46,7 +47,18 @@ const DEFAULT_OPTIONS: SpriteGeneratorOptions = {
 export const SpriteGenerator: VFC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageMap = useRef<SpriteGeneratorImageMap | undefined>();
-  const [colorMap, setColorMap] = useState<SpriteGeneratorColorMap>();
+  const [colorMap, setColorMap] = useState<SpriteGeneratorColorMap>(() => ({
+    [SpriteGeneratorBaseColor.COAT_OUTLINE]: convertNumberToRgb(SpriteGeneratorBaseColor.COAT_OUTLINE),
+    [SpriteGeneratorBaseColor.COAT_SHADOW_OUTLINE]: convertNumberToRgb(SpriteGeneratorBaseColor.COAT_SHADOW_OUTLINE),
+    [SpriteGeneratorBaseColor.COAT_FILL]: convertNumberToRgb(SpriteGeneratorBaseColor.COAT_FILL),
+    [SpriteGeneratorBaseColor.COAT_SHADOW_FILL]: convertNumberToRgb(SpriteGeneratorBaseColor.COAT_SHADOW_FILL),
+    [SpriteGeneratorBaseColor.IRIS_GRADIENT_TOP]: convertNumberToRgb(SpriteGeneratorBaseColor.IRIS_GRADIENT_TOP),
+    [SpriteGeneratorBaseColor.IRIS_GRADIENT_MIDDLE]: convertNumberToRgb(SpriteGeneratorBaseColor.IRIS_GRADIENT_MIDDLE),
+    [SpriteGeneratorBaseColor.IRIS_GRADIENT_BOTTOM]: convertNumberToRgb(SpriteGeneratorBaseColor.IRIS_GRADIENT_BOTTOM),
+    [SpriteGeneratorBaseColor.IRIS_HIGHLIGHT_TOP]: convertNumberToRgb(SpriteGeneratorBaseColor.IRIS_HIGHLIGHT_TOP),
+    [SpriteGeneratorBaseColor.IRIS_HIGHLIGHT_BOTTOM]: convertNumberToRgb(SpriteGeneratorBaseColor.IRIS_HIGHLIGHT_BOTTOM),
+    [SpriteGeneratorBaseColor.MAGIC_AURA]: convertNumberToRgb(SpriteGeneratorBaseColor.MAGIC_AURA),
+  }));
   const loadingErrors = useRef<Array<keyof SpriteGeneratorImageMap>>([]);
   const [loadedImages, setLoadedImages] = useState(0);
   const [licenseAccepted, setLicenseAccepted] = useState(false);
@@ -115,7 +127,13 @@ export const SpriteGenerator: VFC = () => {
       <Form onSubmit={handleSubmit}>
         <Row className="flex-row-reverse flex-lg-row">
           <Col lg={12} xl={6} className="col-xxl-auto">
-            <SpriteGeneratorPreview canvasRef={canvasRef} loading={loading} options={options} imageMap={imageMap.current} />
+            <SpriteGeneratorPreview
+              canvasRef={canvasRef}
+              loading={loading}
+              options={options}
+              colorMap={colorMap}
+              imageMap={imageMap.current}
+            />
             {loading && (
               <div className="mt-2 text-center">
                 <p className={classNames('mb-2', loadingFailed ? 'text-danger' : 'text-ui')}>

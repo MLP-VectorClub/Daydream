@@ -1,17 +1,20 @@
-import { useMemo, VFC } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  VFC,
+} from 'react';
 import {
   Col,
+  Form,
   FormGroup,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Label,
   Row,
 } from 'reactstrap';
 import { SpriteGeneratorBaseColor, SpriteGeneratorColorMap } from 'src/types/sprite-generator';
-import { stringifyRgbKey, stringifyRgbNumber, validHexColorPattern } from 'src/utils';
-import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
+import { hexToRgb, stringifyRgbKey, stringifyRgbNumber } from 'src/utils';
+import { ColorInputGroup } from 'src/components/colorguide/ColorInputGroup';
 
 const INPUT_NAMES: { [k in SpriteGeneratorBaseColor]: `color_${k}` } = {
   [SpriteGeneratorBaseColor.COAT_OUTLINE]: `color_${SpriteGeneratorBaseColor.COAT_OUTLINE}` as const,
@@ -42,26 +45,33 @@ const INPUT_LABELS: Record<SpriteGeneratorBaseColor, string> = {
 export interface SpriteGeneratorColorsFormProps {
   middleIrisGradient: boolean;
   magicAura: boolean;
-  colorMap?: SpriteGeneratorColorMap;
-  setColorMap: (newColorMap: SpriteGeneratorColorMap) => void;
+  colorMap: SpriteGeneratorColorMap;
+  setColorMap: Dispatch<SetStateAction<SpriteGeneratorColorMap>>;
 }
 
 export const SpriteGeneratorColorsForm: VFC<SpriteGeneratorColorsFormProps> = ({
   colorMap,
   middleIrisGradient,
   magicAura,
+  setColorMap,
 }) => {
+  const handleChange = useCallback((value: string, key: keyof SpriteGeneratorColorMap) => {
+    const newColor = hexToRgb(value);
+    if (newColor === null) return;
+    setColorMap({ ...colorMap, [key]: newColor });
+  }, [colorMap, setColorMap]);
+
   const inputValues = useMemo(() => (Object.keys(INPUT_NAMES).reduce((acc, c) => {
     const key = c as unknown as keyof SpriteGeneratorColorMap;
     return {
       ...acc,
       [key]: (
-        (colorMap && key in colorMap && stringifyRgbKey(colorMap, key))
+        (key in colorMap && stringifyRgbKey(colorMap, key))
         || stringifyRgbNumber(parseInt(c, 10))
       ),
     };
   }, {} as Record<SpriteGeneratorBaseColor, string>)), [colorMap]);
-  const inputNames = useMemo<SpriteGeneratorBaseColor[]>(() => [
+  const baseColors = useMemo<SpriteGeneratorBaseColor[]>(() => [
     SpriteGeneratorBaseColor.COAT_OUTLINE,
     SpriteGeneratorBaseColor.COAT_SHADOW_OUTLINE,
     SpriteGeneratorBaseColor.COAT_FILL,
@@ -74,32 +84,25 @@ export const SpriteGeneratorColorsForm: VFC<SpriteGeneratorColorsFormProps> = ({
     ...(magicAura ? [SpriteGeneratorBaseColor.MAGIC_AURA] : []),
   ], [magicAura, middleIrisGradient]);
   return (
-    <>
+    <Form>
       <h3>Colors</h3>
       <Row>
-        {inputNames.map(name => (
-          <Col key={name} xs={12} md={6}>
+        {baseColors.map(baseColor => (
+          <Col key={baseColor} xs={12} md={6}>
             <FormGroup row>
-              <Label for={INPUT_NAMES[name]} lg={5} xl={6} className="col-xxl-7">{INPUT_LABELS[name]}</Label>
+              <Label for={INPUT_NAMES[baseColor]} lg={5} xl={6} className="col-xxl-7">{INPUT_LABELS[baseColor]}</Label>
               <Col lg={7} xl={6} className="col-xxl-5">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText style={{ backgroundColor: inputValues[name] }}>&nbsp;&nbsp;</InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    name={INPUT_NAMES[name]}
-                    value={inputValues[name]}
-                    pattern={validHexColorPattern}
-                    readOnly
-                    className="text-center"
-                  />
-                </InputGroup>
+                <ColorInputGroup
+                  baseColor={baseColor}
+                  name={INPUT_NAMES[baseColor]}
+                  value={inputValues[baseColor]}
+                  onChange={handleChange}
+                />
               </Col>
             </FormGroup>
           </Col>
         ))}
       </Row>
-      <FeaturePlaceholder>These fields will be editable once the form is fully developed</FeaturePlaceholder>
-    </>
+    </Form>
   );
 };
