@@ -38,11 +38,12 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import { ShareAppearanceButton } from 'src/components/colorguide/ShareAppearanceButton';
 import AppearanceTags from 'src/components/colorguide/AppearanceTags';
 import pluralize from 'pluralize';
-import { CutieMarks } from 'src/components/colorguide/CutieMarks';
+import { AppearanceCutieMarks } from 'src/components/colorguide/AppearanceCutieMarks';
 import { useDispatch } from 'react-redux';
 import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
 import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';
 import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
+import { AppearanceColorGroups } from 'src/components/colorguide/AppearanceColorGroups';
 
 interface PropTypes {
   guide: GuideName;
@@ -157,21 +158,8 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
           </div>
         </>
       )}
-      {appearance.cutieMarks.length > 0 && (
-        <>
-          <h2>{pluralize('Cutie mark', appearance.cutieMarks.length)}</h2>
-          <p className={styles.aside}>
-            These are just illustrations, the body shape & colors are <strong>not</strong> guaranteed to reflect the actual design.
-          </p>
-          <CutieMarks label={appearance.label} cutieMarks={appearance.cutieMarks} colorGroups={appearance.colorGroups} />
-        </>
-      )}
-      {appearance.colorGroups && (
-        <>
-          <h2>{pluralize('Color group', appearance.colorGroups.length)}</h2>
-          <FeaturePlaceholder />
-        </>
-      )}
+      <AppearanceCutieMarks label={appearance.label} cutieMarks={appearance.cutieMarks} colorGroups={appearance.colorGroups} />
+      <AppearanceColorGroups colorGroups={appearance.colorGroups} />
       <h2>{pluralize('Related appearances', appearance.colorGroups.length)}</h2>
       <FeaturePlaceholder />
     </Content>

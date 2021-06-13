@@ -8,6 +8,8 @@
   box-sizing: content-box;
   transform: scale(1);
   will-change: transform, box-shadow;
+  width: 2.15rem;
+  height: 2.15rem;
 
   &:not(:empty) {
     cursor: pointer;

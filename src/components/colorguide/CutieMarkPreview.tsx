@@ -53,6 +53,7 @@ export const CutieMarkPreview: VFC<PropTypes> = ({ facing = 'left', colorGroups 
       viewBox="0 0 175 175"
       enableBackground="new 0 0 175 175"
       xmlSpace="preserve"
+      aria-hidden="true"
     >
       <defs>
         <filter id={opacityMaskFilterId} filterUnits="userSpaceOnUse" x="-48.8" y="-30.1" width="270.7" height="396.2">

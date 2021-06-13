@@ -3,8 +3,13 @@ import styles from 'modules/ButtonCollection.module.scss';
 import classNames from 'classnames';
 import { ButtonToolbar } from 'reactstrap';
 
-const ButtonCollection: FC<{ className?: string }> = ({ children, className }) => (
-  <ButtonToolbar className={classNames('justify-content-center', styles.buttonCollection, className)}>
+interface PropTypes {
+  className?: string;
+  leftAlign?: boolean;
+}
+
+const ButtonCollection: FC<PropTypes> = ({ children, className, leftAlign = false }) => (
+  <ButtonToolbar className={classNames(`justify-content-${leftAlign ? 'left' : 'center'}`, styles.buttonCollection, className)}>
     {children}
   </ButtonToolbar>
 );

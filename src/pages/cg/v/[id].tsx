@@ -34,7 +34,7 @@ const LegacyAppearanceRedirect: NextPage<PropTypes> = ({ id }) => {
     <Content>
       <StandardHeading
         heading={<><InlineIcon loading first />Looking for appearance…</>}
-        lead="You hit a legacy link, we're trying to find the original source"
+        lead="You've opened a short link, we're trying to find the original target"
       />
 
       <StatusAlert status={status} />

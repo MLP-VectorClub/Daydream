@@ -1613,6 +1613,11 @@ bootstrap-scss@^4:
   resolved "https://registry.yarnpkg.com/bootstrap-scss/-/bootstrap-scss-4.6.0.tgz#1cc8227029fbd5680c2b0bdf42ceccfdc2f99bfa"
   integrity sha512-VfcGsMAjWpDpJi0d8DknZtJUaJJJkvmpku0Wg7FeJPbXQnqYp6+pkj2/zcZ7QWfRns/1Lt4WMP/QP1do58eDRg==
 
+bootstrap@^4:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
+  integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
+
 boxen@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-4.2.0.tgz#e411b62357d6d6d36587c8ac3d5d974daa070e64"
