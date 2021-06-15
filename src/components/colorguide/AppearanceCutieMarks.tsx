@@ -9,8 +9,8 @@ import Image from 'next/image';
 import capitalize from 'capitalize';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import UserLink from 'src/components/shared/UserLink';
 import pluralize from 'pluralize';
+import UserLinkWithAvatar from 'src/components/shared/UserLinkWithAvatar';
 
 interface PropTypes {
   label: string;
@@ -46,11 +46,11 @@ export const AppearanceCutieMarks: VFC<PropTypes> = ({ label, cutieMarks, colorG
                     {facingText}
                   </span>
                 )}
-                <div className={styles.preview} aria-hidden="true">
+                <div className={styles.preview}>
                   <CutieMarkPreview {...cm} colorGroups={colorGroups} />
                   <div className={styles.previewImageContainer}>
                     <div className={styles.previewImageWrap} style={{ transform: `rotate(${cm.rotation}deg)` }}>
-                      <Image src={cm.viewUrl} unoptimized layout="fill" />
+                      <Image src={cm.viewUrl} unoptimized layout="fill" alt="Cutie mark vector" />
                     </div>
                   </div>
                 </div>
@@ -76,12 +76,7 @@ export const AppearanceCutieMarks: VFC<PropTypes> = ({ label, cutieMarks, colorG
                 {cm.contributor && (
                   <div className={styles.byLine}>
                     <span className="mr-2">By</span>
-                    <UserLink {...cm.contributor} className="d-flex align-items-center border rounded pr-1 bg-light overflow-hidden">
-                      {cm.contributor.avatarUrl && (
-                        <Image src={cm.contributor.avatarUrl} layout="fixed" width={27} height={27} unoptimized />
-                      )}
-                      <span className="ml-2">{cm.contributor.name}</span>
-                    </UserLink>
+                    <UserLinkWithAvatar {...cm.contributor} />
                   </div>
                 )}
               </CardBody>

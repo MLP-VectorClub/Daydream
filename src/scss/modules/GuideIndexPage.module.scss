@@ -26,18 +26,19 @@
     cursor: pointer;
   }
 
-  figure {
+  .guide-figure {
     margin: 0;
     padding: 10px;
+    height: 100%;
 
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(md) {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
 
       .guide-icon {
         width: 75px;
-        height: 75px;
+        margin-right: 1rem;
       }
 
       figcaption {
@@ -47,25 +48,35 @@
     }
 
     @include media-breakpoint-up(lg) {
-      display: block;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: stretch;
 
       .guide-icon {
-        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        flex: 1 1 auto;
+      }
+
+      figcaption {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
       }
     }
 
     @include media-breakpoint-up($sidebar-breakpoint-up) {
       .guide-icon {
-        height: 200px;
+        width: 200px;
       }
     }
   }
 
   .guide-icon {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
     max-width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
   }
 
   .guide-name, .guide-count {

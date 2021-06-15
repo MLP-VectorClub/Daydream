@@ -34,7 +34,7 @@ const LoadingRing: VFC<LoadingRingProps> = ({
       className={classNames(color && `text-${color}`, {
         'mr-2': inline && spaceRight,
         'ml-2': inline && spaceLeft,
-        'svg-inline--fa custom-icon': inline,
+        'svg-inline--fa': inline,
       }, className)}
       style={style}
     >

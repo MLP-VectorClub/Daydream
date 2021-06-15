@@ -8,7 +8,8 @@ export interface CustomIconProps {
 }
 
 const CustomIcon: VFC<CustomIconProps> = ({ src, alt = '', className }) => (
-  <img src={src} className={classNames(className, 'svg-inline--fa custom-icon')} alt={alt} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src={src} className={classNames(className, 'svg-inline--fa')} alt={alt} />
 );
 
 export default CustomIcon;

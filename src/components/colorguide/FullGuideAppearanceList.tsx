@@ -20,7 +20,14 @@ const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appea
         const spriteStyle = scaleResize(aspectWidth, aspectHeight, 'height', 100);
         sprite = (
           <div className={classNames('mb-2', styles.spriteWrap)}>
-            <Image src={a.sprite.path} width={spriteStyle.width} height={spriteStyle.height} unoptimized layout="fixed" />
+            <Image
+              src={a.sprite.path}
+              width={spriteStyle.width}
+              height={spriteStyle.height}
+              unoptimized
+              layout="fixed"
+              alt="Appearance preview image"
+            />
           </div>
         );
       } else {

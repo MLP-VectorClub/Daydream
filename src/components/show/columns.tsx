@@ -1,12 +1,30 @@
+import { ShowTableColumnDefinition } from 'src/types/show';
+import { episodeToString, seasonEpisodeToString } from 'src/utils/show';
+import styles from 'src/scss/modules/ShowPage.module.scss';
 import { useRef, VFC } from 'react';
-import Link from 'next/link';
-import { PATHS } from 'src/paths';
-import { UncontrolledTooltip } from 'reactstrap';
-import InlineIcon from 'src/components/shared/InlineIcon';
-import { show } from 'src/strings';
-import { format } from 'date-fns';
 import { ShowListItem } from 'src/types';
 import { useAuth } from 'src/hooks';
+import Link from 'next/link';
+import { PATHS } from 'src/paths';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import { UncontrolledTooltip } from 'reactstrap';
+import { show } from 'src/strings';
+import { format } from 'date-fns';
+import { GuideIcon } from 'src/components/shared/GuideIcon';
+
+export const EpisodeColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{episodeToString(entry)}</>;
+
+export const GenerationColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => (
+  <div className={styles.generationImage}>
+    <GuideIcon guide={entry.generation} />
+  </div>
+);
+
+export const SeasonColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{entry.season}</>;
+
+export const EpisodeNumberColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{seasonEpisodeToString(entry)}</>;
+
+export const ShowNumberColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{entry.no}</>;
 
 export const TitleAirDateColumn: VFC<{ entry: ShowListItem }> = ({ entry }) => {
   const { isStaff } = useAuth();

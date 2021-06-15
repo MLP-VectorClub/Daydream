@@ -13,7 +13,7 @@ import {
   Label,
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RootState } from 'src/store/rootReducer';
 import { authActions } from 'src/store/slices';
 

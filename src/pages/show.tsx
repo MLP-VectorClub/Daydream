@@ -15,13 +15,18 @@ import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
 import { useTitleSetter } from 'src/hooks/core';
 import { ShowTableColumnDefinition } from 'src/types/show';
-import { episodeToString, seasonEpisodeToString } from 'src/utils/show';
 import styles from 'modules/ShowPage.module.scss';
 import { handleDataFetchingError } from 'src/utils';
 import { showListFetcher } from 'src/fetchers/show';
 import { validatePageParam } from 'src/utils/validate-page-param';
-import { GuideImage } from 'src/components/shared/GuideImage';
-import { TitleAirDateColumn } from 'src/components/show/TitleAirDateColumn';
+import {
+  EpisodeColumn,
+  GenerationColumn,
+  SeasonColumn,
+  EpisodeNumberColumn,
+  TitleAirDateColumn,
+  ShowNumberColumn,
+} from 'src/components/show/columns';
 
 interface ShowPageProps {
   initialEpisodes: Nullable<GetShowResult>;
@@ -40,25 +45,25 @@ const EPISODE_TABLE_COLUMNS: ShowEntriesTableProps['columns'] = [
   {
     header: 'Generation',
     shortHeader: 'Gen',
-    renderContent: ({ entry }) => <GuideImage guide={entry.generation} className={styles.generationImage} tooltip />,
+    renderContent: GenerationColumn,
   },
   {
     header: '№',
     only: 'mobile',
     tdClassName: styles.identifier,
-    renderContent: ({ entry }) => <>{seasonEpisodeToString(entry)}</>,
+    renderContent: EpisodeNumberColumn,
   },
   {
     header: 'Season',
     only: 'desktop',
     tdClassName: styles.identifier,
-    renderContent: ({ entry }) => <>{entry.season}</>,
+    renderContent: SeasonColumn,
   },
   {
     header: 'Episode',
     only: 'desktop',
     tdClassName: styles.identifier,
-    renderContent: ({ entry }) => <>{episodeToString(entry)}</>,
+    renderContent: EpisodeColumn,
   },
   TITLE_AIR_DATE_COLUMN,
 ];
@@ -67,7 +72,7 @@ const OTHERS_TABLE_COLUMNS: ShowEntriesTableProps['columns'] = [
     header: 'Overall #',
     shortHeader: '#',
     tdClassName: styles.identifier,
-    renderContent: ({ entry }) => <>{entry.no}</>,
+    renderContent: ShowNumberColumn,
   },
   TITLE_AIR_DATE_COLUMN,
 ];

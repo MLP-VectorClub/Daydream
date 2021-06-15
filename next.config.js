@@ -17,9 +17,6 @@ module.exports = withPlugins(
     [withCamelCaseCSSModules],
   ],
   {
-    future: {
-      webpack5: true,
-    },
     generateBuildId: async () => {
       try {
         const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);
@@ -34,7 +31,7 @@ module.exports = withPlugins(
       }
     },
     images: {
-      domains: [NEXT_PUBLIC_CDN_DOMAIN],
+      domains: [NEXT_PUBLIC_CDN_DOMAIN, 'a.deviantart.net'],
     },
     async headers() {
       return vercelConfig.headers.reduce((acc, config) => {

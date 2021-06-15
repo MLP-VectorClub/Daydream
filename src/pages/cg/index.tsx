@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { GetColorGuideResult, GuideName } from 'src/types';
 import { useGuideIndex, useTitleSetter } from 'src/hooks';
 import { wrapper } from 'src/store';
-import { Card, CardBody } from 'reactstrap';
+import { Badge, Card, CardBody, UncontrolledTooltip } from 'reactstrap';
 import { useMemo } from 'react';
 import { NextPage } from 'next';
 import { colorGuide, common } from 'src/strings';
@@ -17,8 +17,8 @@ import { TitleFactoryVoid } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { guideIndexFetcher } from 'src/fetchers';
 import { PATHS } from 'src/paths';
-import { GuideImage } from 'src/components/shared/GuideImage';
 import pluralize from 'pluralize';
+import { GuideIcon } from 'src/components/shared/GuideIcon';
 
 interface PropTypes {
   initialData: GetColorGuideResult;
@@ -34,6 +34,7 @@ const titleFactory: TitleFactoryVoid = () => ({
 const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
   const dispatch = useDispatch();
   const data = useGuideIndex(initialData);
+  const wipMeaning = 'wip-meaning';
 
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
@@ -46,7 +47,8 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
         {' '}
         <ExternalLink href={API_DOCS_URL}>API</ExternalLink>
         {' '}
-        (WIP)
+        <Badge tag="abbr" color="danger" id={wipMeaning}>WIP</Badge>
+        <UncontrolledTooltip target={wipMeaning} fade={false}>Work in Progress</UncontrolledTooltip>
       </p>
 
       <div className={styles.guideList}>
@@ -54,10 +56,12 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
           const guideName = getGuideLabel(code);
           const entryCount = data?.entryCounts[code];
           return (
-            <Link key={code} href={PATHS.GUIDE(code)}>
+            <Link key={code} href={PATHS.GUIDE(code)} passHref>
               <Card tag="a">
-                <CardBody tag="figure">
-                  <GuideImage className={styles.guideIcon} guide={code} />
+                <CardBody tag="figure" className={styles.guideFigure}>
+                  <div className={styles.guideIcon}>
+                    <GuideIcon guide={code} priority />
+                  </div>
                   <figcaption>
                     <span className={styles.guideName}>{guideName}</span>
                     <span className={styles.guideCount}>{entryCount} {pluralize('entry', entryCount)}</span>

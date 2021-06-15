@@ -53,7 +53,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
   const resultsListRef = useRef<HTMLDivElement>(null);
   const clearButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleAcQueryChange = useRef(debounce(query => void setAcQuery(query), 400));
+  const handleAcQueryChange = useRef(debounce(query => setAcQuery(query), 400));
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     const newQuery = e.target.value;
     setSearchQuery(newQuery);
@@ -203,9 +203,12 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
               <Button outline type="reset" disabled={clearButtonDisabled} innerRef={clearButtonRef}>
                 <InlineIcon icon="times" />
               </Button>
-              <Button color="ui">
+              <Button color="ui" className="d-none d-lg-inline-block">
                 <InlineIcon icon="search" first />
                 Search
+              </Button>
+              <Button color="ui" className="d-lg-none">
+                <InlineIcon icon="search" />
               </Button>
             </InputGroupAddon>
           </InputGroup>

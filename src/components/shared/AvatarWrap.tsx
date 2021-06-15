@@ -14,7 +14,7 @@ interface PropTypes {
   vectorApp?: VectorApp | null;
 }
 
-const AvatarWrap: VFC<PropTypes> = memo(({
+const AvatarWrap: VFC<PropTypes> = ({
   avatarProvider,
   avatarUrl,
   size,
@@ -31,8 +31,9 @@ const AvatarWrap: VFC<PropTypes> = memo(({
       height={size}
       unoptimized
       priority
+      alt="Avatar image"
     />
   </div>
-));
+);
 
-export default AvatarWrap;
+export default memo(AvatarWrap);

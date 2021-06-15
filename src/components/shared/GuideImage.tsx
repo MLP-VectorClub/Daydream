@@ -5,7 +5,7 @@ import { UncontrolledTooltip } from 'reactstrap';
 
 interface PropTypes {
   guide: GuideName;
-  className: string;
+  className?: string;
   tooltip?: boolean
 }
 
@@ -15,6 +15,7 @@ export const GuideImage: VFC<PropTypes> = ({ guide, className, tooltip = false }
   const imageRef = useRef<HTMLImageElement>(null);
   return (
     <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/img/blank-pixel.png"
         className={className}

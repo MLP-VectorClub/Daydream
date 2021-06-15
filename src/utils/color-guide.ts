@@ -27,7 +27,7 @@ export const resolveGuideName = (guide?: string | string[]): Optional<GuideName>
   }
 };
 
-export const getGuideLabel = (guide: string | null): string => {
+export const getGuideLabel = (guide: GuideName | string | null): string => {
   if (isGuideName(guide)) {
     return guideNameMap[guide];
   }
