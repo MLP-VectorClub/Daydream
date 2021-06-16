@@ -26,7 +26,10 @@ export const AppearanceColorGroups: VFC<PropTypes> = ({ colorGroups }) => {
 
   return (
     <>
-      <h2>{pluralize('Color group', colorGroups.length)}</h2>
+      <h2>
+        <InlineIcon icon="palette" first size="xs" />
+        {pluralize('Color group', colorGroups.length)}
+      </h2>
       {isStaff && (
         <ButtonCollection leftAlign>
           <Button size="sm" color="ui" disabled>

@@ -1,3 +1,8 @@
+@import "../vars";
+@import "~bootstrap-scss/functions";
+@import "~bootstrap-scss/variables";
+@import "~bootstrap-scss/mixins";
+
 @mixin tag-variant($color: $tag-color-default) {
   $border: mix(white, $color, 10%);
   $background: lighten($color, 50%);
@@ -35,7 +40,7 @@
   transition-timing-function: linear;
   @include tag-variant();
 
-  &.tag-synonym {
+  &.synonym {
     font-weight: normal !important;
     letter-spacing: -.8px;
 
@@ -44,10 +49,27 @@
     }
   }
 
-  // Colors
-  @each $color, $value in $tag-colors {
-    &.tag-#{$color} {
-      @include tag-variant($value);
-    }
+  &.type-category {
+    @include tag-variant($tag-color-category);
+  }
+
+  &.type-species {
+    @include tag-variant($tag-color-species);
+  }
+
+  &.type-gender {
+    @include tag-variant($tag-color-gender);
+  }
+
+  &.type-clothing {
+    @include tag-variant($tag-color-clothing);
+  }
+
+  &.type-warning {
+    @include tag-variant($tag-color-warning);
+  }
+
+  &.type-character {
+    @include tag-variant($tag-color-character);
   }
 }

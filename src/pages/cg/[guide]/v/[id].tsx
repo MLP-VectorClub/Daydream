@@ -40,10 +40,9 @@ import AppearanceTags from 'src/components/colorguide/AppearanceTags';
 import pluralize from 'pluralize';
 import { AppearanceCutieMarks } from 'src/components/colorguide/AppearanceCutieMarks';
 import { useDispatch } from 'react-redux';
-import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
-import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';
 import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
 import { AppearanceColorGroups } from 'src/components/colorguide/AppearanceColorGroups';
+import { AppearanceNotes } from 'src/components/colorguide/AppearanceNotes';
 
 interface PropTypes {
   guide: GuideName;
@@ -92,7 +91,6 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
     } : undefined,
   } : null), [appearance]);
   const shortUrl = useMemo(() => appearance && assembleSeoUrl(PATHS.SHORT_APPEARANCE(appearance)), [appearance]);
-  const notes = useMemo(() => (appearance && appearance.notes ? processAppearanceNotes(appearance.notes) : null), [appearance]);
 
   if (!appearance) {
     return <GuideNotFound heading="Unknown appearance" noun="appearance" />;
@@ -133,31 +131,13 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
 
       <StatusAlert status={status} noun="appearance" />
 
-      {appearance.tags && (
-        <>
-          <h2>
-            <InlineIcon icon="tags" first size="xs" />
-            Tags
-          </h2>
-          <AppearanceTags tags={appearance.tags} guide={appearance.guide} />
-        </>
-      )}
+      <AppearanceTags tags={appearance.tags} guide={appearance.guide} />
       <h2>
         <InlineIcon icon="video" first size="xs" />
         Featured in
       </h2>
       <FeaturePlaceholder />
-      {notes && (
-        <>
-          <h2>
-            <InlineIcon icon="info" first size="xs" fixedWidth />
-            Additional notes
-          </h2>
-          <div className={styles.notes}>
-            <AppearanceNotesText>{notes}</AppearanceNotesText>
-          </div>
-        </>
-      )}
+      <AppearanceNotes notes={appearance.notes} />
       <AppearanceCutieMarks label={appearance.label} cutieMarks={appearance.cutieMarks} colorGroups={appearance.colorGroups} />
       <AppearanceColorGroups colorGroups={appearance.colorGroups} />
       <h2>{pluralize('Related appearances', appearance.colorGroups.length)}</h2>
@@ -180,7 +160,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   }
 
   let appearance: Optional<GetAppearancesIdResult>;
-  if (guide && id) {
+  if (guide && id !== null) {
     try {
       appearance = await appearanceFetcher({ id }, req)();
     } catch (e) {

@@ -7,12 +7,12 @@ import {
 } from 'reactstrap';
 import { useMemo, useRef, VFC } from 'react';
 import { Appearance, GuideName, Nullable } from 'src/types';
-import AppearanceNotes from 'src/components/colorguide/AppearanceNotes';
+import AppearanceItemNotes from 'src/components/colorguide/AppearanceItemNotes';
 import SpriteImage from 'src/components/colorguide/SpriteImage';
-import CompactColorGroups from 'src/components/colorguide/CompactColorGroups';
+import AppearanceItemColorGroups from 'src/components/colorguide/AppearanceItemColorGroups';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import styles from 'modules/AppearanceItem.module.scss';
-import AppearanceTags from 'src/components/colorguide/AppearanceTags';
+import AppearanceItemTags from 'src/components/colorguide/AppearanceItemTags';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';
 
@@ -59,9 +59,9 @@ const AppearanceItem: VFC<AppearanceItemProps> = ({ appearance, pinned = false, 
                 <a>{appearance.label}</a>
               </Link>
             </h5>
-            <AppearanceNotes appearance={appearance} />
-            <AppearanceTags tags={appearance.tags} guide={guide} />
-            <CompactColorGroups colorGroups={appearance.colorGroups} />
+            <AppearanceItemNotes notes={appearance.notes} hasCutieMarks={appearance.hasCutieMarks} />
+            <AppearanceItemTags tags={appearance.tags} guide={guide} />
+            <AppearanceItemColorGroups colorGroups={appearance.colorGroups} />
           </Col>
         </Row>
       </CardBody>

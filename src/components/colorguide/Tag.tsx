@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';
+import styles from 'modules/Tag.module.scss';
 
 const TAG_ICON_MAP: Record<TagType, IconProp> = {
   app: 'folder',
@@ -14,6 +15,14 @@ const TAG_ICON_MAP: Record<TagType, IconProp> = {
   char: 'user',
   warn: 'exclamation-triangle',
 };
+const TAG_CLASS_MAP: Record<TagType, string> = {
+  app: styles.typeClothing,
+  cat: styles.typeCategory,
+  gen: styles.typeGender,
+  spec: styles.typeSpecies,
+  char: styles.typeCharacter,
+  warn: styles.typeWarning,
+};
 
 interface PropTypes {
   tag: SlimGuideTag;
@@ -21,8 +30,14 @@ interface PropTypes {
   guide?: Nullable<GuideName>,
 }
 
-const Tag: VFC<PropTypes> = ({ tag, className, guide = null }) => {
-  const finalClassName = classNames('tag', tag.type && `tag-${tag.type}`, { 'tag-synonym': tag.synonymOf }, className);
+const TagComponent: VFC<PropTypes> = ({ tag, className, guide = null }) => {
+  const tagTypeClass = tag.type && tag.type in TAG_CLASS_MAP && TAG_CLASS_MAP[tag.type];
+  const finalClassName = classNames(
+    styles.tag,
+    tagTypeClass,
+    { [styles.synonym]: tag.synonymOf },
+    className,
+  );
   const content = (
     <>
       {tag.type && <InlineIcon icon={TAG_ICON_MAP[tag.type]} first />}
@@ -45,4 +60,4 @@ const Tag: VFC<PropTypes> = ({ tag, className, guide = null }) => {
   );
 };
 
-export default memo(Tag);
+export const Tag = memo(TagComponent);

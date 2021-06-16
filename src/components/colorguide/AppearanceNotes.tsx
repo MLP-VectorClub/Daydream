@@ -1,30 +1,24 @@
-import classNames from 'classnames';
-import { colorGuide } from 'src/strings';
 import { useMemo, VFC } from 'react';
-import { Appearance } from 'src/types';
-import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
-import styles from 'modules/AppearanceNotes.module.scss';
+import { AppearanceOnly } from 'src/types';
+import InlineIcon from 'src/components/shared/InlineIcon';
+import styles from 'src/scss/modules/AppearancePage.module.scss';
 import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';
+import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
 
-export interface AppearanceNotesProps {
-  appearance: Appearance;
-}
+export const AppearanceNotes: VFC<Pick<Partial<AppearanceOnly>, 'notes'>> = ({ notes }) => {
+  const processedNotes = useMemo(() => (notes ? processAppearanceNotes(notes) : null), [notes]);
 
-const AppearanceNotes: VFC<AppearanceNotesProps> = ({ appearance }) => {
-  const notes = useMemo(() => (appearance.notes ? processAppearanceNotes(appearance.notes) : null), [appearance.notes]);
+  if (processedNotes === null) return null;
 
   return (
-    <section className={styles.appearanceNotes} aria-label="Notes">
-      <AppearanceNotesText>
-        {notes}
-        {appearance.hasCutieMarks && (
-          <span className={classNames({ 'ml-2 pl-2 border-left': notes !== null })}>
-            {colorGuide.appearances.cmAvailable}
-          </span>
-        )}
-      </AppearanceNotesText>
-    </section>
+    <>
+      <h2>
+        <InlineIcon icon="sticky-note" first size="xs" />
+        Additional notes
+      </h2>
+      <div className={styles.notes}>
+        <AppearanceNotesText>{processedNotes}</AppearanceNotesText>
+      </div>
+    </>
   );
 };
-
-export default AppearanceNotes;

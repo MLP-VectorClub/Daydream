@@ -79,7 +79,7 @@ export const appearanceLocationFetcher = (params: AppearanceLocationFetcherParam
 export type AppearanceFetcherParams = NullableProps<GetAppearancesIdRequest, 'id'>;
 
 export const appearanceFetcher = (params: AppearanceFetcherParams, req?: IncomingMessage) => () => {
-  if (!params.id) return Promise.resolve(undefined);
+  if (typeof params.id !== 'number') return Promise.resolve(undefined);
 
   const service: ColorGuideService = req ? new ColorGuideService(req) : defaultServices.colorGuide;
 

@@ -7,7 +7,7 @@ interface PropTypes {
   colorGroups?: ColorGroup[];
 }
 
-const CompactColorGroups: VFC<PropTypes> = ({ colorGroups }) => (
+const AppearanceItemColorGroups: VFC<PropTypes> = ({ colorGroups }) => (
   colorGroups && colorGroups.length > 0
     ? (
       <div className={styles.compactColorGroups} aria-label="Color Groups">
@@ -24,4 +24,4 @@ const CompactColorGroups: VFC<PropTypes> = ({ colorGroups }) => (
     : null
 );
 
-export default CompactColorGroups;
+export default AppearanceItemColorGroups;

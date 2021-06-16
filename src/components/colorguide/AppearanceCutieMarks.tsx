@@ -26,7 +26,11 @@ export const AppearanceCutieMarks: VFC<PropTypes> = ({ label, cutieMarks, colorG
 
   return (
     <>
-      <h2>{pluralize('Cutie mark', cutieMarks.length)}</h2>
+      <h2>
+
+        <InlineIcon icon="image" first size="xs" />
+        {pluralize('Cutie mark', cutieMarks.length)}
+      </h2>
       <p className={styles.aside}>
         These are just illustrations, the body shape & colors are <strong>not</strong> guaranteed to reflect the actual design.
       </p>

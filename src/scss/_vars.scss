@@ -75,14 +75,6 @@ $tag-color-clothing: adjust_hue($tag-color-base, 120);
 $tag-color-warning: adjust_hue($tag-color-base, 160);
 $tag-color-episode: adjust_hue($tag-color-base, 190);
 $tag-color-character: adjust_hue($tag-color-base, 240);
-$tag-colors: (
-  "cat": $tag-color-category,
-  "spec": $tag-color-species,
-  "gen": $tag-color-gender,
-  "app": $tag-color-clothing,
-  "warn": $tag-color-warning,
-  "char": $tag-color-character,
-);
 
 $grid-breakpoints: (
   xs: 0,
