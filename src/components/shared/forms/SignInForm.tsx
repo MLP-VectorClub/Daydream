@@ -49,6 +49,7 @@ import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { common } from 'src/strings';
 import { signInThunk } from 'src/store/thunks';
+import { API_PREFIX } from 'src/config';
 
 enum INPUT_NAMES {
   EMAIL = 'email',
@@ -118,7 +119,7 @@ const SingInForm: VFC = () => {
     e.preventDefault();
 
     socialAuthPopup.current.window = popupOpenCenter(
-      ENDPOINTS.USERS_OAUTH_SIGNIN_PROVIDER({ provider }),
+      API_PREFIX + ENDPOINTS.USERS_OAUTH_SIGNIN_PROVIDER({ provider }),
       popupTitle,
       screen.availWidth * 0.75,
       screen.availHeight * 0.75,
