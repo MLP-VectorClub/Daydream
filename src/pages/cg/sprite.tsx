@@ -20,7 +20,7 @@ const titleFactory: TitleFactory = () => {
   return ({
     title,
     breadcrumbs: [
-      { linkProps: { href: PATHS.GUIDE_INDEX }, label: ['color-Guide:index.breadcrumb'] },
+      { linkProps: { href: PATHS.GUIDE_INDEX }, label: ['colorGuide:index.breadcrumb'] },
       { label: title, active: true },
     ],
   });
