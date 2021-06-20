@@ -15,7 +15,7 @@
     "apiMeaning": "Application Programming Interface – for developers"
   },
   "titles": {
-    "colorGuide": "Color Guide",
+    "colorGuides": "Color Guides",
     "colorGuideByName": "{{guideName}} Color Guide",
     "colorGuideByNameAndPage": "Page {{page}} - {{guideName}} Color Guide",
     "colorGuideList": "Color Guide List",

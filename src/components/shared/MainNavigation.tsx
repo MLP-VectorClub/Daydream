@@ -41,7 +41,7 @@ const MainNavigation: VFC = () => {
       </NavItem>
       <NavItem>
         <Link href={defaultGuideLink} passHref>
-          <NavLink>{t('common:titles.colorGuide')}</NavLink>
+          <NavLink>{t('common:titles.colorGuides')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
