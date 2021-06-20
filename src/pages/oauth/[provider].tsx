@@ -4,24 +4,31 @@ import { NextPage } from 'next';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
-import { OAuthErrorTypes, Status, UnifiedErrorResponseTypes, User } from 'src/types';
+import {
+  OAuthErrorTypes,
+  Status,
+  Translatable,
+  UnifiedErrorResponseTypes,
+  User,
+} from 'src/types';
 import { useLayout, useOAuth, useTitleSetter } from 'src/hooks';
 import { ENDPOINTS, setResponseStatus } from 'src/utils';
 import Center from 'src/components/shared/Center';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import LoadingRing from 'src/components/shared/LoadingRing';
-import { oauth } from 'src/strings';
 import { TitleFactory } from 'src/types/title';
 import { getOAuthProvider } from 'src/utils/auth';
 import { useDispatch } from 'react-redux';
 import { titleSetter } from 'src/utils/core';
 import { wrapper } from 'src/store';
 import { PATHS } from 'src/paths';
+import { SSRConfig, useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 const titleFactory: TitleFactory<{ provider?: string }> = query => {
   const provider = getOAuthProvider(query.provider);
-  const title = `${provider} OAuth 2.0 Authentication`;
+  const title: Translatable = ['oauth:authTitle', { replace: { provider } }];
   return {
     title,
     breadcrumbs: [],
@@ -29,6 +36,7 @@ const titleFactory: TitleFactory<{ provider?: string }> = query => {
 };
 
 const OAuthPage: NextPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { setLayoutDisabled } = useLayout();
   const { query, replace } = useRouter();
@@ -37,6 +45,7 @@ const OAuthPage: NextPage = () => {
 
   const success = status === Status.SUCCESS;
   const authorized = user.name !== null;
+  const provider = getOAuthProvider(query.provider);
 
   useEffect(() => {
     setLayoutDisabled(true);
@@ -67,11 +76,11 @@ const OAuthPage: NextPage = () => {
   const titleData = useMemo(() => titleFactory(query), [query]);
   useTitleSetter(dispatch, titleData);
 
-  const header = titleData.title;
+  const header = t('oauth:authTitle', { replace: { provider } });
 
   if (query.code) {
     if (status === Status.FAILURE) {
-      query.error = 'server_error';
+      query.error = OAuthErrorTypes.ServerError;
       if (error && error.type === UnifiedErrorResponseTypes.MESSAGE_ONLY) {
         query.error_description = error.message;
       }
@@ -79,7 +88,7 @@ const OAuthPage: NextPage = () => {
       const color = authorized ? 'success' : 'primary';
       const message = authorized
         ? null
-        : `${success ? 'Loading profile data' : 'Creating session'}…`;
+        : `${success ? t('oauth:loadingUserData') : t('oauth:creatingSession')}…`;
       return (
         <Center color={color} header={header} className="text-center">
           {!authorized ? (
@@ -95,35 +104,36 @@ const OAuthPage: NextPage = () => {
     }
   }
 
-  const { errorTypes } = oauth;
-
-  const heading = typeof query.error === 'string' && query.error in errorTypes
-    ? errorTypes[query.error as OAuthErrorTypes]
-    : errorTypes[OAuthErrorTypes.UnknownError];
+  const unknownError = t(`oauth:errorTypes.unknown_error`);
+  const heading = typeof query.error === 'string'
+    ? t(`oauth:errorTypes.${query.error as OAuthErrorTypes}`, { defaultValue: unknownError })
+    : unknownError;
 
   return (
     <Center color="danger" header={header} className="text-center">
       <StandardHeading
         heading={heading}
-        lead={query.error_description || 'There was an unknown error while authenticating, please try again later.'}
+        lead={query.error_description || t('oauth:unknownError')}
       />
       {closeFnRef.current !== null && (
         <Button color="danger" onClick={closeFnRef.current}>
           <InlineIcon first icon="times" />
-          Dismiss
+          {t('oauth:close')}
         </Button>
       )}
     </Center>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps<SSRConfig>(store => async ctx => {
+  const { query, locale } = ctx;
   if (query.error || query.error_description) setResponseStatus(ctx, 500);
 
   titleSetter(store, titleFactory(query));
   return {
-    props: {},
+    props: {
+      ...(await typedServerSideTranslations(locale, ['oauth'])),
+    },
   };
 });
 

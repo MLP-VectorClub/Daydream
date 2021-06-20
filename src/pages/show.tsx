@@ -1,16 +1,15 @@
 import { NextPage } from 'next';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
-import { common, show } from 'src/strings';
 import { useMemo } from 'react';
 import { Col, Row } from 'reactstrap';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import { useAuth } from 'src/hooks';
 import { AddEntryButton } from 'src/components/show/AddEntryButton';
-import { GetShowResult, Nullable } from 'src/types';
+import { GetShowResult, Nullable, Translatable } from 'src/types';
 import { ShowEntriesTable, ShowEntriesTableProps } from 'src/components/show/ShowEntriesTable';
 import { wrapper } from 'src/store';
-import { TitleFactoryVoid } from 'src/types/title';
+import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
 import { useTitleSetter } from 'src/hooks/core';
@@ -21,12 +20,14 @@ import { showListFetcher } from 'src/fetchers/show';
 import { validatePageParam } from 'src/utils/validate-page-param';
 import {
   EpisodeColumn,
+  EpisodeNumberColumn,
   GenerationColumn,
   SeasonColumn,
-  EpisodeNumberColumn,
-  TitleAirDateColumn,
   ShowNumberColumn,
+  TitleAirDateColumn,
 } from 'src/components/show/columns';
+import { SSRConfig, useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 interface ShowPageProps {
   initialEpisodes: Nullable<GetShowResult>;
@@ -77,15 +78,19 @@ const OTHERS_TABLE_COLUMNS: ShowEntriesTableProps['columns'] = [
   TITLE_AIR_DATE_COLUMN,
 ];
 
-const titleFactory: TitleFactoryVoid = () => ({
-  title: common.titles.show,
-  breadcrumbs: [{
-    label: common.titles.show,
-    active: true,
-  }],
-});
+const titleFactory: TitleFactory = () => {
+  const title: Translatable = ['common:titles.show'];
+  return {
+    title,
+    breadcrumbs: [{
+      label: title,
+      active: true,
+    }],
+  };
+};
 
 const ShowPage: NextPage<ShowPageProps> = ({ initialEpisodes, initialOthers }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
@@ -94,10 +99,10 @@ const ShowPage: NextPage<ShowPageProps> = ({ initialEpisodes, initialOthers }) =
     <Content>
       <Row>
         <Col xs={12} xl className={`mb-3 mb-xl-0 ${styles.column}`}>
-          <StandardHeading heading={show.index.episodes.heading} />
+          <StandardHeading heading={t('show:index.episodes.heading')} />
           {isStaff && (
             <ButtonCollection>
-              <AddEntryButton noun={show.index.episodes.addNoun} />
+              <AddEntryButton noun={t('show:index.episodes.addNoun')} />
             </ButtonCollection>
           )}
           <ShowEntriesTable
@@ -108,10 +113,10 @@ const ShowPage: NextPage<ShowPageProps> = ({ initialEpisodes, initialOthers }) =
           />
         </Col>
         <Col xs={12} xl className={styles.column}>
-          <StandardHeading heading={show.index.others.heading} />
+          <StandardHeading heading={t('show:index.others.heading')} />
           {isStaff && (
             <ButtonCollection>
-              <AddEntryButton noun={show.index.others.addNoun} />
+              <AddEntryButton noun={t('show:index.others.addNoun')} />
             </ButtonCollection>
           )}
           <ShowEntriesTable
@@ -127,8 +132,8 @@ const ShowPage: NextPage<ShowPageProps> = ({ initialEpisodes, initialOthers }) =
 
 export default ShowPage;
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps<ShowPageProps & SSRConfig>(store => async ctx => {
+  const { query, locale } = ctx;
   const props: ShowPageProps = {
     initialOthers: null,
     initialEpisodes: null,
@@ -150,5 +155,10 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
   }
 
   titleSetter(store, titleFactory());
-  return { props };
+  return {
+    props: {
+      ...(await typedServerSideTranslations(locale, ['show'])),
+      ...props,
+    },
+  };
 });

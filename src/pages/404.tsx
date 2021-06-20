@@ -2,22 +2,28 @@ import { useMemo } from 'react';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { AppDispatch, wrapper } from 'src/store';
-import { common } from 'src/strings';
-import { TitleFactoryVoid } from 'src/types/title';
+import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { useTitleSetter } from 'src/hooks';
 import { useDispatch } from 'react-redux';
 import { NextPage } from 'next';
+import { Translatable } from 'src/types';
+import { useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
-const titleFactory: TitleFactoryVoid = () => ({
-  title: common.titles[404],
-  breadcrumbs: [
-    { label: 'Error' },
-    { label: common.titles[404], active: true },
-  ],
-});
+const titleFactory: TitleFactory = () => {
+  const title: Translatable = ['common:titles.404'];
+  return ({
+    title,
+    breadcrumbs: [
+      { label: 'Error' },
+      { label: title, active: true },
+    ],
+  });
+};
 
 const NotFound: NextPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
   const titleData = useMemo(titleFactory, []);
@@ -25,15 +31,17 @@ const NotFound: NextPage = () => {
 
   return (
     <Content>
-      <StandardHeading heading={common.error[404].title} lead={common.error[404].lead} />
+      <StandardHeading heading={t('common:error.404.heading')} lead={t('common:error.404.lead')} />
     </Content>
   );
 };
 
-export const getStaticProps = wrapper.getStaticProps(({ store }) => {
+export const getStaticProps = wrapper.getStaticProps(store => async ({ locale }) => {
   titleSetter(store, titleFactory());
   return {
-    props: {},
+    props: {
+      ...(await typedServerSideTranslations(locale)),
+    },
   };
 });
 

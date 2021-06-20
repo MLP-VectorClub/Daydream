@@ -1,7 +1,7 @@
 import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
 import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
-import { APP_URL, IS_CLIENT_SIDE } from 'src/config';
+import { APP_HOST, IS_CLIENT_SIDE } from 'src/config';
 import { setResponseStatus } from 'src/utils/initial-prop-helpers';
 import { GetServerSidePropsContext } from 'next';
 
@@ -73,10 +73,10 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
 export const assembleSeoUrl = (pathname?: string): string => {
   const protocol = IS_CLIENT_SIDE ? location.protocol : 'https:';
   const host = IS_CLIENT_SIDE ? location.host : undefined;
-  return `${host ? `${protocol}//${host}` : APP_URL}${pathname || ''}`;
+  return `${host ? `${protocol}//${host}` : APP_HOST}${pathname || ''}`;
 };
 
-export const handleDataFetchingError = (ctx: Pick<GetServerSidePropsContext, 'res'>, e: Error) => {
+export const handleDataFetchingError = (ctx: GetServerSidePropsContext, e: Error): void => {
   if ('response' in e) {
     const { response } = e as AxiosError;
     const status = response?.status;

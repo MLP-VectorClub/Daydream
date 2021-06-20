@@ -15,30 +15,32 @@ import {
 import StandardHeading from 'src/components/shared/StandardHeading';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import Content from 'src/components/shared/Content';
-import { profile } from 'src/strings';
 import { userFetcher } from 'src/fetchers';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { NextPage } from 'next';
 import { PATHS } from 'src/paths';
+import { SSRConfig, useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 interface PropTypes {
   initialUser: Nullable<PublicUser>;
 }
 
 const titleFactory: TitleFactory<Pick<PropTypes, 'initialUser'> & { isStaff?: boolean }> = ({ initialUser, isStaff = false }) => {
-  const firstBreadcrumb: BreadcrumbEntry = { label: profile.breadcrumb };
+  const firstBreadcrumb: BreadcrumbEntry = { label: ['users:profile.breadcrumb'] };
   if (isStaff) firstBreadcrumb.linkProps = { href: PATHS.USERS };
   return ({
     title: getProfileTitle(initialUser),
     breadcrumbs: [
       firstBreadcrumb,
-      { label: initialUser ? initialUser.name : profile.unknownUser, active: true },
+      { label: initialUser ? initialUser.name : ['users:profile.unknownUser'], active: true },
     ],
   });
 };
 
 const ProfilePage: NextPage<PropTypes> = ({ initialUser }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { query } = useRouter();
   const { user } = useUser(transformProfileParams(query), initialUser || undefined);
@@ -54,7 +56,7 @@ const ProfilePage: NextPage<PropTypes> = ({ initialUser }) => {
 
   return (
     <Content>
-      {!user && <StandardHeading heading={profile.notFound} lead={profile.checkYourSpelling} />}
+      {!user && <StandardHeading heading={t('users:profile.notFound')} lead={t('users:profile.checkYourSpelling')} />}
       {user && (
         <>
           <div className="d-flex justify-content-center align-items-center mb-2">
@@ -65,15 +67,15 @@ const ProfilePage: NextPage<PropTypes> = ({ initialUser }) => {
               className="flex-grow-0"
             />
           </div>
-          <StandardHeading heading={user.name} lead={mapRoleLabel(user.role)} />
+          <StandardHeading heading={user.name} lead={mapRoleLabel(t, user.role)} />
         </>
       )}
     </Content>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps<PropTypes & SSRConfig>(store => async ctx => {
+  const { query, locale } = ctx;
 
   const params = transformProfileParams(query);
 
@@ -88,8 +90,9 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
 
   if (initialUser) {
     const expectedPath = PATHS.USER_LONG(initialUser);
-    if (fixPath(ctx, expectedPath, ['user'])) {
-      return;
+    const redirect = fixPath(ctx, expectedPath, ['user']);
+    if (redirect) {
+      return { redirect };
     }
   }
 
@@ -97,7 +100,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     initialUser: initialUser || null,
   };
   titleSetter(store, titleFactory(props));
-  return { props };
+  return {
+    props: {
+      ...(await typedServerSideTranslations(locale, ['users'])),
+      ...props,
+    },
+  };
 });
 
 export default ProfilePage;

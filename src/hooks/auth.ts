@@ -23,6 +23,7 @@ interface CurrentUserHookValue {
 }
 
 export function useAuth(): CurrentUserHookValue {
+  // TODO Somehow keep initial auth data from the SSR request
   const csrf = useCsrf();
   const { status, data: user, isError } = useQuery(
     ENDPOINTS.USERS_ME,

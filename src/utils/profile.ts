@@ -1,19 +1,18 @@
-import { Nullable, Numeric, PageTitle, PublicUser } from 'src/types';
-import { common } from 'src/strings';
+import { Nullable, Numeric, PublicUser, Translatable } from 'src/types';
 
 export const getProfileTitle = (
   user: Nullable<PublicUser> = null,
   authUserId: Nullable<number> = null,
-): PageTitle => {
+): Translatable => {
   if (user) {
     if (authUserId === user.id) {
-      return common.titles.yourProfile;
+      return ['common:titles.yourProfile'];
     }
     if (user.name) {
-      return common.titles.profileByName(user.name);
+      return ['common:titles.profileByName', { replace: { name: user.name } }];
     }
   }
-  return common.titles.profile;
+  return ['common:titles.profile'];
 };
 
 export type ProfileLinkOptions = {

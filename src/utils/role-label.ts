@@ -1,5 +1,5 @@
 import { DatabaseRole, Nullable } from 'src/types';
-import { common } from 'src/strings';
+import { TFunction } from 'next-i18next';
 
-export const mapRoleLabel = (role: Nullable<DatabaseRole>): string =>
-  common.roleLabel[role || 'guest'];
+export const mapRoleLabel = (t: TFunction, role: Nullable<DatabaseRole>): string =>
+  t(role === null ? 'common:roleLabel.guest' : `common:roleLabel.${role}`);

@@ -2,35 +2,38 @@ import { NextPage } from 'next';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import { SpriteGenerator } from 'src/components/colorguide/sprite-generator/SpriteGenerator';
-import { TitleFactoryVoid } from 'src/types/title';
+import { TitleFactory } from 'src/types/title';
 import { useMemo } from 'react';
 import { PATHS } from 'src/paths';
-import { colorGuide } from 'src/strings';
 import { NextSeo } from 'next-seo';
 import { assembleSeoUrl } from 'src/utils';
 import { useTitleSetter } from 'src/hooks';
 import { useDispatch } from 'react-redux';
 import { wrapper } from 'src/store';
 import { titleSetter } from 'src/utils/core';
+import { Translatable } from 'src/types';
+import { useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
-const titleFactory: TitleFactoryVoid = () => {
-  const title = 'Sprite Template Generator';
+const titleFactory: TitleFactory = () => {
+  const title: Translatable = ['colorGuide:sprite.title'];
   return ({
     title,
     breadcrumbs: [
-      { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
+      { linkProps: { href: PATHS.GUIDE_INDEX }, label: ['color-Guide:index.breadcrumb'] },
       { label: title, active: true },
     ],
   });
 };
 
 const SpriteGeneratorPage: NextPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
   return (
     <Content>
-      <StandardHeading heading={titleData.title} lead="Create your own pony sprite images based on our template" />
+      <StandardHeading heading={t('colorGuide:sprite.title')} lead="Create your own pony sprite images based on our template" />
       <SpriteGenerator />
       <NextSeo
         description="Create your own pixelated pony reference images using the MLP Vector Club's template generator"
@@ -50,9 +53,11 @@ const SpriteGeneratorPage: NextPage = () => {
 
 export default SpriteGeneratorPage;
 
-export const getStaticProps = wrapper.getStaticProps(({ store }) => {
+export const getStaticProps = wrapper.getStaticProps(store => async ({ locale }) => {
   titleSetter(store, titleFactory());
   return {
-    props: {},
+    props: {
+      ...(await typedServerSideTranslations(locale, ['colorGuide'])),
+    },
   };
 });

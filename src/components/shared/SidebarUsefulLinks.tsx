@@ -4,9 +4,11 @@ import { MouseEventHandler, useCallback, VFC } from 'react';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Link from 'next/link';
-import { common } from 'src/strings';
+import { useTranslation } from 'next-i18next';
+import { PATHS } from 'src/paths';
 
 const SidebarUsefulLinks: VFC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { signedIn } = useAuth();
   const usefulLinks = useSidebarUsefulLinks(signedIn);
@@ -26,7 +28,7 @@ const SidebarUsefulLinks: VFC = () => {
 
   return (
     <div className="links">
-      <h3>{common.sidebar.usefulLinks}</h3>
+      <h3>{t('common:sidebar.usefulLinks')}</h3>
       <ul>
         {usefulLinks.map(el => {
           let link: JSX.Element;
@@ -36,7 +38,9 @@ const SidebarUsefulLinks: VFC = () => {
           } else {
             const actionDispatcher = el.url.startsWith('#');
             if (actionDispatcher) {
-              link = <a href={el.url} onClick={dispatchActionByAnchor(el.url)} title={el.title}>{el.label}</a>;
+              link = el.url === '#sprite-tpl'
+                ? <Link href={PATHS.GUIDE_SPRITE}><a title={el.title}>{el.label}</a></Link>
+                : <a href={el.url} onClick={dispatchActionByAnchor(el.url)} title={el.title}>{el.label}</a>;
             } else {
               link = (
                 <Link href={el.url}>

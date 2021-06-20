@@ -2,6 +2,7 @@ const {
   NEXT_PUBLIC_CDN_DOMAIN,
   NEXT_PUBLIC_BACKEND_HOST,
 } = process.env;
+const { i18n } = require('./next-i18next.config.js');
 const withPlugins = require('next-compose-plugins');
 const withESLint = require('./utils/next-eslint');
 const withCamelCaseCSSModules = require('./utils/next-css-modules');
@@ -17,6 +18,7 @@ module.exports = withPlugins(
     [withCamelCaseCSSModules],
   ],
   {
+    i18n,
     generateBuildId: async () => {
       try {
         const { stdout } = await execFile('git', ['log', '-1', '--date=short', '--pretty=%h;%ct']);

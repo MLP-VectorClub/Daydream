@@ -2,15 +2,16 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { VFC } from 'react';
 import Link from 'next/link';
-import { CLUB_URL } from 'src/config';
+import { DEVIANTART_GROUP_NAME, DEVIANTART_GROUP_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { common } from 'src/strings';
 import { getDefaultGuideLink, getHomeLink, getProfileLink } from 'src/utils/path-utils';
 import { PATHS } from 'src/paths';
+import { useTranslation } from 'next-i18next';
 
 const MainNavigation: VFC = () => {
+  const { t } = useTranslation();
   const { signedIn, user, isStaff } = useAuth();
   const prefs = usePrefs(signedIn);
   const defaultGuideLink = getDefaultGuideLink(prefs);
@@ -23,35 +24,35 @@ const MainNavigation: VFC = () => {
           <Link href={homeLink} passHref>
             <NavLink>
               <InlineIcon first icon="home" />
-              {common.titles.home}
+              {t('common:titles.home')}
             </NavLink>
           </Link>
         )}
       </NavItem>
       <NavItem>
         <Link href={PATHS.LATEST_EPISODE} passHref>
-          <NavLink disabled>{common.titles.latestEpisode}</NavLink>
+          <NavLink disabled>{t('common:titles.latestEpisode')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
         <Link href={PATHS.SHOW} passHref>
-          <NavLink>{common.titles.show}</NavLink>
+          <NavLink>{t('common:titles.show')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
         <Link href={defaultGuideLink} passHref>
-          <NavLink>{common.titles.colorGuide}</NavLink>
+          <NavLink>{t('common:titles.colorGuide')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
         <Link href={PATHS.EVENTS} passHref>
-          <NavLink disabled>{common.titles.events}</NavLink>
+          <NavLink disabled>{t('common:titles.events')}</NavLink>
         </Link>
       </NavItem>
       {signedIn && (
         <NavItem>
           <Link href={getProfileLink(user)} passHref>
-            <NavLink>{common.titles.account}</NavLink>
+            <NavLink>{t('common:titles.account')}</NavLink>
           </Link>
         </NavItem>
       )}
@@ -59,30 +60,30 @@ const MainNavigation: VFC = () => {
         <>
           <NavItem>
             <Link href={PATHS.USERS} passHref>
-              <NavLink>{common.titles.users}</NavLink>
+              <NavLink>{t('common:titles.users')}</NavLink>
             </Link>
           </NavItem>
           <NavItem>
             <Link href={PATHS.ADMIN} passHref>
-              <NavLink disabled>{common.titles.admin}</NavLink>
+              <NavLink disabled>{t('common:titles.admin')}</NavLink>
             </Link>
           </NavItem>
         </>
       ) : (
         <NavItem>
           <Link href={PATHS.USERS} passHref>
-            <NavLink>{common.titles.members}</NavLink>
+            <NavLink>{t('common:titles.members')}</NavLink>
           </Link>
         </NavItem>
       )}
       <NavItem>
         <Link href={PATHS.ABOUT} passHref>
-          <NavLink>{common.titles.about}</NavLink>
+          <NavLink>{t('common:titles.about')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <ExternalLink className="nav-link" href={CLUB_URL}>
-          <span className="mr-1">MLP-VectorClub</span>
+        <ExternalLink className="nav-link" href={DEVIANTART_GROUP_URL}>
+          <span className="mr-1">{DEVIANTART_GROUP_NAME}</span>
           <FontAwesomeIcon icon="external-link-alt" size="sm" />
         </ExternalLink>
       </NavItem>

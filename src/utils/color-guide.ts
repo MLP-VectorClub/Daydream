@@ -88,35 +88,14 @@ export function scaleResize(w: number, h: number, property: 'scale' | 'width' | 
   }
 }
 
-export const fullListSortOptionsMap: Record<FullGuideSortField, string> = {
-  label: 'alphabetically',
-  added: 'by date added',
-  relevance: 'by relevance',
+export const fullListSortOptionsMap: Record<FullGuideSortField, true> = {
+  label: true,
+  added: true,
+  relevance: true,
 };
 
 export const isValidFullListSortOption = (sort: unknown): sort is FullGuideSortField =>
   typeof sort === 'string' && sort in fullListSortOptionsMap;
-
-export const getFullGuideTitle = (
-  guide: Nullable<string> = null,
-): string => {
-  const guideName = getGuideLabel(guide);
-  return `Full List - ${guideName} Color Guide`;
-};
-
-const fullGuideNameMap: Record<GuideName, string> = {
-  eqg: 'EQG Character',
-  pl: 'Pony Life Character',
-  pony: 'FiM Pony',
-};
-
-export const getFullGuideHeading = (
-  guide: Nullable<string> = null,
-): string => {
-  const subject = isGuideName(guide) ? fullGuideNameMap[guide] : 'Character';
-
-  return `Complete ${subject} List`;
-};
 
 const TAG_SORT_ORDER: Record<TagType, number> = {
   app: 1,
@@ -131,13 +110,6 @@ export const sortTagsByType = <T extends SlimGuideTag>(tagA: T, tagB: T): number
   const orderA = tagA.type ? TAG_SORT_ORDER[tagA.type] : Infinity;
   const orderB = tagB.type ? TAG_SORT_ORDER[tagB.type] : Infinity;
   return orderA > orderB ? 1 : (orderA < orderB ? -1 : 0);
-};
-
-export const getGuideChangesHeading = (
-  guide: Nullable<string> = null,
-): string => {
-  const guideName = getGuideLabel(guide);
-  return `Major ${guideName} Color Changes`;
 };
 
 interface CutieMarkMappingColor {

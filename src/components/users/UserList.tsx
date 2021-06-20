@@ -1,39 +1,20 @@
-import pluralize from 'pluralize';
-import { common } from 'src/strings';
 import { useUsers } from 'src/hooks/users';
-import InlineIcon from 'src/components/shared/InlineIcon';
-import { Alert } from 'reactstrap';
 import GroupedUserList from 'src/components/users/GroupedUserList';
 import { VFC } from 'react';
+import { useTranslation } from 'next-i18next';
+import StatusAlert from 'src/components/shared/StatusAlert';
 
-const UserList: VFC<{ enabled: boolean }> = ({ enabled }) => {
-  const { users, error, isLoading } = useUsers(enabled);
+export const UserList: VFC<{ enabled: boolean }> = ({ enabled }) => {
+  const { t } = useTranslation();
+  const { users, error, status } = useUsers(enabled);
 
-  if (isLoading) {
-    return (
-      <Alert color="primary" className="text-center">
-        <InlineIcon loading className="mr-2" />
-        Loading list of users…
-      </Alert>
-    );
-  }
-
-  if (error) {
-    if (!enabled) return null;
-
-    return (
-      <Alert color="danger">Failed to load list of users</Alert>
-    );
-  }
-
-  if (!users) return null;
+  if (!users && !error) return null;
 
   return (
     <section>
-      <h2>{users.length} {pluralize(common.roleLabel.user, users.length)}</h2>
-      <GroupedUserList users={users} />
+      <h2>{t('users:userList.heading', { count: users ? users.length : 0 })}</h2>
+      <StatusAlert status={status} subject={t('users:userList.loadingSubject')} />
+      {users && <GroupedUserList users={users} />}
     </section>
   );
 };
-
-export default UserList;

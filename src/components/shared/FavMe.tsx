@@ -1,7 +1,9 @@
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { FC } from 'react';
 
-const FavMe: FC<{ id: string }> = ({ id, children = null, ...rest }) => {
+export interface FavMeProps { id: string }
+
+const FavMe: FC<FavMeProps> = ({ id, children = null, ...rest }) => {
   const url = `https://fav.me/${id}`;
   return (
     <ExternalLink href={url} {...rest}>

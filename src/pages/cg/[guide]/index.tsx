@@ -20,7 +20,6 @@ import AppearanceItem from 'src/components/colorguide/AppearanceItem';
 import Pagination from 'src/components/shared/Pagination';
 import Content from 'src/components/shared/Content';
 import { NextPage } from 'next';
-import { colorGuide } from 'src/strings';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import ContactLink from 'src/components/shared/ContactLink';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -39,13 +38,15 @@ import PinnedAppearances from 'src/components/colorguide/PinnedAppearances';
 import SearchBar from 'src/components/colorguide/SearchBar';
 import { PATHS } from 'src/paths';
 import { validatePageParam } from 'src/utils/validate-page-param';
+import { SSRConfig } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 const titleFactory: TitleFactory<Omit<PropTypes, 'initialData'>> = ({ guide, page, q }) => {
   const title = getGuideTitle(guide, page, q);
   return {
     title,
     breadcrumbs: [
-      { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
+      { linkProps: { href: PATHS.GUIDE_INDEX }, label: ['colorGuide:index.breadcrumb'] },
       { label: getGuideLabel(guide), active: true },
     ],
   };
@@ -115,7 +116,7 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) =>
 
       <SearchBar guide={guide} initialQuery={q} />
 
-      <StatusAlert status={data.status} noun="color guide entries" />
+      <StatusAlert status={data.status} subject="color guide entries" />
       {data.appearances?.length === 0 && (
         <NoResultsAlert message="There are no entries in this guide yet" />
       )}
@@ -128,8 +129,8 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) =>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store, req } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps<PropTypes & SSRConfig>(store => async ctx => {
+  const { query, req, locale } = ctx;
 
   const guide = resolveGuideName(query.guide) || null;
   if (!guide) {
@@ -169,7 +170,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     },
   };
   titleSetter(store, titleFactory(props));
-  return { props };
+  return {
+    props: {
+      ...(await typedServerSideTranslations(locale, ['colorGuide'])),
+      ...props,
+    },
+  };
 });
 
 export default ColorGuidePage;

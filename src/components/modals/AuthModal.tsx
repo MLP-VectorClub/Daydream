@@ -8,13 +8,14 @@ import { authActions } from 'src/store/slices';
 import { useAuth } from 'src/hooks';
 import SingInForm from 'src/components/shared/forms/SignInForm';
 import RegisterForm from 'src/components/shared/forms/RegisterForm';
-import { common } from 'src/strings';
+import { useTranslation } from 'next-i18next';
 
 export interface AuthModalFormProps {
   switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
 }
 
 const AuthModal: VFC = () => {
+  const { t } = useTranslation();
   const { reset } = useForm({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
   const { signedIn } = useAuth();
@@ -40,7 +41,7 @@ const AuthModal: VFC = () => {
       : authActions.openAuthModal(null)
   ));
 
-  const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? common.auth.signInTitle : common.auth.signUpTitle;
+  const modalTitle = authModal.side === AuthModalSide.SIGN_IN ? t('common:auth.signInTitle') : t('common:auth.signUpTitle');
 
   const sides = {
     [AuthModalSide.SIGN_IN]: <SingInForm />,

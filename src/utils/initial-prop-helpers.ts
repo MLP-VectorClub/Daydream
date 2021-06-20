@@ -1,25 +1,16 @@
-import { GetServerSidePropsContext as NextGSSPC, GetServerSidePropsResult, NextPageContext } from 'next';
-import { GetServerSidePropsContext as ReduxWrapperGSSPC } from 'next-redux-wrapper';
+import { GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from 'next';
 import { mapValues, omit, omitBy } from 'lodash';
 import { parseRelativeUrl } from 'next/dist/next-server/lib/router/utils/parse-relative-url';
 import { buildUrl } from 'src/utils/url';
 
-export const redirect = (ctx: NextPageContext | NextGSSPC, path: string, status = 301) => {
-  const { res } = ctx;
-  if (res) {
-    res.writeHead(status, { Location: path });
-    res.end();
-  }
-};
-
-export const setResponseStatus = (ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>, statusCode: number) => {
+export const setResponseStatus = (ctx: GetServerSidePropsContext, statusCode: number) => {
   const { res } = ctx;
   if (res) {
     res.statusCode = statusCode;
   }
 };
 
-export const notFound = <P>(ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>): GetServerSidePropsResult<P> => {
+export const notFound = <P>(ctx: GetServerSidePropsContext): GetServerSidePropsResult<P> => {
   setResponseStatus(ctx, 404);
 
   return { notFound: true };
@@ -29,11 +20,11 @@ export const notFound = <P>(ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'res'>): Ge
  * @returns true if caller should halt execution
  */
 export const fixPath = (
-  ctx: Pick<NextGSSPC | ReduxWrapperGSSPC, 'req' | 'res'>,
+  ctx: GetServerSidePropsContext,
   expectedPath: string,
   stripParams: string[] = [],
-): boolean => {
-  const { req, res } = ctx;
+): false | Redirect => {
+  const { req } = ctx;
   if (!req.url || req.url?.includes('_next')) return false;
 
   const requestUrlParts = parseRelativeUrl(req.url);
@@ -48,9 +39,5 @@ export const fixPath = (
 
   if (requestUrl === expectedPath) return false;
 
-  res.setHeader('location', expectedPath);
-  res.setHeader('x-original-location', req.url);
-  res.statusCode = 302;
-  res.end();
-  return true;
+  return { destination: expectedPath, permanent: false };
 };

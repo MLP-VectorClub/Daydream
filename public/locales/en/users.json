@@ -1,0 +1,25 @@
+{
+  "memberList": {
+    "staff": {
+      "heading": "Users",
+      "lead": "List of all users in the database",
+      "loadingSubject": "list of users"
+    },
+    "public": {
+      "heading": "Club Members",
+      "lead": "The people in our community",
+      "loadingSubject": "list of members"
+    }
+  },
+  "userList": {
+    "heading": "{{count}} Regular User",
+    "heading_plural": "{{count}} Regular Users",
+    "loadingSubject": "list of users"
+  },
+  "profile": {
+    "notFound": "User not found",
+    "checkYourSpelling": "Please check the URL for any typos",
+    "breadcrumb": "Users",
+    "unknownUser": "Unknown User"
+  }
+}

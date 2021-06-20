@@ -5,14 +5,14 @@ import { ReactChild, VFC } from 'react';
 
 interface PropTypes {
   status: Status;
-  noun?: string;
+  subject?: string;
   errorMessage?: ReactChild;
   loadingMessage?: ReactChild;
 }
 
-const StatusAlert: VFC<PropTypes> = ({ status, loadingMessage, errorMessage, noun = 'data' }) => {
+const StatusAlert: VFC<PropTypes> = ({ status, loadingMessage, errorMessage, subject = 'data' }) => {
   if (status === Status.FAILURE) {
-    const message = errorMessage || `Failed to fetch ${noun}, please try again later.`;
+    const message = errorMessage || `Failed to fetch ${subject}, please try again later.`;
     return (
       <Alert color="danger" fade={false} className="text-center">
         {message}
@@ -21,7 +21,7 @@ const StatusAlert: VFC<PropTypes> = ({ status, loadingMessage, errorMessage, nou
   }
 
   if (status === Status.LOAD) {
-    const message = loadingMessage || `Loading ${noun}, please wait…`;
+    const message = loadingMessage || `Loading ${subject}, please wait…`;
     return (
       <Alert color="ui" fade={false} className="text-center">
         <InlineIcon loading first />

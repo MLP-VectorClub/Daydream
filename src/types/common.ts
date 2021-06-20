@@ -1,5 +1,6 @@
 import { FieldValues, FormProps } from 'react-hook-form';
 import { GetUsersMeResult, User, ValidationErrorResponse } from 'src/types/api';
+import { TFunction } from 'next-i18next';
 
 export enum Status {
   INIT,
@@ -80,7 +81,10 @@ export type UnifiedErrorResponse = {
 
 export type FailsafeUser = GetUsersMeResult | (NullableProps<Omit<User, 'id'>, 'name' | 'avatarUrl' | 'email' | 'role'> & { id: null });
 
-export type PageTitle = Nullable<string>;
+type TFuncParams = Parameters<TFunction>;
+export type Translatable = [TFuncParams[0]] | [TFuncParams[0], Exclude<TFuncParams[2], string | undefined>];
+
+export type PageTitle = Nullable<string> | Translatable;
 
 export type FormSubmitHandler<T = FieldValues> = Parameters<FormProps<T>['handleSubmit']>[0];
 

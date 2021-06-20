@@ -6,12 +6,24 @@ import { renderingStateSlice } from 'src/utils/store';
 import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { assembleSeoUrl } from 'src/utils';
+import { pageTitleValue } from 'src/hooks';
+import { useTranslation } from 'next-i18next';
 
 const TitleManager: VFC = () => {
-  const router = useRouter();
+  const { t } = useTranslation();
+  const { asPath, defaultLocale, locale, locales } = useRouter();
   const { title } = useSelector((store: RootState) => renderingStateSlice(store.core));
 
-  const titleText = useMemo(() => `${!title ? '' : `${title} - `}${APP_NAME}`, [title]);
+  const titleText = useMemo(() => `${!title ? '' : `${pageTitleValue(t, title)} - `}${APP_NAME}`, [t, title]);
+
+  const languageAlternates = useMemo(
+    () =>
+      locales?.map(hrefLang => ({
+        hrefLang,
+        href: (hrefLang !== defaultLocale ? `/${hrefLang}` : '') + asPath,
+      })),
+    [asPath, defaultLocale, locales],
+  );
 
   return (
     <DefaultSeo
@@ -20,8 +32,8 @@ const TitleManager: VFC = () => {
       openGraph={{
         title: titleText,
         type: 'website',
-        url: assembleSeoUrl(router.asPath),
-        locale: 'en-US',
+        url: assembleSeoUrl(asPath),
+        locale,
         site_name: APP_NAME,
         description: APP_DESCRIPTION,
         images: [{
@@ -31,6 +43,7 @@ const TitleManager: VFC = () => {
       twitter={{
         cardType: 'summary',
       }}
+      languageAlternates={languageAlternates}
     />
   );
 };

@@ -7,9 +7,7 @@ import { prefsFetcher } from 'src/fetchers';
  */
 const HomePageRedirect: NextPage = () => null;
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { req } = ctx;
-
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   let destination: string = getHomeLink();
   try {
     const prefs = await prefsFetcher({ keys: ['cg_defaultguide', 'p_homelastep'] }, req)();
@@ -18,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     // ignore
   }
 
-  return { redirect: { destination, statusCode: 302 } };
+  return { redirect: { destination, permanent: false } };
 };
 
 export default HomePageRedirect;

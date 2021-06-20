@@ -1,11 +1,9 @@
 import { NextPage } from 'next';
 import Content from 'src/components/shared/Content';
-import { useMemo } from 'react';
+import { useCallback, useMemo, VoidFunctionComponent } from 'react';
 import StandardHeading from 'src/components/shared/StandardHeading';
 import {
   fullListSortOptionsMap,
-  getFullGuideHeading,
-  getFullGuideTitle,
   getGuideLabel,
   handleDataFetchingError,
   isValidFullListSortOption,
@@ -18,10 +16,10 @@ import {
   GuideName,
   Nullable,
   Optional,
+  Translatable,
 } from 'src/types';
 import { wrapper } from 'src/store';
 import { useAuth, useFullGuide, useTitleSetter } from 'src/hooks';
-import { colorGuide } from 'src/strings';
 import { GuideNotFound } from 'src/components/colorguide/GuideNotFound';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
 import Link from 'next/link';
@@ -42,6 +40,8 @@ import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
 import { PATHS } from 'src/paths';
 import ReturnToGuideButton from 'src/components/colorguide/ReturnToGuideButton';
+import { SSRConfig, Trans, useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 interface PropTypes {
   guide: Nullable<GuideName>;
@@ -50,12 +50,12 @@ interface PropTypes {
 }
 
 const titleFactory: TitleFactory<Pick<PropTypes, 'guide'>> = ({ guide }) => {
-  const title = getFullGuideTitle(guide);
+  const title: Translatable = ['colorGuide:fullList.title', { replace: { guideName: getGuideLabel(guide) } }];
   const guideLinkProps = guide ? { href: PATHS.GUIDE(guide) } : undefined;
   return {
     title,
     breadcrumbs: [
-      { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
+      { linkProps: { href: PATHS.GUIDE_INDEX }, label: ['colorGuide:index.breadcrumb'] },
       { linkProps: guideLinkProps, label: getGuideLabel(guide) },
       { label: 'Full List', active: true },
     ],
@@ -63,32 +63,44 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'guide'>> = ({ guide }) => {
 };
 
 const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isStaff } = useAuth();
   const data = useFullGuide({ guide, sort }, initialData || undefined);
-  const heading = getFullGuideHeading(guide);
+  const heading = t('colorGuide:fullList.heading', { guideName: getGuideLabel(guide) });
 
   const titleData = useMemo(() => titleFactory({ guide }), [guide]);
   useTitleSetter(dispatch, titleData);
+
+  const sortMethod = fullListSortOptionsMap[sort];
+  const SortDropdown: VoidFunctionComponent = useCallback(() => (
+    <DropdownToggle color="white" className="font-italic">
+      {sortMethod}
+      <InlineIcon icon="caret-down" last />
+    </DropdownToggle>
+  ), [sortMethod]);
 
   if (guide === null) {
     return <GuideNotFound heading={heading} />;
   }
 
-  const sortMethod = fullListSortOptionsMap[sort];
-  const sortOptions = Object.keys(fullListSortOptionsMap) as FullGuideSortField[];
+  const sortOptions = Object.keys(fullListSortOptionsMap) as Array<keyof typeof fullListSortOptionsMap>;
+
   return (
     <Content>
       <StandardHeading
         heading={heading}
         lead={(
           <UncontrolledDropdown>
-            Sorted <DropdownToggle color="white" className="font-italic">{sortMethod}<InlineIcon icon="caret-down" last /></DropdownToggle>
+            <Trans t={t} i18nKey="colorGuide:fullList.lead">
+              0
+              <SortDropdown />
+            </Trans>
             <DropdownMenu>
-              <DropdownItem header>Sort by</DropdownItem>
+              <DropdownItem header>{t('colorGuide:fullList.sortOptionsHeader')}</DropdownItem>
               {sortOptions.map(sortBy => (
                 <Link key={sortBy} href={PATHS.GUIDE_FULL(guide, { sort_by: sortBy })} passHref>
-                  <DropdownItem tag="a" active={sortBy === sort}>{fullListSortOptionsMap[sortBy]}</DropdownItem>
+                  <DropdownItem tag="a" active={sortBy === sort}>{t(`colorGuide:fullList.sortOptions.${sortBy}`)}</DropdownItem>
                 </Link>
               ))}
             </DropdownMenu>
@@ -100,13 +112,13 @@ const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
         {isStaff && (
           <Button color="ui" size="sm" disabled>
             <InlineIcon icon="sort" first />
-            Re-order
+            {t('colorGuide:fullList.reorder')}
           </Button>
         )}
         <MajorChangesButton guide={guide} />
       </ButtonCollection>
 
-      <StatusAlert status={data.status} noun="list of all entries" />
+      <StatusAlert status={data.status} subject="list of all entries" />
       {typeof data.appearances !== 'undefined' && typeof data.groups !== 'undefined' && (
         <FullGuideGroups appearances={data.appearances} groups={data.groups} />
       )}
@@ -114,8 +126,8 @@ const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps<PropTypes & SSRConfig>(store => async ctx => {
+  const { query, locale } = ctx;
 
   const guide = resolveGuideName(query.guide) || null;
   if (!guide) {
@@ -139,7 +151,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     initialData: initialData || null,
   };
   titleSetter(store, titleFactory(props));
-  return { props };
+  return {
+    props: {
+      ...(await typedServerSideTranslations(locale, ['colorGuide'])),
+      ...props,
+    },
+  };
 });
 
 export default FullGuidePage;

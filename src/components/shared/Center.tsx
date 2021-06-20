@@ -10,7 +10,7 @@ interface CenterProps {
 
 const Center: FC<CenterProps> = ({ children, header, className, color }) => (
   <Modal className={classNames(className, color && `modal-${color}`)} centered backdrop={false} fade={false} isOpen>
-    {Boolean(header) && (
+    {typeof header !== 'undefined' && (
       <ModalHeader className="justify-content-center">
         {header}
       </ModalHeader>

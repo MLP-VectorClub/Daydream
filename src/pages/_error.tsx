@@ -1,28 +1,33 @@
 import { useMemo } from 'react';
-import { Nullable } from 'src/types';
+import { Nullable, Translatable } from 'src/types';
 import Content from 'src/components/shared/Content';
 import StandardHeading from 'src/components/shared/StandardHeading';
-import { common } from 'src/strings';
 import { NextPage } from 'next';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, wrapper } from 'src/store';
 import { useTitleSetter } from 'src/hooks';
-import { TitleFactoryVoid } from 'src/types/title';
+import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
+import { useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 interface PropTypes {
   statusCode?: Nullable<number>;
 }
 
-const titleFactory: TitleFactoryVoid = () => ({
-  title: common.error.withoutStatus,
-  breadcrumbs: [
-    { label: 'Error' },
-    { label: common.error.withoutStatus, active: true },
-  ],
-});
+const titleFactory: TitleFactory = () => {
+  const title: Translatable = ['common:error.withoutStatus'];
+  return ({
+    title,
+    breadcrumbs: [
+      { label: 'Error' },
+      { label: title, active: true },
+    ],
+  });
+};
 
 const Error: NextPage<PropTypes> = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
   const titleData = useMemo(titleFactory, []);
@@ -30,15 +35,17 @@ const Error: NextPage<PropTypes> = () => {
 
   return (
     <Content>
-      <StandardHeading heading={common.error.withoutStatus} />
+      <StandardHeading heading={t('common:error.withoutStatus')} />
     </Content>
   );
 };
 
-export const getStaticProps = wrapper.getStaticProps(({ store }) => {
+export const getStaticProps = wrapper.getStaticProps(store => async ({ locale }) => {
   titleSetter(store, titleFactory());
   return {
-    props: {},
+    props: {
+      ...(await typedServerSideTranslations(locale)),
+    },
   };
 });
 

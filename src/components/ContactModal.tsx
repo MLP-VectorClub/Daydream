@@ -3,38 +3,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
-import { CLUB_URL, DEV_EMAIL, DISCORD_INVITE_LINK } from 'src/config';
-import { common } from 'src/strings';
+import { DEV_EMAIL, DEVIANTART_GROUP_URL, DISCORD_INVITE_LINK } from 'src/config';
 import { VFC } from 'react';
+import { Trans, useTranslation } from 'next-i18next';
 
 const ContactModal: VFC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { contactOpen } = useSelector((state: RootState) => state.core);
   const toggle = () => dispatch(coreActions.toggleContact());
   return (
     <Modal className="modal-info" centered isOpen={contactOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>{common.contact.header}</ModalHeader>
+      <ModalHeader toggle={toggle}>{t('common:contact.header')}</ModalHeader>
       <ModalBody>
-        <h3>{common.contact.howTo}</h3>
-        <p>{common.contact.useAnyBelow}</p>
+        <h3>{t('common:contact.howTo')}</h3>
+        <p>{t('common:contact.useAnyBelow')}</p>
         <ul>
           <li>
-            <ExternalLink href={DISCORD_INVITE_LINK}>
-              Join our Discord server
-            </ExternalLink>
-            {' and describe your issue/idea in the '}
-            <strong>#support</strong>
-            {' channel'}
+            <Trans t={t} i18nKey="common:contact.discord">
+              <ExternalLink href={DISCORD_INVITE_LINK}>
+                0
+              </ExternalLink>
+              1
+              <strong>2</strong>
+              3
+            </Trans>
           </li>
           <li>
-            <ExternalLink href={`${CLUB_URL}/notes/`}>
-              Send a note
-            </ExternalLink>
-            {' to the group on DeviantArt'}
+            <Trans t={t} i18nKey="common:contact.deviantart">
+              <ExternalLink href={`${DEVIANTART_GROUP_URL}/notes/`}>
+                0
+              </ExternalLink>
+              1
+            </Trans>
           </li>
           <li>
-            <a href={`mailto:${DEV_EMAIL}`}>Send an e-mail</a>
-            {` to ${DEV_EMAIL}`}
+            <Trans t={t} i18nKey="common:contact.email" values={{ email: DEV_EMAIL }}>
+              <a href={`mailto:${DEV_EMAIL}`}>0</a>
+              1
+            </Trans>
           </li>
         </ul>
       </ModalBody>

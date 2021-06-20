@@ -10,28 +10,30 @@ import { wrapper } from 'src/store';
 import { Badge, Card, CardBody, UncontrolledTooltip } from 'reactstrap';
 import { useMemo } from 'react';
 import { NextPage } from 'next';
-import { colorGuide, common } from 'src/strings';
 import styles from 'modules/GuideIndexPage.module.scss';
 import { useDispatch } from 'react-redux';
-import { TitleFactoryVoid } from 'src/types/title';
+import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { guideIndexFetcher } from 'src/fetchers';
 import { PATHS } from 'src/paths';
 import pluralize from 'pluralize';
 import { GuideIcon } from 'src/components/shared/GuideIcon';
+import { SSRConfig, useTranslation } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 interface PropTypes {
   initialData: GetColorGuideResult;
 }
 
-const titleFactory: TitleFactoryVoid = () => ({
-  title: common.titles.colorGuideList,
+const titleFactory: TitleFactory = () => ({
+  title: ['common:titles.colorGuideList'],
   breadcrumbs: [
-    { label: colorGuide.index.breadcrumb, active: true },
+    { label: ['colorGuide:index.breadcrumb'], active: true },
   ],
 });
 
 const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const data = useGuideIndex(initialData);
   const wipMeaning = 'wip-meaning';
@@ -41,7 +43,7 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
 
   return (
     <Content>
-      <StandardHeading heading={colorGuide.index.heading} lead={colorGuide.index.lead} />
+      <StandardHeading heading={t('colorGuide:index.heading')} lead={t('colorGuide:index.lead')} />
       <p className="text-center">
         Resources for developers:
         {' '}
@@ -76,8 +78,7 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { store, req } = ctx as typeof ctx;
+export const getServerSideProps = wrapper.getServerSideProps<PropTypes & SSRConfig>(store => async ({ locale, req }) => {
   let initialData: GetColorGuideResult = {
     entryCounts: GUIDE_NAMES.reduce((acc, c) => ({ ...acc, [c]: 0 }), {} as Record<GuideName, number>),
   };
@@ -92,7 +93,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     initialData,
   };
   titleSetter(store, titleFactory());
-  return { props };
+  return {
+    props: {
+      ...(await typedServerSideTranslations(locale, ['colorGuide'])),
+      ...props,
+    },
+  };
 });
 
 export default GuideIndexPage;

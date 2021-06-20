@@ -55,6 +55,7 @@ export const PATHS = {
   GUIDE_SPRITE: '/cg/sprite',
   LATEST_EPISODE: '/episode/latest',
   PRIVACY_POLICY: '/about/privacy',
+  ABOUT_CONNECTION: '/about/connection',
   SHOW: '/show',
   USERS: '/users',
   USER_LEGACY: (username: string) => `/@${username}`,

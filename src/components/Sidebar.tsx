@@ -10,10 +10,11 @@ import CustomIcon from 'src/components/shared/CustomIcon';
 import SignInButton from 'src/components/shared/SignInButton';
 import SignOutButton from 'src/components/shared/SignOutButton';
 import { useAuth, useConnectionInfo } from 'src/hooks';
-import { common } from 'src/strings';
 import { VFC } from 'react';
+import { useTranslation } from 'next-i18next';
 
 const Sidebar: VFC = () => {
+  const { t } = useTranslation();
   const { signedIn } = useAuth();
   const { backendDown } = useConnectionInfo();
 
@@ -27,8 +28,8 @@ const Sidebar: VFC = () => {
 
       {backendDown && (
         <section className="signin">
-          <h2>{common.sidebar.welcome}</h2>
-          <p>{common.sidebar.backendDown}</p>
+          <h2>{t('common:sidebar.welcome')}</h2>
+          <p>{t('common:sidebar.backendDown')}</p>
         </section>
       )}
       {!backendDown && (
@@ -49,7 +50,7 @@ const Sidebar: VFC = () => {
               href={DISCORD_INVITE_LINK}
             >
               <CustomIcon src="/img/discord-logo-white.svg" className="mr-2" />
-              {common.sidebar.joinDiscord}
+              {t('common:sidebar.joinDiscord')}
             </Button>
           </section>
           {/* Widgets will go here */}

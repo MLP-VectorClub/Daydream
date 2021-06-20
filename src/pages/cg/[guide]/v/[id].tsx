@@ -21,7 +21,6 @@ import { titleSetter } from 'src/utils/core';
 import Content from 'src/components/shared/Content';
 import { TitleFactory } from 'src/types/title';
 import { PATHS } from 'src/paths';
-import { colorGuide } from 'src/strings';
 import { appearanceFetcher } from 'src/fetchers';
 import { useAuth, useDetailedAppearance, useTitleSetter } from 'src/hooks';
 import StatusAlert from 'src/components/shared/StatusAlert';
@@ -43,6 +42,8 @@ import { useDispatch } from 'react-redux';
 import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
 import { AppearanceColorGroups } from 'src/components/colorguide/AppearanceColorGroups';
 import { AppearanceNotes } from 'src/components/colorguide/AppearanceNotes';
+import { SSRConfig } from 'next-i18next';
+import { typedServerSideTranslations } from 'src/utils/i18n';
 
 interface PropTypes {
   guide: GuideName;
@@ -52,13 +53,13 @@ interface PropTypes {
   };
 }
 
-const titleFactory: TitleFactory<Omit<PropTypes, 'id'>> = ({ guide, initialData }) => {
+const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'initialData'>> = ({ guide, initialData }) => {
   const title = getAppearanceTitle(guide, initialData.appearance);
   const guideItem = guide !== null
     ? { label: getGuideLabel(guide), linkProps: { href: PATHS.GUIDE(guide) } }
     : { label: getGuideLabel(guide) };
   const breadcrumbs: BreadcrumbEntry[] = [
-    { linkProps: { href: PATHS.GUIDE_INDEX }, label: colorGuide.index.breadcrumb },
+    { linkProps: { href: PATHS.GUIDE_INDEX }, label: ['colorGuide:index.breadcrumb'] },
     guideItem,
   ];
   if (initialData.appearance) {
@@ -129,7 +130,7 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
         )}
       </ButtonCollection>
 
-      <StatusAlert status={status} noun="appearance" />
+      <StatusAlert status={status} subject="appearance" />
 
       <AppearanceTags tags={appearance.tags} guide={appearance.guide} />
       <h2>
@@ -146,8 +147,8 @@ const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
-  const { query, store, req } = ctx;
+export const getServerSideProps = wrapper.getServerSideProps<PropTypes & SSRConfig>(store => async ctx => {
+  const { query, req, locale } = ctx;
 
   const guide = resolveGuideName(query.guide) || null;
   if (!guide) {
@@ -176,7 +177,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async ctx => {
     },
   };
   titleSetter(store, titleFactory(props));
-  return { props };
+  return {
+    props: {
+      ...(await typedServerSideTranslations(locale, ['colorGuide'])),
+      ...props,
+    },
+  };
 });
 
 export default AppearancePage;

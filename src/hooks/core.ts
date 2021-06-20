@@ -5,6 +5,8 @@ import { useCallback, useEffect } from 'react';
 import { CoreSliceMirroredState } from 'src/store/slices';
 import { titleSetter } from 'src/utils/core';
 import { AppDispatch } from 'src/store';
+import { useTranslation, TFunction } from 'next-i18next';
+import { PageTitle, Translatable } from 'src/types';
 
 export function useCsrf() {
   const { data } = useQuery(ENDPOINTS.CSRF_INIT, csrfFetcher, {
@@ -22,12 +24,26 @@ export function useSidebarUsefulLinks(enabled: boolean) {
   return enabled ? data : undefined;
 }
 
+export const isTranslatable = (value: Translatable | unknown): value is Translatable => {
+  if (typeof value === 'string' || value === null) return false;
+
+  return Array.isArray(value) && value.length > 0 && typeof value[0] === 'string';
+};
+
+export const pageTitleValue = (t: TFunction, value: PageTitle): string => (isTranslatable(value) ? t(value[0], value[1]) : (value || ''));
+
 export const useTitleSetter = (dispatch: AppDispatch, { title, breadcrumbs }: CoreSliceMirroredState): void => {
+  const { t } = useTranslation();
   useEffect(() => {
-    titleSetter({ dispatch }, { title });
-  }, [title, dispatch]);
+    titleSetter({ dispatch }, { title: pageTitleValue(t, title) });
+  }, [title, dispatch, t]);
 
   useEffect(() => {
-    titleSetter({ dispatch }, { breadcrumbs });
-  }, [breadcrumbs, dispatch]);
+    titleSetter({ dispatch }, {
+      breadcrumbs: breadcrumbs.map(crumb => ({
+        ...crumb,
+        label: pageTitleValue(t, crumb.label),
+      })),
+    });
+  }, [breadcrumbs, dispatch, t]);
 };

@@ -5,24 +5,22 @@ import { useAuth, usePrefs } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import ProfileLink from 'src/components/shared/ProfileLink';
-import { common } from 'src/strings';
 import { VFC } from 'react';
+import { useTranslation } from 'next-i18next';
 
 const SidebarUserInfo: VFC = () => {
+  const { t } = useTranslation();
   const { authCheck, user, signedIn } = useAuth();
   const prefs = usePrefs(signedIn);
 
   const checkingAuth = authCheck.status === Status.LOAD;
-
-  const titleProp: { title?: string } = {};
-  if (checkingAuth) titleProp.title = common.sidebar.authCheck;
 
   return (
     <div
       className={classNames(`logged-in provider-${user.avatarProvider}`, {
         'checking-auth': checkingAuth,
       })}
-      {...titleProp}
+      title={checkingAuth ? t('common:sidebar.authCheck') : undefined}
     >
       <LoadingRing color="white" outline={false} className="spinner" />
       <AvatarWrap
@@ -35,10 +33,10 @@ const SidebarUserInfo: VFC = () => {
         <span className="user-name">
           {signedIn ? (
             <ProfileLink {...user} />
-          ) : common.guestUserName}
+          ) : t('common:guestUserName')}
         </span>
         <span className="user-role">
-          <span>{mapRoleLabel(user.role)}</span>
+          <span>{mapRoleLabel(t, user.role)}</span>
         </span>
       </div>
     </div>

@@ -33,7 +33,7 @@ export const ColorInputGroup: FC<PropTypes> = ({ baseColor, value, name, childre
   return (
     <>
       <InputGroup>
-        <InputGroupAddon tag="label" addonType="prepend" for={inputId} className="mb-0">
+        <InputGroupAddon tag="label" addonType="prepend" htmlFor={inputId} className="mb-0">
           <InputGroupText style={{ backgroundColor: value, userSelect: 'none' }}>
             <InlineIcon icon="eye-dropper" fixedWidth className={darkColor ? 'text-light' : 'text-dark'} />
           </InputGroupText>

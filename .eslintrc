@@ -183,6 +183,22 @@
             "importNames": [
               "default"
             ]
+          },
+          {
+            "name": "react-i18next",
+            "importNames": [
+              "useTranslation",
+              "Trans",
+              "TFunction"
+            ],
+            "message": "Import this from `next-i18next` instead for consistency"
+          },
+          {
+            "name": "i18next",
+            "importNames": [
+              "TFunction"
+            ],
+            "message": "Import this from `next-i18next` instead for consistency"
           }
         ]
       }

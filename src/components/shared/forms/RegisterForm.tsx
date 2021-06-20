@@ -13,7 +13,7 @@ import {
   Label,
 } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { RootState } from 'src/store/rootReducer';
 import { authActions } from 'src/store/slices';
 
@@ -21,7 +21,6 @@ import ExternalLink from 'src/components/shared/ExternalLink';
 import BootstrapErrorMessages from 'src/components/shared/BootstrapErrorMessages';
 import RevealPasswordButton from 'src/components/shared/RevealPasswordButton';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { common } from 'src/strings';
 import { registerThunk } from 'src/store/thunks';
 import {
   combineErrors,
@@ -33,6 +32,7 @@ import {
 import { Status, UnifiedErrorResponseTypes } from 'src/types/common';
 import { PATHS } from 'src/paths';
 import { AuthModalSide } from 'src/types/auth';
+import { TFunction, Trans, useTranslation } from 'next-i18next';
 
 enum INPUT_NAMES {
   NAME = 'name',
@@ -41,8 +41,11 @@ enum INPUT_NAMES {
   PRIVACY = 'privacy_policy',
 }
 
-export const AcceptPrivacyPolicy: React.FC = () => (
-  <>I accept the <ExternalLink href={PATHS.PRIVACY_POLICY} icon>Privacy Policy</ExternalLink></>
+export const AcceptPrivacyPolicy: VFC<{ t: TFunction }> = ({ t }) => (
+  <Trans t={t} i18nKey="common:auth.acceptPrivacyPolicy">
+    0
+    <ExternalLink href={PATHS.PRIVACY_POLICY} icon>1</ExternalLink>
+  </Trans>
 );
 
 type FormFields = {
@@ -52,7 +55,8 @@ type FormFields = {
   [INPUT_NAMES.PRIVACY]: boolean;
 };
 
-const RegisterForm: React.FC = () => {
+const RegisterForm: VFC = () => {
+  const { t } = useTranslation();
   const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
   const dispatch = useDispatch();
   const { authModal, register } = useSelector((store: RootState) => store.auth);
@@ -76,21 +80,21 @@ const RegisterForm: React.FC = () => {
   const isLoading = register.status === Status.LOAD;
   const errors = combineErrors(clientErrors, register.error);
 
-  const requiredValidation = validateRequired();
-  const emailValidation = validateEmail<FormFields>();
-  const nameValidation = validateUserName<FormFields>();
-  const passwordValidation = validatePassword();
+  const requiredValidation = validateRequired(t);
+  const emailValidation = validateEmail<FormFields>(t);
+  const nameValidation = validateUserName<FormFields>(t);
+  const passwordValidation = validatePassword(t);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <p className="text-center">
         <a href="#" onClick={() => dispatch(authActions.openAuthModal(AuthModalSide.SIGN_IN))}>
-          {common.auth.alreadyHaveAccount}
+          {t('common:auth.alreadyHaveAccount')}
         </a>
       </p>
 
       <FormGroup>
-        <Label htmlFor={INPUT_NAMES.NAME}>{common.auth.name}</Label>
+        <Label htmlFor={INPUT_NAMES.NAME}>{t('common:auth.name')}</Label>
         <Input
           type="text"
           defaultValue=""
@@ -104,10 +108,10 @@ const RegisterForm: React.FC = () => {
           disabled={isLoading}
         />
         <FormText className="text-muted">
-          {common.auth.nameHelp(
-            nameValidation.minLength.value,
-            nameValidation.maxLength.value,
-          )}
+          {t('common:auth.nameHelp', {
+            min: nameValidation.minLength.value,
+            max: nameValidation.maxLength.value,
+          })}
         </FormText>
         <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.NAME} />
       </FormGroup>
@@ -117,7 +121,7 @@ const RegisterForm: React.FC = () => {
           htmlFor={INPUT_NAMES.EMAIL}
           sm={12}
         >
-          {common.auth.email}
+          {t('common:auth.email')}
         </Label>
         <Col sm={12}>
           <Input
@@ -132,7 +136,7 @@ const RegisterForm: React.FC = () => {
             disabled={isLoading}
           />
           <FormText className="text-muted">
-            {common.auth.emailHelp}
+            {t('common:auth.emailHelp')}
           </FormText>
           <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.EMAIL} />
         </Col>
@@ -143,7 +147,7 @@ const RegisterForm: React.FC = () => {
           htmlFor={INPUT_NAMES.PASSWORD}
           sm={12}
         >
-          {common.auth.password}
+          {t('common:auth.password')}
         </Label>
         <Col sm={12}>
           <InputGroup>
@@ -167,7 +171,7 @@ const RegisterForm: React.FC = () => {
             </InputGroupAddon>
           </InputGroup>
           <FormText className="text-muted">
-            {common.auth.passwordHelp(passwordValidation.minLength.value)}
+            {t('common:auth.passwordHelp', { min: passwordValidation.minLength.value })}
           </FormText>
           <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.PASSWORD} />
         </Col>
@@ -178,10 +182,10 @@ const RegisterForm: React.FC = () => {
           id={INPUT_NAMES.PRIVACY}
           name={INPUT_NAMES.PRIVACY}
           type="checkbox"
-          label={<AcceptPrivacyPolicy />}
+          label={<AcceptPrivacyPolicy t={t} />}
           invalid={INPUT_NAMES.PRIVACY in errors}
           disabled={isLoading}
-          innerRef={r<HTMLInputElement>(validateRequired('acceptPrivacyPolicy'))}
+          innerRef={r<HTMLInputElement>(validateRequired(t, 'acceptPrivacyPolicy'))}
         />
         <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.PRIVACY} />
       </FormGroup>
@@ -192,13 +196,13 @@ const RegisterForm: React.FC = () => {
 
       {register.error?.type === UnifiedErrorResponseTypes.RATE_LIMITED && (
         <Alert color="danger">
-          {common.auth.rateLimited(register.error.retryAfter)}
+          {t('common:auth.rateLimited', { count: register.error.retryAfter })}
         </Alert>
       )}
 
       <Button color="ui" disabled={isLoading}>
         <InlineIcon first loading={isLoading} icon="user-plus" />
-        {common.auth.registerButton}
+        {t('common:auth.registerButton')}
       </Button>
     </Form>
   );

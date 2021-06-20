@@ -1,12 +1,13 @@
 import classNames from 'classnames';
-import { colorGuide } from 'src/strings';
 import { useMemo, VFC } from 'react';
 import { Appearance } from 'src/types';
 import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
 import styles from 'modules/AppearanceNotes.module.scss';
 import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';
+import { useTranslation } from 'next-i18next';
 
 const AppearanceItemNotes: VFC<Pick<Appearance, 'notes' | 'hasCutieMarks'>> = ({ notes, hasCutieMarks }) => {
+  const { t } = useTranslation();
   const processedNotes = useMemo(() => (notes ? processAppearanceNotes(notes) : null), [notes]);
 
   return (
@@ -15,7 +16,7 @@ const AppearanceItemNotes: VFC<Pick<Appearance, 'notes' | 'hasCutieMarks'>> = ({
         {processedNotes}
         {hasCutieMarks && (
           <span className={classNames({ 'ml-2 pl-2 border-left': processedNotes !== null })}>
-            {colorGuide.appearances.cmAvailable}
+            {t('colorGuide:appearances.cmAvailable')}
           </span>
         )}
       </AppearanceNotesText>

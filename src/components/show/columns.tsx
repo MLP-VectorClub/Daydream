@@ -8,9 +8,9 @@ import Link from 'next/link';
 import { PATHS } from 'src/paths';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { UncontrolledTooltip } from 'reactstrap';
-import { show } from 'src/strings';
 import { format } from 'date-fns';
 import { GuideIcon } from 'src/components/shared/GuideIcon';
+import { useTranslation } from 'next-i18next';
 
 export const EpisodeColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{episodeToString(entry)}</>;
 
@@ -27,9 +27,12 @@ export const EpisodeNumberColumn: ShowTableColumnDefinition['renderContent'] = (
 export const ShowNumberColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{entry.no}</>;
 
 export const TitleAirDateColumn: VFC<{ entry: ShowListItem }> = ({ entry }) => {
+  const { t } = useTranslation();
   const { isStaff } = useAuth();
   const editButtonRef = useRef<HTMLButtonElement>(null);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
+  const typeName = t(`show:index.typeNames.${entry.type}`);
+  const airDateFormat = t(`show:index.airDateFormat`);
   return (
     <>
       <div>
@@ -42,18 +45,18 @@ export const TitleAirDateColumn: VFC<{ entry: ShowListItem }> = ({ entry }) => {
               <InlineIcon icon="pencil-alt" />
             </span>
             <UncontrolledTooltip target={editButtonRef} fade={false} placement="top">
-              {show.index.edit} {entry.type}
+              {t('show:index.edit', { typeName })}
             </UncontrolledTooltip>
             <span className="p-2 text-danger faded" ref={deleteButtonRef}>
               <InlineIcon icon="times" />
             </span>
             <UncontrolledTooltip target={deleteButtonRef} fade={false} placement="top">
-              {show.index.delete} {entry.type}
+              {t('show:index.delete', { typeName })}
             </UncontrolledTooltip>
           </span>
         )}
       </div>
-      {entry.airs && <time dateTime={entry.airs}>{format(new Date(entry.airs), 'EEEE, do MMMM yyyy, H:mm:ss')}</time>}
+      {entry.airs && <time dateTime={entry.airs}>{format(new Date(entry.airs), airDateFormat)}</time>}
     </>
   );
 };
