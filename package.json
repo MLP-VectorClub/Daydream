@@ -59,7 +59,7 @@
     "urlcat": "^2.0.4"
   },
   "devDependencies": {
-    "@seinopsys-forks/openapi-to-typescript": "^0.0.9",
+    "@seinopsys-forks/openapi-to-typescript": "^0.0.11",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
     "@types/capitalize": "^2.0.0",
@@ -85,7 +85,7 @@
     "eslint-config-next": "^11.0.0",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-import-newlines": "^1.1.0",
+    "eslint-plugin-import-newlines": "^1.1.3",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.2.0",
