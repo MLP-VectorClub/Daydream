@@ -1,0 +1,38 @@
+{
+  "website": "<0>{{linkText}}</0> Website",
+  "tagline": "Handling requests, reservations & the Color Guide since 2015",
+  "whatsThisSite": {
+    "title": "What's this site?",
+    "p1": "This website originally started as a new, automatic way to process and store the requests & reservations users want to make. It was born due to the fact that in the past, the handling of comments under journals was done manually. Because of this, there had to be people who checked those comments every once in a while, evaluated them, then updated the journal accordingly. This was a time consuming task, and since the group's staff consists of busy people expecting them to constantly monitor new incoming comments is unrealistic. The initial goal of this website was to provide an easy-to-use interface where new entries can be submitted and added to a list (just like the journals) automatically, eliminating this monotonous task.",
+    "p2": "After some time, the idea of moving the old PNG color guide into an easier to use format was brought up and met with positive responses. Since then, the site also houses the vector club's official color guide, with freshly picked colors from recent episodes (and cute little pictures to go with a couple popular characters) among other information such as recommended cutie mark vectors and tag-based search. For easier use in drawing applications individual characters can still be downloaded as PNG files that contain all colors associated with them."
+  },
+  "attributions": {
+    "title": "Attributions",
+    "github": "Please refer to the project's <1>GitHub page</1> for an up to date list of all used tools & libraries.",
+    "blendingCalc": "<0>Color Blending Calculator</0> originally made by <2>DASPRiD</2>",
+    "headingFont": "<0>Headings' font: </0><1>{{linkText}}</1>",
+    "daLogo": "<0>DeviantArt logo</0> © <2>{{copyright}}</2>",
+    "aiLogo": "<0>Adobe Illustrator CC logo</0> © {{copyright}}",
+    "inkscapeLogo": "<0>Inkscape logo</0> © Inkscape team",
+    "ponyscapeLogo": "<0>Ponyscape logo</0> © <2></2>",
+    "applicationLogo": "<0>Application logo</0> features Penny Curve, the mascot of our group. The image is based on an expression from <2>Christmas Vector of the MLP-VC Mascot</2> (made by <4></4>, <6></6>, <8></8> & <10></10>) with the mane design and eye colours from <12>Penny Curve (MLP-VectorClub Mascot 2.0)</12> (made by <14></14>)",
+    "logoVectors": {
+      "general": "<0>Color Guide logo vectors</0> were made by the following artists and their design is © {{copyright}}",
+      "specific": "<0></0> by <2></2>"
+    },
+    "uiIcons": "<0>User interface icons</0> use <2>{{linkText}}</2>",
+    "browserLogos": {
+      "general": "<0>Browser logos</0> (used in session list & the <2>Browser recognition testing page</2>):"
+    }
+  },
+  "providers": {
+    "title": "What image hosting providers do you support?",
+    "p1": "As you can probably tell we do not host a large majority of images you can see on episode pages, we make use of already established sites. Here's a full list of all providers we can recognize and that you can use to submit images:",
+    "asterisk": "* Using direct links from these providers is not supported due to the URLs lacking the identifiers necessary for adding both their preview and full size versions to posts."
+  },
+  "openSource": {
+    "title": "Can I see the code behind the site?",
+    "p1": "Absolutely! Both the front- and backend of this website is open source software, you can find each component on GitHub:",
+    "p2": "Additionally, the footer will always display the versions of each repository currently being used by the application. To show this information, simply click the <1></1> icon in front of the last update time."
+  }
+}
