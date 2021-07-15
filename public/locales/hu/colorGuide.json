@@ -1,0 +1,41 @@
+{
+  "index": {
+    "heading": "Color Guide List",
+    "lead": "Here you can find all color guides maintained by the club staff",
+    "breadcrumb": "Color Guides"
+  },
+  "unknownGuide": "Unknown",
+  "appearances": {
+    "cmAvailable": "Cutie mark available"
+  },
+  "changes": {
+    "breadcrumb": "List of Major Changes",
+    "heading": "Major {{guideName}} Color Changes",
+    "title": "Page {{page}} - Major {{guideName}} Color Changes - Color Guide",
+    "loadingSubject": "major changes",
+    "noResults": "There are no changes to display",
+    "columns": {
+      "appearance": "Appearance",
+      "reason": "Reason",
+      "created": "When?"
+    }
+  },
+  "fullList": {
+    "heading": "Complete {{guideName}} Character List",
+    "title": "Full List - {{guideName}} Color Guide",
+    "lead": "Sorted <1></1>",
+    "sortOptionsHeader": "Sort by",
+    "sortOptions": {
+      "label": "alphabetically",
+      "added": "by date added",
+      "relevance": "by relevance"
+    },
+    "reorder": "Re-order"
+  },
+  "sprite": {
+    "title": "Sprite Template Generator"
+  },
+  "errors": {
+    "unknownGuide": "There is no guide by the specified name"
+  }
+}
