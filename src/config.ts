@@ -16,7 +16,7 @@ export const BACKEND_GITHUB_URL = 'https://github.com/MLP-VectorClub/Luna';
 export const BACKEND_PROJECT_NAME = BACKEND_GITHUB_URL.split('/').pop();
 export const DEVIANTART_GROUP_URL = 'https://www.deviantart.com/mlp-vectorclub';
 export const DEVIANTART_GROUP_NAME = 'MLP-VectorClub';
-export const DISCORD_INVITE_LINK = 'https://discord.gg/hrffb8k';
+export const DISCORD_INVITE_LINK = 'https://discord.mlpvector.club';
 export const DEV_EMAIL = 'david@seinopsys.dev';
 
 export const DEV_ENV = process.env.NODE_ENV !== 'production';
