@@ -1,0 +1,11 @@
+{
+  "heading": "Connection Information",
+  "connectingAddress": "Connecting IP Address",
+  "forwardedFor": "Forwarded IP Addresses",
+  "userAgent": "User Agent",
+  "deviceIdentifier": "Device Identifier",
+  "commitId": "Server Commit ID",
+  "commitTime": "Server Commit Time",
+  "updateBackend": "Refresh results",
+  "deviceIdentifierInfo": "This is the name given to your new access tokens by default; this information is gathered from the User Agent string"
+}
