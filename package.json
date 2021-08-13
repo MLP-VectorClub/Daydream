@@ -90,6 +90,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-webpack-plugin": "^2.1.0",
+    "husky": "^4.3.0",
     "jest": "^26.2.2",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",

@@ -5,7 +5,7 @@ import { getGuideLabel } from 'src/utils';
 
 export const EquestriaGirlsLogo: VFC<Pick<ImageProps, 'priority'>> = ({ priority }) => (
   <Image
-    src={eqgLogo}
+    src={eqgLogo as StaticImageData}
     width={9000}
     height={9000}
     alt={`${getGuideLabel('eqg')} Logo`}

@@ -5,7 +5,7 @@ import { getGuideLabel } from 'src/utils';
 
 export const PonyLifeLogo: VFC<Pick<ImageProps, 'priority'>> = ({ priority }) => (
   <Image
-    src={plLogo}
+    src={plLogo as StaticImageData}
     width={701.58}
     height={520.68}
     alt={`${getGuideLabel('pl')} Logo`}

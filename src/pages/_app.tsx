@@ -11,7 +11,7 @@ import ProgressIndicator from 'src/components/ProgressIndicator';
 import Layout from 'src/components/Layout';
 import { LayoutContext } from 'src/hooks';
 import { appWithTranslation } from 'next-i18next';
-import { AppComponent } from 'next/dist/next-server/lib/router/router';
+import { AppComponent } from 'next/dist/shared/lib/router/router';
 
 const Celestia: AppComponent = props => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
