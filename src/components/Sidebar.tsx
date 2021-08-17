@@ -6,7 +6,7 @@ import { DISCORD_INVITE_LINK } from 'src/config';
 import SidebarNotifications from 'src/components/shared/SidebarNotifications';
 import HappeningSoon from 'src/components/widgets/HappeningSoon';
 import SidebarUsefulLinks from 'src/components/shared/SidebarUsefulLinks';
-import CustomIcon from 'src/components/shared/CustomIcon';
+import InlineIcon from 'src/components/shared/InlineIcon';
 import SignInButton from 'src/components/shared/SignInButton';
 import SignOutButton from 'src/components/shared/SignOutButton';
 import { useAuth, useConnectionInfo } from 'src/hooks';
@@ -49,7 +49,7 @@ const Sidebar: VFC = () => {
               tag={ExternalLink}
               href={DISCORD_INVITE_LINK}
             >
-              <CustomIcon src="/img/discord-logo-white.svg" className="mr-2" />
+              <InlineIcon icon={['fab', 'discord']} first />
               {t('common:sidebar.joinDiscord')}
             </Button>
           </section>
