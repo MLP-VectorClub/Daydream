@@ -74,7 +74,7 @@ const SingInForm: VFC = () => {
   const dispatch = useDispatch();
   const { authModal, signIn } = useSelector((store: RootState) => store.auth);
   const [passwordRevealed, setPasswordRevealed] = useState(false);
-  const [rateLimitTimeout, setRateLimitTimeout] = useState<null | ReturnType<typeof setTimeout>>(null);
+  const rateLimitTimeout = useRef<null | ReturnType<typeof setTimeout>>(null);
   const socialAuthPopup = useRef<SocialPopupRef>({ window: null, timer: null });
 
   useEffect(() => {
@@ -86,9 +86,9 @@ const SingInForm: VFC = () => {
 
   useEffect(() => {
     const clearRateLimitTimeout = () => {
-      if (rateLimitTimeout) {
-        clearTimeout(rateLimitTimeout);
-        setRateLimitTimeout(null);
+      if (rateLimitTimeout.current) {
+        clearTimeout(rateLimitTimeout.current);
+        rateLimitTimeout.current = null;
       }
     };
 
@@ -97,8 +97,8 @@ const SingInForm: VFC = () => {
       return;
     }
 
-    setRateLimitTimeout(setTimeout(clearRateLimitTimeout, signIn.error.retryAfter * 1e3));
-  }, [rateLimitTimeout, signIn.error]);
+    rateLimitTimeout.current = setTimeout(clearRateLimitTimeout, signIn.error.retryAfter * 1e3);
+  }, [signIn.error]);
 
   useEffect(() => {
     const subscription = fromEvent(window, 'beforeunload').subscribe(() => {
@@ -111,6 +111,9 @@ const SingInForm: VFC = () => {
       if (socialAuthPopup.current.timer) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         clearInterval(socialAuthPopup.current.timer);
+      }
+      if (rateLimitTimeout.current !== null) {
+        clearTimeout(rateLimitTimeout.current);
       }
       subscription.unsubscribe();
     };
@@ -208,7 +211,7 @@ const SingInForm: VFC = () => {
               })}
               invalid={Boolean(errors[INPUT_NAMES.PASSWORD])}
               disabled={isLoading}
-              autocomplete="current-password"
+              autoComplete="current-password"
             />
             <InputGroupAddon addonType="append">
               <RevealPasswordButton
@@ -239,7 +242,7 @@ const SingInForm: VFC = () => {
         <Alert color="danger">{signIn.error.message}</Alert>
       )}
 
-      {signIn.error?.type === UnifiedErrorResponseTypes.RATE_LIMITED && (
+      {(signIn.error?.type === UnifiedErrorResponseTypes.RATE_LIMITED) && (
         <Alert color="danger">
           {t('common:auth.rateLimited', { count: signIn.error.retryAfter })}
         </Alert>
@@ -247,7 +250,7 @@ const SingInForm: VFC = () => {
 
       <Row className="align-items-center">
         <Col>
-          <Button color="ui" size="lg" disabled={isLoading || rateLimitTimeout !== null}>
+          <Button color="ui" size="lg" disabled={isLoading || rateLimitTimeout.current !== null}>
             <InlineIcon first loading={isLoading} icon="sign-in-alt" />
             {t('common:auth.signInButton')}
           </Button>

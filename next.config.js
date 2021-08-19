@@ -1,6 +1,7 @@
 const {
   NEXT_PUBLIC_CDN_DOMAIN,
   NEXT_PUBLIC_BACKEND_HOST,
+  NEXT_PUBLIC_API_PREFIX,
 } = process.env;
 const { i18n } = require('./next-i18next.config.js');
 const withPlugins = require('next-compose-plugins');
@@ -70,26 +71,13 @@ module.exports = withPlugins(
       }, []);
     },
     async redirects() {
-      return [
-        {
-          source: '/colorguide/appearance/:path*',
-          destination: `/cg/v/:path*`,
-          permanent: true,
-        },
-        {
-          source: '/colorguide/:path*',
-          destination: `/cg/:path*`,
-          permanent: true,
-        },
-      ];
+      return vercelConfig.redirects;
     },
     async rewrites() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: `${NEXT_PUBLIC_BACKEND_HOST}/:path*`,
-        },
-      ];
+      return vercelConfig.rewrites.map(rewrite => rewrite.source === `${NEXT_PUBLIC_API_PREFIX}/:path*` ? {
+        ...rewrite,
+        destination: `${NEXT_PUBLIC_BACKEND_HOST}/:path*`,
+      } : rewrite);
     },
   },
 );

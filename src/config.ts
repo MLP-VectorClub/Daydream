@@ -26,7 +26,7 @@ export const API_DOCS_URL = API_HOST as string;
 /**
  * Global prefix for all api calls, no trailing slash
  */
-export const API_PREFIX = '/api';
+export const API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX || '';
 Axios.defaults.baseURL = IS_CLIENT_SIDE ? API_PREFIX : process.env.NEXT_PUBLIC_BACKEND_HOST;
 
 export const GUEST_AVATAR = '/img/guest.svg';

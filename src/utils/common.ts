@@ -55,7 +55,6 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
     }
     default: {
       const message = get(err, 'response.data.message') as unknown;
-      console.error(err);
       if (typeof message === 'string') {
         return {
           type: UnifiedErrorResponseTypes.MESSAGE_ONLY,

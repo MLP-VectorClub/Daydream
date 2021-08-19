@@ -1,5 +1,5 @@
 import { queryCache } from 'react-query';
-import { ENDPOINTS } from 'src/utils';
+import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
 import { UserService } from 'src/services';
 import { PostUsersRequest, PostUsersSigninRequest } from 'src/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -11,34 +11,46 @@ const invalidateUserSpecificQueries = () => {
 
 export const signInThunk = createAsyncThunk(
   'auth/signIn',
-  async (params: PostUsersSigninRequest) => {
-    await UserService.signIn(params);
-    const response = await UserService.getMe();
+  async (params: PostUsersSigninRequest, { rejectWithValue }) => {
+    try {
+      await requestPromiseMapper(UserService.signIn(params));
+      const data = await requestPromiseMapper(UserService.getMe());
 
-    queryCache.setQueryData(ENDPOINTS.USERS_ME, response.data);
-    invalidateUserSpecificQueries();
-    return response.data;
+      queryCache.setQueryData(ENDPOINTS.USERS_ME, data);
+      invalidateUserSpecificQueries();
+      return data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
   },
 );
 
 export const signOutThunk = createAsyncThunk(
   'auth/signOut',
-  async () => {
-    await UserService.signOut();
+  async (_, { rejectWithValue }) => {
+    try {
+      await requestPromiseMapper(UserService.signOut());
 
-    queryCache.setQueryData(ENDPOINTS.USERS_ME, undefined);
-    invalidateUserSpecificQueries();
+      queryCache.setQueryData(ENDPOINTS.USERS_ME, undefined);
+      invalidateUserSpecificQueries();
+    } catch (e) {
+      return rejectWithValue(e);
+    }
   },
 );
 
 export const registerThunk = createAsyncThunk(
   'auth/register',
-  async (params: PostUsersRequest) => {
-    await UserService.register(params);
-    const response = await UserService.getMe();
+  async (params: PostUsersRequest, { rejectWithValue }) => {
+    try {
+      await requestPromiseMapper(UserService.register(params));
+      const data = await requestPromiseMapper(UserService.getMe());
 
-    queryCache.setQueryData(ENDPOINTS.USERS_ME, response.data);
-    invalidateUserSpecificQueries();
-    return response.data;
+      queryCache.setQueryData(ENDPOINTS.USERS_ME, data);
+      invalidateUserSpecificQueries();
+      return data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
   },
 );

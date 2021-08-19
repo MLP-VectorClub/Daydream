@@ -9,13 +9,13 @@ import {
   GetUsersMeResult,
   GetUsersResult,
   GetUsersTokensResult,
+  PostUsersOauthSigninProviderRequest,
   PostUsersOauthSigninProviderResult,
   PostUsersRequest,
   PostUsersResult,
   PostUsersSigninRequest,
   PostUsersSigninResult,
   PostUsersSignoutResult,
-  PostUsersOauthSigninProviderRequest,
 } from 'src/types';
 import { ENDPOINTS } from 'src/utils';
 import { Service } from 'src/services/service-class';

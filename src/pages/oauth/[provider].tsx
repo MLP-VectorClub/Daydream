@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { Button } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { queryCache } from 'react-query';
 import {
@@ -115,8 +115,13 @@ const OAuthPage: NextPage = () => {
         heading={heading}
         lead={query.error_description || t('oauth:unknownError')}
       />
+      {error?.type === UnifiedErrorResponseTypes.RATE_LIMITED && (
+        <Alert color="danger" className="mt-3 mb-0">
+          {t('common:auth.rateLimited', { count: error.retryAfter })}
+        </Alert>
+      )}
       {closeFnRef.current !== null && (
-        <Button color="danger" onClick={closeFnRef.current}>
+        <Button color="danger" onClick={closeFnRef.current} className="mt-3">
           <InlineIcon first icon="times" />
           {t('oauth:close')}
         </Button>

@@ -116,9 +116,9 @@ const authSlice = createSlice({
       state.register.status = Status.SUCCESS;
       afterAuthChange(state, action.payload);
     },
-    [registerThunk.rejected.type](state, action: PayloadAction<UnifiedErrorResponse>) {
+    [registerThunk.rejected.type](state, action: PayloadAction<void, string, never, UnifiedErrorResponse>) {
       state.register.status = Status.FAILURE;
-      state.register.error = action.payload;
+      state.register.error = action.error;
     },
   },
 });
