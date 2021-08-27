@@ -75,8 +75,8 @@ export const assembleSeoUrl = (pathname?: string): string => {
   return `${host ? `${protocol}//${host}` : APP_HOST}${pathname || ''}`;
 };
 
-export const handleDataFetchingError = (ctx: GetServerSidePropsContext, e: Error): void => {
-  if ('response' in e) {
+export const handleDataFetchingError = (ctx: GetServerSidePropsContext, e: unknown): void => {
+  if (e instanceof Error && 'response' in e) {
     const { response } = e as AxiosError;
     const status = response?.status;
     if (status) {
