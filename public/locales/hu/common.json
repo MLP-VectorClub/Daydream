@@ -61,7 +61,7 @@
     "header": "Contact Us",
     "howTo": "How to contact us",
     "useAnyBelow": "You can use any of the following methods to reach out to us:",
-    "discord": "<0>Join our Discord server</0> and describe your issue/idea in the <2>#support</2> channel",
+    "discord": "<0>Join our Discord server</0> and describe your issue/idea in the <2>#club-helpdesk</2> channel",
     "deviantart": "<0>Send a note</0> to the group on DeviantArt",
     "email": "<0>Send an e-mail</0> to {{email}}"
   },
