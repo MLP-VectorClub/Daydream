@@ -5,7 +5,6 @@ const {
 } = process.env;
 const { i18n } = require('./next-i18next.config.js');
 const withPlugins = require('next-compose-plugins');
-const withESLint = require('./utils/next-eslint');
 const withCamelCaseCSSModules = require('./utils/next-css-modules');
 const { promisify } = require('util');
 const execFile = promisify(require('child_process').execFile);
@@ -15,7 +14,6 @@ const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = withPlugins(
   [
-    [withESLint],
     [withCamelCaseCSSModules],
   ],
   {
