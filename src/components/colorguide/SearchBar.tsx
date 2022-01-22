@@ -53,7 +53,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
   const resultsListRef = useRef<HTMLDivElement>(null);
   const clearButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleAcQueryChange = useRef(debounce(query => setAcQuery(query), 400));
+  const handleAcQueryChange = useRef(debounce((query: string) => setAcQuery(query), 400));
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     const newQuery = e.target.value;
     setSearchQuery(newQuery);
@@ -145,7 +145,8 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
       }
     }
   };
-  const setSearchState = useCallback((query = '') => {
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  const setSearchState = useCallback((query: string = '') => {
     setSearchQuery(query);
     setAcQuery(query);
   }, []);
@@ -164,7 +165,7 @@ const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
     setActiveResult(null);
   }, []);
 
-  // Force update the search query if it changes in the URL
+  // Force an update to the search query if it changes in the URL
   useEffect(() => {
     setSearchState(initialQuery);
   }, [initialQuery, setSearchState]);

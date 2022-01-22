@@ -22,7 +22,7 @@ const MemberList: VFC<PropTypes> = ({ initialMembers, isStaff }) => {
   const { t } = useTranslation();
   // TODO Handle errors
   const { members, status } = useMembers(initialMembers);
-  const membersByRole = useMemo(() => groupBy(members, m => m.role) as UsersByRole, [members]);
+  const membersByRole = useMemo(() => groupBy(members, m => m.role) as unknown as UsersByRole, [members]);
   const loadingSubject = isStaff ? t('users:memberList.staff.loadingSubject') : t('users:memberList.public.loadingSubject');
 
   return (
