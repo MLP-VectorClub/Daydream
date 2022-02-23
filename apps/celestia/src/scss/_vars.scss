@@ -1,0 +1,86 @@
+$primary: #2c73b1;
+$secondary: #696e73;
+$ui: #357;
+$info: #02a;
+
+$club-blue: #1e3db3;
+$discord: #7289da;
+$deviantart: #05cc47;
+$primary-dark: darken($primary, 20);
+
+$link-color: $primary;
+$component-active-bg: $ui;
+
+$font-family-monospace: 'Consolas', monospace;
+$font-family-sans-serif: 'Arimo', sans-serif;
+
+$headings-font-family: 'Celestia', 'Lucida Calligraphy', 'Monotype Corsiva', cursive;
+
+$breadcrumb-padding-y: 0.5rem;
+$breadcrumb-padding-x: 0.5rem;
+$breadcrumb-border-radius: 0;
+$breadcrumb-bg: $primary-dark;
+$breadcrumb-active-color: #fff;
+$breadcrumb-divider-color: rgba($breadcrumb-active-color, 0.5);
+
+$navbar-dark-color: #fff;
+
+$modal-backdrop-bg: #fff;
+$modal-backdrop-opacity: 0.9;
+$modal-header-padding: 0;
+$modal-header-padding-y: 0.6rem;
+
+$alert-color-level: 6;
+$alert-border-level: $alert-color-level;
+
+$theme-colors: (
+  'ui': $ui,
+  'discord': $discord,
+  'deviantart': $deviantart,
+  'club': $club-blue,
+);
+
+$main-margin: 0.5rem;
+$sidebar-width: 20.625rem;
+$footer-height: 2.375rem;
+
+$content-outline: rgba(188, 188, 188, 0.8);
+$content-bg: rgba(255, 255, 255, 0.75);
+
+$link-color: #337287;
+$link-hover-color: desaturate(lighten($link-color, 13), 7);
+$link-color-light: lighten($link-color, 30);
+$link-hover-color-light: lighten($link-hover-color, 37);
+
+$sidebar-breakpoint-up: lg;
+$sidebar-breakpoint-down: md;
+$SidebarBackground: darken($primary, 24);
+$SidebarBackgroundMobile: rgba($SidebarBackground, 0.95);
+$SidebarWidth: 330px;
+$MainMargin: 8px;
+$SidebarContentColor: rgba(white, 0.75);
+$SidebarContentBorder: rgba(white, 0.3);
+$SidebarContentBackground: rgba(white, 0.1);
+
+$navbar-padding-y: 0.313rem;
+
+$code-color: adjust-hue($club-blue, -40);
+
+$tag-color-base: #0c70b1;
+$tag-color-default: gray;
+$tag-color-category: $tag-color-base;
+$tag-color-species: adjust_hue($tag-color-base, -80);
+$tag-color-gender: adjust_hue($tag-color-base, 60);
+$tag-color-clothing: adjust_hue($tag-color-base, 120);
+$tag-color-warning: adjust_hue($tag-color-base, 160);
+$tag-color-episode: adjust_hue($tag-color-base, 190);
+$tag-color-character: adjust_hue($tag-color-base, 240);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 2250px,
+);

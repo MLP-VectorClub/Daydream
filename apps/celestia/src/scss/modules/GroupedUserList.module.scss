@@ -1,0 +1,36 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+@import '../mixins/clearfix';
+
+.letter-group {
+  display: block;
+  @include clearfix;
+
+  &:first-child {
+    margin-top: 10px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  strong {
+    float: left;
+    margin-right: 0.5em;
+    margin-bottom: 0.1em;
+    font-family: $font-family-monospace;
+    font-size: 2em;
+    line-height: 1em;
+    position: relative;
+    top: -0.1em;
+  }
+
+  .user-link {
+    display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: 0.75em;
+    }
+  }
+}

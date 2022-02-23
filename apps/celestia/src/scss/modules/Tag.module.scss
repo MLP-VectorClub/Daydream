@@ -1,0 +1,76 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+@import '~bootstrap-scss/mixins';
+
+@mixin tag-variant($color: $tag-color-default) {
+  $border: mix(white, $color, 10%);
+  $background: lighten($color, 50%);
+  $background-hover: desaturate(darken($background, 5%), 20%);
+
+  background-color: $background;
+
+  &,
+  &:hover,
+  &:active {
+    color: $border;
+  }
+
+  &:hover {
+    background-color: $background-hover;
+  }
+
+  &:focus {
+    @if $enable-shadows {
+      @include box-shadow($btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), 0.5));
+    } @else {
+      box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), 0.5);
+    }
+  }
+}
+
+.tag {
+  border-radius: $btn-border-radius;
+  border: 1px solid;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0.05rem 0.3rem;
+  font-weight: bolder;
+  transition: background-color, opacity;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  @include tag-variant();
+
+  &.synonym {
+    font-weight: normal !important;
+    letter-spacing: -0.8px;
+
+    &:not(:hover):not(:focus) {
+      opacity: 0.6;
+    }
+  }
+
+  &.type-category {
+    @include tag-variant($tag-color-category);
+  }
+
+  &.type-species {
+    @include tag-variant($tag-color-species);
+  }
+
+  &.type-gender {
+    @include tag-variant($tag-color-gender);
+  }
+
+  &.type-clothing {
+    @include tag-variant($tag-color-clothing);
+  }
+
+  &.type-warning {
+    @include tag-variant($tag-color-warning);
+  }
+
+  &.type-character {
+    @include tag-variant($tag-color-character);
+  }
+}

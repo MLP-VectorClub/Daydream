@@ -1,0 +1,30 @@
+.color-square {
+  font-size: 0;
+  speak: none;
+  color: transparent;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 0.125rem;
+  box-sizing: content-box;
+  transform: scale(1);
+  will-change: transform, box-shadow;
+  width: 2.15rem;
+  height: 2.15rem;
+
+  &:not(:empty) {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 0 1px black, inset 0 0 0 1px white;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
+
+.compact-color-square {
+  width: 0.875rem;
+  height: 0.875rem;
+}

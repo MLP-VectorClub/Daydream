@@ -1,0 +1,11 @@
+@mixin link($color: $link-color, $hover: $link-hover-color) {
+  color: $color;
+  text-decoration: none !important;
+  transition: color 0.2s linear;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: $hover;
+  }
+}

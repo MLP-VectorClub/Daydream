@@ -1,9 +1,0 @@
-.button-collection {
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-
-  > :not(:last-child) {
-    margin-right: .5rem;
-  }
-}

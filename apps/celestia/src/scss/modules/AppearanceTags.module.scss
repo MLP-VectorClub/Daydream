@@ -1,0 +1,12 @@
+.tags {
+  display: block;
+  padding-bottom: 0.3rem;
+
+  > * {
+    margin-bottom: 0.3rem;
+
+    &:not(:last-child) {
+      margin-right: 0.3rem;
+    }
+  }
+}

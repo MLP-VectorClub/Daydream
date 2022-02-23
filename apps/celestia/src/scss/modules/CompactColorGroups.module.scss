@@ -1,0 +1,42 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+
+.compact-color-groups {
+  display: flex;
+  flex-flow: row wrap;
+
+  .compact-color-group {
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem 0.35rem;
+    border: $border-width solid $border-color;
+    background-color: mix($border-color, white, 35%);
+    margin-bottom: 0.3rem;
+
+    &:not(:last-child) {
+      margin-right: 0.3rem;
+    }
+  }
+}
+
+.compact-color-group-label {
+  line-height: 1.2rem;
+
+  &:after {
+    content: ':';
+    margin-right: 0.3rem;
+  }
+}
+
+.compact-color-list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+
+  > :not(:last-child) {
+    margin-right: 0.2rem;
+  }
+}

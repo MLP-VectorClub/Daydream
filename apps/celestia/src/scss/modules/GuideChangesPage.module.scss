@@ -1,0 +1,16 @@
+.changes {
+  padding: 0;
+  margin: 0 auto 10px;
+  min-width: 50%;
+  max-width: 100%;
+  text-align: center;
+  width: auto;
+
+  td,
+  th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+}

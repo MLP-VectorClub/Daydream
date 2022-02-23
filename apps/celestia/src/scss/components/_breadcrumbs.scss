@@ -1,0 +1,46 @@
+#breadcrumbs {
+  position: relative;
+  color: #fff;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    $size: 8px;
+    left: 0;
+    bottom: -$size;
+    z-index: 3;
+    width: $size;
+    height: $size;
+    background: url('/img/sidebar-corner.svg') no-repeat top left;
+    background-size: $size * 2;
+  }
+
+  .breadcrumb {
+    padding: 5px;
+    margin: 0;
+
+    @include media-breakpoint-up(lg) {
+      padding: $main-margin;
+    }
+  }
+
+  .breadcrumb-item-divider + .breadcrumb-item {
+    padding-left: 0;
+
+    &:before {
+      font-weight: normal;
+    }
+  }
+
+  .breadcrumb-item {
+    line-height: 1.125rem;
+    display: inline;
+    color: inherit;
+  }
+
+  a.breadcrumb-item {
+    text-decoration: underline;
+    font-weight: normal;
+  }
+}

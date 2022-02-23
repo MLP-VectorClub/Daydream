@@ -1,0 +1,29 @@
+.color-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
+
+  .color-info {
+    margin-left: 0.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    line-height: 1.2;
+
+    &.detailed .color-label {
+      font-size: 1.1rem;
+    }
+
+    .color-label {
+      font-size: 1.2rem;
+    }
+
+    .color-details {
+      font-size: 0.75rem;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.appearance-link {
+  display: inline-flex;
+  align-items: center;
+  flex-flow: row wrap;
+
+  .appearance-preview {
+    height: 1em;
+    border-color: currentColor;
+    margin-right: 0.5em;
+  }
+}

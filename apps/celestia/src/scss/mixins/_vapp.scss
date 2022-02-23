@@ -1,0 +1,69 @@
+// Vector app styles
+@mixin vapp($Base, $imgname) {
+  $RGradTop: lighten($Base, 40);
+  $RBorder: desaturate(lighten($Base, 20), 40);
+  &.avatar-wrap {
+    border-color: $RBorder;
+    background-color: lighten($RGradTop, 5);
+  }
+  &.reserver .da-userlink {
+    border-color: mix(#93a98f, $RBorder, 70%);
+    background: mix(#d2dfc5, $RGradTop, 70%);
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s linear !important;
+
+    > .avatar {
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    $avatarsize: 40px;
+    $border: 1px;
+
+    &:after {
+      content: '';
+      display: block;
+      background: url('/img/vapps/#{$imgname}.svg') no-repeat center center;
+      background-size: contain;
+      position: absolute;
+      $size: 18px;
+      $spacearound: $avatarsize - $size - $border;
+      width: $size;
+      height: $size;
+      top: $spacearound;
+      left: $spacearound;
+      opacity: 0.8;
+
+      transition-property: opacity, top, left, width, height;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+
+    &:hover {
+      background-color: $RGradTop;
+      border-color: $RBorder;
+
+      &:after {
+        opacity: 1;
+
+        $size: 32px;
+        $spacearound: $avatarsize - $size - ($border * 2);
+        width: $size;
+        height: $size;
+        top: $spacearound/2;
+        left: $spacearound/2;
+      }
+
+      > .avatar {
+        opacity: 0.3;
+      }
+    }
+
+    &.local.provider-discord:hover:after {
+      $size: 24px;
+      $spacearound: $avatarsize - $size - ($border * 2);
+      width: $size;
+      height: $size;
+      top: $spacearound/2;
+      left: $spacearound/2;
+    }
+  }
+}

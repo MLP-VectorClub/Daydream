@@ -1,0 +1,92 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+@import '~bootstrap-scss/mixins';
+
+.guide-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0;
+  padding: 0;
+
+  @include media-breakpoint-up(lg) {
+    flex-wrap: nowrap;
+  }
+
+  a {
+    flex: 1 1 100%;
+    max-width: calc(100% - 10px);
+    display: block;
+    box-sizing: border-box;
+    margin: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-decoration: none !important;
+    cursor: pointer;
+  }
+
+  .guide-figure {
+    margin: 0;
+    padding: 10px;
+    height: 100%;
+
+    @include media-breakpoint-down(md) {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      .guide-icon {
+        width: 75px;
+        margin-right: 1rem;
+      }
+
+      figcaption {
+        text-align: left;
+        padding-left: 10px;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: stretch;
+
+      .guide-icon {
+        width: 100px;
+        margin: 0 auto;
+        flex: 1 1 auto;
+      }
+
+      figcaption {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+      }
+    }
+
+    @include media-breakpoint-up($sidebar-breakpoint-up) {
+      .guide-icon {
+        width: 200px;
+      }
+    }
+  }
+
+  .guide-icon {
+    max-width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+
+  .guide-name,
+  .guide-count {
+    display: block;
+  }
+
+  .guide-count {
+    color: black;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+}

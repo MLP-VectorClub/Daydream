@@ -1,0 +1,27 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+@import '~bootstrap-scss/mixins';
+
+.preview {
+  background: url(/img/transparency.svg) repeat center;
+  background-size: 16px;
+  border: 1px solid #000;
+  display: block;
+  margin: 0 auto;
+
+  &,
+  & canvas {
+    height: 300px;
+    width: 300px;
+    pointer-events: none;
+
+    @supports (image-rendering: crisp-edges) {
+      @include media-breakpoint-up(xxl) {
+        height: 600px;
+        width: 600px;
+        image-rendering: crisp-edges;
+      }
+    }
+  }
+}

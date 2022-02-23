@@ -1,0 +1,29 @@
+#main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: calc(100% - #{header-height() + $footer-height});
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+
+  @include media-breakpoint-up($sidebar-breakpoint-up) {
+    padding-left: $sidebar-width;
+  }
+  @include media-breakpoint-down($sidebar-breakpoint-down) {
+    padding-left: 0;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 5px;
+    @include gray-grid;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: $main-margin $main-margin #{$main-margin + $footer-height} $main-margin;
+  }
+
+  @include media-breakpoint-up($sidebar-breakpoint-up) {
+    padding-left: $sidebar-width + $main-margin;
+  }
+}
