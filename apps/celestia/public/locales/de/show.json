@@ -1,0 +1,21 @@
+{
+  "index": {
+    "edit": "Edit {{typeName}}",
+    "delete": "Delete {{typeName}}",
+    "typeNames": {
+      "episode": "Episode",
+      "movie": "Movie",
+      "short": "Short",
+      "special": "Special"
+    },
+    "episodes": {
+      "heading": "TV Episodes",
+      "addNoun": "Episode"
+    },
+    "others": {
+      "heading": "Movies, Shorts & Specials",
+      "addNoun": "Entry"
+    },
+    "airDateFormat": "EEEE, do MMMM yyyy, H:mm:ss"
+  }
+}
