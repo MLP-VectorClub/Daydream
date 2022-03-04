@@ -1,0 +1,122 @@
+{
+  "footer": {
+    "lastUpdate": "Last update",
+    "unknown": "Unknown",
+    "showGitInfo": "Show version information",
+    "hideGitInfo": "Hide version information",
+    "commitTitle": "See exactly what was changed and why",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "created": "created",
+    "visitGithub": "Visit the GitHub repository",
+    "privacyPolicy": "Privacy Policy",
+    "contactUs": "Contact Us",
+    "api": "API Docs",
+    "apiMeaning": "Application Programming Interface – for developers"
+  },
+  "titles": {
+    "colorGuides": "Color Guides",
+    "colorGuideByName": "{{guideName}} Color Guide",
+    "colorGuideByNameAndPage": "Page {{page}} - {{guideName}} Color Guide",
+    "colorGuideList": "Color Guide List",
+    "profile": "Profile",
+    "connectionInfo": "Connection Info",
+    "profileByName": "{{name}} - Profile",
+    "yourProfile": "Your Profile",
+    "show": "Show",
+    "events": "Events",
+    "about": "About",
+    "admin": "Admin",
+    "404": "Not Found",
+    "latestEpisode": "Latest Episode",
+    "privacyPolicy": "Privacy Policy",
+    "users": "Users",
+    "members": "Members",
+    "clubMembers": "Club Members",
+    "account": "Account",
+    "home": "Home"
+  },
+  "error": {
+    "withStatus": "Error {{statusCode}}!",
+    "withoutStatus": "Unknown Error!",
+    "404": {
+      "heading": "404 Not Found",
+      "lead": "This page does not exist"
+    }
+  },
+  "sidebar": {
+    "welcome": "Welcome!",
+    "backendDown": "Signing in is not possible at the moment. Please check back later.",
+    "sessionUpdating": "Updating your session",
+    "authCheck": "Checking if you are logged in",
+    "signOut": "Sign Out",
+    "signIn": "Sign In",
+    "joinDiscord": "Join Discord",
+    "confirmSignOut": "Are you sure you want to sign out?",
+    "csrfInitializing": "Fetching CSRF token",
+    "authInitializing": "Fetching user data",
+    "usefulLinks": "Useful links"
+  },
+  "contact": {
+    "header": "Contact Us",
+    "howTo": "How to contact us",
+    "useAnyBelow": "You can use any of the following methods to reach out to us:",
+    "discord": "<0>Join our Discord server</0> and describe your issue/idea in the <2>#club-helpdesk</2> channel",
+    "deviantart": "<0>Send a note</0> to the group on DeviantArt",
+    "email": "<0>Send an e-mail</0> to {{email}}"
+  },
+  "guestUserName": "Curious Pony",
+  "roleLabel": {
+    "guest": "Guest",
+    "user": "DeviantArt User",
+    "member": "Club Member",
+    "assistant": "Assistant",
+    "staff": "Staff",
+    "admin": "Administrator",
+    "developer": "Site Developer"
+  },
+  "auth": {
+    "signInTitle": "Let's get you signed in",
+    "signUpTitle": "Create an account",
+    "noAccountYet": "No account yet? Create one here!",
+    "alreadyHaveAccount": "Already have an account? Sign in here!",
+    "accountBenefits": "An account allows you to customize the site's behavior, with many more features yet to come.",
+    "name": "Display Name",
+    "nameHelp": "Only English letters, digits, dashes and underscores. Must be between {{min}} and {{max}} characters. Can be changed later.",
+    "email": "E-Mail Address",
+    "emailHelp": "Use a valid e-mail address that can receive messages to ensure you do not lose access to your account. This address must be confirmed after signing up. <1>We will not send you spam.</1>",
+    "password": "Password",
+    "passwordHelp": "Must be at least {{min}} characters long and not commonly used.",
+    "rememberMe": "Keep me signed in",
+    "signInButton": "Sign In",
+    "registerButton": "Create Account",
+    "invalidCredentials": "Incorrect e-mail address or password",
+    "rateLimited": "Too many signin attempts, please try again in {{count}} second",
+    "rateLimited_plural": "Too many signin attempts, please try again in {{count}} seconds",
+    "hidePassword": "Hide Password",
+    "showPassword": "Show Password",
+    "forgotPassword": "Forgot password?",
+    "pwResetNotYetAvailable": "The password reset feature is not available yet",
+    "socialSignIn": {
+      "alternatively": "alternatively",
+      "signInWith": "Sign in with {{provider}}"
+    },
+    "acceptPrivacyPolicy": "I accept the <1>Privacy Policy</1>"
+  },
+  "validation": {
+    "required": "Please fill in this field",
+    "tooLong": "Cannot be longer than {{count}} characters",
+    "tooShort": "Cannot be shorter than {{count}} characters",
+    "email": "Please enter a valid e-mail address",
+    "acceptPrivacyPolicy": "You must accept the privacy policy",
+    "format": "Please match the specified format"
+  },
+  "pagination": {
+    "page": "Page",
+    "go": "Go",
+    "itemsPerPage": "Displaying {{count}} item/page",
+    "itemsPerPage_plural": "Displaying {{count}} items/page"
+  },
+  "tmdbDisclaimer": "This product uses the TMDb API but is not endorsed or certified by TMDb.",
+  "wipNotice": "This website is a work-in-progress, for our current live site please visit <1>{{url}}</1>"
+}
