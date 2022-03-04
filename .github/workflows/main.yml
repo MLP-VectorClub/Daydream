@@ -2,6 +2,14 @@ name: Build & Test
 
 on: [push, pull_request]
 
+env:
+  API_JSON_PATH: https://api.example.com/generated/api-docs.json
+  NEXT_PUBLIC_BACKEND_HOST: https://api.example.com
+  NEXT_PUBLIC_FRONTEND_HOST: https://example.com
+  NEXT_PUBLIC_CDN_DOMAIN: cdn.example.com
+  NEXT_PUBLIC_API_PREFIX: /api
+
+
 jobs:
   build-and-test:
     name: 'Linting and Unit Tests'
