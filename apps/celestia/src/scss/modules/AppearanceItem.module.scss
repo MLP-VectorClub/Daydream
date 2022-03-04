@@ -1,0 +1,10 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+
+.appearance-item {
+  .appearance-name {
+    font-family: $font-family-base;
+    font-weight: bold;
+  }
+}

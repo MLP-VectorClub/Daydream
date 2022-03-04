@@ -10,30 +10,22 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
     CMD_FETCH="$GIT fetch"
     CMD_YARN="yarn"
     CMD_BUILD="nice yarn build"
-    CMD_RESTART="pm2 reload pm2.json"
+    CMD_RESTART="yarn reload"
 
     echo "$ $CMD_CD"
     eval ${CMD_CD}
     echo "$ $CMD_FETCH"
     eval ${CMD_FETCH}
 
-    if $GIT diff --name-only $oldrev $newrev | grep "^yarn.lock"; then
-        echo "$ $CMD_YARN"
-        eval $CMD_YARN
-    else
-        echo "# Skipping yarn install, lockfile not modified"
-    fi
+    echo "$ $CMD_YARN"
+    eval $CMD_YARN
 
-    if $GIT diff --name-only $oldrev $newrev | grep "^\(src\|public\|yarn.lock\)/"; then
-        echo "$ $CMD_BUILD"
-        if eval $CMD_BUILD; then
-          echo "Build successful"
-        else
-          echo "Build failed"
-          exit 1
-        fi
+    echo "$ $CMD_BUILD"
+    if eval $CMD_BUILD; then
+      echo "Build successful"
     else
-        echo "# Skipping build, no changes in src or public folders"
+      echo "Build failed"
+      exit 1
     fi
 
     echo "$ $CMD_RESTART"

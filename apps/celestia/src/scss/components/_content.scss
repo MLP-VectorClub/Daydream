@@ -1,0 +1,30 @@
+#content {
+  border-radius: 5px;
+  border: 1px solid $content-outline;
+  background-color: $content-bg;
+  padding: 1rem;
+  color: $black;
+  box-sizing: border-box;
+  width: 100%;
+
+  .page-heading {
+    text-align: center;
+    margin: 0 0 0.3rem;
+    font-family: $headings-font-family;
+
+    + .page-lead {
+      text-align: center;
+      margin: 0 0 0.75rem;
+
+      &,
+      > .btn {
+        font-style: italic !important;
+      }
+
+      .dropdown-menu {
+        font-style: normal;
+        font-size: 1rem;
+      }
+    }
+  }
+}

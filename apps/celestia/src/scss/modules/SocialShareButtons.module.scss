@@ -1,0 +1,29 @@
+.social-sharing {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 2rem;
+
+  > :not(:last-child) {
+    margin-right: 0.75rem;
+  }
+}
+
+.telegram-color {
+  color: #36aee2 !important;
+}
+
+.twitter-color {
+  color: #06abed !important;
+}
+
+.whatsapp-color {
+  color: #24d366 !important;
+}
+
+.email-color {
+  color: #7f7f7f !important;
+}
+
+.vk-color {
+  color: #44668e !important;
+}

@@ -1,0 +1,10 @@
+@import '../functions';
+
+.staff-block {
+  display: inline-block;
+  font-size: 1.75rem;
+
+  > :not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}

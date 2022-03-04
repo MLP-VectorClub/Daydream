@@ -1,0 +1,57 @@
+name: Build & Test
+
+on: [push, pull_request]
+
+env:
+  API_JSON_PATH: https://api.example.com/generated/api-docs.json
+  NEXT_PUBLIC_BACKEND_HOST: https://api.example.com
+  NEXT_PUBLIC_FRONTEND_HOST: https://example.com
+  NEXT_PUBLIC_CDN_DOMAIN: cdn.example.com
+  NEXT_PUBLIC_API_PREFIX: /api
+
+
+jobs:
+  build-and-test:
+    name: 'Linting and Unit Tests'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: |
+          echo "::set-output name=dir::$(yarn cache dir)"
+          echo "::set-output name=version::$(yarn -v)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: yarn build
+        run: yarn build --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}"
+
+      - run: yarn lint
+
+      - run: yarn test

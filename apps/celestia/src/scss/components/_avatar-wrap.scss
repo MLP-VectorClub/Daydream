@@ -1,0 +1,25 @@
+.avatar-wrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  flex: 1 1 auto;
+  margin: 0;
+  user-select: none;
+  color: #777;
+  border: 0.125rem solid;
+  background-color: #efefef;
+  box-sizing: content-box;
+
+  &.provider-deviantart,
+  &.provider-gravatar {
+    border-radius: 5px;
+  }
+
+  &.provider-discord {
+    border-radius: 50%;
+  }
+
+  * {
+    display: block !important;
+  }
+}

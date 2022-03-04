@@ -1,0 +1,20 @@
+$outline-strength-light: 0;
+$outline-strength-normal: 1;
+$outline-strength-medium: 2;
+$outline-strength-maximum: 3;
+
+@mixin outline($strength: $outline-strength-maximum, $color: #fff) {
+  $size: 0.133em;
+  @if ($strength <= $outline-strength-light) {
+    text-shadow: 0 0 $size $color, 0 0 $size $color;
+  }
+  @if ($strength == $outline-strength-normal) {
+    text-shadow: 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color;
+  } @else if ($strength == $outline-strength-medium) {
+    text-shadow: 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color,
+      0 0 $size $color, 0 0 $size $color;
+  } @else if ($strength >= $outline-strength-maximum) {
+    text-shadow: 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color,
+      0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color, 0 0 $size $color;
+  }
+}

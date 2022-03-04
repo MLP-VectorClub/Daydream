@@ -1,0 +1,8 @@
+@mixin lazy-opacity {
+  opacity: 1;
+  transition: 0.3s ease-in;
+
+  &.__lazy {
+    opacity: 0;
+  }
+}

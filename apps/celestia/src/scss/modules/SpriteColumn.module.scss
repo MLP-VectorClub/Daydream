@@ -1,0 +1,9 @@
+@import '../mixins/lazy-opacity';
+
+.sprite-image {
+  height: 150px;
+  min-width: 150px;
+  display: block;
+
+  @include lazy-opacity;
+}

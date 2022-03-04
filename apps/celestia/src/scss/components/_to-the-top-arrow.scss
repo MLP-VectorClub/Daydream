@@ -1,0 +1,26 @@
+#to-the-top {
+  $header-height: header-height();
+  display: block;
+  position: absolute;
+  z-index: $zindex-fixed + 1;
+  top: 0;
+  right: -$header-height;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.1s linear, right 0.1s linear;
+  width: $header-height;
+  height: $header-height;
+  cursor: pointer;
+  font-size: $header-height * 0.75;
+  line-height: $header-height;
+  padding: 0;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+
+  &.show {
+    opacity: 1;
+    right: 0;
+  }
+}

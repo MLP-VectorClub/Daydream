@@ -1,0 +1,40 @@
+@import '../vars';
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/variables';
+
+.list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.sprite-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.appearance-preview {
+  width: 100px;
+  height: 100px;
+}
+
+.card-body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.label {
+  font-family: $font-family-base !important;
+  font-weight: bold;
+}
+
+.aka {
+  display: block;
+  color: $black;
+  font-size: 0.7rem;
+  font-weight: bold;
+}

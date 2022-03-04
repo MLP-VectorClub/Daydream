@@ -1,0 +1,150 @@
+html {
+  background-color: $primary;
+  min-height: 100vh;
+}
+
+body {
+  background: $primary;
+  margin: 0 !important;
+  min-height: 100vh;
+
+  &:not(.layout-disabled) {
+    padding-top: header-height();
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include gray-grid;
+  }
+
+  @include media-breakpoint-down(md) {
+    overflow: initial;
+
+    &:before {
+      z-index: 2;
+      transition: left 0.4s linear;
+    }
+
+    &.sidebar-open {
+      overflow: hidden;
+
+      &:before {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(black, 0.7);
+      }
+    }
+  }
+}
+
+.breadcrumb-item.active {
+  font-weight: bold;
+}
+
+.faded {
+  opacity: $btn-disabled-opacity;
+}
+
+#content > :last-child {
+  margin-bottom: 0 !important;
+}
+
+// Bootstrap dropdown overrides
+.dropdown-header {
+  font-family: $font-family-base !important;
+}
+
+// Bootstrap modal overrides
+.modal {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    font-family: $font-family-base !important;
+  }
+}
+
+.modal-header {
+  .modal-title {
+    font-weight: normal !important;
+    padding: $modal-header-padding-y $modal-header-padding-x;
+  }
+
+  .close {
+    opacity: 1;
+    margin: 0 !important;
+    padding: $modal-header-padding-y $modal-header-padding-x;
+    line-height: $headings-line-height;
+  }
+}
+
+.modal-content {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+@each $color, $value in $theme-colors {
+  .modal-#{$color} {
+    @if ($color != 'ui') {
+      color: $value !important;
+    }
+
+    .modal-content,
+    .modal-header,
+    .modal-footer {
+      border-color: $value !important;
+    }
+
+    .modal-header {
+      background-color: $value !important;
+
+      &,
+      .close {
+        color: color-yiq($value) !important;
+      }
+    }
+  }
+}
+
+abbr[aria-label],
+time[id] {
+  @extend abbr, [title];
+}
+
+.app-illustrator {
+  @include vapp(#f80, 'illustrator');
+}
+
+.app-inkscape {
+  @include vapp(#0af, 'inkscape');
+}
+
+.app-ponyscape {
+  @include vapp(#f00, 'ponyscape');
+}
+
+#content,
+.modal-content,
+.notice {
+  a:not(.btn):not(.dropdown-item) {
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+// Prevent RQDt from blocking the entire right edge of the page
+.ReactQueryDevtools button[style*='top:0'] {
+  bottom: initial !important;
+}
