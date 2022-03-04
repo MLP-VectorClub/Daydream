@@ -9,7 +9,8 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "type-check": "tsc",
-    "api:types": "node utils/generate-types.js"
+    "api:types": "node utils/generate-types.js",
+    "reload": "pm2 reload pm2.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
