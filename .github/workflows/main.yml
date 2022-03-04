@@ -1,0 +1,30 @@
+name: Build & Test
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    name: 'Linting and Unit Tests'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
+
+      - run: yarn
+
+      - name: yarn build
+        run: yarn build --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="foo"
+
+      - run: yarn lint
+
+      - run: yarn test
