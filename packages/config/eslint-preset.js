@@ -50,6 +50,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
     'arrow-parens': ['error', 'always'],
     camelcase: 'off',
     'consistent-return': 'off',

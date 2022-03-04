@@ -29,7 +29,7 @@
     "express": "^4.17.1",
     "file-saver": "^2.0.5",
     "hamburger-react": "^1.4.0",
-    "html-to-react": "^1.4.8",
+    "html-to-react": "1.4.7",
     "http-proxy-middleware": "^1.0.3",
     "http-status-codes": "^2.1.4",
     "i18next": "^20.3.2",
