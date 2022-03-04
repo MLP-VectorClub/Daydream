@@ -23,7 +23,7 @@ jobs:
       - run: yarn
 
       - name: yarn build
-        run: yarn build --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="foo"
+        run: yarn build --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}"
 
       - run: yarn lint
 
