@@ -201,7 +201,10 @@ export interface AppearanceList {
   appearances: Appearance[];
 }
 
-export type Order = ErrorResponse;
+/**
+ * Used for displaying items in a specific order. The API guarantees that array return values are sorted in ascending order based on this property.
+ */
+export type Order = number;
 
 /**
  * Array of color groups under the `colorGroups` key
@@ -405,11 +408,7 @@ export interface GuideFullListGroups {
   groups: GuideFullListGroupItem[];
 }
 
-export type AppearancePreviewData =
-  | [string]
-  | [string, string]
-  | [string, string, string]
-  | [string, string, string, string];
+export type AppearancePreviewData = [string] | [string, string] | [string, string, string] | [string, string, string, string];
 
 /**
  * Minimal set of properties to display an appearance link, optionally with a colored preview
@@ -623,7 +622,6 @@ export interface CommitData {
  */
 export type AppSettings = 'dev_role_label';
 
-
 export interface GetAppearancesRequest {
   guide: GuideName;
   page?: PageNumber;
@@ -668,17 +666,17 @@ export interface GetAppearancesIdLocateRequest {
   id: ZeroBasedId;
 }
 
-export type PostUsersSigninRequest = SigninRequest
+export type PostUsersSigninRequest = SigninRequest;
 
 export interface GetUsersOauthSigninProviderRequest {
   provider: SocialProvider;
 }
 
 export type PostUsersOauthSigninProviderRequest = OauthCode & {
-  provider: SocialProvider
-}
+  provider: SocialProvider;
+};
 
-export type PostUsersRequest = RegistrationRequest
+export type PostUsersRequest = RegistrationRequest;
 
 export interface GetColorGuideMajorChangesRequest {
   guide: GuideName;
@@ -705,7 +703,6 @@ export interface GetUsersIdRequest {
   id: OneBasedId;
 }
 
-
 export interface DeleteUsersTokensIdRequest {
   id: number;
 }
@@ -722,9 +719,9 @@ export type GetAppearancesIdResult = DetailedAppearance;
 
 export type GetAppearancesIdColorGroupsResult = ListOfColorGroups;
 
-export type GetAppearancesIdSpriteResult = any
-export type GetAppearancesIdSprite302 = any
-export type GetAppearancesIdPreviewResult = any
+export type GetAppearancesIdSpriteResult = any;
+export type GetAppearancesIdSprite302 = any;
+export type GetAppearancesIdPreviewResult = any;
 export type GetAppearancesPinnedResult = Appearance[];
 
 export type GetAppearancesAutocompleteResult = AutocompleteAppearance[];
@@ -735,21 +732,21 @@ export interface PostUsersSigninResult {
   token?: string;
 }
 
-export type PostUsersSignin204 = any
-export type GetUsersOauthSigninProviderResult = any
+export type PostUsersSignin204 = any;
+export type GetUsersOauthSigninProviderResult = any;
 
 export interface PostUsersOauthSigninProviderResult {
   token?: string;
 }
 
-export type PostUsersOauthSigninProvider204 = any
+export type PostUsersOauthSigninProvider204 = any;
 export type GetUsersResult = BarePublicUser[];
 
 export interface PostUsersResult {
   token?: string;
 }
 
-export type PostUsers204 = any
+export type PostUsers204 = any;
 
 export interface GetColorGuideResult {
   entryCounts: GuideEntryCounts;
@@ -757,7 +754,7 @@ export interface GetColorGuideResult {
 
 export type GetColorGuideMajorChangesResult = MajorChangeList & PageData;
 
-export type GetSanctumCsrfCookieResult = any
+export type GetSanctumCsrfCookieResult = any;
 export type GetShowResult = ShowList & PageData;
 
 export type GetUsefulLinksSidebarResult = PublicUsefulLink[];
@@ -770,7 +767,7 @@ export type GetUsersDaUsernameResult = PublicUser;
 
 export type GetUsersIdResult = PublicUser;
 
-export type PostUsersSignoutResult = any
+export type PostUsersSignoutResult = any;
 
 export interface GetUsersTokensResult {
   /**
@@ -783,4 +780,4 @@ export interface GetUsersTokensResult {
   tokens: [Token, ...Token[]];
 }
 
-export type DeleteUsersTokensIdResult = any
+export type DeleteUsersTokensIdResult = any;
