@@ -6,8 +6,6 @@
     "dist"
   ],
   "scripts": {
-    "prepublishOnly": "yarn build",
-    "release": "np",
     "build": "node ./util/generate-types.js"
   },
   "repository": {
@@ -23,18 +21,10 @@
   },
   "devDependencies": {
     "@seinopsys-forks/openapi-to-typescript": "^0.0.11",
-    "np": "^7.6.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.7"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "np": {
-    "branch": "main",
-    "cleanup": false,
-    "releaseDraft": false,
-    "tests": false,
-    "message": "@mlp-vectorclub/api-types release %s"
   }
 }
