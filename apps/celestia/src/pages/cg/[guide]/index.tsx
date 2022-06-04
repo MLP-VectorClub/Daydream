@@ -1,6 +1,7 @@
 import { Button } from 'reactstrap';
 import { useMemo } from 'react';
-import { GetAppearancesPinnedResult, GetAppearancesResult, GuideName, Nullable, Optional } from 'src/types';
+import { Nullable, Optional } from 'src/types';
+import { GetAppearancesPinnedResult, GetAppearancesResult, GuideName } from '@mlp-vectorclub/api-types';
 import { getGuideLabel, getGuideTitle, handleDataFetchingError, notFound, resolveGuideName } from 'src/utils';
 import { AppDispatch, wrapper } from 'src/store';
 import { useAuth, useGuide, usePrefs, useTitleSetter } from 'src/hooks';

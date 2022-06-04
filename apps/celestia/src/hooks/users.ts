@@ -1,4 +1,4 @@
-import { GetAboutMembersResult } from 'src/types';
+import { GetAboutMembersResult } from '@mlp-vectorclub/api-types';
 import { useQuery } from 'react-query';
 import { ENDPOINTS, mapQueryStatus } from 'src/utils';
 import { membersFetcher, usersFetcher } from 'src/fetchers';

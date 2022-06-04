@@ -1,13 +1,8 @@
 import { useQuery } from 'react-query';
 import { ParsedUrlQuery } from 'querystring';
 import { ENDPOINTS, mapQueryStatus } from 'src/utils';
-import {
-  PostUsersOauthSigninProviderRequest,
-  PostUsersOauthSigninProviderResult,
-  SocialProvider,
-  Status,
-  UnifiedErrorResponse,
-} from 'src/types';
+import { Status, UnifiedErrorResponse } from 'src/types';
+import { PostUsersOauthSigninProviderRequest, PostUsersOauthSigninProviderResult, SocialProvider } from '@mlp-vectorclub/api-types';
 import { useAuth } from 'src/hooks/auth';
 import { oauthRegistrationFetcher } from 'src/fetchers';
 import { useCallback } from 'react';

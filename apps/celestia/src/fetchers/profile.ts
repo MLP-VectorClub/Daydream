@@ -1,6 +1,6 @@
 import { requestPromiseMapper } from 'src/utils';
 import { UserService } from 'src/services';
-import { GetUsersDaUsernameRequest, GetUsersIdRequest } from 'src/types';
+import { GetUsersDaUsernameRequest, GetUsersIdRequest } from '@mlp-vectorclub/api-types';
 
 export type FetchUserParams = GetUsersDaUsernameRequest | GetUsersIdRequest;
 

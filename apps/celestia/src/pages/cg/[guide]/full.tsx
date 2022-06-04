@@ -10,7 +10,8 @@ import {
   notFound,
   resolveGuideName,
 } from 'src/utils';
-import { FullGuideSortField, GetAppearancesAllResult, GuideName, Nullable, Optional, Translatable } from 'src/types';
+import { Nullable, Optional, Translatable } from 'src/types';
+import { FullGuideSortField, GetAppearancesAllResult, GuideName } from '@mlp-vectorclub/api-types';
 import { wrapper } from 'src/store';
 import { useAuth, useFullGuide, useTitleSetter } from 'src/hooks';
 import { GuideNotFound } from 'src/components/colorguide/GuideNotFound';

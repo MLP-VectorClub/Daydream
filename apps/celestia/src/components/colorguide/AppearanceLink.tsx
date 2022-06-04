@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { PreviewAppearance } from 'src/types';
+import { PreviewAppearance } from '@mlp-vectorclub/api-types';
 import { PATHS } from 'src/paths';
 import Link from 'next/link';
 import { AppearancePreview } from 'src/components/colorguide/AppearancePreview';

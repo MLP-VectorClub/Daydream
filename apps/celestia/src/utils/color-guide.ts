@@ -1,14 +1,5 @@
-import {
-  Appearance,
-  FullGuideSortField,
-  GuideName,
-  Nullable,
-  Numeric,
-  Optional,
-  PreviewAppearance,
-  SlimGuideTag,
-  TagType,
-} from 'src/types';
+import { Nullable, Numeric, Optional } from 'src/types';
+import { Appearance, FullGuideSortField, GuideName, PreviewAppearance, SlimGuideTag, TagType } from '@mlp-vectorclub/api-types';
 import { colorGuide } from 'src/strings';
 import { RgbColors } from 'src/types/sprite-generator';
 import { padStart } from 'lodash';

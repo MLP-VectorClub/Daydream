@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { Appearance, CutieMark } from 'src/types';
+import { Appearance, CutieMark } from '@mlp-vectorclub/api-types';
 import styles from 'modules/AppearanceCutieMarks.module.scss';
 import { Button, Card, CardBody } from 'reactstrap';
 import { CutieMarkPreview } from 'src/components/colorguide/CutieMarkPreview';

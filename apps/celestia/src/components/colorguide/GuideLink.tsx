@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { GuideName } from 'src/types';
+import { GuideName } from '@mlp-vectorclub/api-types';
 import { PATHS } from 'src/paths';
 import { getGuideLabel, getGuideTitle } from 'src/utils';
 

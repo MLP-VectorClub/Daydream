@@ -1,11 +1,6 @@
 import { queryCache, useQuery } from 'react-query';
-import {
-  GetAboutConnectionResult,
-  MappedAboutConnectionResult,
-  Optional,
-  UnifiedErrorResponse,
-  UnifiedErrorResponseTypes,
-} from 'src/types';
+import { MappedAboutConnectionResult, Optional, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
+import { GetAboutConnectionResult } from '@mlp-vectorclub/api-types';
 import { ENDPOINTS } from 'src/utils';
 import { connectionFetcher } from 'src/fetchers';
 import { IS_CLIENT_SIDE } from 'src/config';

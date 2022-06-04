@@ -1,7 +1,7 @@
 import { range } from 'lodash';
 import Axios from 'axios';
 import { ReactQueryConfig } from 'react-query/types/core/types';
-import { GuideName } from 'src/types';
+import { GuideName } from '@mlp-vectorclub/api-types';
 import { AppI18nNamespaces } from 'react-i18next';
 
 export const APP_NAME = 'MLP Vector Club';

@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
-import { Optional, PublicUser } from 'src/types';
+import { Optional } from 'src/types';
+import { PublicUser } from '@mlp-vectorclub/api-types';
 import { ENDPOINTS } from 'src/utils';
 import { useCsrf } from 'src/hooks/core';
 import { FetchUserParams, userFetcher } from 'src/fetchers';

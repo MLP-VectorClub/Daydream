@@ -1,3 +1,4 @@
+import { NullableProps } from 'src/types';
 import {
   GetAppearancesAllRequest,
   GetAppearancesAutocompleteRequest,
@@ -6,8 +7,7 @@ import {
   GetAppearancesPinnedRequest,
   GetAppearancesRequest,
   GetColorGuideMajorChangesRequest,
-  NullableProps,
-} from 'src/types';
+} from '@mlp-vectorclub/api-types';
 import { requestPromiseMapper } from 'src/utils';
 import { ColorGuideService, defaultServices } from 'src/services';
 import { IncomingMessage } from 'http';

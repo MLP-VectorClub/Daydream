@@ -1,5 +1,5 @@
 import { FieldValues, FormProps } from 'react-hook-form';
-import { GetUsersMeResult, User, ValidationErrorResponse } from 'src/types/api';
+import { GetUsersMeResult, User, ValidationErrorResponse } from '@mlp-vectorclub/api-types';
 import { TFunction } from 'next-i18next';
 
 export enum Status {

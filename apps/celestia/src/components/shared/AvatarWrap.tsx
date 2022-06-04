@@ -1,6 +1,7 @@
 import { memo, VFC } from 'react';
 import classNames from 'classnames';
-import { AvatarProvider, Nullable, VectorApp } from 'src/types';
+import { Nullable } from 'src/types';
+import { AvatarProvider, VectorApp } from '@mlp-vectorclub/api-types';
 import { GUEST_AVATAR } from 'src/config';
 import Image from 'next/image';
 

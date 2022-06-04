@@ -1,4 +1,4 @@
-import { Color } from 'src/types';
+import { Color } from '@mlp-vectorclub/api-types';
 import styles from 'modules/ColorSquare.module.scss';
 import classNames from 'classnames';
 import { RefObject, VFC } from 'react';

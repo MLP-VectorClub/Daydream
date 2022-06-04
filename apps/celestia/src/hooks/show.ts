@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { showListFetcher } from 'src/fetchers/show';
-import { GetShowRequest, GetShowResult } from 'src/types';
+import { GetShowRequest, GetShowResult } from '@mlp-vectorclub/api-types';
 import { ENDPOINTS } from 'src/utils';
 import { useMemo } from 'react';
 

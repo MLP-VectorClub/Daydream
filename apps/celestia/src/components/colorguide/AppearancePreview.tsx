@@ -1,5 +1,5 @@
 import { memo, VFC } from 'react';
-import { AppearancePreviewData } from 'src/types';
+import { AppearancePreviewData } from '@mlp-vectorclub/api-types';
 import styles from 'modules/AppearancePreview.module.scss';
 import classNames from 'classnames';
 

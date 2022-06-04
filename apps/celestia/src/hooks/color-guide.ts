@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import { Status } from 'src/types';
 import {
   GetAppearancesAllRequest,
   GetAppearancesAllResult,
@@ -15,8 +16,7 @@ import {
   GetColorGuideMajorChangesRequest,
   GetColorGuideMajorChangesResult,
   GetColorGuideResult,
-  Status,
-} from 'src/types';
+} from '@mlp-vectorclub/api-types';
 import { ENDPOINTS, mapQueryStatus } from 'src/utils';
 import {
   appearanceFetcher,

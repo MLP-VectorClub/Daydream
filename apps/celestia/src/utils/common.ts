@@ -1,6 +1,7 @@
 import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
-import { UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
+import { UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
+import { ValidationErrorResponse } from '@mlp-vectorclub/api-types';
 import { APP_HOST, IS_CLIENT_SIDE } from 'src/config';
 import { setResponseStatus } from 'src/utils/initial-prop-helpers';
 import { GetServerSidePropsContext } from 'next';

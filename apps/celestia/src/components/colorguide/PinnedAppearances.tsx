@@ -1,5 +1,6 @@
 import { VFC } from 'react';
-import { GetAppearancesPinnedResult, GuideName, Nullable } from 'src/types';
+import { Nullable } from 'src/types';
+import { GetAppearancesPinnedResult, GuideName } from '@mlp-vectorclub/api-types';
 import AppearanceItem from 'src/components/colorguide/AppearanceItem';
 import { usePinnedAppearances } from 'src/hooks';
 

@@ -1,0 +1,13 @@
+{
+  "name": "@mlp-vectorclub/api-types",
+  "version": "0.0.1",
+  "types": "./dist/index.d.ts",
+  "files": [],
+  "scripts": {
+    "build": "node ./util/generate-types.js"
+  },
+  "devDependencies": {
+    "@seinopsys-forks/openapi-to-typescript": "^0.0.11",
+    "typescript": "^4.6"
+  }
+}

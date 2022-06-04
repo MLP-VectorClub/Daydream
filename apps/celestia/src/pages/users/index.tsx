@@ -1,6 +1,7 @@
 import Content from 'src/components/shared/Content';
 import { useMemo } from 'react';
-import { GetAboutMembersResult, Nullable, Optional, Translatable } from 'src/types';
+import { Nullable, Optional, Translatable } from 'src/types';
+import { GetAboutMembersResult } from '@mlp-vectorclub/api-types';
 import { wrapper } from 'src/store';
 import { useAuth, useTitleSetter } from 'src/hooks';
 import StandardHeading, { StandardHeadingProps } from 'src/components/shared/StandardHeading';

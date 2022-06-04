@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { handleDataFetchingError, notFound } from 'src/utils';
-import { PreviewAppearance } from 'src/types';
+import { PreviewAppearance } from '@mlp-vectorclub/api-types';
 import { PATHS } from 'src/paths';
 import { appearanceLocationFetcher } from 'src/fetchers';
 import { StatusCodes } from 'http-status-codes';

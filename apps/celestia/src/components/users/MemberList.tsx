@@ -1,4 +1,4 @@
-import { GetAboutMembersResult, PublicUser, Role } from 'src/types';
+import { GetAboutMembersResult, PublicUser, Role } from '@mlp-vectorclub/api-types';
 import { useMembers } from 'src/hooks/users';
 import { useMemo, VFC } from 'react';
 import { groupBy } from 'lodash';

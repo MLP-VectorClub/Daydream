@@ -1,4 +1,4 @@
-import { GuideName } from 'src/types';
+import { GuideName } from '@mlp-vectorclub/api-types';
 import { VFC } from 'react';
 import { EquestriaGirlsLogo } from 'src/components/logos/EquestriaGirlsLogo';
 import { PonyLifeLogo } from 'src/components/logos/PonyLifeLogo';

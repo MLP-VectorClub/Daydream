@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { ColorGroup } from 'src/types';
+import { ColorGroup } from '@mlp-vectorclub/api-types';
 import styles from 'modules/AppearanceColorGroups.module.scss';
 import { Button, Card, CardBody, Col, Row } from 'reactstrap';
 import { ColorListItem } from 'src/components/colorguide/ColorListItem';

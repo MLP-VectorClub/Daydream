@@ -10,7 +10,8 @@ import {
   useState,
   VFC,
 } from 'react';
-import { GuideName, Nullable, Status } from 'src/types';
+import { Nullable, Status } from 'src/types';
+import { GuideName } from '@mlp-vectorclub/api-types';
 import { useGuideAutocomplete } from 'src/hooks';
 import { Button, Col, Form, Input, InputGroup, InputGroupAddon, ListGroupItem, Row, UncontrolledTooltip } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';

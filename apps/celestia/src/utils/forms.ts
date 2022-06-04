@@ -1,6 +1,7 @@
 import { FieldError, FieldValues } from 'react-hook-form';
 import { FieldErrors, ValidateResult } from 'react-hook-form/dist/types';
-import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes, ValidationErrorResponse } from 'src/types';
+import { Nullable, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
+import { ValidationErrorResponse } from '@mlp-vectorclub/api-types';
 import { TFunction } from 'next-i18next';
 import { CustomTypeOptions } from 'react-i18next';
 

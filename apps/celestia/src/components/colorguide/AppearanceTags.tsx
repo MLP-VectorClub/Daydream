@@ -1,5 +1,6 @@
 import { VFC } from 'react';
-import { GuideName, Nullable, SlimGuideTag } from 'src/types';
+import { Nullable } from 'src/types';
+import { GuideName, SlimGuideTag } from '@mlp-vectorclub/api-types';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import AppearanceItemTags from 'src/components/colorguide/AppearanceItemTags';
 

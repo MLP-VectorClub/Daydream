@@ -2,7 +2,7 @@ import { ShowTableColumnDefinition } from 'src/types/show';
 import { episodeToString, seasonEpisodeToString } from 'src/utils/show';
 import styles from 'modules/ShowPage.module.scss';
 import { useRef, VFC } from 'react';
-import { ShowListItem } from 'src/types';
+import { ShowListItem } from '@mlp-vectorclub/api-types';
 import { useAuth } from 'src/hooks';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';

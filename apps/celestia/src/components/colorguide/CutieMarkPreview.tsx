@@ -1,5 +1,5 @@
 import { useMemo, VFC } from 'react';
-import { Appearance, CutieMark, CutieMarkFacing } from 'src/types';
+import { Appearance, CutieMark, CutieMarkFacing } from '@mlp-vectorclub/api-types';
 import { CutieMarkColorMapping, getColorMapping } from 'src/utils';
 import { uniqueId } from 'lodash';
 

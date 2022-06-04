@@ -1,5 +1,6 @@
 import { useMemo, VFC } from 'react';
-import { GuideName, Nullable, SlimGuideTag } from 'src/types';
+import { Nullable } from 'src/types';
+import { GuideName, SlimGuideTag } from '@mlp-vectorclub/api-types';
 import { Tag } from 'src/components/colorguide/Tag';
 import styles from 'modules/AppearanceTags.module.scss';
 import { sortTagsByType } from 'src/utils';

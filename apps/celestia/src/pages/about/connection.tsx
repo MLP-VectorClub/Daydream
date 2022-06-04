@@ -11,7 +11,7 @@ import { wrapper } from 'src/store';
 import { titleSetter } from 'src/utils/core';
 import { useDispatch } from 'react-redux';
 import { Nullable } from 'src/types/common';
-import { GetAboutConnectionResult } from 'src/types/api';
+import { GetAboutConnectionResult } from '@mlp-vectorclub/api-types';
 import { useConnectionInfo } from 'src/hooks/connection-info';
 import { MappedAboutConnectionResult } from 'src/types/api-alias';
 import { useTitleSetter } from 'src/hooks/core';

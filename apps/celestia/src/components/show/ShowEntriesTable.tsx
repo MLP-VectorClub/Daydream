@@ -1,5 +1,6 @@
 import { useMemo, VFC } from 'react';
-import { GetShowRequest, GetShowResult, Nullable } from 'src/types';
+import { Nullable } from 'src/types';
+import { GetShowRequest, GetShowResult } from '@mlp-vectorclub/api-types';
 import { useRouter } from 'next/router';
 import Pagination from 'src/components/shared/Pagination';
 import { Table } from 'reactstrap';

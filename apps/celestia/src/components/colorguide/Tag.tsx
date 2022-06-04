@@ -1,5 +1,6 @@
 import { memo, VFC } from 'react';
-import { GuideName, Nullable, SlimGuideTag, TagType } from 'src/types';
+import { Nullable } from 'src/types';
+import { GuideName, SlimGuideTag, TagType } from '@mlp-vectorclub/api-types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classNames from 'classnames';
 import InlineIcon from 'src/components/shared/InlineIcon';

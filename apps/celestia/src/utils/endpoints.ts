@@ -12,7 +12,7 @@ import {
   GetUsersDaUsernameRequest,
   GetUsersIdRequest,
   GetUsersOauthSigninProviderRequest,
-} from 'src/types';
+} from '@mlp-vectorclub/api-types';
 import { buildUrl } from 'src/utils/url';
 
 export const ENDPOINTS = {

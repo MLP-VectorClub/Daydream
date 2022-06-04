@@ -1,7 +1,7 @@
 import { queryCache } from 'react-query';
 import { ENDPOINTS, requestPromiseMapper } from 'src/utils';
 import { UserService } from 'src/services';
-import { PostUsersRequest, PostUsersSigninRequest } from 'src/types';
+import { PostUsersRequest, PostUsersSigninRequest } from '@mlp-vectorclub/api-types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const invalidateUserSpecificQueries = () => {

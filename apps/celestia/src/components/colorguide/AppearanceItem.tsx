@@ -1,6 +1,7 @@
 import { Card, CardBody, Col, Row, UncontrolledTooltip } from 'reactstrap';
 import { useMemo, useRef, VFC } from 'react';
-import { Appearance, GuideName, Nullable } from 'src/types';
+import { Nullable } from 'src/types';
+import { Appearance, GuideName } from '@mlp-vectorclub/api-types';
 import AppearanceItemNotes from 'src/components/colorguide/AppearanceItemNotes';
 import SpriteImage from 'src/components/colorguide/SpriteImage';
 import AppearanceItemColorGroups from 'src/components/colorguide/AppearanceItemColorGroups';

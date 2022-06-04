@@ -1,4 +1,4 @@
-import { ShowListItem } from 'src/types/api';
+import { ShowListItem } from '@mlp-vectorclub/api-types';
 import { VFC } from 'react';
 
 export interface ShowTableColumnDefinition {

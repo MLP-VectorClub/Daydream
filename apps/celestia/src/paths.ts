@@ -1,7 +1,7 @@
 import { isEmpty, mapValues, omit, omitBy } from 'lodash';
 import { buildUrl, makeUrlSafe, pathSegmentWithId } from 'src/utils/url';
 import { Numeric } from 'src/types/common';
-import { FullGuideSortField, GuideName, PreviewAppearance, PublicUser, ShowListItem } from 'src/types/api';
+import { FullGuideSortField, GuideName, PreviewAppearance, PublicUser, ShowListItem } from '@mlp-vectorclub/api-types';
 import { seasonEpisodeToString } from 'src/utils/show';
 
 /**

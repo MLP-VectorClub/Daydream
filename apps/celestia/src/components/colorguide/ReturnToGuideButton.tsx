@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { GuideName } from 'src/types';
+import { GuideName } from '@mlp-vectorclub/api-types';
 import Link from 'next/link';
 import { PATHS } from 'src/paths';
 import { Button } from 'reactstrap';

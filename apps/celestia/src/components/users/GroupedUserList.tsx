@@ -1,4 +1,4 @@
-import { BarePublicUser } from 'src/types';
+import { BarePublicUser } from '@mlp-vectorclub/api-types';
 import { groupBy } from 'lodash';
 import { useMemo, VFC } from 'react';
 import UserLink from 'src/components/shared/UserLink';

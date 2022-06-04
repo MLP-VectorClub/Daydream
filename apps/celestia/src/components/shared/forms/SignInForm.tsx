@@ -20,7 +20,8 @@ import { map } from 'lodash';
 import { fromEvent } from 'rxjs';
 import { queryCache } from 'react-query';
 import { RootState } from 'src/store/rootReducer';
-import { AuthModalSide, Nullable, SocialProvider, Status, UnifiedErrorResponseTypes } from 'src/types';
+import { AuthModalSide, Nullable, Status, UnifiedErrorResponseTypes } from 'src/types';
+import { SocialProvider } from '@mlp-vectorclub/api-types';
 import { authActions } from 'src/store/slices';
 import { combineErrors, ENDPOINTS, popupOpenCenter, validateEmail, validatePassword, validateRequired } from 'src/utils';
 import { SOCIAL_PROVIDERS } from 'src/fancy-config';
@@ -259,13 +260,13 @@ const SingInForm: VFC = () => {
         <legend className="text-uppercase w-auto mx-auto px-2">
           <small>{t('common:auth.socialSignIn.alternatively')}</small>
         </legend>
-        {map(SOCIAL_PROVIDERS, (settings, provider: SocialProvider) => {
+        {map(SOCIAL_PROVIDERS, ({ name, renderIcon: RenderIcon }, provider: SocialProvider) => {
           const text = t('common:auth.socialSignIn.signInWith', {
-            provider: settings.name,
+            provider: name,
           });
           return (
             <Button type="button" key={provider} color={provider} className="mx-2" onClick={signInWith(provider, text)}>
-              {settings.renderIcon({ first: true })}
+              <RenderIcon first />
               {text}
             </Button>
           );

@@ -1,6 +1,6 @@
 import { useMemo, VFC } from 'react';
 import ColorSquare from 'src/components/colorguide/ColorSquare';
-import { Color } from 'src/types';
+import { Color } from '@mlp-vectorclub/api-types';
 import { hexToRgb } from 'src/utils';
 import classNames from 'classnames';
 import styles from 'modules/ColorListItem.module.scss';

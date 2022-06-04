@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { SlimAppearance } from 'src/types';
+import { SlimAppearance } from '@mlp-vectorclub/api-types';
 import { Card, CardBody } from 'reactstrap';
 import Image from 'next/image';
 import { scaleResize } from 'src/utils';

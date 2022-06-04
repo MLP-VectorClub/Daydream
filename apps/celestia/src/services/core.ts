@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { ENDPOINTS } from 'src/utils';
-import { GetUsefulLinksSidebarResult } from 'src/types';
+import { GetUsefulLinksSidebarResult } from '@mlp-vectorclub/api-types';
 import { Service } from 'src/services/service-class';
 
 export class CoreService extends Service {

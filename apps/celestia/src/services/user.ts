@@ -16,7 +16,7 @@ import {
   PostUsersSigninRequest,
   PostUsersSigninResult,
   PostUsersSignoutResult,
-} from 'src/types';
+} from '@mlp-vectorclub/api-types';
 import { ENDPOINTS } from 'src/utils';
 import { Service } from 'src/services/service-class';
 

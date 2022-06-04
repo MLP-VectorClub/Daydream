@@ -1,5 +1,5 @@
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { SocialProvider } from 'src/types/api';
+import { SocialProvider } from '@mlp-vectorclub/api-types';
 import { SocialProviderConfig } from 'src/types/auth';
 import type { IconName } from '@fortawesome/fontawesome-common-types';
 

@@ -1,7 +1,7 @@
 import { ENDPOINTS } from 'src/utils';
 import { useQuery } from 'react-query';
 import { prefsFetcher } from 'src/fetchers';
-import { UserPrefs } from 'src/types';
+import { UserPrefs } from '@mlp-vectorclub/api-types';
 import { useCallback } from 'react';
 
 export function usePrefs(enabled: boolean): UserPrefs | undefined {

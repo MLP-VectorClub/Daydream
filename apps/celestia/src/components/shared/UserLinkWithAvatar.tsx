@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PublicUser } from 'src/types';
+import { PublicUser } from '@mlp-vectorclub/api-types';
 import styles from 'modules/UserLinkWithAvatar.module.scss';
 import { getProfileLink } from 'src/utils/path-utils';
 import { VFC } from 'react';

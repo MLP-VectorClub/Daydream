@@ -1,11 +1,24 @@
+const commonParserOptions = {
+  ecmaFeatures: {
+    jsx: true,
+  },
+  ecmaVersion: 2018,
+  sourceType: 'module',
+};
+
 module.exports = {
   ...require('@mlp-vectorclub/config/eslint-preset'),
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    project: './tsconfig*.json',
+    ...commonParserOptions,
+    project: './tsconfig.json',
   },
+  overrides: [
+    {
+      files: '*.test.ts',
+      parserOptions: {
+        ...commonParserOptions,
+        project: './tsconfig.test.json',
+      },
+    },
+  ],
 };

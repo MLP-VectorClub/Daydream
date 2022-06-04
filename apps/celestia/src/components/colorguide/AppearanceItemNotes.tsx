@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useMemo, VFC } from 'react';
-import { Appearance } from 'src/types';
+import { Appearance } from '@mlp-vectorclub/api-types';
 import { processAppearanceNotes } from 'src/utils/html-parsers/appearance-notes-parser';
 import styles from 'modules/AppearanceNotes.module.scss';
 import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';

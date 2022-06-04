@@ -1,4 +1,4 @@
-import { ColorGroup } from 'src/types';
+import { ColorGroup } from '@mlp-vectorclub/api-types';
 import styles from 'modules/CompactColorGroups.module.scss';
 import ColorSquare from 'src/components/colorguide/ColorSquare';
 import { VFC } from 'react';

@@ -4,7 +4,7 @@ import { API_DOCS_URL, GUIDE_NAMES } from 'src/config';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { getGuideLabel } from 'src/utils';
 import Link from 'next/link';
-import { GetColorGuideResult, GuideName } from 'src/types';
+import { GetColorGuideResult, GuideName } from '@mlp-vectorclub/api-types';
 import { useGuideIndex, useTitleSetter } from 'src/hooks';
 import { wrapper } from 'src/store';
 import { Badge, Card, CardBody, UncontrolledTooltip } from 'reactstrap';

@@ -1,4 +1,4 @@
-import { PublicUser, UserPrefs } from 'src/types';
+import { PublicUser, UserPrefs } from '@mlp-vectorclub/api-types';
 import { PATHS } from 'src/paths';
 import { ProfileLinkOptions } from 'src/utils/profile';
 

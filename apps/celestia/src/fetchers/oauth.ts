@@ -1,4 +1,4 @@
-import { PostUsersOauthSigninProviderRequest } from 'src/types';
+import { PostUsersOauthSigninProviderRequest } from '@mlp-vectorclub/api-types';
 import { requestPromiseMapper } from 'src/utils';
 import { UserService } from 'src/services';
 

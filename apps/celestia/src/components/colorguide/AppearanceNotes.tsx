@@ -1,5 +1,5 @@
 import { useMemo, VFC } from 'react';
-import { AppearanceOnly } from 'src/types';
+import { AppearanceOnly } from '@mlp-vectorclub/api-types';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import styles from 'modules/AppearancePage.module.scss';
 import { AppearanceNotesText } from 'src/components/colorguide/AppearanceNotesText';

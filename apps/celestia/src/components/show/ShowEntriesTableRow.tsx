@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { ShowListItem } from 'src/types';
+import { ShowListItem } from '@mlp-vectorclub/api-types';
 import { ShowTableColumnDefinition } from 'src/types/show';
 import classNames from 'classnames';
 

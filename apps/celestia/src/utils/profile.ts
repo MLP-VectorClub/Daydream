@@ -1,4 +1,5 @@
-import { Nullable, Numeric, PublicUser, Translatable } from 'src/types';
+import { Nullable, Numeric, Translatable } from 'src/types';
+import { PublicUser } from '@mlp-vectorclub/api-types';
 
 export const getProfileTitle = (user: Nullable<PublicUser> = null, authUserId: Nullable<number> = null): Translatable => {
   if (user) {

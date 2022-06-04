@@ -1,4 +1,4 @@
-import { PublicUser } from 'src/types';
+import { PublicUser } from '@mlp-vectorclub/api-types';
 import UserLinkWithAvatar from 'src/components/shared/UserLinkWithAvatar';
 import styles from 'modules/StaffMembersList.module.scss';
 import { VFC } from 'react';

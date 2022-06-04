@@ -35,4 +35,5 @@ yarn-error.log*
 
 # project-specific
 .vercel
-apps/celestia/.env.local
+**/.env.local
+**/dist

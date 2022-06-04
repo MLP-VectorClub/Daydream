@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { scaleResize } from 'src/utils';
 import Image from 'next/image';
-import { Sprite } from 'src/types';
+import { Sprite } from '@mlp-vectorclub/api-types';
 import styles from 'modules/SpriteColumn.module.scss';
 
 interface PropTypes {
