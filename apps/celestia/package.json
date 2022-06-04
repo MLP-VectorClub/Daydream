@@ -60,10 +60,10 @@
     "urlcat": "^2.0.4"
   },
   "devDependencies": {
-    "@seinopsys-forks/openapi-to-typescript": "^0.0.11",
     "@mlp-vectorclub/config": "*",
     "@mlp-vectorclub/tsconfig": "*",
     "@mlp-vectorclub/ui": "*",
+    "@seinopsys-forks/openapi-to-typescript": "^0.0.11",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "@types/capitalize": "^2.0.0",
