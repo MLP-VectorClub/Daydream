@@ -4,6 +4,25 @@ These type definitions are generated based on the MLP Vector Club's public OpenA
 
 They can be utilized in any TypeScript-based applications to refer to the latest types provided by the application.
 
+## Usage
+
+Make sure TypeScript is configured in your project, then simply install the type definitions package with your favourite package manager:
+
+```shell
+# Via NPM
+$ npm install @mlp-vectorclub/api-types
+# Via YARN
+$ yarn add @mlp-vectorclub/api-types
+```
+
+In your TypeScript code, simply import the necessary types from the package:
+
+```ts
+import { Appearance } from '@mlp-vectorclub/api-types';
+
+const value: Appearance = { /* … */ };
+```
+
 ## Building
 
 1. Make a copy of `.env.example` named `.env`

@@ -7,11 +7,15 @@ This repository contains the frontend code for the MLP Vector Club's next genera
 This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following
 packages/apps:
 
-### Apps and Packages
+### Apps
 
-- `celestia`: a [Next.js](https://nextjs.org) app
-- `config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- [celestia](apps/celestia): a [Next.js](https://nextjs.org) app
+
+### Packages
+
+- [api-types](packages/api-types): TypeScript type definition and OpeanAPI schema file package for the website's backend API
+- [config](packages/config): `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- [tsconfig](packages/tsconfig): Collection of `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
