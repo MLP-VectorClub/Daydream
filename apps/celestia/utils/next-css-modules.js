@@ -5,7 +5,7 @@ module.exports = {
 
     rules.forEach((rule) => {
       rule.use.forEach((moduleLoader) => {
-        if (/css-loader\/(?:cjs|dist|src)/.test(moduleLoader.loader)) {
+        if (/css-loader[\\\/](?:cjs|dist|src)/.test(moduleLoader.loader)) {
           if (typeof moduleLoader.options.modules === 'object') {
             moduleLoader.options.modules = {
               ...moduleLoader.options.modules,

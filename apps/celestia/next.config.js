@@ -1,4 +1,5 @@
 const { NEXT_PUBLIC_CDN_DOMAIN, NEXT_PUBLIC_BACKEND_HOST, NEXT_PUBLIC_API_PREFIX } = process.env;
+const { platform } = require('os');
 const { i18n } = require('./next-i18next.config.js');
 const withPlugins = require('next-compose-plugins');
 const withCamelCaseCSSModules = require('./utils/next-css-modules');
@@ -23,7 +24,8 @@ module.exports = withPlugins(
     i18n,
     generateBuildId: async () => {
       try {
-        const { stdout } = await execFile('env', ['-i', 'git', 'log', '-1', '--date=short', '--pretty=%h;%ct']);
+        const gitArgs = ['log', '-1', '--date=short', '--pretty=%h;%ct'];
+        const { stdout } = await (platform() === 'win32' ? execFile('git', gitArgs) : execFile('env', ['-i', 'git', ...gitArgs]));
         const buildId = stdout.trim();
         console.log(`Generated build ID: ${buildId}`);
         return buildId;
