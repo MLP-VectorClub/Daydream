@@ -1,12 +1,24 @@
 const { GenerateTypings } = require('@seinopsys-forks/openapi-to-typescript');
 const fs = require('fs');
+const path = require('path');
+const rimraf = require('rimraf');
 
 require('dotenv').config({ path: '.env.local' });
 
 const filePath = process.env.API_JSON_PATH;
-const outputPath = 'dist/index.d.ts';
+const outputDir = 'dist';
+const outputFileName = 'index.d.ts';
 
 (async function () {
+  if (fs.existsSync(outputDir)) {
+    console.log('Build output directory already exists, clearing…');
+    rimraf.sync(outputDir);
+  }
+
+  console.log('Creating output folder…');
+  fs.mkdirSync(outputDir, { recursive: true });
+  const outputPath = path.join(outputDir, outputFileName);
+
   let schema;
   if (/^https?:\/\//.test(filePath)) {
     const fetch = require('node-fetch');
@@ -28,7 +40,7 @@ const outputPath = 'dist/index.d.ts';
     console.log('API schema successfully read');
   }
 
-  console.log('Generating API typings…');
+  console.log('Generating type definitions…');
   const typings = await GenerateTypings(schema);
   const buildHeader = `// MLP-VectorClub API type definition - built on ${new Date().toISOString()}\n`;
 

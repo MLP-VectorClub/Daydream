@@ -1,6 +1,6 @@
-# Turborepo starter
+# Celestia
 
-This is an official Yarn v1 starter turborepo.
+This repository contains the frontend code for the MLP Vector Club's next generation website.
 
 ## What's inside?
 
@@ -44,6 +44,24 @@ To develop all apps and packages, run the following command:
 ```
 cd my-turborepo
 yarn run dev
+```
+
+### Lint
+
+To run linters for all apps and packages, run the following command:
+
+```
+cd my-turborepo
+yarn run lint
+```
+
+### Unit Tests
+
+To run unit tests for all apps and packages, run the following command:
+
+```
+cd my-turborepo
+yarn run test
 ```
 
 ### Remote Caching
