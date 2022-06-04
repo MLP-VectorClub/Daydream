@@ -3,11 +3,12 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config();
 
 const filePath = process.env.API_JSON_PATH;
 const outputDir = 'dist';
-const outputFileName = 'index.d.ts';
+const typesOutputFileName = 'index.d.ts';
+const schemaOutputFileName = 'schema.json';
 
 (async function () {
   if (fs.existsSync(outputDir)) {
@@ -17,7 +18,8 @@ const outputFileName = 'index.d.ts';
 
   console.log('Creating output folder…');
   fs.mkdirSync(outputDir, { recursive: true });
-  const outputPath = path.join(outputDir, outputFileName);
+  const typesOutputPath = path.join(outputDir, typesOutputFileName);
+  const schemaOutputPath = path.join(outputDir, schemaOutputFileName);
 
   let schema;
   if (/^https?:\/\//.test(filePath)) {
@@ -40,11 +42,13 @@ const outputFileName = 'index.d.ts';
     console.log('API schema successfully read');
   }
 
+  console.log('Writing schema file…');
+  fs.writeFileSync(schemaOutputPath, JSON.stringify(schema));
+  console.log(`Written source OpenAPI schema file to ${schemaOutputPath}`);
+
   console.log('Generating type definitions…');
   const typings = await GenerateTypings(schema);
   const buildHeader = `// MLP-VectorClub API type definition - built on ${new Date().toISOString()}\n`;
-
-  fs.writeFileSync(outputPath, buildHeader + '\n' + typings);
-
-  console.log(`Written API type definitions to ${outputPath}`);
+  fs.writeFileSync(typesOutputPath, buildHeader + '\n' + typings);
+  console.log(`Written API type definitions to ${typesOutputPath}`);
 })();

@@ -36,4 +36,5 @@ yarn-error.log*
 # project-specific
 .vercel
 **/.env.local
+**/.env
 **/dist
