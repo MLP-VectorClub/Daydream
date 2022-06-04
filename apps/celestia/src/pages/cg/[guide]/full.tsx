@@ -64,15 +64,14 @@ const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
   const titleData = useMemo(() => titleFactory({ guide }), [guide]);
   useTitleSetter(dispatch, titleData);
 
-  const sortMethod = fullListSortOptionsMap[sort];
-  const SortDropdown: VoidFunctionComponent = useCallback(
-    () => (
+  const SortDropdown: VoidFunctionComponent<{ sortI18n: FullGuideSortField }> = useCallback(
+    ({ sortI18n }) => (
       <DropdownToggle color="white" className="font-italic">
-        {sortMethod}
+        {t(`colorGuide:fullList.sortOptions.${sortI18n}`)}
         <InlineIcon icon="caret-down" last />
       </DropdownToggle>
     ),
-    [sortMethod]
+    [t]
   );
 
   if (guide === null) {
@@ -89,7 +88,7 @@ const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
           <UncontrolledDropdown>
             <Trans t={t} i18nKey="colorGuide:fullList.lead">
               0
-              <SortDropdown />
+              <SortDropdown sortI18n={sort} />
             </Trans>
             <DropdownMenu>
               <DropdownItem header>{t('colorGuide:fullList.sortOptionsHeader')}</DropdownItem>
