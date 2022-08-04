@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { coreActions } from 'src/store/slices';
-import { FC, MouseEventHandler } from 'react';
+import { FC, MouseEventHandler, PropsWithChildren } from 'react';
 
-const ContactLink: FC = ({ children, ...rest }) => {
+const ContactLink: FC<PropsWithChildren> = ({ children, ...rest }) => {
   const dispatch = useDispatch();
   const openModal: MouseEventHandler = (e) => {
     e.preventDefault();

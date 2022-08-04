@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Button, Col, CustomInput, Form, FormGroup, FormText, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { RootState } from 'src/store/rootReducer';
 import { authActions } from 'src/store/slices';
 
@@ -23,7 +23,7 @@ enum INPUT_NAMES {
   PRIVACY = 'privacy_policy',
 }
 
-export const AcceptPrivacyPolicy: VFC<{ t: TFunction }> = ({ t }) => (
+export const AcceptPrivacyPolicy: FC<{ t: TFunction }> = ({ t }) => (
   <Trans t={t} i18nKey="common:auth.acceptPrivacyPolicy">
     0
     <ExternalLink href={PATHS.PRIVACY_POLICY} icon>
@@ -39,9 +39,14 @@ type FormFields = {
   [INPUT_NAMES.PRIVACY]: boolean;
 };
 
-const RegisterForm: VFC = () => {
+const RegisterForm: FC = () => {
   const { t } = useTranslation();
-  const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
+  const {
+    register: r,
+    handleSubmit,
+    formState: { errors: clientErrors },
+    reset,
+  } = useForm<FormFields>({ criteriaMode: 'all' });
   const dispatch = useDispatch();
   const { authModal, register } = useSelector((store: RootState) => store.auth);
   const [passwordRevealed, setPasswordRevealed] = useState(false);
@@ -71,6 +76,23 @@ const RegisterForm: VFC = () => {
   const nameValidation = validateUserName<FormFields>(t);
   const passwordValidation = validatePassword(t);
 
+  const { ref: nameInputRef, ...nameInputRegister } = r(INPUT_NAMES.NAME, {
+    ...requiredValidation,
+    ...nameValidation,
+  });
+  const { ref: emailInputRef, ...emailInputRegister } = r(INPUT_NAMES.EMAIL, {
+    ...requiredValidation,
+    validate: emailValidation,
+  });
+  const { ref: passwordInputRef, ...passwordInputRegister } = r(INPUT_NAMES.PASSWORD, {
+    ...requiredValidation,
+    ...passwordValidation,
+  });
+  const { ref: acceptPrivacyPolicyRef, ...acceptPrivacyPolicyRegister } = r(
+    INPUT_NAMES.PRIVACY,
+    validateRequired(t, 'acceptPrivacyPolicy')
+  );
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <p className="text-center">
@@ -84,12 +106,8 @@ const RegisterForm: VFC = () => {
         <Input
           type="text"
           defaultValue=""
-          name={INPUT_NAMES.NAME}
-          innerRef={r({
-            ...requiredValidation,
-            ...nameValidation,
-          })}
-          maxLength={nameValidation.maxLength.value}
+          {...nameInputRegister}
+          innerRef={nameInputRef}
           invalid={INPUT_NAMES.NAME in errors}
           disabled={isLoading}
         />
@@ -110,11 +128,8 @@ const RegisterForm: VFC = () => {
           <Input
             type="email"
             defaultValue=""
-            name={INPUT_NAMES.EMAIL}
-            innerRef={r({
-              ...requiredValidation,
-              validate: emailValidation,
-            })}
+            {...emailInputRegister}
+            innerRef={emailInputRef}
             invalid={INPUT_NAMES.EMAIL in errors}
             disabled={isLoading}
           />
@@ -132,11 +147,8 @@ const RegisterForm: VFC = () => {
             <Input
               type={passwordRevealed ? 'text' : 'password'}
               defaultValue=""
-              name={INPUT_NAMES.PASSWORD}
-              innerRef={r({
-                ...requiredValidation,
-                ...passwordValidation,
-              })}
+              {...passwordInputRegister}
+              innerRef={passwordInputRef}
               invalid={Boolean(errors[INPUT_NAMES.PASSWORD])}
               disabled={isLoading}
               autoComplete="off"
@@ -157,12 +169,12 @@ const RegisterForm: VFC = () => {
       <FormGroup>
         <CustomInput
           id={INPUT_NAMES.PRIVACY}
-          name={INPUT_NAMES.PRIVACY}
           type="checkbox"
           label={<AcceptPrivacyPolicy t={t} />}
           invalid={INPUT_NAMES.PRIVACY in errors}
           disabled={isLoading}
-          innerRef={r<HTMLInputElement>(validateRequired(t, 'acceptPrivacyPolicy'))}
+          {...acceptPrivacyPolicyRegister}
+          innerRef={acceptPrivacyPolicyRef}
         />
         <BootstrapErrorMessages errors={errors} name={INPUT_NAMES.PRIVACY} />
       </FormGroup>

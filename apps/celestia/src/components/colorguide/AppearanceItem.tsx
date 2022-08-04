@@ -1,5 +1,5 @@
 import { Card, CardBody, Col, Row, UncontrolledTooltip } from 'reactstrap';
-import { useMemo, useRef, VFC } from 'react';
+import { FC, RefObject, useMemo, useRef } from 'react';
 import { Nullable } from 'src/types';
 import { Appearance, GuideName } from '@mlp-vectorclub/api-types';
 import AppearanceItemNotes from 'src/components/colorguide/AppearanceItemNotes';
@@ -19,8 +19,8 @@ export interface AppearanceItemProps {
 
 const PINNED_TOOLTIP = 'Pinned';
 
-const AppearanceItem: VFC<AppearanceItemProps> = ({ appearance, pinned = false, guide }) => {
-  const pinRef = useRef<HTMLElement>(null);
+const AppearanceItem: FC<AppearanceItemProps> = ({ appearance, pinned = false, guide }) => {
+  const pinRef = useRef<SVGSVGElement>(null);
 
   const appearanceLink = useMemo(() => PATHS.APPEARANCE(appearance), [appearance]);
 
@@ -45,7 +45,7 @@ const AppearanceItem: VFC<AppearanceItemProps> = ({ appearance, pinned = false, 
               {pinned && (
                 <>
                   <InlineIcon icon="thumbtack" color="primary" first size="sm" ref={pinRef} />
-                  <UncontrolledTooltip target={pinRef} fade={false}>
+                  <UncontrolledTooltip target={pinRef as unknown as RefObject<HTMLElement>} fade={false}>
                     {PINNED_TOOLTIP}
                   </UncontrolledTooltip>
                 </>

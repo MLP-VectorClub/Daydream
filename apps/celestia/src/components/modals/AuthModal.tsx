@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import { MouseEventHandler, useEffect, VFC } from 'react';
+import { FC, useEffect } from 'react';
 import { RootState } from 'src/store/rootReducer';
 import { AuthModalSide } from 'src/types';
 import { authActions } from 'src/store/slices';
@@ -10,13 +10,9 @@ import SingInForm from 'src/components/shared/forms/SignInForm';
 import RegisterForm from 'src/components/shared/forms/RegisterForm';
 import { useTranslation } from 'next-i18next';
 
-export interface AuthModalFormProps {
-  switchSide: (currentSide: AuthModalSide) => MouseEventHandler;
-}
-
-const AuthModal: VFC = () => {
+const AuthModal: FC = () => {
   const { t } = useTranslation();
-  const { reset } = useForm({ validateCriteriaMode: 'all' });
+  const { reset } = useForm({ criteriaMode: 'all' });
   const dispatch = useDispatch();
   const { signedIn } = useAuth();
   const { authModal } = useSelector((store: RootState) => store.auth);

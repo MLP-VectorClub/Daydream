@@ -19,5 +19,5 @@ export function mapQueryStatus(status: QueryStatus) {
 }
 
 export function requestPromiseMapper<T>(promise: Promise<AxiosResponse<T>>) {
-  return promise.then((r) => r.data).catch((res) => Promise.reject(httpResponseMapper(res)));
+  return promise.then((r) => r.data).catch((res: unknown) => Promise.reject(httpResponseMapper(res)));
 }

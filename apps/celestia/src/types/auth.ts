@@ -1,5 +1,5 @@
 import { InlineIconProps } from 'src/types/component-props';
-import { VFC } from 'react';
+import { FC } from 'react';
 
 export enum AuthModalSide {
   SIGN_IN,
@@ -9,7 +9,7 @@ export enum AuthModalSide {
 
 export interface SocialProviderConfig {
   name: string;
-  renderIcon: VFC<Omit<InlineIconProps, 'icon'>>;
+  renderIcon: FC<Omit<InlineIconProps, 'icon'>>;
 }
 
 export enum OAuthErrorTypes {

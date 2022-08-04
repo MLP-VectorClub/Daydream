@@ -1,10 +1,13 @@
-import { ErrorMessage } from 'react-hook-form';
 import { FormFeedback } from 'reactstrap';
-import { VFC } from 'react';
+import { FC } from 'react';
+import { ValidationErrorResponse } from '@mlp-vectorclub/api-types';
 
-type PropTypes = Required<Pick<Parameters<typeof ErrorMessage>[0], 'errors' | 'name'>>;
+interface PropTypes {
+  errors: ValidationErrorResponse['errors'];
+  name: string;
+}
 
-const BootstrapErrorMessages: VFC<PropTypes> = ({ errors, name }) => {
+const BootstrapErrorMessages: FC<PropTypes> = ({ errors, name }) => {
   const messages = errors && (errors[name] as unknown);
   if (!Array.isArray(messages)) {
     return null;

@@ -5,7 +5,7 @@ import { getInlineIconClasses } from 'src/utils';
 import { InlineIconProps } from 'src/types/component-props';
 import LoadingRing from 'src/components/shared/LoadingRing';
 
-const InlineIcon: ForwardRefRenderFunction<HTMLElement, InlineIconProps> = (
+const InlineIcon: ForwardRefRenderFunction<SVGSVGElement, InlineIconProps> = (
   { icon, loading = false, last = false, first = false, color, className, ...faProps },
   ref
 ) => {
@@ -15,14 +15,7 @@ const InlineIcon: ForwardRefRenderFunction<HTMLElement, InlineIconProps> = (
 
   if (!icon) return null;
 
-  return (
-    <FontAwesomeIcon
-      icon={icon}
-      className={classNames(className, getInlineIconClasses(color, first, last))}
-      forwardedRef={ref}
-      {...faProps}
-    />
-  );
+  return <FontAwesomeIcon icon={icon} className={classNames(className, getInlineIconClasses(color, first, last))} ref={ref} {...faProps} />;
 };
 
 export default memo(forwardRef(InlineIcon));

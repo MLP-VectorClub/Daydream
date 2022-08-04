@@ -1,20 +1,20 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
 import { APP_DESCRIPTION, APP_NAME } from 'src/config';
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import { renderingStateSlice } from 'src/utils/store';
 import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { assembleSeoUrl } from 'src/utils';
-import { pageTitleValue } from 'src/hooks';
+import { translatableValue } from 'src/hooks';
 import { useTranslation } from 'next-i18next';
 
-const TitleManager: VFC = () => {
+const TitleManager: FC = () => {
   const { t } = useTranslation();
   const { asPath, defaultLocale, locale, locales } = useRouter();
   const { title } = useSelector((store: RootState) => renderingStateSlice(store.core));
 
-  const titleText = useMemo(() => `${!title ? '' : `${pageTitleValue(t, title)} - `}${APP_NAME}`, [t, title]);
+  const titleText = useMemo(() => `${!title ? '' : `${translatableValue(t, title)} - `}${APP_NAME}`, [t, title]);
 
   const languageAlternates = useMemo(
     () =>

@@ -6,12 +6,12 @@ import { authActions } from 'src/store/slices';
 import { useAuth, useCsrf } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import TooltipContent from 'src/components/shared/TooltipContent';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 
 const BUTTON_ID = 'signin';
 
-const SignInButton: VFC = () => {
+const SignInButton: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { authCheck } = useAuth();

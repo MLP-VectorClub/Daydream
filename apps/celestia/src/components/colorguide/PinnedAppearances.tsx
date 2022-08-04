@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Nullable } from 'src/types';
 import { GetAppearancesPinnedResult, GuideName } from '@mlp-vectorclub/api-types';
 import AppearanceItem from 'src/components/colorguide/AppearanceItem';
@@ -9,7 +9,7 @@ interface PropTypes {
   initialData: Nullable<GetAppearancesPinnedResult>;
 }
 
-const PinnedAppearance: VFC<PropTypes> = ({ initialData, guide }) => {
+const PinnedAppearance: FC<PropTypes> = ({ initialData, guide }) => {
   const appearances = usePinnedAppearances({ guide }, initialData || undefined);
 
   if (!appearances) return null;

@@ -1,4 +1,4 @@
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import { Appearance, CutieMark, CutieMarkFacing } from '@mlp-vectorclub/api-types';
 import { CutieMarkColorMapping, getColorMapping } from 'src/utils';
 import { uniqueId } from 'lodash';
@@ -10,6 +10,7 @@ interface CMPreviewPaths {
   bodyShadowFill: string;
 }
 
+/* eslint-disable @typescript-eslint/naming-convention */
 const DEFAULT_COLOR_MAPPING: CutieMarkColorMapping = {
   'Coat Outline': '#0d0d0d',
   'Coat Shadow Outline': '#000',
@@ -18,6 +19,7 @@ const DEFAULT_COLOR_MAPPING: CutieMarkColorMapping = {
   'Mane & Tail Outline': '#333',
   'Mane & Tail Fill': '#5e5e5e',
 };
+/* eslint-enable @typescript-eslint/naming-convention */
 
 /* eslint-disable max-len */
 const CM_PREVIEW_PATHS: Record<Exclude<CutieMarkFacing, null>, CMPreviewPaths> = {
@@ -44,7 +46,7 @@ const CM_PREVIEW_PATHS: Record<Exclude<CutieMarkFacing, null>, CMPreviewPaths> =
 
 type PropTypes = Pick<CutieMark, 'facing' | 'rotation'> & Pick<Appearance, 'colorGroups'>;
 
-export const CutieMarkPreview: VFC<PropTypes> = ({ facing = 'left', colorGroups }) => {
+export const CutieMarkPreview: FC<PropTypes> = ({ facing = 'left', colorGroups }) => {
   const fixedFacing = facing === null ? 'left' : facing;
   const colorMap = useMemo(() => getColorMapping(colorGroups, DEFAULT_COLOR_MAPPING), [colorGroups]);
   const uid = useMemo(() => uniqueId(), []);

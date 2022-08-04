@@ -1,13 +1,13 @@
 import { ColorGroup } from '@mlp-vectorclub/api-types';
 import styles from 'modules/CompactColorGroups.module.scss';
 import ColorSquare from 'src/components/colorguide/ColorSquare';
-import { VFC } from 'react';
+import { FC } from 'react';
 
 interface PropTypes {
   colorGroups?: ColorGroup[];
 }
 
-const AppearanceItemColorGroups: VFC<PropTypes> = ({ colorGroups }) =>
+const AppearanceItemColorGroups: FC<PropTypes> = ({ colorGroups }) =>
   colorGroups && colorGroups.length > 0 ? (
     <div className={styles.compactColorGroups} aria-label="Color Groups">
       {colorGroups.map((cg) => (

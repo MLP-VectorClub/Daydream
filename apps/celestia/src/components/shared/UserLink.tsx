@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { ProfileLinkOptions } from 'src/utils';
 import { getProfileLink } from 'src/utils/path-utils';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-interface PropTypes extends ProfileLinkOptions {
+interface PropTypes extends ProfileLinkOptions, PropsWithChildren {
   text?: string;
   className?: string;
 }

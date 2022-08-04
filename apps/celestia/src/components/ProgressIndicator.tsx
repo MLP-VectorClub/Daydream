@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { Router } from 'next/router';
 import TopBarProgress from 'react-topbar-progress-indicator';
 
@@ -8,7 +8,7 @@ TopBarProgress.config({
   barThickness: 2,
 });
 
-const ProgressIndicator: VFC = () => {
+const ProgressIndicator: FC = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

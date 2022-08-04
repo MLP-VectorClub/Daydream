@@ -1,8 +1,8 @@
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 import classNames from 'classnames';
 
-interface CenterProps {
+interface CenterProps extends PropsWithChildren {
   header?: ReactNode;
   className?: string;
   color?: string;

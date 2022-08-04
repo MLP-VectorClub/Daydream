@@ -1,6 +1,6 @@
 import { GetAboutMembersResult, PublicUser, Role } from '@mlp-vectorclub/api-types';
 import { useMembers } from 'src/hooks/users';
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import { groupBy } from 'lodash';
 import { mapRoleLabel, permission } from 'src/utils';
 import pluralize from 'pluralize';
@@ -18,7 +18,7 @@ type UsersByRole = Record<Role, PublicUser[]>;
 
 const ROLE_SECTIONS: Role[] = ['admin', 'staff', 'assistant', 'member'];
 
-const MemberList: VFC<PropTypes> = ({ initialMembers, isStaff }) => {
+const MemberList: FC<PropTypes> = ({ initialMembers, isStaff }) => {
   const { t } = useTranslation();
   // TODO Handle errors
   const { members, status } = useMembers(initialMembers);

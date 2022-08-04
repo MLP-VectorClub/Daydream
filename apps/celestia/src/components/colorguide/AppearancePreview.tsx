@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { AppearancePreviewData } from '@mlp-vectorclub/api-types';
 import styles from 'modules/AppearancePreview.module.scss';
 import classNames from 'classnames';
@@ -8,7 +8,7 @@ interface PropTypes {
   className: string;
 }
 
-const AppearancePreviewComponent: VFC<PropTypes> = ({ data, className }) => {
+const AppearancePreviewComponent: FC<PropTypes> = ({ data, className }) => {
   const colorCount = data?.length || 0;
 
   let svgContents;

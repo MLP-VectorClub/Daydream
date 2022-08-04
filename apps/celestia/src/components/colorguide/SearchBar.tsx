@@ -8,7 +8,7 @@ import {
   useEffect,
   useRef,
   useState,
-  VFC,
+  FC,
 } from 'react';
 import { Nullable, Status } from 'src/types';
 import { GuideName } from '@mlp-vectorclub/api-types';
@@ -32,7 +32,7 @@ const RESULT_ITEM_CLASS = styles.acResultItem;
 
 const acOptionId = (index: number | null): string | undefined => (index === null ? undefined : `ac-option-${index}`);
 
-const SearchBar: VFC<PropTypes> = ({ initialQuery, guide }) => {
+const SearchBar: FC<PropTypes> = ({ initialQuery, guide }) => {
   const router = useRouter();
   const [searchInputFocused, setSearchInputFocused] = useState(false);
   const [searchInputDirty, setSearchInputDirty] = useState(false);

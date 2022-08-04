@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { VFC } from 'react';
+import { FC } from 'react';
 
 export interface CustomIconProps {
   src: string;
@@ -7,7 +7,7 @@ export interface CustomIconProps {
   className?: string;
 }
 
-const CustomIcon: VFC<CustomIconProps> = ({ src, alt = '', className }) => (
+const CustomIcon: FC<CustomIconProps> = ({ src, alt = '', className }) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img src={src} className={classNames(className, 'svg-inline--fa')} alt={alt} />
 );

@@ -30,8 +30,9 @@ export const paginationParam = (page: number): number | undefined => (page === 1
 
 export const range = (start: number, end: number, step = 1): number[] => _range(start, end + step, step);
 
-export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
-  switch (err.response?.status) {
+export const httpResponseMapper = (err: AxiosError | unknown): UnifiedErrorResponse => {
+  const statusCode = typeof err === 'object' && err !== null && 'isAxiosError' in err ? (err as AxiosError).response?.status : 0;
+  switch (statusCode) {
     case 503: {
       const message = get(err, 'response.data.message') as unknown;
       return {
@@ -44,7 +45,7 @@ export const httpResponseMapper = (err: AxiosError): UnifiedErrorResponse => {
     case 401:
       return { type: UnifiedErrorResponseTypes.AUTHENTICATION_ERROR };
     case 422: {
-      const body = err.response.data as ValidationErrorResponse;
+      const body = get(err, 'response.data') as ValidationErrorResponse;
       return {
         type: UnifiedErrorResponseTypes.VALIDATION_ERROR,
         ...body,

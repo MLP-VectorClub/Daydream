@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Nullable } from 'src/types';
 import { GuideName, SlimGuideTag } from '@mlp-vectorclub/api-types';
 import InlineIcon from 'src/components/shared/InlineIcon';
@@ -9,7 +9,7 @@ interface PropTypes {
   guide?: Nullable<GuideName>;
 }
 
-const AppearanceTags: VFC<PropTypes> = (props) => {
+const AppearanceTags: FC<PropTypes> = (props) => {
   const { tags, guide } = props;
   if (!tags || tags.length === 0) return null;
 

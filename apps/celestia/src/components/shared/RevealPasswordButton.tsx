@@ -1,5 +1,5 @@
 import { Button, UncontrolledTooltip } from 'reactstrap';
-import { useRef, VFC } from 'react';
+import { useRef, FC } from 'react';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import TooltipContent from 'src/components/shared/TooltipContent';
 import { useTranslation } from 'next-i18next';
@@ -9,7 +9,7 @@ interface RevealPasswordButtonProps {
   passwordRevealed: boolean;
 }
 
-const RevealPasswordButton: VFC<RevealPasswordButtonProps> = ({ setPasswordRevealed, passwordRevealed }) => {
+const RevealPasswordButton: FC<RevealPasswordButtonProps> = ({ setPasswordRevealed, passwordRevealed }) => {
   const { t } = useTranslation();
   const revealBtnRef = useRef<HTMLButtonElement>(null);
   return (

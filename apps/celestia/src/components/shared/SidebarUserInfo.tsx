@@ -5,10 +5,10 @@ import { useAuth, usePrefs } from 'src/hooks';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import AvatarWrap from 'src/components/shared/AvatarWrap';
 import ProfileLink from 'src/components/shared/ProfileLink';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 
-const SidebarUserInfo: VFC = () => {
+const SidebarUserInfo: FC = () => {
   const { t } = useTranslation();
   const { authCheck, user, signedIn } = useAuth();
   const prefs = usePrefs(signedIn);
@@ -18,6 +18,7 @@ const SidebarUserInfo: VFC = () => {
   return (
     <div
       className={classNames(`logged-in provider-${user.avatarProvider}`, {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         'checking-auth': checkingAuth,
       })}
       title={checkingAuth ? t('common:sidebar.authCheck') : undefined}

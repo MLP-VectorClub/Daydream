@@ -32,12 +32,12 @@ export const isTranslatable = (value: Translatable | unknown): value is Translat
   return Array.isArray(value) && value.length > 0 && typeof value[0] === 'string';
 };
 
-export const pageTitleValue = (t: TFunction, value: PageTitle): string => (isTranslatable(value) ? t(value[0], value[1]) : value || '');
+export const translatableValue = (t: TFunction, value: PageTitle): string => (isTranslatable(value) ? t(value[0], value[1]) : value || '');
 
 export const useTitleSetter = (dispatch: AppDispatch, { title, breadcrumbs }: CoreSliceMirroredState): void => {
   const { t } = useTranslation();
   useEffect(() => {
-    titleSetter({ dispatch }, { title: pageTitleValue(t, title) });
+    titleSetter({ dispatch }, { title: translatableValue(t, title) });
   }, [title, dispatch, t]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export const useTitleSetter = (dispatch: AppDispatch, { title, breadcrumbs }: Co
       {
         breadcrumbs: breadcrumbs.map((crumb) => ({
           ...crumb,
-          label: pageTitleValue(t, crumb.label),
+          label: translatableValue(t, crumb.label),
         })),
       }
     );

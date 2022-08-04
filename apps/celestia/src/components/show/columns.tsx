@@ -1,7 +1,7 @@
 import { ShowTableColumnDefinition } from 'src/types/show';
 import { episodeToString, seasonEpisodeToString } from 'src/utils/show';
 import styles from 'modules/ShowPage.module.scss';
-import { useRef, VFC } from 'react';
+import { useRef, FC } from 'react';
 import { ShowListItem } from '@mlp-vectorclub/api-types';
 import { useAuth } from 'src/hooks';
 import Link from 'next/link';
@@ -26,7 +26,7 @@ export const EpisodeNumberColumn: ShowTableColumnDefinition['renderContent'] = (
 
 export const ShowNumberColumn: ShowTableColumnDefinition['renderContent'] = ({ entry }) => <>{entry.no}</>;
 
-export const TitleAirDateColumn: VFC<{ entry: ShowListItem }> = ({ entry }) => {
+export const TitleAirDateColumn: FC<{ entry: ShowListItem }> = ({ entry }) => {
   const { t } = useTranslation();
   const { isStaff } = useAuth();
   const editButtonRef = useRef<HTMLButtonElement>(null);

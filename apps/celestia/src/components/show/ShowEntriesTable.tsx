@@ -1,4 +1,4 @@
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import { Nullable } from 'src/types';
 import { GetShowRequest, GetShowResult } from '@mlp-vectorclub/api-types';
 import { useRouter } from 'next/router';
@@ -17,7 +17,7 @@ export interface ShowEntriesTableProps {
   columns: ShowTableColumnDefinition[];
 }
 
-export const ShowEntriesTable: VFC<ShowEntriesTableProps> = ({ params, pageQueryParam = 'page', initialData, columns }) => {
+export const ShowEntriesTable: FC<ShowEntriesTableProps> = ({ params, pageQueryParam = 'page', initialData, columns }) => {
   const { query } = useRouter();
   const page = useMemo(() => validatePageParam(query[pageQueryParam]), [pageQueryParam, query]);
   const entries = useShowList({ ...params, page }, initialData || undefined);
@@ -35,12 +35,15 @@ export const ShowEntriesTable: VFC<ShowEntriesTableProps> = ({ params, pageQuery
                 <th
                   key={i}
                   className={classNames({
+                    /* eslint-disable @typescript-eslint/naming-convention */
                     'd-lg-none': col.only === 'mobile',
                     'd-none d-lg-table-cell': col.only === 'desktop',
+                    /* eslint-enable @typescript-eslint/naming-convention */
                   })}
                 >
                   <span
                     className={classNames({
+                      // eslint-disable-next-line @typescript-eslint/naming-convention
                       'd-none d-lg-inline': hasShortHeader,
                     })}
                   >

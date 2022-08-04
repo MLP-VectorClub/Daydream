@@ -1,4 +1,4 @@
-import { EventHandler, FocusEventHandler, RefObject, SyntheticEvent, useCallback, useEffect, VFC } from 'react';
+import { EventHandler, FocusEventHandler, RefObject, SyntheticEvent, useCallback, useEffect, FC } from 'react';
 import classNames from 'classnames';
 import styles from 'modules/SpriteGeneratorPreview.module.scss';
 import {
@@ -67,7 +67,7 @@ const remapColors = (ctx: CanvasRenderingContext2D, colors: Required<PropTypes>[
   if (change) ctx.putImageData(imageData, 0, 0);
 };
 
-export const SpriteGeneratorPreview: VFC<PropTypes> = ({ loading, canvasRef, options, imageMap, colorMap }) => {
+export const SpriteGeneratorPreview: FC<PropTypes> = ({ loading, canvasRef, options, imageMap, colorMap }) => {
   const drawImage = useCallback(
     (ctx: CanvasRenderingContext2D, img: keyof SpriteGeneratorImageMap) => {
       const imageElement: HTMLImageElement | undefined = imageMap && imageMap[img];

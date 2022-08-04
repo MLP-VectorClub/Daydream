@@ -1,7 +1,7 @@
 import { Color } from '@mlp-vectorclub/api-types';
 import styles from 'modules/ColorSquare.module.scss';
 import classNames from 'classnames';
-import { RefObject, VFC } from 'react';
+import { RefObject, FC } from 'react';
 
 interface PropTypes {
   color: Color;
@@ -9,7 +9,7 @@ interface PropTypes {
   innerRef?: RefObject<HTMLSpanElement>;
 }
 
-const ColorSquare: VFC<PropTypes> = ({ color, compact = false, innerRef }) => (
+const ColorSquare: FC<PropTypes> = ({ color, compact = false, innerRef }) => (
   <span
     className={classNames(styles.colorSquare, {
       [styles.compactColorSquare]: compact,

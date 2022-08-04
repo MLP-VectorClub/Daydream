@@ -1,9 +1,9 @@
 import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { hexToRgb, validHexColorPattern, yiq } from 'src/utils';
-import { ChangeEventHandler, FC, useCallback, useMemo, useState } from 'react';
+import { ChangeEventHandler, FC, PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import InlineIcon from 'src/components/shared/InlineIcon';
 
-interface PropTypes {
+interface PropTypes extends PropsWithChildren {
   baseColor: number;
   value?: string;
   name?: string;

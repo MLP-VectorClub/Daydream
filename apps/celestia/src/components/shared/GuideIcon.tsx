@@ -1,5 +1,5 @@
 import { GuideName } from '@mlp-vectorclub/api-types';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { EquestriaGirlsLogo } from 'src/components/logos/EquestriaGirlsLogo';
 import { PonyLifeLogo } from 'src/components/logos/PonyLifeLogo';
 import { FriendshipIsMagicLogo } from 'src/components/logos/FriendshipIsMagicLogo';
@@ -9,7 +9,7 @@ interface PropTypes extends Pick<ImageProps, 'priority'> {
   guide: GuideName;
 }
 
-export const GuideIcon: VFC<PropTypes> = ({ guide, priority }) => {
+export const GuideIcon: FC<PropTypes> = ({ guide, priority }) => {
   switch (guide) {
     case 'eqg':
       return <EquestriaGirlsLogo priority={priority} />;

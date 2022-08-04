@@ -12,9 +12,8 @@ const processingInstructions: ProcessingInstruction[] = [
     // Custom link processing
     shouldProcessNode: (node) => node.name === 'a' && 'href' in node.attribs && /^\/(?:[^/]|$)/.test(node.attribs.href),
     processNode: (node, children, index) => (
-      // eslint-disable-next-line react/destructuring-assignment
       <Link key={index} href={node.attribs.href}>
-        <a>{children}</a>
+        <a>{children as unknown as string[]}</a>
       </Link>
     ),
   },

@@ -10,10 +10,10 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import SignInButton from 'src/components/shared/SignInButton';
 import SignOutButton from 'src/components/shared/SignOutButton';
 import { useAuth, useConnectionInfo } from 'src/hooks';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 
-const Sidebar: VFC = () => {
+const Sidebar: FC = () => {
   const { t } = useTranslation();
   const { signedIn } = useAuth();
   const { backendDown } = useConnectionInfo();

@@ -1,7 +1,7 @@
 import ExternalLink from 'src/components/shared/ExternalLink';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-export interface FavMeProps {
+export interface FavMeProps extends PropsWithChildren {
   id: string;
 }
 

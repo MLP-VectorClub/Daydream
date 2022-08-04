@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useMemo, VFC } from 'react';
+import { Dispatch, SetStateAction, useCallback, useMemo, FC } from 'react';
 import { Col, Form, FormGroup, Label, Row } from 'reactstrap';
 import { SpriteGeneratorBaseColor, SpriteGeneratorColorMap } from 'src/types/sprite-generator';
 import { hexToRgb, stringifyRgbKey, stringifyRgbNumber } from 'src/utils';
@@ -37,12 +37,7 @@ export interface SpriteGeneratorColorsFormProps {
   setColorMap: Dispatch<SetStateAction<SpriteGeneratorColorMap>>;
 }
 
-export const SpriteGeneratorColorsForm: VFC<SpriteGeneratorColorsFormProps> = ({
-  colorMap,
-  middleIrisGradient,
-  magicAura,
-  setColorMap,
-}) => {
+export const SpriteGeneratorColorsForm: FC<SpriteGeneratorColorsFormProps> = ({ colorMap, middleIrisGradient, magicAura, setColorMap }) => {
   const handleChange = useCallback(
     (value: string, key: keyof SpriteGeneratorColorMap) => {
       const newColor = hexToRgb(value);

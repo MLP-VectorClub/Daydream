@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useCallback, useEffect, useRef, useState, VFC } from 'react';
+import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useCallback, useEffect, useRef, useState, FC } from 'react';
 import { Button, Col, CustomInput, Form, Progress, Row } from 'reactstrap';
 import { saveAs } from 'file-saver';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -28,7 +28,7 @@ const DEFAULT_OPTIONS: SpriteGeneratorOptions = {
   gradientStops: 2,
 };
 
-export const SpriteGenerator: VFC = () => {
+export const SpriteGenerator: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageMap = useRef<SpriteGeneratorImageMap | undefined>();
   const [colorMap, setColorMap] = useState<SpriteGeneratorColorMap>(() => ({

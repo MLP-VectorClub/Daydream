@@ -104,12 +104,14 @@ interface CutieMarkMappingColor {
 }
 
 export interface CutieMarkColorMapping {
+  /* eslint-disable @typescript-eslint/naming-convention */
   'Coat Outline': string;
   'Coat Shadow Outline': string;
   'Coat Fill': string;
   'Coat Shadow Fill': string;
   'Mane & Tail Outline': string;
   'Mane & Tail Fill': string;
+  /* eslint-enable @typescript-eslint/naming-convention */
 }
 
 export const getColorMapping = (

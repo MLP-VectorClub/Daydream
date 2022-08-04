@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
-import { VFC } from 'react';
+import { FC } from 'react';
 
-const HappeningSoon: VFC = () => {
+const HappeningSoon: FC = () => {
   const { upcomingEvents } = useSelector((state: RootState) => state.core);
   return <>{upcomingEvents.map(() => null)}</>;
 };

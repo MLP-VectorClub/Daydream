@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'reactstrap';
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { debounceTime, tap } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 
-const ToTheTopArrow: VFC = () => {
+const ToTheTopArrow: FC = () => {
   const [visible, setVisible] = useState(false);
 
   const handleClick = () => {

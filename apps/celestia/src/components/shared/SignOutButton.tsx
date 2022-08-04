@@ -1,6 +1,6 @@
 import { Button, Tooltip } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, VFC } from 'react';
+import { useState, FC } from 'react';
 import { Status } from 'src/types';
 import { RootState } from 'src/store/rootReducer';
 import InlineIcon from 'src/components/shared/InlineIcon';
@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next';
 
 const BUTTON_ID = 'signout';
 
-const SignOutButton: VFC = () => {
+const SignOutButton: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { signOut } = useSelector((state: RootState) => state.auth);

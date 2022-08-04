@@ -1,5 +1,5 @@
 import { UncontrolledTooltip } from 'reactstrap';
-import { ElementType, ReactNode, useMemo, VFC } from 'react';
+import { ElementType, ReactNode, useMemo, FC } from 'react';
 import md5 from 'md5';
 import { Nullable } from 'src/types';
 
@@ -12,7 +12,7 @@ interface PropTypes {
 
 const defaultTag = 'abbr';
 
-const Abbr: VFC<PropTypes> = ({ id, title, children, tag: Tag = defaultTag }) => {
+const Abbr: FC<PropTypes> = ({ id, title, children, tag: Tag = defaultTag }) => {
   const realId: string = useMemo(() => id || `abbr-${md5(title)}`, [id, title]);
   // Only wrap
   const realChildren =

@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ElementType, ReactNode, ReactNodeArray, VFC } from 'react';
+import { AnchorHTMLAttributes, ElementType, ReactNode, ReactNodeArray, FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface PropTypes extends Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'id' | 'title' | 'className'> {
@@ -9,7 +9,7 @@ interface PropTypes extends Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'id' |
   icon?: boolean;
 }
 
-const ExternalLink: VFC<PropTypes> = ({ children, tag = null, href, className, blank = true, icon = false, title, id }) => {
+const ExternalLink: FC<PropTypes> = ({ children, tag = null, href, className, blank = true, icon = false, title, id }) => {
   const Tag = tag || 'a';
   const additionalProps = blank ? { target: '_blank', rel: 'noopener noreferrer' } : null;
   return (

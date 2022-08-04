@@ -1,4 +1,4 @@
-import { MouseEventHandler, useCallback, useEffect, useRef, useState, VFC } from 'react';
+import { MouseEventHandler, useCallback, useEffect, useRef, useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Alert,
@@ -49,9 +49,14 @@ interface SocialPopupRef {
   timer: Nullable<ReturnType<typeof setInterval>>;
 }
 
-const SingInForm: VFC = () => {
+const SingInForm: FC = () => {
   const { t } = useTranslation();
-  const { register: r, handleSubmit, errors: clientErrors, reset } = useForm<FormFields>({ validateCriteriaMode: 'all' });
+  const {
+    register: r,
+    handleSubmit,
+    formState: { errors: clientErrors },
+    reset,
+  } = useForm<FormFields>({ criteriaMode: 'all' });
   const dispatch = useDispatch();
   const { authModal, signIn } = useSelector((store: RootState) => store.auth);
   const [passwordRevealed, setPasswordRevealed] = useState(false);
@@ -155,6 +160,15 @@ const SingInForm: VFC = () => {
   const emailValidation = validateEmail<FormFields>(t);
   const passwordValidation = validatePassword(t);
 
+  const { ref: emailInputRef, ...emailInputRegister } = r(INPUT_NAMES.EMAIL, {
+    ...requiredValidation,
+    validate: emailValidation,
+  });
+  const { ref: passwordInputRef, ...passwordInputRegister } = r(INPUT_NAMES.PASSWORD, {
+    ...requiredValidation,
+    ...passwordValidation,
+  });
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <p className="text-center">
@@ -176,11 +190,8 @@ const SingInForm: VFC = () => {
           <Input
             type="email"
             defaultValue=""
-            name={INPUT_NAMES.EMAIL}
-            innerRef={r({
-              ...requiredValidation,
-              validate: emailValidation,
-            })}
+            {...emailInputRegister}
+            innerRef={emailInputRef}
             invalid={INPUT_NAMES.EMAIL in errors}
             disabled={isLoading}
           />
@@ -197,11 +208,8 @@ const SingInForm: VFC = () => {
             <Input
               type={passwordRevealed ? 'text' : 'password'}
               defaultValue=""
-              name={INPUT_NAMES.PASSWORD}
-              innerRef={r({
-                ...requiredValidation,
-                ...passwordValidation,
-              })}
+              {...passwordInputRegister}
+              innerRef={passwordInputRef}
               invalid={Boolean(errors[INPUT_NAMES.PASSWORD])}
               disabled={isLoading}
               autoComplete="current-password"
@@ -215,13 +223,7 @@ const SingInForm: VFC = () => {
       </FormGroup>
 
       <FormGroup>
-        <CustomInput
-          type="checkbox"
-          name={INPUT_NAMES.REMEMBER}
-          label={t('common:auth.rememberMe')}
-          id="remember-me"
-          innerRef={r<HTMLInputElement>()}
-        />
+        <CustomInput type="checkbox" label={t('common:auth.rememberMe')} id="remember-me" {...r(INPUT_NAMES.REMEMBER)} />
       </FormGroup>
 
       {signIn.error?.type === UnifiedErrorResponseTypes.AUTHENTICATION_ERROR && (

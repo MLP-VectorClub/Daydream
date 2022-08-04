@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { ColorGroup } from '@mlp-vectorclub/api-types';
 import styles from 'modules/AppearanceColorGroups.module.scss';
 import { Button, Card, CardBody, Col, Row } from 'reactstrap';
@@ -12,7 +12,7 @@ interface PropTypes {
   colorGroups?: ColorGroup[];
 }
 
-export const AppearanceColorGroups: VFC<PropTypes> = ({ colorGroups }) => {
+export const AppearanceColorGroups: FC<PropTypes> = ({ colorGroups }) => {
   const { signedIn, isStaff } = useAuth();
   const prefs = usePrefs(signedIn);
 

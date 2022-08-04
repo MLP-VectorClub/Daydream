@@ -1,4 +1,4 @@
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import { ServerInfoHookValue } from 'src/hooks';
 import { getBuildData } from 'src/utils';
@@ -9,7 +9,7 @@ const buildData = IS_CLIENT_SIDE ? getBuildData() : null;
 
 type PropTypes = Pick<ServerInfoHookValue, 'serverInfo'>;
 
-const FooterLastUpdateInfo: VFC<PropTypes> = ({ serverInfo }) => {
+const FooterLastUpdateInfo: FC<PropTypes> = ({ serverInfo }) => {
   const { t } = useTranslation();
   const latestDate = useMemo<Date | undefined>(() => {
     const dates: Date[] = [];

@@ -3,11 +3,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
 import Link from 'next/link';
 import { renderingStateSlice } from 'src/utils/store';
-import { VFC } from 'react';
+import { FC } from 'react';
+import { translatableValue } from 'src/hooks';
+import { useTranslation } from 'next-i18next';
 
 const ELEMENT_ID = 'breadcrumbs';
 
-const Breadcrumbs: VFC = () => {
+const Breadcrumbs: FC = () => {
+  const { t } = useTranslation();
   const { breadcrumbs } = useSelector((state: RootState) => renderingStateSlice(state.core));
 
   // TODO Rich JSON+LD data for SEO
@@ -22,7 +25,7 @@ const Breadcrumbs: VFC = () => {
         const Tag = isActive ? 'strong' : el.linkProps ? 'a' : 'span';
         const item = (
           <Tag className="breadcrumb-item" key={el.linkProps ? undefined : i}>
-            {el.label}
+            {translatableValue(t, el.label)}
           </Tag>
         );
 

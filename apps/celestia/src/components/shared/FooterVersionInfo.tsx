@@ -2,11 +2,11 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import { UncontrolledTooltip } from 'reactstrap';
 import FooterGitInfo from 'src/components/shared/FooterGitInfo';
 import FooterLastUpdateInfo from 'src/components/shared/FooterLastUpdateInfo';
-import { MouseEventHandler, useCallback, useState, VFC } from 'react';
+import { MouseEventHandler, useCallback, useState, FC } from 'react';
 import { useConnectionInfo } from 'src/hooks';
 import { useTranslation } from 'next-i18next';
 
-const FooterVersionInfo: VFC = () => {
+const FooterVersionInfo: FC = () => {
   const { t } = useTranslation();
   const connectionInfo = useConnectionInfo();
 

@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/rootReducer';
-import { VFC } from 'react';
+import { FC } from 'react';
 
-const SidebarNotifications: VFC = () => {
+const SidebarNotifications: FC = () => {
   const { notifications } = useSelector((state: RootState) => state.auth);
   return notifications.length > 0 ? (
     <section className="notifications">
-      <h2>Unread notifications</h2>
-      {notifications}
+      <>
+        <h2>Unread notifications</h2>
+        {notifications}
+      </>
     </section>
   ) : null;
 };

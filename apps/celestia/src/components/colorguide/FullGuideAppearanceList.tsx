@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { SlimAppearance } from '@mlp-vectorclub/api-types';
 import { Card, CardBody } from 'reactstrap';
 import Image from 'next/image';
@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { PATHS } from 'src/paths';
 import { AppearancePreview } from 'src/components/colorguide/AppearancePreview';
 
-const FullGuideAppearanceList: VFC<{ appearances: SlimAppearance[] }> = ({ appearances }) => (
+const FullGuideAppearanceList: FC<{ appearances: SlimAppearance[] }> = ({ appearances }) => (
   <div className={styles.list}>
     {appearances.map((a) => {
       let sprite: JSX.Element;

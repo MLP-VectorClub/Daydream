@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { PublicUser } from '@mlp-vectorclub/api-types';
 import styles from 'modules/UserLinkWithAvatar.module.scss';
 import { getProfileLink } from 'src/utils/path-utils';
-import { VFC } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 
-const UserLinkWithAvatar: VFC<PublicUser> = ({ id, name, avatarUrl }) => (
+const UserLinkWithAvatar: FC<PublicUser> = ({ id, name, avatarUrl }) => (
   <Link href={getProfileLink({ id, name })}>
     <a className={`${styles.userLinkWithAvatar} ${styles.local}`}>
       {avatarUrl && (

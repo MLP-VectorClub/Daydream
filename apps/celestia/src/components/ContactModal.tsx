@@ -4,10 +4,10 @@ import { RootState } from 'src/store/rootReducer';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { DEV_EMAIL, DEVIANTART_GROUP_URL, DISCORD_INVITE_LINK } from 'src/config';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Trans, useTranslation } from 'next-i18next';
 
-const ContactModal: VFC = () => {
+const ContactModal: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { contactOpen } = useSelector((state: RootState) => state.core);

@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 
 import Head from 'next/head';
 import classNames from 'classnames';
@@ -9,11 +9,13 @@ import { useLayout } from 'src/hooks';
 import Breadcrumbs from 'src/components/shared/Breadcrumbs';
 import Notices from 'src/components/shared/Notices';
 
-const Layout: FC = ({ children }) => {
+const layoutDisabledClass = 'layout-disabled';
+
+const Layout: FC<PropsWithChildren> = ({ children }) => {
   const { disabled } = useLayout();
 
   useEffect(() => {
-    document.body.className = classNames({ 'layout-disabled': disabled });
+    document.body.className = classNames({ [layoutDisabledClass]: disabled });
   }, [disabled]);
 
   if (disabled) {

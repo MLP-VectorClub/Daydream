@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { scaleResize } from 'src/utils';
 import Image from 'next/image';
 import { Sprite } from '@mlp-vectorclub/api-types';
@@ -9,7 +9,7 @@ interface PropTypes {
   height?: number;
 }
 
-const SpriteImage: VFC<PropTypes> = ({ sprite, height = 150 }) => {
+const SpriteImage: FC<PropTypes> = ({ sprite, height = 150 }) => {
   if (!sprite) {
     return null;
   }

@@ -1,4 +1,4 @@
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import { Nullable } from 'src/types';
 import { GuideName, SlimGuideTag } from '@mlp-vectorclub/api-types';
 import { Tag } from 'src/components/colorguide/Tag';
@@ -10,7 +10,7 @@ interface PropTypes {
   guide?: Nullable<GuideName>;
 }
 
-const AppearanceItemTags: VFC<PropTypes> = ({ tags, guide }) => {
+const AppearanceItemTags: FC<PropTypes> = ({ tags, guide }) => {
   const sortedTags = useMemo<PropTypes['tags']>(() => {
     // No point in sorting empty and single-item arrays
     if (tags.length < 2) return tags;

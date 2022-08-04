@@ -1,4 +1,4 @@
-import { TimeHTMLAttributes, useEffect, useMemo, useState, VFC } from 'react';
+import { TimeHTMLAttributes, useEffect, useMemo, useState, FC } from 'react';
 import { timer } from 'rxjs';
 import { formatDistanceToNow, isValid } from 'date-fns';
 import { distinctUntilChanged, map, tap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ interface PropTypes extends Omit<TimeHTMLAttributes<unknown>, 'datetime'> {
   tooltipPlacement?: UncontrolledTooltipProps['placement'];
 }
 
-const TimeAgo: VFC<PropTypes> = ({ date: inputDate, tooltip = true, tooltipPlacement = 'top', ...rest }) => {
+const TimeAgo: FC<PropTypes> = ({ date: inputDate, tooltip = true, tooltipPlacement = 'top', ...rest }) => {
   const [text, setText] = useState('');
   const date = useMemo(() => {
     if (inputDate instanceof Date) return inputDate;

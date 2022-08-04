@@ -1,7 +1,7 @@
 import { Status } from 'src/types';
 import { Alert } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
-import { ReactChild, VFC } from 'react';
+import { ReactChild, FC } from 'react';
 
 interface PropTypes {
   status: Status;
@@ -10,7 +10,7 @@ interface PropTypes {
   loadingMessage?: ReactChild;
 }
 
-const StatusAlert: VFC<PropTypes> = ({ status, loadingMessage, errorMessage, subject = 'data' }) => {
+const StatusAlert: FC<PropTypes> = ({ status, loadingMessage, errorMessage, subject = 'data' }) => {
   if (status === Status.FAILURE) {
     const message = errorMessage || `Failed to fetch ${subject}, please try again later.`;
     return (

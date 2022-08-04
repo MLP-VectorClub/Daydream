@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react';
+import { memo, FC } from 'react';
 import { Nullable } from 'src/types';
 import { GuideName, SlimGuideTag, TagType } from '@mlp-vectorclub/api-types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -31,7 +31,7 @@ interface PropTypes {
   guide?: Nullable<GuideName>;
 }
 
-const TagComponent: VFC<PropTypes> = ({ tag, className, guide = null }) => {
+const TagComponent: FC<PropTypes> = ({ tag, className, guide = null }) => {
   const tagTypeClass = tag.type && tag.type in TAG_CLASS_MAP && TAG_CLASS_MAP[tag.type];
   const finalClassName = classNames(styles.tag, tagTypeClass, { [styles.synonym]: tag.synonymOf }, className);
   const content = (

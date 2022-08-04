@@ -3,14 +3,14 @@ import { UncontrolledTooltip } from 'reactstrap';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import { ServerInfoHookValue } from 'src/hooks';
 import { getBuildData } from 'src/utils';
-import { ReactNode, VFC } from 'react';
+import { ReactNode, FC } from 'react';
 import { useTranslation } from 'next-i18next';
 
 const buildData = IS_CLIENT_SIDE ? getBuildData() : null;
 
 type PropTypes = Pick<ServerInfoHookValue, 'serverInfo' | 'loading' | 'backendDown'>;
 
-const FooterGitInfo: VFC<PropTypes> = ({ serverInfo, loading, backendDown }) => {
+const FooterGitInfo: FC<PropTypes> = ({ serverInfo, loading, backendDown }) => {
   const { t } = useTranslation();
   let commitHash: ReactNode = null;
   let commitTime: ReactNode = null;

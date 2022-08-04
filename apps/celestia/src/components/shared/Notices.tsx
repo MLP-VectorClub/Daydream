@@ -3,10 +3,10 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { OLD_SITE_HOST } from 'src/config';
 import { useRouter } from 'next/router';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Trans } from 'next-i18next';
 
-const Notices: VFC = () => {
+const Notices: FC = () => {
   const router = useRouter();
   const url = OLD_SITE_HOST + router.asPath;
   return (

@@ -1,6 +1,6 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { VFC } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import { DEVIANTART_GROUP_NAME, DEVIANTART_GROUP_URL } from 'src/config';
 import { useAuth, usePrefs } from 'src/hooks';
@@ -10,7 +10,7 @@ import { getDefaultGuideLink, getHomeLink, getProfileLink } from 'src/utils/path
 import { PATHS } from 'src/paths';
 import { useTranslation } from 'next-i18next';
 
-const MainNavigation: VFC = () => {
+const MainNavigation: FC = () => {
   const { t } = useTranslation();
   const { signedIn, user, isStaff } = useAuth();
   const prefs = usePrefs(signedIn);

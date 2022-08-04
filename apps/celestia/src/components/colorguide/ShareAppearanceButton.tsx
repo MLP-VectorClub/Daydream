@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, VFC } from 'react';
+import { useCallback, useRef, useState, FC } from 'react';
 import { Button, FormGroup, InputGroup, InputGroupAddon, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { SocialShareButtons } from 'src/components/colorguide/SocialShareButtons';
@@ -9,7 +9,7 @@ interface PropTypes {
   shortUrl?: string;
 }
 
-export const ShareAppearanceButton: VFC<PropTypes> = ({ shortUrl }) => {
+export const ShareAppearanceButton: FC<PropTypes> = ({ shortUrl }) => {
   const [shareOpen, setShareOpen] = useState(false);
   const [shareVisible, setShareVisible] = useState(false);
   const copyButtonRef = useRef<HTMLButtonElement>(null);

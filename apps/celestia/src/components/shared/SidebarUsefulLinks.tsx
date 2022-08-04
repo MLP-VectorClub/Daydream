@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useAuth, useSidebarUsefulLinks } from 'src/hooks';
-import { MouseEventHandler, useCallback, VFC } from 'react';
+import { MouseEventHandler, useCallback, FC } from 'react';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { PATHS } from 'src/paths';
 
-const SidebarUsefulLinks: VFC = () => {
+const SidebarUsefulLinks: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { signedIn } = useAuth();

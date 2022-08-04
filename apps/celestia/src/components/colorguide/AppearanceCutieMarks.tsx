@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Appearance, CutieMark } from '@mlp-vectorclub/api-types';
 import styles from 'modules/AppearanceCutieMarks.module.scss';
 import { Button, Card, CardBody } from 'reactstrap';
@@ -18,7 +18,7 @@ interface PropTypes {
   colorGroups: Appearance['colorGroups'];
 }
 
-export const AppearanceCutieMarks: VFC<PropTypes> = ({ label, cutieMarks, colorGroups }) => {
+export const AppearanceCutieMarks: FC<PropTypes> = ({ label, cutieMarks, colorGroups }) => {
   const { user } = useAuth();
   const isDeveloper = user.role && permission('developer', user.role);
 

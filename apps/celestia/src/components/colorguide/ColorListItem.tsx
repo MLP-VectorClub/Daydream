@@ -1,4 +1,4 @@
-import { useMemo, VFC } from 'react';
+import { useMemo, FC } from 'react';
 import ColorSquare from 'src/components/colorguide/ColorSquare';
 import { Color } from '@mlp-vectorclub/api-types';
 import { hexToRgb } from 'src/utils';
@@ -10,7 +10,7 @@ interface PropTypes {
   hideColorInfo?: boolean;
 }
 
-export const ColorListItem: VFC<PropTypes> = ({ color, hideColorInfo }) => {
+export const ColorListItem: FC<PropTypes> = ({ color, hideColorInfo }) => {
   const rgb = useMemo(() => {
     if (!hideColorInfo && color.hex) return hexToRgb(color.hex);
   }, [color.hex, hideColorInfo]);

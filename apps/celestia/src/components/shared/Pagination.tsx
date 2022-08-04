@@ -1,16 +1,5 @@
 import { Button, Input, Pagination as RSPagination, PaginationItem, PaginationLink, Tooltip } from 'reactstrap';
-import {
-  ChangeEventHandler,
-  FC,
-  KeyboardEventHandler,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  VFC,
-} from 'react';
+import { ChangeEventHandler, KeyboardEventHandler, PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState, FC } from 'react';
 import { useRouter } from 'next/router';
 import { pickBy } from 'lodash';
 import Link from 'next/link';
@@ -55,7 +44,7 @@ interface GotoPaginationItemProps {
   tooltipPos: PaginationProps['tooltipPos'];
 }
 
-const GotoPaginationItem: VFC<GotoPaginationItemProps> = ({ defaultValue, totalPages, pageParam, tooltipPos }) => {
+const GotoPaginationItem: FC<GotoPaginationItemProps> = ({ defaultValue, totalPages, pageParam, tooltipPos }) => {
   const { t } = useTranslation();
   const linkRef = useRef<HTMLButtonElement>(null);
   const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -71,7 +60,7 @@ const GotoPaginationItem: VFC<GotoPaginationItemProps> = ({ defaultValue, totalP
       setFocusInput(true);
     }
   }, [tooltipOpen, defaultValue]);
-  const handleKeypress: KeyboardEventHandler<HTMLButtonElement> = useCallback(
+  const handleKeyDown: KeyboardEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
       if (e.key === 'Enter' || e.key === ' ') toggleTooltip();
     },
@@ -90,7 +79,7 @@ const GotoPaginationItem: VFC<GotoPaginationItemProps> = ({ defaultValue, totalP
 
   return (
     <PaginationItem className="page-item-ellipsis">
-      <button type="button" className="page-link" ref={linkRef} onClick={toggleTooltip} onKeyPress={handleKeypress}>
+      <button type="button" className="page-link" ref={linkRef} onClick={toggleTooltip} onKeyDown={handleKeyDown}>
         <InlineIcon icon={tooltipOpen ? (tooltipPos === 'top' ? 'chevron-down' : 'chevron-up') : 'ellipsis-h'} fixedWidth />
       </button>
       {linkRef.current !== null && (
@@ -128,7 +117,7 @@ const GotoPaginationItem: VFC<GotoPaginationItemProps> = ({ defaultValue, totalP
   );
 };
 
-const Pagination: VFC<PaginationProps> = ({
+const Pagination: FC<PaginationProps> = ({
   currentPage,
   totalPages,
   relevantProps,

@@ -1,4 +1,4 @@
-import { useCallback, VFC } from 'react';
+import { useCallback, FC } from 'react';
 import { SpriteGeneratorBodyOptions, SpriteGeneratorEyeOptions, SpriteGeneratorOptions } from 'src/types/sprite-generator';
 import { Button, ButtonGroup, Col, FormGroup, Label } from 'reactstrap';
 import {
@@ -11,7 +11,7 @@ interface PropTypes extends Pick<SpriteGeneratorColorsFormProps, 'colorMap' | 's
   setOptions: (newOptions: SpriteGeneratorOptions) => void;
 }
 
-export const SpriteGeneratorCustomizer: VFC<PropTypes> = ({ options, setOptions, colorMap, setColorMap }) => {
+export const SpriteGeneratorCustomizer: FC<PropTypes> = ({ options, setOptions, colorMap, setColorMap }) => {
   const setSpecies = useCallback((wing: boolean, horn: boolean) => setOptions({ ...options, wing, horn }), [options, setOptions]);
   const setBodyType = useCallback(
     (body: SpriteGeneratorBodyOptions) => {

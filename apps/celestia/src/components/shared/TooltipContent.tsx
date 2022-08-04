@@ -1,6 +1,6 @@
-import { FC, useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 
-interface TooltipContentProps {
+interface TooltipContentProps extends PropsWithChildren {
   scheduleUpdate: VoidFunction;
 }
 

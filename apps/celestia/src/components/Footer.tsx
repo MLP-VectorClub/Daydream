@@ -6,10 +6,10 @@ import ContactModal from 'src/components/ContactModal';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Abbr from 'src/components/shared/Abbr';
 import FooterVersionInfo from 'src/components/shared/FooterVersionInfo';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 
-const Footer: VFC = () => {
+const Footer: FC = () => {
   const { t } = useTranslation();
   return (
     <>
