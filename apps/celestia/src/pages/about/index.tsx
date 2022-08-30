@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode, useMemo, VoidFunctionComponent } from 'react';
+import { FC, FunctionComponent, PropsWithChildren, ReactNode, useMemo } from 'react';
 import Link from 'next/link';
 import {
   BACKEND_GITHUB_URL,
@@ -27,13 +27,13 @@ import { Translatable } from 'src/types';
 import { Trans, useTranslation } from 'next-i18next';
 import { typedServerSideTranslations } from 'src/utils/i18n';
 
-const AppPageLink: FC<{ href: string } & PropsWithChildren> = ({ children, href }) => (
+const AppPageLink: FC<PropsWithChildren<{ href: string }>> = ({ children, href }) => (
   <Link href={href}>
     <a>{children}</a>
   </Link>
 );
 
-const ChildfreeFavme: VoidFunctionComponent<FavMeProps & { content: ReactNode }> = ({ content, ...props }) => (
+const ChildfreeFavme: FunctionComponent<FavMeProps & { content: ReactNode }> = ({ content, ...props }) => (
   <FavMe {...props}>{content}</FavMe>
 );
 
