@@ -2,7 +2,6 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: calc(100% - #{header-height() + $footer-height});
   padding-top: 0;
   padding-right: 0;
   padding-bottom: 0;

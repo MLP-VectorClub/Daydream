@@ -8,6 +8,7 @@ import Sidebar from 'src/components/Sidebar';
 import { useLayout } from 'src/hooks';
 import Breadcrumbs from 'src/components/shared/Breadcrumbs';
 import Notices from 'src/components/shared/Notices';
+import { Main } from 'src/components/Main';
 
 const layoutDisabledClass = 'layout-disabled';
 
@@ -35,7 +36,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
         <Breadcrumbs />
         <Notices />
       </aside>
-      <main id="main">{children}</main>
+      <Main>{children}</Main>
       <Footer />
     </div>
   );
