@@ -2,13 +2,12 @@ import Content from 'src/components/shared/Content';
 import { useMemo } from 'react';
 import { Nullable, Optional, Translatable } from 'src/types';
 import { GetAboutMembersResult } from '@mlp-vectorclub/api-types';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { useAuth, useTitleSetter } from 'src/hooks';
 import StandardHeading, { StandardHeadingProps } from 'src/components/shared/StandardHeading';
 import MemberList from 'src/components/users/MemberList';
 import { UserList } from 'src/components/users/UserList';
 import { handleDataFetchingError } from 'src/utils';
-import { useDispatch } from 'react-redux';
 import styles from 'modules/UsersIndexPage.module.scss';
 import { membersFetcher } from 'src/fetchers';
 import { TitleFactory } from 'src/types/title';
@@ -36,7 +35,7 @@ interface PropTypes {
 
 const UsersIndexPage: NextPage<PropTypes> = ({ initialMembers }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isStaff } = useAuth();
 
   const titleData = useMemo(() => titleFactory({ isStaff }), [isStaff]);

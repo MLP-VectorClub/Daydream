@@ -1,19 +1,15 @@
 html {
-  background-color: $primary;
+  background-color: $SidebarBackground;
   min-height: 100vh;
 }
 
 body {
-  background: $primary;
+  background: $SidebarBackground;
   margin: 0 !important;
   min-height: 100vh;
 
   &:not(.layout-disabled) {
     padding-top: header-height();
-  }
-
-  @include media-breakpoint-up(lg) {
-    @include gray-grid;
   }
 
   @include media-breakpoint-down(md) {

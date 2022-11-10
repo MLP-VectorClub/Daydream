@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { FC, useEffect } from 'react';
-import { RootState } from 'src/store/rootReducer';
+import { RootState, useAppDispatch } from 'src/store';
 import { AuthModalSide } from 'src/types';
 import { authActions } from 'src/store/slices';
 import { useAuth } from 'src/hooks';
@@ -13,7 +13,7 @@ import { useTranslation } from 'next-i18next';
 const AuthModal: FC = () => {
   const { t } = useTranslation();
   const { reset } = useForm({ criteriaMode: 'all' });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { signedIn } = useAuth();
   const { authModal } = useSelector((store: RootState) => store.auth);
 

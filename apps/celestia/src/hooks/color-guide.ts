@@ -44,7 +44,7 @@ interface GuideHookValue extends Partial<GetAppearancesResult> {
 export function useGuide(params: GuideFetcherParams, initialData?: GetAppearancesResult): GuideHookValue {
   const fetcher = useCallback(() => guideFetcher(params)(), [params]);
   const { status, data } = useQuery(ENDPOINTS.APPEARANCES(params as GetAppearancesRequest), fetcher, {
-    enabled: params.guide,
+    enabled: Boolean(params.guide),
     initialData,
   });
 
@@ -63,7 +63,7 @@ export function useGuideAutocomplete(params: GuideAutocompleteFetcherParams): Gu
   const fetcher = useCallback(() => guideAutocompleteFetcher(params)(), [params]);
   const haveQuery = Boolean(params.q && params.q.length > 0);
   const { status, data } = useQuery(ENDPOINTS.APPEARANCES_AUTOCOMPLETE(params as GetAppearancesAutocompleteRequest), fetcher, {
-    enabled: params.guide && haveQuery,
+    enabled: Boolean(params.guide && haveQuery),
     keepPreviousData: haveQuery,
   });
 
@@ -83,7 +83,7 @@ export function useGuideIndex(initialData?: GetColorGuideResult) {
 export function useFullGuide(params: FullGuideFetcherParams, initialData?: GetAppearancesAllResult) {
   const fetcher = useCallback(() => fullGuideFetcher(params)(), [params]);
   const { data, status } = useQuery(ENDPOINTS.APPEARANCES_FULL(params as GetAppearancesAllRequest), fetcher, {
-    enabled: params.guide,
+    enabled: Boolean(params.guide),
     initialData,
   });
 
@@ -126,7 +126,7 @@ export function useAppearanceLocation(
 ): AppearanceLocationHookValue {
   const fetcher = useCallback(() => appearanceLocationFetcher(params)(), [params]);
   const { data, status } = useQuery(ENDPOINTS.APPEARANCE_LOCATE(params as GetAppearancesIdLocateRequest), fetcher, {
-    enabled: params.id,
+    enabled: Boolean(params.id),
     initialData,
   });
 
@@ -143,7 +143,10 @@ interface DetailedAppearanceHookValue {
 
 export function useDetailedAppearance(params: AppearanceFetcherParams, initialData?: GetAppearancesIdResult): DetailedAppearanceHookValue {
   const fetcher = useCallback(() => appearanceFetcher(params)(), [params]);
-  const { data, status } = useQuery(ENDPOINTS.APPEARANCE(params as GetAppearancesIdRequest), fetcher, { enabled: params.id, initialData });
+  const { data, status } = useQuery(ENDPOINTS.APPEARANCE(params as GetAppearancesIdRequest), fetcher, {
+    enabled: Boolean(params.id),
+    initialData,
+  });
 
   return {
     appearance: data,

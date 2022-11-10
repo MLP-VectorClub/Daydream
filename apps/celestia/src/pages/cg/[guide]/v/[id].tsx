@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import StandardHeading from 'src/components/shared/StandardHeading';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { assembleSeoUrl, getAppearanceTitle, getGuideLabel, handleDataFetchingError, notFound, resolveGuideName } from 'src/utils';
 import { BreadcrumbEntry, Nullable, Optional } from 'src/types';
 import { DetailedAppearance, GetAppearancesIdResult, GuideName } from '@mlp-vectorclub/api-types';
@@ -25,7 +25,6 @@ import { ShareAppearanceButton } from 'src/components/colorguide/ShareAppearance
 import AppearanceTags from 'src/components/colorguide/AppearanceTags';
 import pluralize from 'pluralize';
 import { AppearanceCutieMarks } from 'src/components/colorguide/AppearanceCutieMarks';
-import { useDispatch } from 'react-redux';
 import { FeaturePlaceholder } from 'src/components/shared/FeaturePlaceholder';
 import { AppearanceColorGroups } from 'src/components/colorguide/AppearanceColorGroups';
 import { AppearanceNotes } from 'src/components/colorguide/AppearanceNotes';
@@ -43,7 +42,12 @@ interface PropTypes {
 const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'initialData'>> = ({ guide, initialData }) => {
   const title = getAppearanceTitle(guide, initialData.appearance);
   const guideItem =
-    guide !== null ? { label: getGuideLabel(guide), linkProps: { href: PATHS.GUIDE(guide) } } : { label: getGuideLabel(guide) };
+    guide !== null
+      ? {
+          label: getGuideLabel(guide),
+          linkProps: { href: PATHS.GUIDE(guide) },
+        }
+      : { label: getGuideLabel(guide) };
   const breadcrumbs: BreadcrumbEntry[] = [
     {
       linkProps: { href: PATHS.GUIDE_INDEX },
@@ -65,7 +69,7 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'guide' | 'initialData'>> = ({ 
 const AppearancePage: NextPage<PropTypes> = ({ guide, id, initialData }) => {
   const { isStaff } = useAuth();
   const { appearance, status } = useDetailedAppearance({ id }, initialData.appearance || undefined);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const titleData = useMemo(() => titleFactory({ initialData, guide }), [guide, initialData]);
   useTitleSetter(dispatch, titleData);
 

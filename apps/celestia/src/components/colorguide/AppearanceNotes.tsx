@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import { AppearanceOnly } from '@mlp-vectorclub/api-types';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import styles from 'modules/AppearancePage.module.scss';

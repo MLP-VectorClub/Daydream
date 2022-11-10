@@ -5,6 +5,13 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "quoteProps": "as-needed",
+  "importOrder": [
+    "^(!?@mlp-vectorclub|src|module)/(.*)$",
+    "^@mlp-vectorclub(.*)$",
+    "^.[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
   "overrides": [
     {
       "files": ".prettierrc",

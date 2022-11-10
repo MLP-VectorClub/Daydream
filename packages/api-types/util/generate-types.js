@@ -10,7 +10,7 @@ const outputDir = 'dist';
 const typesOutputFileName = 'index.d.ts';
 const schemaOutputFileName = 'schema.json';
 
-(async function () {
+(async function() {
   if (fs.existsSync(outputDir)) {
     console.log('Build output directory already exists, clearing…');
     rimraf.sync(outputDir);
@@ -23,7 +23,7 @@ const schemaOutputFileName = 'schema.json';
 
   let schema;
   if (/^https?:\/\//.test(filePath)) {
-    const fetch = require('node-fetch');
+    const fetch = (await import('node-fetch')).default;
     console.log(`Downloading API schema from ${filePath}…`);
     schema = await fetch(filePath).then((r) => {
       if (r.status !== 200) throw new Error(r.json());

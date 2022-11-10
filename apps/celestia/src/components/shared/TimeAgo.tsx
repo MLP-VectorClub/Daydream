@@ -1,4 +1,4 @@
-import { TimeHTMLAttributes, useEffect, useMemo, useState, FC } from 'react';
+import { FC, TimeHTMLAttributes, useEffect, useMemo, useState } from 'react';
 import { timer } from 'rxjs';
 import { formatDistanceToNow, isValid } from 'date-fns';
 import { distinctUntilChanged, map, tap } from 'rxjs/operators';

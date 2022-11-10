@@ -11,7 +11,7 @@ const ProfileLink: FC<PropsWithChildren<ProfileLinkOptions>> = ({ children = nul
   }
 
   return (
-    <Link href={getProfileLink(rest)} passHref={children !== null}>
+    <Link href={getProfileLink(rest)} passHref={children !== null} legacyBehavior>
       {content}
     </Link>
   );

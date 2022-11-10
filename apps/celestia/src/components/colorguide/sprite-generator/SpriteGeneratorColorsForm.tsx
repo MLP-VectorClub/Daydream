@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useMemo, FC } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useMemo } from 'react';
 import { Col, Form, FormGroup, Label, Row } from 'reactstrap';
 import { SpriteGeneratorBaseColor, SpriteGeneratorColorMap } from 'src/types/sprite-generator';
 import { hexToRgb, stringifyRgbKey, stringifyRgbNumber } from 'src/utils';

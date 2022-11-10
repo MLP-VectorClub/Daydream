@@ -8,7 +8,7 @@ import {
   GITHUB_URL,
   PROJECT_NAME,
 } from 'src/config';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { getGuideLabel } from 'src/utils';
 import Content from 'src/components/shared/Content';
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -20,7 +20,6 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import { useTitleSetter } from 'src/hooks';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
-import { useDispatch } from 'react-redux';
 import { NextPage } from 'next';
 import { PATHS } from 'src/paths';
 import { Translatable } from 'src/types';
@@ -29,7 +28,7 @@ import { typedServerSideTranslations } from 'src/utils/i18n';
 
 const AppPageLink: FC<PropsWithChildren<{ href: string }>> = ({ children, href }) => (
   <Link href={href}>
-    <a>{children}</a>
+    {children}
   </Link>
 );
 
@@ -49,7 +48,7 @@ const titleFactory: TitleFactory = () => {
 
 const AboutPage: NextPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
 

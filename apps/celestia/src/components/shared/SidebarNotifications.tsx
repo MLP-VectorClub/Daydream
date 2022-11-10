@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/rootReducer';
+import { RootState } from 'src/store';
 import { FC } from 'react';
 
 const SidebarNotifications: FC = () => {

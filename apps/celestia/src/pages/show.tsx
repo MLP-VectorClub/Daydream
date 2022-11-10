@@ -9,10 +9,9 @@ import { AddEntryButton } from 'src/components/show/AddEntryButton';
 import { Nullable, Translatable } from 'src/types';
 import { GetShowResult } from '@mlp-vectorclub/api-types';
 import { ShowEntriesTable, ShowEntriesTableProps } from 'src/components/show/ShowEntriesTable';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
-import { useDispatch } from 'react-redux';
 import { useTitleSetter } from 'src/hooks/core';
 import { ShowTableColumnDefinition } from 'src/types/show';
 import styles from 'modules/ShowPage.module.scss';
@@ -100,7 +99,7 @@ const titleFactory: TitleFactory = () => {
 
 const ShowPage: NextPage<ShowPageProps> = ({ initialEpisodes, initialOthers }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
   const { isStaff } = useAuth();

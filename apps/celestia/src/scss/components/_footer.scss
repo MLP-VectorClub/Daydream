@@ -5,6 +5,7 @@
   padding: 10px;
   line-height: 18px;
   color: #fff;
+  @include fluid-background;
 
   a {
     text-decoration: underline;
@@ -20,7 +21,6 @@
     left: 0;
     height: $footer-height;
     white-space: nowrap;
-    background: $primary;
   }
 }
 

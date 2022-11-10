@@ -1,5 +1,5 @@
 import { GuideName } from '@mlp-vectorclub/api-types';
-import { useRef, FC } from 'react';
+import { FC, useRef } from 'react';
 import { getGuideLabel } from 'src/utils';
 import { UncontrolledTooltip } from 'reactstrap';
 

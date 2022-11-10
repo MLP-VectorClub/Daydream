@@ -1,0 +1,4 @@
+@mixin fluid-background($color: $primary, $opacity: .88) {
+  background-color: rgba($color, $opacity);
+  backdrop-filter: blur(5px);
+}

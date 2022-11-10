@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Nullable } from 'src/types';
 import { GetShowRequest, GetShowResult } from '@mlp-vectorclub/api-types';
 import { useRouter } from 'next/router';

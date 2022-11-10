@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import ColorSquare from 'src/components/colorguide/ColorSquare';
 import { Color } from '@mlp-vectorclub/api-types';
 import { hexToRgb } from 'src/utils';

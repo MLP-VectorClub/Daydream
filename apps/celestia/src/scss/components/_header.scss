@@ -6,6 +6,7 @@
   right: 0;
   height: header-height();
   overflow: hidden;
+  @include fluid-background;
 }
 
 #sidebar-toggler {

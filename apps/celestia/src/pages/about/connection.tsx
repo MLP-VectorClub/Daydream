@@ -7,9 +7,8 @@ import Content from 'src/components/shared/Content';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import Abbr from 'src/components/shared/Abbr';
 import { TitleFactory } from 'src/types/title';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { titleSetter } from 'src/utils/core';
-import { useDispatch } from 'react-redux';
 import { Nullable } from 'src/types/common';
 import { GetAboutConnectionResult } from '@mlp-vectorclub/api-types';
 import { useConnectionInfo } from 'src/hooks/connection-info';
@@ -33,7 +32,7 @@ const titleFactory: TitleFactory = () => ({
 
 export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forwardedFor, userAgent, initialServerInfo }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { serverInfo, fetching, backendDown, makeStale } = useConnectionInfo(initialServerInfo);
 
   const titleData = useMemo(titleFactory, []);
@@ -84,7 +83,8 @@ export const ConnectionPage: NextPage<PropTypes> = ({ connectingAddress, forward
         <strong>{t('connection:userAgent')}:</strong> <code>{JSON.stringify(getServerInfo('userAgent'))}</code>
       </p>
       <p>
-        <strong>{t('connection:deviceIdentifier')}:</strong> <code>{JSON.stringify(getServerInfo('deviceIdentifier'))}</code>
+        <strong>{t('connection:deviceIdentifier')}:</strong>
+        <code>{JSON.stringify(getServerInfo('deviceIdentifier'))}</code>
         <br />
         <span className="text-info">
           <InlineIcon icon="info" first />
@@ -109,8 +109,8 @@ export const getServerSideProps = wrapper.getServerSideProps<PropTypes & SSRConf
   };
 
   const connAddr = req.connection.address();
-  if (connAddr) {
-    props.connectingAddress = typeof connAddr === 'string' ? connAddr : connAddr.address;
+  if (connAddr && 'address' in connAddr) {
+    props.connectingAddress = connAddr.address;
   }
 
   titleSetter(store, titleFactory());

@@ -11,6 +11,7 @@ import ButtonCollection from 'src/components/shared/ButtonCollection';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import pluralize from 'pluralize';
 import UserLinkWithAvatar from 'src/components/shared/UserLinkWithAvatar';
+import { ResponsiveContainer } from 'src/components/shared/ResponsiveContainer';
 
 interface PropTypes {
   label: string;
@@ -53,7 +54,9 @@ export const AppearanceCutieMarks: FC<PropTypes> = ({ label, cutieMarks, colorGr
                   <CutieMarkPreview {...cm} colorGroups={colorGroups} />
                   <div className={styles.previewImageContainer}>
                     <div className={styles.previewImageWrap} style={{ transform: `rotate(${cm.rotation}deg)` }}>
-                      <Image src={cm.viewUrl} unoptimized layout="fill" alt="Cutie mark vector" />
+                      <ResponsiveContainer size={1}>
+                        <Image src={cm.viewUrl} unoptimized fill alt="Cutie mark vector" />
+                      </ResponsiveContainer>
                     </div>
                   </div>
                 </div>

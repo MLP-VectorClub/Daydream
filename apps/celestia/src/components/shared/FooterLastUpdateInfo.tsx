@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import { ServerInfoHookValue } from 'src/hooks';
 import { getBuildData } from 'src/utils';

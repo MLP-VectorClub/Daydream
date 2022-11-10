@@ -1,13 +1,13 @@
 import { Fade as Hamburger } from 'hamburger-react';
 import { NavbarToggler } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, FC } from 'react';
-import { RootState } from 'src/store/rootReducer';
+import { useSelector } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { RootState, useAppDispatch } from 'src/store';
 import { coreActions } from 'src/store/slices';
 
 const SidebarToggler: FC = () => {
   const { sidebarOpen } = useSelector((state: RootState) => state.core);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const toggleSidebar = () => dispatch(coreActions.toggleSidebar(!sidebarOpen));
 

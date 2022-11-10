@@ -51,7 +51,7 @@ const AppearanceItem: FC<AppearanceItemProps> = ({ appearance, pinned = false, g
                 </>
               )}
               <Link href={appearanceLink}>
-                <a>{appearance.label}</a>
+                {appearance.label}
               </Link>
             </h5>
             <AppearanceItemNotes notes={appearance.notes} hasCutieMarks={appearance.hasCutieMarks} />

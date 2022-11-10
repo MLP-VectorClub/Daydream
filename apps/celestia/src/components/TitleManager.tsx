@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/rootReducer';
+import { RootState } from 'src/store';
 import { APP_DESCRIPTION, APP_NAME } from 'src/config';
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import { renderingStateSlice } from 'src/utils/store';
 import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';

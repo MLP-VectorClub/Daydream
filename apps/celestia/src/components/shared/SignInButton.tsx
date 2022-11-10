@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, UncontrolledTooltip } from 'reactstrap';
-import { useDispatch } from 'react-redux';
 import { AuthModalSide, Status } from 'src/types';
 import { authActions } from 'src/store/slices';
 import { useAuth, useCsrf } from 'src/hooks';
@@ -8,12 +7,13 @@ import LoadingRing from 'src/components/shared/LoadingRing';
 import TooltipContent from 'src/components/shared/TooltipContent';
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
+import { useAppDispatch } from 'src/store';
 
 const BUTTON_ID = 'signin';
 
 const SignInButton: FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { authCheck } = useAuth();
   const csrf = useCsrf();
 

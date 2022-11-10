@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { coreActions } from 'src/store/slices';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { fixPath, getProfileTitle, handleDataFetchingError, mapRoleLabel } from 'src/utils';
 import { transformProfileParams, useAuth, useTitleSetter, useUser } from 'src/hooks';
 import { BreadcrumbEntry, Nullable, Optional } from 'src/types';
@@ -41,7 +40,7 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'initialUser'> & { isStaff?: bo
 
 const ProfilePage: NextPage<PropTypes> = ({ initialUser }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { query } = useRouter();
   const { user } = useUser(transformProfileParams(query), initialUser || undefined);
   const { user: authUser, isStaff } = useAuth();

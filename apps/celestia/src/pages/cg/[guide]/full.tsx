@@ -12,7 +12,7 @@ import {
 } from 'src/utils';
 import { Nullable, Optional, Translatable } from 'src/types';
 import { FullGuideSortField, GetAppearancesAllResult, GuideName } from '@mlp-vectorclub/api-types';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { useAuth, useFullGuide, useTitleSetter } from 'src/hooks';
 import { GuideNotFound } from 'src/components/colorguide/GuideNotFound';
 import ButtonCollection from 'src/components/shared/ButtonCollection';
@@ -25,7 +25,6 @@ import FullGuideGroups from 'src/components/colorguide/FullGuideGroups';
 import { fullGuideFetcher } from 'src/fetchers';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
-import { useDispatch } from 'react-redux';
 import { PATHS } from 'src/paths';
 import ReturnToGuideButton from 'src/components/colorguide/ReturnToGuideButton';
 import { SSRConfig, Trans, useTranslation } from 'next-i18next';
@@ -55,7 +54,7 @@ const titleFactory: TitleFactory<Pick<PropTypes, 'guide'>> = ({ guide }) => {
 
 const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isStaff } = useAuth();
   const data = useFullGuide({ guide, sort }, initialData || undefined);
   const heading = t('colorGuide:fullList.heading', {
@@ -94,7 +93,11 @@ const FullGuidePage: NextPage<PropTypes> = ({ guide, sort, initialData }) => {
             <DropdownMenu>
               <DropdownItem header>{t('colorGuide:fullList.sortOptionsHeader')}</DropdownItem>
               {sortOptions.map((sortBy) => (
-                <Link key={sortBy} href={PATHS.GUIDE_FULL(guide, { sort_by: sortBy })} passHref>
+                <Link
+                  key={sortBy}
+                  href={PATHS.GUIDE_FULL(guide, { sort_by: sortBy })}
+                  passHref
+                  legacyBehavior>
                   <DropdownItem tag="a" active={sortBy === sort}>
                     {t(`colorGuide:fullList.sortOptions.${sortBy}`)}
                   </DropdownItem>

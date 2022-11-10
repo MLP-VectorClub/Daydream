@@ -1,7 +1,18 @@
 #sidebar {
   height: calc(100% - #{header-height()});
-  background: $SidebarBackgroundMobile !important;
-  padding-top: 0 !important;
+  position: fixed;
+  z-index: 4;
+  top: header-height();
+  left: -$SidebarWidth;
+  width: $SidebarWidth;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: $SidebarContentColor;
+  padding: 0 10px 10px;
+  text-align: center;
+  overflow: auto;
+  will-change: left, width;
+  @include fluid-background($SidebarBackground);
 
   > .mobile-nav {
     position: relative;
@@ -9,8 +20,8 @@
     width: calc(100% + 20px);
     padding: 5px 7px;
     margin-bottom: 10px !important;
-    background: $primary;
     box-sizing: border-box;
+    @include fluid-background;
 
     ul {
       display: flex;
@@ -27,22 +38,6 @@
       }
     }
   }
-}
-
-#sidebar {
-  position: fixed;
-  z-index: 3;
-  top: header-height();
-  left: -$SidebarWidth;
-  width: $SidebarWidth;
-  max-width: 100%;
-  box-sizing: border-box;
-  color: $SidebarContentColor;
-  background: $SidebarBackground;
-  padding: 10px;
-  text-align: center;
-  overflow: auto;
-  will-change: left, width;
 
   button,
   .btn {
@@ -406,9 +401,6 @@
 @include media-breakpoint-up($sidebar-breakpoint-up) {
   #sidebar {
     left: 0 !important;
-  }
-  #main {
-    padding-left: $SidebarWidth + $MainMargin;
   }
   #above-content {
     padding-left: $SidebarWidth;

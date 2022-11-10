@@ -1,5 +1,5 @@
 import styles from 'modules/SocialShareButtons.module.scss';
-import { useRef, FC } from 'react';
+import { FC, useRef } from 'react';
 import { EmailShareButton, TelegramShareButton, TwitterShareButton, VKShareButton, WhatsappShareButton } from 'react-share';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { UncontrolledTooltip } from 'reactstrap';

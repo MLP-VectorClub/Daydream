@@ -87,7 +87,7 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) =>
         <br />
         Can't find links that were here previously? Some links were moved to the{' '}
         <Link href={PATHS.GUIDE_INDEX}>
-          <a>guide list</a>
+          guide list
         </Link>
         .
       </p>
@@ -98,7 +98,7 @@ const ColorGuidePage: NextPage<PropTypes> = ({ guide, page, q, initialData }) =>
             Add new {guide === 'eqg' ? 'Character' : 'Pony'}
           </Button>
         )}
-        <Link href={PATHS.GUIDE_FULL(guide)} passHref>
+        <Link href={PATHS.GUIDE_FULL(guide)} passHref legacyBehavior>
           <Button color="link" size="sm">
             <InlineIcon icon="bars" first />
             Full List

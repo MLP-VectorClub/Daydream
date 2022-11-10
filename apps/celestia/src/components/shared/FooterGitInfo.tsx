@@ -3,7 +3,7 @@ import { UncontrolledTooltip } from 'reactstrap';
 import TimeAgo from 'src/components/shared/TimeAgo';
 import { ServerInfoHookValue } from 'src/hooks';
 import { getBuildData } from 'src/utils';
-import { ReactNode, FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useTranslation } from 'next-i18next';
 
 const buildData = IS_CLIENT_SIDE ? getBuildData() : null;

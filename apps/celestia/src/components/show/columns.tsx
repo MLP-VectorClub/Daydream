@@ -1,7 +1,7 @@
 import { ShowTableColumnDefinition } from 'src/types/show';
 import { episodeToString, seasonEpisodeToString } from 'src/utils/show';
 import styles from 'modules/ShowPage.module.scss';
-import { useRef, FC } from 'react';
+import { FC, useRef } from 'react';
 import { ShowListItem } from '@mlp-vectorclub/api-types';
 import { useAuth } from 'src/hooks';
 import Link from 'next/link';
@@ -33,30 +33,28 @@ export const TitleAirDateColumn: FC<{ entry: ShowListItem }> = ({ entry }) => {
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const typeName = t(`show:index.typeNames.${entry.type}`);
   const airDateFormat = t(`show:index.airDateFormat`);
-  return (
-    <>
-      <div>
-        <Link href={PATHS.EPISODE(entry)}>
-          <a>{entry.title}</a>
-        </Link>
-        {isStaff && (
-          <span className="ml-2">
-            <span className="p-2 text-info faded" ref={editButtonRef}>
-              <InlineIcon icon="pencil-alt" />
-            </span>
-            <UncontrolledTooltip target={editButtonRef} fade={false} placement="top">
-              {t('show:index.edit', { typeName })}
-            </UncontrolledTooltip>
-            <span className="p-2 text-danger faded" ref={deleteButtonRef}>
-              <InlineIcon icon="times" />
-            </span>
-            <UncontrolledTooltip target={deleteButtonRef} fade={false} placement="top">
-              {t('show:index.delete', { typeName })}
-            </UncontrolledTooltip>
+  return <>
+    <div>
+      <Link href={PATHS.EPISODE(entry)}>
+        {entry.title}
+      </Link>
+      {isStaff && (
+        <span className="ml-2">
+          <span className="p-2 text-info faded" ref={editButtonRef}>
+            <InlineIcon icon="pencil-alt" />
           </span>
-        )}
-      </div>
-      {entry.airs && <time dateTime={entry.airs}>{format(new Date(entry.airs), airDateFormat)}</time>}
-    </>
-  );
+          <UncontrolledTooltip target={editButtonRef} fade={false} placement="top">
+            {t('show:index.edit', { typeName })}
+          </UncontrolledTooltip>
+          <span className="p-2 text-danger faded" ref={deleteButtonRef}>
+            <InlineIcon icon="times" />
+          </span>
+          <UncontrolledTooltip target={deleteButtonRef} fade={false} placement="top">
+            {t('show:index.delete', { typeName })}
+          </UncontrolledTooltip>
+        </span>
+      )}
+    </div>
+    {entry.airs && <time dateTime={entry.airs}>{format(new Date(entry.airs), airDateFormat)}</time>}
+  </>;
 };

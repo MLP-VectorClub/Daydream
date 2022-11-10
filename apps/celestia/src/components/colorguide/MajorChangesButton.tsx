@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 
 const MajorChangesButton: FC<{ guide: GuideName }> = ({ guide }) => (
-  <Link href={PATHS.GUIDE_CHANGES(guide)} passHref>
+  <Link href={PATHS.GUIDE_CHANGES(guide)} passHref legacyBehavior>
     <Button color="link" size="sm">
       <InlineIcon icon="exclamation-triangle" first />
       Major Changes

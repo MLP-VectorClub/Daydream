@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import { GetAppearancesAllResult, SlimAppearance } from '@mlp-vectorclub/api-types';
 import { keyBy } from 'lodash';
 import FullGuideAppearanceList from 'src/components/colorguide/FullGuideAppearanceList';

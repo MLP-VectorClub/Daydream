@@ -1,6 +1,6 @@
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/store/rootReducer';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from 'src/store';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import { DEV_EMAIL, DEVIANTART_GROUP_URL, DISCORD_INVITE_LINK } from 'src/config';
@@ -9,7 +9,7 @@ import { Trans, useTranslation } from 'next-i18next';
 
 const ContactModal: FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { contactOpen } = useSelector((state: RootState) => state.core);
   const toggle = () => dispatch(coreActions.toggleContact());
   return (

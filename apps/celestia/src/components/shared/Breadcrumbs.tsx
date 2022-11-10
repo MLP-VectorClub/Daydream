@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/rootReducer';
+import { RootState } from 'src/store';
 import Link from 'next/link';
 import { renderingStateSlice } from 'src/utils/store';
 import { FC } from 'react';
@@ -34,7 +34,7 @@ const Breadcrumbs: FC = () => {
         }
 
         return (
-          <Link key={i} {...el.linkProps} passHref>
+          <Link key={i} {...el.linkProps} passHref legacyBehavior>
             {item}
           </Link>
         );

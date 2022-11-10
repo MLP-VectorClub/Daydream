@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 
 const ReturnToGuideButton: FC<{ guide: GuideName }> = ({ guide }) => (
-  <Link href={PATHS.GUIDE(guide)} passHref>
+  <Link href={PATHS.GUIDE(guide)} passHref legacyBehavior>
     <Button color="link" size="sm">
       <InlineIcon icon="arrow-circle-left" first />
       Return to Guide

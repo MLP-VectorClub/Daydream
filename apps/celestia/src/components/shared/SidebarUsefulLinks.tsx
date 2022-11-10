@@ -1,15 +1,15 @@
-import { useDispatch } from 'react-redux';
 import { useAuth, useSidebarUsefulLinks } from 'src/hooks';
-import { MouseEventHandler, useCallback, FC } from 'react';
+import { FC, MouseEventHandler, useCallback } from 'react';
 import { coreActions } from 'src/store/slices';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { PATHS } from 'src/paths';
+import { useAppDispatch } from 'src/store';
 
 const SidebarUsefulLinks: FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { signedIn } = useAuth();
   const usefulLinks = useSidebarUsefulLinks(signedIn);
   const dispatchActionByAnchor = useCallback(
@@ -48,8 +48,8 @@ const SidebarUsefulLinks: FC = () => {
             if (actionDispatcher) {
               link =
                 el.url === '#sprite-tpl' ? (
-                  <Link href={PATHS.GUIDE_SPRITE}>
-                    <a title={el.title}>{el.label}</a>
+                  <Link href={PATHS.GUIDE_SPRITE} title={el.title}>
+                    {el.label}
                   </Link>
                 ) : (
                   <a href={el.url} onClick={dispatchActionByAnchor(el.url)} title={el.title}>
@@ -58,8 +58,8 @@ const SidebarUsefulLinks: FC = () => {
                 );
             } else {
               link = (
-                <Link href={el.url}>
-                  <a title={el.title}>{el.label}</a>
+                <Link href={el.url} title={el.title}>
+                  {el.label}
                 </Link>
               );
             }

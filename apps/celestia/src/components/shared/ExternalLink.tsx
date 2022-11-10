@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ElementType, ReactNode, ReactNodeArray, FC } from 'react';
+import { AnchorHTMLAttributes, ElementType, FC, ReactNode, ReactNodeArray } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface PropTypes extends Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'id' | 'title' | 'className'> {

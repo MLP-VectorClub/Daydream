@@ -8,7 +8,7 @@ import { FC } from 'react';
 const Header: FC = () => (
   <header id="header">
     <ScrollContainer>
-      <Navbar expand="lg" dark className="bg-primary">
+      <Navbar expand="lg" dark>
         <SidebarToggler />
 
         <NavbarBrand className="d-lg-none">MLP Vector Club</NavbarBrand>

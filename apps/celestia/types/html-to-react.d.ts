@@ -1,4 +1,3 @@
-/* eslint-disable */
 declare module 'html-to-react' {
   import { ReactNode } from 'react';
 

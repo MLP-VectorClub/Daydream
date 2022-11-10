@@ -8,8 +8,7 @@ import { PATHS } from 'src/paths';
 import { NextSeo } from 'next-seo';
 import { assembleSeoUrl } from 'src/utils';
 import { useTitleSetter } from 'src/hooks';
-import { useDispatch } from 'react-redux';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { titleSetter } from 'src/utils/core';
 import { Translatable } from 'src/types';
 import { useTranslation } from 'next-i18next';
@@ -31,7 +30,7 @@ const titleFactory: TitleFactory = () => {
 
 const SpriteGeneratorPage: NextPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
   return (

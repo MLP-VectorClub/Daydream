@@ -9,8 +9,8 @@ interface PropTypes extends ProfileLinkOptions, PropsWithChildren {
 }
 
 const UserLink: FC<PropTypes> = ({ children, className = 'user-link', ...rest }) => (
-  <Link href={getProfileLink(rest)}>
-    <a className={className}>{children || rest.name}</a>
+  <Link href={getProfileLink(rest)} className={className}>
+    {children || rest.name}
   </Link>
 );
 

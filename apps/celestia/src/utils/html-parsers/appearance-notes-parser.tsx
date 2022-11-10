@@ -13,7 +13,7 @@ const processingInstructions: ProcessingInstruction[] = [
     shouldProcessNode: (node) => node.name === 'a' && 'href' in node.attribs && /^\/(?:[^/]|$)/.test(node.attribs.href),
     processNode: (node, children, index) => (
       <Link key={index} href={node.attribs.href}>
-        <a>{children as unknown as string[]}</a>
+        {children as unknown as string[]}
       </Link>
     ),
   },

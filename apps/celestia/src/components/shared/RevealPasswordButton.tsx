@@ -1,5 +1,5 @@
 import { Button, UncontrolledTooltip } from 'reactstrap';
-import { useRef, FC } from 'react';
+import { FC, useRef } from 'react';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import TooltipContent from 'src/components/shared/TooltipContent';
 import { useTranslation } from 'next-i18next';

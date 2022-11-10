@@ -16,7 +16,7 @@ export const GuideNotFound: FC<PropTypes> = ({ heading, noun = 'color guide' }) 
     <Alert color="info" fade={false} className="text-center">
       Check out the{' '}
       <Link href={PATHS.GUIDE_INDEX}>
-        <a>list of available guides</a>
+        list of available guides
       </Link>{' '}
       to hopefully find what you were looking for.
     </Alert>

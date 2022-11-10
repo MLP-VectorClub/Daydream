@@ -20,14 +20,7 @@ const FullGuideAppearanceList: FC<{ appearances: SlimAppearance[] }> = ({ appear
         const spriteStyle = scaleResize(aspectWidth, aspectHeight, 'height', 100);
         sprite = (
           <div className={classNames('mb-2', styles.spriteWrap)}>
-            <Image
-              src={a.sprite.path}
-              width={spriteStyle.width}
-              height={spriteStyle.height}
-              unoptimized
-              layout="fixed"
-              alt="Appearance preview image"
-            />
+            <Image src={a.sprite.path} width={spriteStyle.width} height={spriteStyle.height} unoptimized alt="Appearance preview image" />
           </div>
         );
       } else {
@@ -38,7 +31,7 @@ const FullGuideAppearanceList: FC<{ appearances: SlimAppearance[] }> = ({ appear
       const nonObviousCharacterTags = (a.characterTagNames as string[]).filter((tag) => !lowerCaseLabel.includes(tag));
 
       return (
-        <Link key={a.id} href={PATHS.APPEARANCE(a)} passHref>
+        <Link key={a.id} href={PATHS.APPEARANCE(a)} passHref legacyBehavior>
           <Card color="link" tag="a" className="mr-2 mb-2">
             <CardBody className={classNames('p-2', styles.cardBody)}>
               {sprite}

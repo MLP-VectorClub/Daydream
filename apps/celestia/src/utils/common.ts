@@ -1,7 +1,6 @@
 import { get, range as _range } from 'lodash';
 import { AxiosError } from 'axios';
-import { UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
-import { ValidationErrorResponse } from '@mlp-vectorclub/api-types';
+import { isValidationErrorResponse, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
 import { APP_HOST, IS_CLIENT_SIDE } from 'src/config';
 import { setResponseStatus } from 'src/utils/initial-prop-helpers';
 import { GetServerSidePropsContext } from 'next';
@@ -45,7 +44,12 @@ export const httpResponseMapper = (err: AxiosError | unknown): UnifiedErrorRespo
     case 401:
       return { type: UnifiedErrorResponseTypes.AUTHENTICATION_ERROR };
     case 422: {
-      const body = get(err, 'response.data') as ValidationErrorResponse;
+      const body = isValidationErrorResponse(err)
+        ? err.response.data
+        : {
+            message: 'Could not find errors in response',
+            errors: {},
+          };
       return {
         type: UnifiedErrorResponseTypes.VALIDATION_ERROR,
         ...body,

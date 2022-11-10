@@ -1,5 +1,5 @@
-import { MouseEventHandler, useCallback, useEffect, useRef, useState, FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, MouseEventHandler, useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Alert,
   Button,
@@ -18,8 +18,7 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { map } from 'lodash';
 import { fromEvent } from 'rxjs';
-import { queryCache } from 'react-query';
-import { RootState } from 'src/store/rootReducer';
+import { RootState, useAppDispatch } from 'src/store';
 import { AuthModalSide, Nullable, Status, UnifiedErrorResponseTypes } from 'src/types';
 import { SocialProvider } from '@mlp-vectorclub/api-types';
 import { authActions } from 'src/store/slices';
@@ -31,6 +30,7 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import { signInThunk } from 'src/store/thunks';
 import { API_PREFIX } from 'src/config';
 import { useTranslation } from 'next-i18next';
+import { useQueryClient } from 'react-query';
 
 enum INPUT_NAMES {
   EMAIL = 'email',
@@ -57,7 +57,7 @@ const SingInForm: FC = () => {
     formState: { errors: clientErrors },
     reset,
   } = useForm<FormFields>({ criteriaMode: 'all' });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { authModal, signIn } = useSelector((store: RootState) => store.auth);
   const [passwordRevealed, setPasswordRevealed] = useState(false);
   const rateLimitTimeout = useRef<null | ReturnType<typeof setTimeout>>(null);
@@ -65,6 +65,7 @@ const SingInForm: FC = () => {
     window: null,
     timer: null,
   });
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!authModal.open) {
@@ -131,26 +132,25 @@ const SingInForm: FC = () => {
                 clearInterval(socialAuthPopup.current.timer);
                 socialAuthPopup.current.timer = null;
               }
-              void queryCache.invalidateQueries(ENDPOINTS.USERS_ME);
+              void queryClient.invalidateQueries(ENDPOINTS.USERS_ME);
             }
           } catch (err) {
             /* ignore */
           }
         }, 500);
       },
-    []
+    [queryClient]
   );
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = useCallback(
-    (data) => {
-      dispatch(
+    (data) =>
+      void dispatch(
         signInThunk({
           email: data[INPUT_NAMES.EMAIL],
           password: data[INPUT_NAMES.PASSWORD],
           remember: Boolean(data[INPUT_NAMES.REMEMBER]),
         })
-      );
-    },
+      ),
     [dispatch]
   );
   const isLoading = signIn.status === Status.LOAD;
@@ -252,8 +252,10 @@ const SingInForm: FC = () => {
             {t('common:auth.forgotPassword')}
           </Button>
           <UncontrolledTooltip target="forgot-pw" fade={false}>
-            <InlineIcon icon="exclamation-triangle" color="warning" first />
-            {t('common:auth.pwResetNotYetAvailable')}
+            <>
+              <InlineIcon icon="exclamation-triangle" color="warning" first />
+              {t('common:auth.pwResetNotYetAvailable')}
+            </>
           </UncontrolledTooltip>
         </Col>
       </Row>

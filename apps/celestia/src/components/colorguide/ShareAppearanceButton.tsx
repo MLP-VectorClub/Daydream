@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, FC } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
 import { Button, FormGroup, InputGroup, InputGroupAddon, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { SocialShareButtons } from 'src/components/colorguide/SocialShareButtons';

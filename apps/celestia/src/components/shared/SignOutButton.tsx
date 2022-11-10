@@ -1,8 +1,8 @@
 import { Button, Tooltip } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, FC } from 'react';
+import { useSelector } from 'react-redux';
+import { FC, useState } from 'react';
 import { Status } from 'src/types';
-import { RootState } from 'src/store/rootReducer';
+import { RootState, useAppDispatch } from 'src/store';
 import InlineIcon from 'src/components/shared/InlineIcon';
 import { signOutThunk } from 'src/store/thunks';
 import { useTranslation } from 'next-i18next';
@@ -11,12 +11,12 @@ const BUTTON_ID = 'signout';
 
 const SignOutButton: FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { signOut } = useSelector((state: RootState) => state.auth);
   const [signOutConfirm, setSignOutConfirm] = useState(false);
 
   const handleSignOut = () => {
-    dispatch(signOutThunk());
+    void dispatch(signOutThunk());
     setSignOutConfirm(false);
   };
 

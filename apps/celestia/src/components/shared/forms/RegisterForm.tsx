@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Alert, Button, Col, CustomInput, Form, FormGroup, FormText, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState, FC } from 'react';
-import { RootState } from 'src/store/rootReducer';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { RootState, useAppDispatch } from 'src/store';
 import { authActions } from 'src/store/slices';
 
 import ExternalLink from 'src/components/shared/ExternalLink';
@@ -47,7 +47,7 @@ const RegisterForm: FC = () => {
     formState: { errors: clientErrors },
     reset,
   } = useForm<FormFields>({ criteriaMode: 'all' });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { authModal, register } = useSelector((store: RootState) => store.auth);
   const [passwordRevealed, setPasswordRevealed] = useState(false);
 
@@ -58,15 +58,17 @@ const RegisterForm: FC = () => {
     }
   }, [reset, authModal.open]);
 
-  const onSubmit: Parameters<typeof handleSubmit>[0] = (data) => {
-    dispatch(
-      registerThunk({
-        name: data[INPUT_NAMES.NAME],
-        email: data[INPUT_NAMES.EMAIL],
-        password: data[INPUT_NAMES.PASSWORD],
-      })
-    );
-  };
+  const onSubmit: Parameters<typeof handleSubmit>[0] = useCallback(
+    (data) =>
+      void dispatch(
+        registerThunk({
+          name: data[INPUT_NAMES.NAME],
+          email: data[INPUT_NAMES.EMAIL],
+          password: data[INPUT_NAMES.PASSWORD],
+        })
+      ),
+    [dispatch]
+  );
 
   const isLoading = register.status === Status.LOAD;
   const errors = combineErrors(clientErrors, register.error);

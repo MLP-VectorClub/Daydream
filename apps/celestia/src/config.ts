@@ -1,6 +1,5 @@
 import { range } from 'lodash';
 import Axios from 'axios';
-import { ReactQueryConfig } from 'react-query/types/core/types';
 import { GuideName } from '@mlp-vectorclub/api-types';
 import { AppI18nNamespaces } from 'react-i18next';
 
@@ -36,12 +35,5 @@ export const CSRF_COOKIE_NAME = 'XSRF-TOKEN';
 export const GUIDE_NAMES: readonly GuideName[] = ['pony', 'eqg', 'pl'] as const;
 
 export const GUIDE_PAGE_SIZES: readonly number[] = range(7, 20 + 1);
-
-export const REACT_QUERY_CONFIG: ReactQueryConfig = {
-  queries: {
-    staleTime: 60e3,
-    keepPreviousData: true,
-  },
-};
 
 export const DEFAULT_I18N_NAMESPACES: AppI18nNamespaces[] = ['common'];

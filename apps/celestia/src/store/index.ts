@@ -1,16 +1,23 @@
-import { configureStore, getDefaultMiddleware, Store, ThunkDispatch } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
-import { rootReducer, RootState } from 'src/store/rootReducer';
+import { rootReducer } from 'src/store/rootReducer';
+import { queryClient } from 'src/store/queryClient';
+import { useDispatch } from 'react-redux';
+import { WithAppThunkExtra } from 'src/store/thunkTypes';
 
-const createStore = () =>
-  configureStore({
+const createStore = () => {
+  const extraArgument: WithAppThunkExtra['extra'] = {
+    queryCache: queryClient,
+  };
+  return configureStore({
     reducer: rootReducer,
-    middleware: [...getDefaultMiddleware()],
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: { extraArgument } }),
   });
+};
 
-export type AppStore = ReturnType<typeof createStore>;
-export type AppActions = Parameters<typeof rootReducer>[1];
-export type AppDispatch = ThunkDispatch<RootState, void, AppActions>;
+type StoreType = ReturnType<typeof createStore>;
+export type RootState = ReturnType<StoreType['getState']>;
+export type AppDispatch = StoreType['dispatch'];
 
 // create a makeStore function
 const makeStore: MakeStore<Store<RootState>> = () => createStore();
@@ -19,3 +26,5 @@ const makeStore: MakeStore<Store<RootState>> = () => createStore();
 export const wrapper = createWrapper<Store<RootState>>(makeStore, {
   debug: false,
 });
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();

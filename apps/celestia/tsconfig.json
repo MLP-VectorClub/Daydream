@@ -4,25 +4,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "src/*": [
-        "src/*"
-      ],
-      "modules/*": [
-        "src/scss/modules/*"
-      ]
+      "src/*": ["src/*"],
+      "modules/*": ["src/scss/modules/*"]
     },
     "incremental": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".next",
-    "out",
-    "next.config.js"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["node_modules", "dist", ".next", "out"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"]
 }

@@ -6,12 +6,11 @@ import { getGuideLabel } from 'src/utils';
 import Link from 'next/link';
 import { GetColorGuideResult, GuideName } from '@mlp-vectorclub/api-types';
 import { useGuideIndex, useTitleSetter } from 'src/hooks';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { Badge, Card, CardBody, UncontrolledTooltip } from 'reactstrap';
 import { useMemo } from 'react';
 import { NextPage } from 'next';
 import styles from 'modules/GuideIndexPage.module.scss';
-import { useDispatch } from 'react-redux';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
 import { guideIndexFetcher } from 'src/fetchers';
@@ -32,7 +31,7 @@ const titleFactory: TitleFactory = () => ({
 
 const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const data = useGuideIndex(initialData);
   const wipMeaning = 'wip-meaning';
 
@@ -57,7 +56,7 @@ const GuideIndexPage: NextPage<PropTypes> = ({ initialData }) => {
           const guideName = getGuideLabel(code);
           const entryCount = data?.entryCounts[code];
           return (
-            <Link key={code} href={PATHS.GUIDE(code)} passHref>
+            <Link key={code} href={PATHS.GUIDE(code)} passHref legacyBehavior>
               <Card tag="a">
                 <CardBody tag="figure" className={styles.guideFigure}>
                   <div className={styles.guideIcon}>

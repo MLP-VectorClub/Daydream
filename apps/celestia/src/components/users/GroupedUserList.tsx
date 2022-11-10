@@ -1,6 +1,6 @@
 import { BarePublicUser } from '@mlp-vectorclub/api-types';
 import { groupBy } from 'lodash';
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import UserLink from 'src/components/shared/UserLink';
 import styles from 'modules/GroupedUserList.module.scss';
 

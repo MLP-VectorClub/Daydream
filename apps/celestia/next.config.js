@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires -- require is required */
 const { NEXT_PUBLIC_CDN_DOMAIN, NEXT_PUBLIC_BACKEND_HOST, NEXT_PUBLIC_API_PREFIX } = process.env;
 const { platform } = require('os');
 const { i18n } = require('./next-i18next.config.js');
@@ -7,6 +8,7 @@ const withTM = require('next-transpile-modules')(['@mlp-vectorclub/ui']);
 const { promisify } = require('util');
 const execFile = promisify(require('child_process').execFile);
 const vercelConfig = require('./vercel.json');
+/* eslint-enable @typescript-eslint/no-var-requires */
 
 const devMode = process.env.NODE_ENV === 'development';
 

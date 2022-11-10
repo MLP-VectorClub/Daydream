@@ -14,7 +14,7 @@ export function mapQueryStatus(status: QueryStatus) {
     case 'error':
       return Status.FAILURE;
     default:
-      throw new Error(`Unknown query status: ${status}`);
+      throw new Error(`Unknown query status: ${String(status)}`);
   }
 }
 

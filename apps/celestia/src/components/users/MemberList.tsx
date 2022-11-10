@@ -1,6 +1,6 @@
 import { GetAboutMembersResult, PublicUser, Role } from '@mlp-vectorclub/api-types';
 import { useMembers } from 'src/hooks/users';
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import { groupBy } from 'lodash';
 import { mapRoleLabel, permission } from 'src/utils';
 import pluralize from 'pluralize';

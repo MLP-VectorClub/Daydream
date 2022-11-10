@@ -1,4 +1,4 @@
-import { memo, FC } from 'react';
+import { FC, memo } from 'react';
 import { Nullable } from 'src/types';
 import { GuideName, SlimGuideTag, TagType } from '@mlp-vectorclub/api-types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -43,8 +43,8 @@ const TagComponent: FC<PropTypes> = ({ tag, className, guide = null }) => {
 
   if (guide) {
     return (
-      <Link href={PATHS.GUIDE(guide, { q: tag.name })}>
-        <a className={finalClassName}>{content}</a>
+      <Link href={PATHS.GUIDE(guide, { q: tag.name })} className={finalClassName}>
+        {content}
       </Link>
     );
   }

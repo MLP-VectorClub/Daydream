@@ -1,4 +1,4 @@
-import { queryCache, useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { MappedAboutConnectionResult, Optional, UnifiedErrorResponse, UnifiedErrorResponseTypes } from 'src/types';
 import { GetAboutConnectionResult } from '@mlp-vectorclub/api-types';
 import { ENDPOINTS } from 'src/utils';
@@ -25,6 +25,7 @@ export function useConnectionInfo(initialData?: GetAboutConnectionResult): Serve
     initialData,
     refetchInterval: 60e3,
   });
+  const queryClient = useQueryClient();
 
   const serverInfo: Optional<MappedAboutConnectionResult> = data
     ? {
@@ -39,7 +40,7 @@ export function useConnectionInfo(initialData?: GetAboutConnectionResult): Serve
     serverInfo,
     backendDown: !loading && error?.type === UnifiedErrorResponseTypes.BACKEND_DOWN,
     makeStale: () => {
-      void queryCache.invalidateQueries(key);
+      void queryClient.invalidateQueries(key);
     },
   };
 }

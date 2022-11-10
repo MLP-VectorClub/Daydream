@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Nullable } from 'src/types';
 import { GuideName, SlimGuideTag } from '@mlp-vectorclub/api-types';
 import { Tag } from 'src/components/colorguide/Tag';

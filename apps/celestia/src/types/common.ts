@@ -1,4 +1,3 @@
-import { FieldValues, UseFormHandleSubmit } from 'react-hook-form';
 import { GetUsersMeResult, User, ValidationErrorResponse } from '@mlp-vectorclub/api-types';
 import { TFunction } from 'next-i18next';
 
@@ -93,6 +92,6 @@ export type Translatable = [TFuncParams[0]] | [TFuncParams[0], Exclude<TFuncPara
 
 export type PageTitle = Nullable<string> | Translatable;
 
-export type FormSubmitHandler<T = FieldValues> = UseFormHandleSubmit<T>;
-
-export type AppInitialProps<T = unknown> = { pageProps: T };
+export const isValidationErrorResponse = (value: unknown): value is { response: { data: ValidationErrorResponse } } => {
+  return typeof value === 'object' && value !== null && 'response' in value;
+};

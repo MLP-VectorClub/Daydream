@@ -1,4 +1,4 @@
-import { memo, FC } from 'react';
+import { FC, memo } from 'react';
 import classNames from 'classnames';
 import { Nullable } from 'src/types';
 import { AvatarProvider, VectorApp } from '@mlp-vectorclub/api-types';

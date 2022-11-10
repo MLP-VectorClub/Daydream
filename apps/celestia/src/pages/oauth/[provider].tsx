@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { Alert, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { queryCache } from 'react-query';
 import { OAuthErrorTypes, Status, Translatable, UnifiedErrorResponseTypes } from 'src/types';
 import { User } from '@mlp-vectorclub/api-types';
 import { useLayout, useOAuth, useTitleSetter } from 'src/hooks';
@@ -14,12 +13,12 @@ import InlineIcon from 'src/components/shared/InlineIcon';
 import LoadingRing from 'src/components/shared/LoadingRing';
 import { TitleFactory } from 'src/types/title';
 import { getOAuthProvider } from 'src/utils/auth';
-import { useDispatch } from 'react-redux';
 import { titleSetter } from 'src/utils/core';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import { PATHS } from 'src/paths';
 import { SSRConfig, useTranslation } from 'next-i18next';
 import { typedServerSideTranslations } from 'src/utils/i18n';
+import { useQueryClient } from 'react-query';
 
 const titleFactory: TitleFactory<{ provider?: string }> = (query) => {
   const provider = getOAuthProvider(query.provider);
@@ -32,11 +31,12 @@ const titleFactory: TitleFactory<{ provider?: string }> = (query) => {
 
 const OAuthPage: NextPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { setLayoutDisabled } = useLayout();
   const { query, replace } = useRouter();
   const closeFnRef = useRef<VoidFunction | null>(null);
   const { status, error, user } = useOAuth(query);
+  const queryClient = useQueryClient();
 
   const success = status === Status.SUCCESS;
   const authorized = user.name !== null;
@@ -60,8 +60,8 @@ const OAuthPage: NextPage = () => {
   useEffect(() => {
     if (!success) return;
 
-    void queryCache.invalidateQueries(ENDPOINTS.USERS_ME);
-  }, [success]);
+    void queryClient.invalidateQueries(ENDPOINTS.USERS_ME);
+  }, [queryClient, success]);
 
   useEffect(() => {
     if (!authorized) return;

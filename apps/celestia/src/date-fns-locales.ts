@@ -1,4 +1,3 @@
-/* eslint-disable import/no-duplicates */
 import enLocale from 'date-fns/locale/en-US';
 
 /**

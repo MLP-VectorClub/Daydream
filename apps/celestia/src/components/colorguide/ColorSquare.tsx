@@ -1,7 +1,7 @@
 import { Color } from '@mlp-vectorclub/api-types';
 import styles from 'modules/ColorSquare.module.scss';
 import classNames from 'classnames';
-import { RefObject, FC } from 'react';
+import { FC, RefObject } from 'react';
 
 interface PropTypes {
   color: Color;

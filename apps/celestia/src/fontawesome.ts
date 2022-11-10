@@ -114,3 +114,5 @@ library.add(
   faArrowCircleLeft,
   faExclamationTriangle
 );
+
+export const appLibrary = library;

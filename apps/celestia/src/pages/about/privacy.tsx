@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Alert } from 'reactstrap';
 import { APP_HOST } from 'src/config';
-import { wrapper } from 'src/store';
+import { useAppDispatch, wrapper } from 'src/store';
 import Content from 'src/components/shared/Content';
 import ExternalLink from 'src/components/shared/ExternalLink';
 import ContactLink from 'src/components/shared/ContactLink';
@@ -9,7 +9,6 @@ import StandardHeading from 'src/components/shared/StandardHeading';
 import styles from 'modules/PrivacyPolicy.module.scss';
 import { TitleFactory } from 'src/types/title';
 import { titleSetter } from 'src/utils/core';
-import { useDispatch } from 'react-redux';
 import { NextPage } from 'next';
 import { PATHS } from 'src/paths';
 import { useTitleSetter } from 'src/hooks/core';
@@ -38,7 +37,7 @@ const titleFactory: TitleFactory = () => {
 
 const PrivacyPolicy: NextPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const titleData = useMemo(titleFactory, []);
   useTitleSetter(dispatch, titleData);
 

@@ -1,5 +1,6 @@
 import {
   ChangeEventHandler,
+  FC,
   FocusEvent,
   FormEventHandler,
   KeyboardEventHandler,
@@ -8,7 +9,6 @@ import {
   useEffect,
   useRef,
   useState,
-  FC,
 } from 'react';
 import { Nullable, Status } from 'src/types';
 import { GuideName } from '@mlp-vectorclub/api-types';
@@ -257,7 +257,7 @@ const SearchBar: FC<PropTypes> = ({ initialQuery, guide }) => {
                       search results page. This box can be closed with <kbd>Esc</kbd>
                     </ListGroupItem>
                     {results!.map((r, i) => (
-                      <Link key={r.id} href={PATHS.APPEARANCE(r)} passHref>
+                      <Link key={r.id} href={PATHS.APPEARANCE(r)} passHref legacyBehavior>
                         <ListGroupItem
                           tag="a"
                           className={`${RESULT_ITEM_CLASS} p-2`}

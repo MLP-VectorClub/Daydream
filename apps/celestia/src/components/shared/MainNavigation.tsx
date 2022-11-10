@@ -21,7 +21,7 @@ const MainNavigation: FC = () => {
     <Nav navbar>
       <NavItem>
         {signedIn && (
-          <Link href={homeLink} passHref>
+          <Link href={homeLink} passHref legacyBehavior>
             <NavLink>
               <InlineIcon first icon="home" />
               {t('common:titles.home')}
@@ -30,28 +30,28 @@ const MainNavigation: FC = () => {
         )}
       </NavItem>
       <NavItem>
-        <Link href={PATHS.LATEST_EPISODE} passHref>
+        <Link href={PATHS.LATEST_EPISODE} passHref legacyBehavior>
           <NavLink disabled>{t('common:titles.latestEpisode')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href={PATHS.SHOW} passHref>
+        <Link href={PATHS.SHOW} passHref legacyBehavior>
           <NavLink>{t('common:titles.show')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href={defaultGuideLink} passHref>
+        <Link href={defaultGuideLink} passHref legacyBehavior>
           <NavLink>{t('common:titles.colorGuides')}</NavLink>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href={PATHS.EVENTS} passHref>
+        <Link href={PATHS.EVENTS} passHref legacyBehavior>
           <NavLink disabled>{t('common:titles.events')}</NavLink>
         </Link>
       </NavItem>
       {signedIn && (
         <NavItem>
-          <Link href={getProfileLink(user)} passHref>
+          <Link href={getProfileLink(user)} passHref legacyBehavior>
             <NavLink>{t('common:titles.account')}</NavLink>
           </Link>
         </NavItem>
@@ -59,25 +59,25 @@ const MainNavigation: FC = () => {
       {isStaff ? (
         <>
           <NavItem>
-            <Link href={PATHS.USERS} passHref>
+            <Link href={PATHS.USERS} passHref legacyBehavior>
               <NavLink>{t('common:titles.users')}</NavLink>
             </Link>
           </NavItem>
           <NavItem>
-            <Link href={PATHS.ADMIN} passHref>
+            <Link href={PATHS.ADMIN} passHref legacyBehavior>
               <NavLink disabled>{t('common:titles.admin')}</NavLink>
             </Link>
           </NavItem>
         </>
       ) : (
         <NavItem>
-          <Link href={PATHS.USERS} passHref>
+          <Link href={PATHS.USERS} passHref legacyBehavior>
             <NavLink>{t('common:titles.members')}</NavLink>
           </Link>
         </NavItem>
       )}
       <NavItem>
-        <Link href={PATHS.ABOUT} passHref>
+        <Link href={PATHS.ABOUT} passHref legacyBehavior>
           <NavLink>{t('common:titles.about')}</NavLink>
         </Link>
       </NavItem>
